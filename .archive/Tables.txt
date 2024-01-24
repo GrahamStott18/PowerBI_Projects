@@ -1,0 +1,36 @@
+Smartsheet Tbls:
+
+dim_ac_MetricList
+dim_ac_MetricSort
+dim_ac_MetricTotalQty
+dim_ac_SortList
+dim_ac_TeamSort
+dim_Date
+dim_mor_Departments
+dim_mor_KpiFormatString
+dim_mor_KPIs
+dim_mor_KpiSortOrder
+dim_mor_ProfitCenters
+dim_mor_s&bSortOrder
+dim_ProfitCenters_hr_tbls
+fact_metricData_GBS
+fact_metricData_AR
+fact_metricData_AP
+fact_metricData
+fact_mor_Comments-GBS
+GBS_Department_Hierarchy
+GBS_HeadcountPlan
+GBS_Profit_Centers
+
+
+Excel Tbls:
+
+metricData_gbs
+metricData_AR
+metricData_CB
+metricData_FA
+metricData_GL
+metricData_AP
+metricData_CC
+metricAuditRecoveryVolume_AP
+metricEmailVolume_CC
