@@ -4,8 +4,8 @@
     {
       "ordinal": 0,
       "scrollPosition": {
-        "x": 260.31229820360619,
-        "y": 0
+        "x": 0,
+        "y": 10.999111776507508
       },
       "nodes": [
         {
@@ -166,8 +166,8 @@
         },
         {
           "location": {
-            "x": 239.75506767440334,
-            "y": 128.3065639790085
+            "x": 99.974694402326719,
+            "y": 11.441005997436264
           },
           "nodeIndex": "UFR GL_L2_SUMMARY_F (EDWRPRD)",
           "nodeLineageTag": "55e889ce-d4cf-4c90-84f0-6f2c4450c0b9",
@@ -319,6 +319,19 @@
             "width": 234
           },
           "zIndex": 1
+        },
+        {
+          "location": {
+            "x": 272.68630195700189,
+            "y": 1527.0272722791108
+          },
+          "nodeIndex": "UFR GL_L2_SUMMARY_F",
+          "nodeLineageTag": "261de6be-8a58-4e81-924b-67aafbd7e16c",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
         }
       ],
       "name": "All tables",

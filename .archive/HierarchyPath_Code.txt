@@ -1,0 +1,15 @@
+Path = PATH('Department Hierarchy'[Department Id], 'Department Hierarchy'[Parent Department Id])
+
+Path Lenght = PATHLENGTH('Department Hierarchy'[Path])
+
+Level 1 = 
+LOOKUPVALUE('Department Hierarchy'[Department Name], 'Department Hierarchy'[Department Id],
+    PATHITEM('Department Hierarchy'[Path], 1))
+	
+Level 2 = 
+LOOKUPVALUE('Department Hierarchy'[Department Name], 'Department Hierarchy'[Department Id],
+    PATHITEM('Department Hierarchy'[Path], 2))
+	
+Level 3 = 
+LOOKUPVALUE('Department Hierarchy'[Department Name], 'Department Hierarchy'[Department Id],
+    PATHITEM('Department Hierarchy'[Path], 3))

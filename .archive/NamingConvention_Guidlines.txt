@@ -1,0 +1,16 @@
+Table Naming:
+fact tables
+	fact_
+	
+
+diminsion tables
+	dim_
+	
+	
+	
+	
+
+
+
+Column Naming:
+Snake Case (Hybrid)

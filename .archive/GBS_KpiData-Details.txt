@@ -1,0 +1,19 @@
+Cash & Banking:
+	Pending Reconciliation Items:
+		- Total
+			= US + Canada (Current Month / Month 3 of Quarter)
+		- US Total & CAD Total 
+			= US & Canada Individual Totals (Current Month / Month 3 of Quarter)
+		- Quarter KPI
+			= US KPI (Quarter Average)
+	ReconNet Depository & Non-Depository Accounts:
+		- Total
+			= US + Canada (Current Month / Month 3 of Quarter)
+		- US Total & CAD Total 
+			= US & Canada Individual Totals (Current Month / Month 3 of Quarter)
+		- Quarter KPI
+			= US KPI (Quarter Average)
+
+Accounts Receivable:
+	AR Incident tickets submitted:
+		- 

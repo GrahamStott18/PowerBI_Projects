@@ -1,0 +1,9 @@
+Long table vs Wide Table
+	- Long: Easier data to work with. 
+		- Harder for team leads to update? 
+		
+	- Wide: Easier for team leads to update, each month has its own column
+		- Data harder to visualize due to each month having its own column and must update measures for all columns included. One for each fiscal period of data wanting to view. 
+		
+***Make 2 tables for each Team? One for leaders to update monthly allocations (wide), and one for data visualizations (long). I can update the long table manually from the wide table as workaround, until better option found. 
+
