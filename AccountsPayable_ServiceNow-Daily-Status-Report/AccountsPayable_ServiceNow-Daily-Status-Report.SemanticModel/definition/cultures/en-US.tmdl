@@ -1,0 +1,131 @@
+cultureInfo en-US
+
+	linguisticMetadata =
+			{
+			  "Version": "2.0.0",
+			  "Language": "en-US",
+			  "Entities": {
+			    "dim_date_fiscal_monthkey.month_fyyy": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "dim_date_fiscal_MonthKey",
+			          "ConceptualProperty": "Month FY-YY"
+			        }
+			      },
+			      "State": "Generated"
+			    },
+			    "measures.ttm_goal": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": ".Measures",
+			          "ConceptualProperty": "TTM_Goal"
+			        }
+			      },
+			      "State": "Generated"
+			    },
+			    "measures.ttm_quantity": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": ".Measures",
+			          "ConceptualProperty": "TTM_Quantity"
+			        }
+			      },
+			      "State": "Generated"
+			    },
+			    "fact_servicenow_dailystatus.assignment_group": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "fact_ServiceNow_DailyStatus",
+			          "ConceptualProperty": "assignment_group"
+			        }
+			      },
+			      "State": "Generated"
+			    },
+			    "fact_servicenow_dailystatus.subcategory": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "fact_ServiceNow_DailyStatus",
+			          "ConceptualProperty": "subcategory"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "‌": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "dim_servicenow_assignmentgroup.queue": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "dim_ServiceNow_AssignmentGroup",
+			          "ConceptualProperty": "Queue"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "‌": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "dim_servicenow_assignmentgroup.assignmentgroup": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "dim_ServiceNow_AssignmentGroup",
+			          "ConceptualProperty": "Assignment-Group"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "‌": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "measures.ticket_count": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": ".Measures",
+			          "ConceptualProperty": "Ticket Count"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Total": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    }
+			  }
+			}
+		contentType: json
+

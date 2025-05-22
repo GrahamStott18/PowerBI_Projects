@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Report",
+    "displayName": "AccountsReceivable_C2C-AR-Daily-Scorecard"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "0dfe7324-4038-4164-bdf2-fd8b15d86898"
+  }
+}

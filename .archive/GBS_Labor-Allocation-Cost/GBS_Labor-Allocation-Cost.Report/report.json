@@ -1,0 +1,117 @@
+{
+  "config": "{\"version\":\"5.47\",\"themeCollection\":{\"baseTheme\":{\"name\":\"CY23SU08\",\"version\":\"5.48\",\"type\":2}},\"activeSectionIndex\":1,\"defaultDrillFilterOtherVisuals\":true,\"slowDataSourceSettings\":{\"isCrossHighlightingDisabled\":false,\"isSlicerSelectionsButtonEnabled\":false,\"isFilterSelectionsButtonEnabled\":false,\"isFieldWellButtonEnabled\":false,\"isApplyAllButtonEnabled\":false},\"linguisticSchemaSyncVersion\":2,\"settings\":{\"useNewFilterPaneExperience\":true,\"allowChangeFilterTypes\":true,\"useStylableVisualContainerHeader\":true,\"queryLimitOption\":6,\"exportDataMode\":1,\"useDefaultAggregateDisplayName\":true},\"objects\":{\"section\":[{\"properties\":{\"verticalAlignment\":{\"expr\":{\"Literal\":{\"Value\":\"'Top'\"}}}}}]}}",
+  "layoutOptimization": 0,
+  "resourcePackages": [
+    {
+      "resourcePackage": {
+        "disabled": false,
+        "items": [
+          {
+            "name": "CY23SU08",
+            "path": "BaseThemes/CY23SU08.json",
+            "type": 202
+          }
+        ],
+        "name": "SharedResources",
+        "type": 2
+      }
+    }
+  ],
+  "sections": [
+    {
+      "config": "{}",
+      "displayName": "Page 1",
+      "displayOption": 1,
+      "filters": "[]",
+      "height": 720.00,
+      "name": "ReportSection",
+      "visualContainers": [
+        {
+          "config": "{\"name\":\"44bdeb6b309c500a9136\",\"layouts\":[{\"id\":0,\"position\":{\"x\":1108.182047130779,\"y\":0,\"z\":2000,\"width\":172.41662169454938,\"height\":279.992804461234,\"tabOrder\":2000}}],\"singleVisual\":{\"visualType\":\"slicer\",\"projections\":{\"Values\":[{\"queryRef\":\"dim_date_fiscal_MonthKey.Month FY-YY\",\"active\":true}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"d\",\"Entity\":\"dim_date_fiscal_MonthKey\",\"Type\":0}],\"Select\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"d\"}},\"Property\":\"Month FY-YY\"},\"Name\":\"dim_date_fiscal_MonthKey.Month FY-YY\",\"NativeReferenceName\":\"Month FY-YY\"}]},\"drillFilterOtherVisuals\":true,\"objects\":{\"data\":[{\"properties\":{\"mode\":{\"expr\":{\"Literal\":{\"Value\":\"'Basic'\"}}}}}],\"general\":[{\"properties\":{\"filter\":{\"filter\":{\"Version\":2,\"From\":[{\"Name\":\"d\",\"Entity\":\"dim_date_fiscal_MonthKey\",\"Type\":0}],\"Where\":[{\"Condition\":{\"In\":{\"Expressions\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"d\"}},\"Property\":\"Month FY-YY\"}}],\"Values\":[[{\"Literal\":{\"Value\":\"'December FY-24'\"}}]]}}}]}}}}]}}}",
+          "filters": "[]",
+          "height": 279.99,
+          "width": 172.42,
+          "x": 1108.18,
+          "y": 0.00,
+          "z": 2000.00
+        },
+        {
+          "config": "{\"name\":\"95e726a116395e344cba\",\"layouts\":[{\"id\":0,\"position\":{\"x\":0,\"y\":330.09677999640223,\"z\":1000,\"width\":554.0910235653895,\"height\":279.992804461234,\"tabOrder\":1000}}],\"singleVisual\":{\"visualType\":\"tableEx\",\"projections\":{\"Values\":[{\"queryRef\":\"dim_EmployeeSalary_AP.Employee-Name\"},{\"queryRef\":\"dim_EmployeeSalary_AP.Employee-Salary\"},{\"queryRef\":\"fact_LaborAllocation_AccountsPayable.Allocation-%\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"d\",\"Entity\":\"dim_EmployeeSalary_AP\",\"Type\":0},{\"Name\":\"f\",\"Entity\":\"fact_LaborAllocation_AccountsPayable\",\"Type\":0}],\"Select\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"d\"}},\"Property\":\"Employee-Name\"},\"Name\":\"dim_EmployeeSalary_AP.Employee-Name\",\"NativeReferenceName\":\"Employee-Name\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"d\"}},\"Property\":\"Employee-Salary\"},\"Name\":\"dim_EmployeeSalary_AP.Employee-Salary\",\"NativeReferenceName\":\"Employee-Salary\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"f\"}},\"Property\":\"Allocation-%\"},\"Name\":\"fact_LaborAllocation_AccountsPayable.Allocation-%\",\"NativeReferenceName\":\"Allocation-%\"}]},\"drillFilterOtherVisuals\":true}}",
+          "filters": "[]",
+          "height": 279.99,
+          "width": 554.09,
+          "x": 0.00,
+          "y": 330.10,
+          "z": 1000.00
+        },
+        {
+          "config": "{\"name\":\"cbc4199bba58142aa060\",\"layouts\":[{\"id\":0,\"position\":{\"x\":10.31552437488757,\"y\":0,\"z\":0,\"width\":442.09390178089586,\"height\":279.992804461234,\"tabOrder\":0}}],\"singleVisual\":{\"visualType\":\"slicer\",\"projections\":{\"Values\":[{\"queryRef\":\"dim_gbs_ProfitCenter.Org\",\"active\":true}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"d\",\"Entity\":\"dim_gbs_ProfitCenter\",\"Type\":0}],\"Select\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"d\"}},\"Property\":\"Org\"},\"Name\":\"dim_gbs_ProfitCenter.Org\",\"NativeReferenceName\":\"Org\"}]},\"drillFilterOtherVisuals\":true,\"objects\":{\"data\":[{\"properties\":{\"mode\":{\"expr\":{\"Literal\":{\"Value\":\"'Basic'\"}}}}}],\"general\":[{\"properties\":{\"filter\":{\"filter\":{\"Version\":2,\"From\":[{\"Name\":\"d\",\"Entity\":\"dim_gbs_ProfitCenter\",\"Type\":0}],\"Where\":[{\"Condition\":{\"In\":{\"Expressions\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"d\"}},\"Property\":\"Org\"}}],\"Values\":[[{\"Literal\":{\"Value\":\"'Accounts Payable'\"}}]]}}}]}}}}]}}}",
+          "filters": "[]",
+          "height": 279.99,
+          "width": 442.09,
+          "x": 10.32,
+          "y": 0.00,
+          "z": 0.00
+        }
+      ],
+      "width": 1280.00
+    },
+    {
+      "config": "{}",
+      "displayName": "Duplicate of Page 1",
+      "displayOption": 1,
+      "filters": "[]",
+      "height": 720.00,
+      "name": "ReportSection038e90c007b04205950b",
+      "ordinal": 1,
+      "visualContainers": [
+        {
+          "config": "{\"name\":\"4fa75c1b82a7bd941279\",\"layouts\":[{\"id\":0,\"position\":{\"x\":166.83498957183167,\"y\":0,\"z\":4000,\"width\":592.9677340203656,\"height\":308.54422770212244,\"tabOrder\":4000}}],\"singleVisual\":{\"visualType\":\"pivotTable\",\"projections\":{\"Values\":[{\"queryRef\":\".Measures.Salary-Allocation\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"m\",\"Entity\":\".Measures\",\"Type\":0}],\"Select\":[{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"m\"}},\"Property\":\"Salary-Allocation\"},\"Name\":\".Measures.Salary-Allocation\",\"NativeReferenceName\":\"Salary-Allocation\"}]},\"drillFilterOtherVisuals\":true}}",
+          "filters": "[]",
+          "height": 308.54,
+          "width": 592.97,
+          "x": 166.83,
+          "y": 0.00,
+          "z": 4000.00
+        },
+        {
+          "config": "{\"name\":\"5a6b986802134ad15ae1\",\"layouts\":[{\"id\":0,\"position\":{\"x\":0,\"y\":0,\"z\":0,\"width\":166.83498957183167,\"height\":308.54422770212244,\"tabOrder\":0}}],\"singleVisual\":{\"visualType\":\"slicer\",\"projections\":{\"Values\":[{\"queryRef\":\"dim_gbs_ProfitCenter.ProfitCenter-Name-ALT\",\"active\":true}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"d\",\"Entity\":\"dim_gbs_ProfitCenter\",\"Type\":0}],\"Select\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"d\"}},\"Property\":\"ProfitCenter-Name-ALT\"},\"Name\":\"dim_gbs_ProfitCenter.ProfitCenter-Name-ALT\",\"NativeReferenceName\":\"ProfitCenter-Name-ALT\"}]},\"drillFilterOtherVisuals\":true,\"objects\":{\"data\":[{\"properties\":{\"mode\":{\"expr\":{\"Literal\":{\"Value\":\"'Basic'\"}}}}}],\"general\":[{\"properties\":{\"filter\":{\"filter\":{\"Version\":2,\"From\":[{\"Name\":\"d\",\"Entity\":\"dim_gbs_ProfitCenter\",\"Type\":0}],\"Where\":[{\"Condition\":{\"In\":{\"Expressions\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"d\"}},\"Property\":\"ProfitCenter-Name-ALT\"}}],\"Values\":[[{\"Literal\":{\"Value\":\"'InvoiceMRPO'\"}}]]}}}]}}}}]}}}",
+          "filters": "[{\"name\":\"Filter8d42e41419507aaa0e90\",\"expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"dim_gbs_ProfitCenter\"}},\"Property\":\"ProfitCenter-Name-ALT\"}},\"filter\":{\"Version\":2,\"From\":[{\"Name\":\"d\",\"Entity\":\"dim_gbs_ProfitCenter\",\"Type\":0}],\"Where\":[{\"Condition\":{\"In\":{\"Expressions\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"d\"}},\"Property\":\"ProfitCenter-Name-ALT\"}}],\"Values\":[[{\"Literal\":{\"Value\":\"'Audit Recovery'\"}}],[{\"Literal\":{\"Value\":\"'Vendor Control'\"}}],[{\"Literal\":{\"Value\":\"'InvoiceMRPO'\"}}],[{\"Literal\":{\"Value\":\"'Banking'\"}}]]}}}]},\"type\":\"Categorical\",\"howCreated\":0,\"objects\":{},\"isHiddenInViewMode\":false}]",
+          "height": 308.54,
+          "width": 166.83,
+          "x": 0.00,
+          "y": 0.00,
+          "z": 0.00
+        },
+        {
+          "config": "{\"name\":\"7e5d1a575e02d107890d\",\"layouts\":[{\"id\":0,\"position\":{\"x\":0,\"y\":308.54422770212244,\"z\":1000,\"width\":1280.408293460925,\"height\":411.05729358360935,\"tabOrder\":1000}}],\"singleVisual\":{\"visualType\":\"pivotTable\",\"projections\":{\"Values\":[{\"queryRef\":\".Measures.EmployeeSalary\"},{\"queryRef\":\".Measures.Allocation-Percent\"},{\"queryRef\":\".Measures.Salary-Allocation\"}],\"Rows\":[{\"queryRef\":\"dim_EmployeeSalary_AP.Employee-Name\",\"active\":true}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"m\",\"Entity\":\".Measures\",\"Type\":0},{\"Name\":\"d\",\"Entity\":\"dim_EmployeeSalary_AP\",\"Type\":0}],\"Select\":[{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"m\"}},\"Property\":\"Allocation-Percent\"},\"Name\":\".Measures.Allocation-Percent\",\"NativeReferenceName\":\"Allocation-Percent\"},{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"m\"}},\"Property\":\"Salary-Allocation\"},\"Name\":\".Measures.Salary-Allocation\",\"NativeReferenceName\":\"Salary-Allocation\"},{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"m\"}},\"Property\":\"EmployeeSalary\"},\"Name\":\".Measures.EmployeeSalary\",\"NativeReferenceName\":\"EmployeeSalary\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"d\"}},\"Property\":\"Employee-Name\"},\"Name\":\"dim_EmployeeSalary_AP.Employee-Name\",\"NativeReferenceName\":\"Employee-Name\"}]},\"drillFilterOtherVisuals\":true,\"objects\":{\"columnWidth\":[{\"properties\":{\"value\":{\"expr\":{\"Literal\":{\"Value\":\"168.221322537112D\"}}}},\"selector\":{\"metadata\":\"dim_EmployeeSalary_AP.Employee-Name\"}}]}}}",
+          "filters": "[]",
+          "height": 411.06,
+          "width": 1280.41,
+          "x": 0.00,
+          "y": 308.54,
+          "z": 1000.00
+        },
+        {
+          "config": "{\"name\":\"85356a828a51ee0a24b7\",\"layouts\":[{\"id\":0,\"position\":{\"x\":1108.548153600785,\"y\":0,\"z\":2000,\"width\":171.86013986013987,\"height\":238.19212366580788,\"tabOrder\":2000}}],\"singleVisual\":{\"visualType\":\"slicer\",\"projections\":{\"Values\":[{\"queryRef\":\"dim_date_fiscal_MonthKey.Month FY-YY\",\"active\":true}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"d\",\"Entity\":\"dim_date_fiscal_MonthKey\",\"Type\":0}],\"Select\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"d\"}},\"Property\":\"Month FY-YY\"},\"Name\":\"dim_date_fiscal_MonthKey.Month FY-YY\",\"NativeReferenceName\":\"Month FY-YY\"}]},\"drillFilterOtherVisuals\":true,\"objects\":{\"data\":[{\"properties\":{\"mode\":{\"expr\":{\"Literal\":{\"Value\":\"'Basic'\"}}}}}],\"general\":[{\"properties\":{\"filter\":{\"filter\":{\"Version\":2,\"From\":[{\"Name\":\"d\",\"Entity\":\"dim_date_fiscal_MonthKey\",\"Type\":0}],\"Where\":[{\"Condition\":{\"In\":{\"Expressions\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"d\"}},\"Property\":\"Month FY-YY\"}}],\"Values\":[[{\"Literal\":{\"Value\":\"'December FY-24'\"}}]]}}}]}}}}]}}}",
+          "filters": "[{\"name\":\"Filterbad3d3024d18c5a494e4\",\"expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"dim_date_fiscal_MonthKey\"}},\"Property\":\"Month FY-YY\"}},\"filter\":{\"Version\":2,\"From\":[{\"Name\":\"d\",\"Entity\":\"dim_date_fiscal_MonthKey\",\"Type\":0}],\"Where\":[{\"Condition\":{\"In\":{\"Expressions\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"d\"}},\"Property\":\"Month FY-YY\"}}],\"Values\":[[{\"Literal\":{\"Value\":\"'October FY-24'\"}}],[{\"Literal\":{\"Value\":\"'November FY-24'\"}}],[{\"Literal\":{\"Value\":\"'December FY-24'\"}}],[{\"Literal\":{\"Value\":\"'January FY-24'\"}}],[{\"Literal\":{\"Value\":\"'February FY-24'\"}}],[{\"Literal\":{\"Value\":\"'March FY-24'\"}}],[{\"Literal\":{\"Value\":\"'April FY-24'\"}}],[{\"Literal\":{\"Value\":\"'May FY-24'\"}}],[{\"Literal\":{\"Value\":\"'June FY-24'\"}}],[{\"Literal\":{\"Value\":\"'July FY-24'\"}}],[{\"Literal\":{\"Value\":\"'August FY-24'\"}}],[{\"Literal\":{\"Value\":\"'September FY-24'\"}}]]}}}]},\"type\":\"Categorical\",\"howCreated\":0,\"objects\":{\"general\":[{\"properties\":{}}]},\"isHiddenInViewMode\":false}]",
+          "height": 238.19,
+          "width": 171.86,
+          "x": 1108.55,
+          "y": 0.00,
+          "z": 2000.00
+        },
+        {
+          "config": "{\"name\":\"f82b73e247bc037db83b\",\"layouts\":[{\"id\":0,\"position\":{\"x\":759.8027235921973,\"y\":0,\"z\":3000,\"width\":348.7454300085879,\"height\":308.54422770212244,\"tabOrder\":3000}}],\"singleVisual\":{\"visualType\":\"pivotTable\",\"projections\":{\"Values\":[{\"queryRef\":\".Measures.Actual\"}],\"Rows\":[{\"queryRef\":\"dim_budget_DashboardAccountHierarchy.Lvl_5\",\"active\":true},{\"queryRef\":\"dim_budget_DashboardAccountHierarchy.Lvl_4\",\"active\":true},{\"queryRef\":\"dim_budget_DashboardAccountHierarchy.Lvl_3\",\"active\":true}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"m\",\"Entity\":\".Measures\",\"Type\":0},{\"Name\":\"d\",\"Entity\":\"dim_budget_DashboardAccountHierarchy\",\"Type\":0}],\"Select\":[{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"m\"}},\"Property\":\"Actual\"},\"Name\":\".Measures.Actual\",\"NativeReferenceName\":\"Actual\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"d\"}},\"Property\":\"Lvl_3\"},\"Name\":\"dim_budget_DashboardAccountHierarchy.Lvl_3\",\"NativeReferenceName\":\"Lvl_3\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"d\"}},\"Property\":\"Lvl_5\"},\"Name\":\"dim_budget_DashboardAccountHierarchy.Lvl_5\",\"NativeReferenceName\":\"Lvl_5\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"d\"}},\"Property\":\"Lvl_4\"},\"Name\":\"dim_budget_DashboardAccountHierarchy.Lvl_4\",\"NativeReferenceName\":\"Lvl_4\"}]},\"expansionStates\":[{\"roles\":[\"Rows\"],\"levels\":[{\"queryRefs\":[\"dim_budget_DashboardAccountHierarchy.Lvl_5\"],\"isCollapsed\":true,\"identityKeys\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"dim_budget_DashboardAccountHierarchy\"}},\"Property\":\"Lvl_5\"}}],\"isPinned\":true},{\"queryRefs\":[\"dim_budget_DashboardAccountHierarchy.Lvl_4\"],\"isCollapsed\":true,\"identityKeys\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"dim_budget_DashboardAccountHierarchy\"}},\"Property\":\"Lvl_4\"}}],\"isPinned\":true},{\"queryRefs\":[\"dim_budget_DashboardAccountHierarchy.Lvl_3\"],\"isCollapsed\":true,\"identityKeys\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"dim_budget_DashboardAccountHierarchy\"}},\"Property\":\"Lvl_3\"}}],\"isPinned\":true}],\"root\":{\"identityValues\":null,\"children\":[{\"identityValues\":[{\"Literal\":{\"Value\":\"'Net Income'\"}}],\"isToggled\":true,\"children\":[{\"identityValues\":[{\"Literal\":{\"Value\":\"'Operating Income'\"}}],\"isToggled\":true}]}]}}],\"drillFilterOtherVisuals\":true}}",
+          "filters": "[{\"name\":\"Filter965e89b05c808344ec31\",\"expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"dim_budget_DashboardAccountHierarchy\"}},\"Property\":\"Lvl_5\"}},\"filter\":{\"Version\":2,\"From\":[{\"Name\":\"d\",\"Entity\":\"dim_budget_DashboardAccountHierarchy\",\"Type\":0}],\"Where\":[{\"Condition\":{\"Not\":{\"Expression\":{\"In\":{\"Expressions\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"d\"}},\"Property\":\"Lvl_5\"}}],\"Values\":[[{\"Literal\":{\"Value\":\"null\"}}]]}}}}}]},\"type\":\"Categorical\",\"howCreated\":0,\"objects\":{\"general\":[{\"properties\":{\"isInvertedSelectionMode\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}}}}]},\"isHiddenInViewMode\":false}]",
+          "height": 308.54,
+          "width": 348.75,
+          "x": 759.80,
+          "y": 0.00,
+          "z": 3000.00
+        }
+      ],
+      "width": 1280.00
+    }
+  ]
+}

@@ -1,0 +1,103 @@
+table dim_date_fiscal_TTMKey
+	lineageTag: f09306d5-6901-415b-b6c4-ac7f6f4bbfc4
+
+	column DateID
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 5c0cba55-7a29-4ae7-ad3a-7736ac2ef799
+		summarizeBy: none
+		sourceColumn: DateID
+
+		variation Variation
+			isDefault
+			relationship: b1be2d67-588b-4b82-8b30-a2a33d486f49
+			defaultHierarchy: LocalDateTable_07d4074b-6db8-4afb-a27b-ef3a916e6b94.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column PeriodID
+		dataType: string
+		lineageTag: 87cd16f9-3bbd-417d-a701-372bd5beaa78
+		summarizeBy: none
+		sourceColumn: PeriodID
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Month Name'
+		dataType: string
+		lineageTag: 2a97ff5d-6c5f-4e96-802f-5a0030b2ac7e
+		summarizeBy: none
+		sourceColumn: Month Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column Month
+		dataType: double
+		lineageTag: 08e96709-395e-41a0-bc31-c7ffd6772c4c
+		summarizeBy: sum
+		sourceColumn: Month
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Calendar Year'
+		dataType: double
+		lineageTag: ffe26467-c987-45c6-a15e-5eec4b9ce88c
+		summarizeBy: sum
+		sourceColumn: Calendar Year
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Fiscal Year'
+		dataType: string
+		lineageTag: 6e567abb-530f-40e7-b59e-a1e0ceacbeee
+		summarizeBy: none
+		sourceColumn: Fiscal Year
+
+		annotation SummarizationSetBy = Automatic
+
+	column YY
+		dataType: string
+		lineageTag: a49da269-0841-4a6d-bfb6-aecf949ae08f
+		summarizeBy: none
+		sourceColumn: YY
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Month FY-YY'
+		dataType: string
+		lineageTag: a70d43dc-d007-4320-9e7e-cfc4681b740f
+		summarizeBy: none
+		sourceColumn: Month FY-YY
+
+		annotation SummarizationSetBy = Automatic
+
+	column FY-YY
+		dataType: string
+		lineageTag: cd2f2447-032f-4d06-934d-189858e48ed7
+		summarizeBy: none
+		sourceColumn: FY-YY
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_date_fiscal_TTMKey = m
+		mode: import
+		source =
+				let
+				    Source = PowerPlatform.Dataflows(null),
+				    Workspaces = Source{[Id="Workspaces"]}[Data],
+				    #"c52e4ff9-a75a-4ede-b43a-ee2e8b5aaae1" = Workspaces{[workspaceId="c52e4ff9-a75a-4ede-b43a-ee2e8b5aaae1"]}[Data],
+				    #"c4eefec3-54ff-4c2d-95b2-631d551349a7" = #"c52e4ff9-a75a-4ede-b43a-ee2e8b5aaae1"{[dataflowId="c4eefec3-54ff-4c2d-95b2-631d551349a7"]}[Data],
+				    dim_date_fiscal_TTMKey_ = #"c4eefec3-54ff-4c2d-95b2-631d551349a7"{[entity="dim_date_fiscal_TTMKey",version=""]}[Data]
+				in
+				    dim_date_fiscal_TTMKey_
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "SemanticModel",
+    "displayName": "AccountsReceivable_Labor-Cost-Calculator"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "81a15d16-2c9f-4488-8c8c-b38ed2607079"
+  }
+}

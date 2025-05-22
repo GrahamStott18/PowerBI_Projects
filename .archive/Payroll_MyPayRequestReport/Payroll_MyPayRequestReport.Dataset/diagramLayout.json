@@ -1,0 +1,126 @@
+{
+  "version": "1.1.0",
+  "diagrams": [
+    {
+      "ordinal": 0,
+      "scrollPosition": {
+        "x": 0,
+        "y": 0
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 360.81043207274951,
+            "y": 327.58151481714265
+          },
+          "nodeIndex": "dim_date_fiscal_DateKey",
+          "nodeLineageTag": "6283fb61-df62-4f0a-b20b-b6080992292e",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 1
+        },
+        {
+          "location": {
+            "x": 597.27823415269654,
+            "y": 734.55709221701511
+          },
+          "nodeIndex": "dim_date_fiscal_MonthKey",
+          "nodeLineageTag": "f85aa0b1-de4c-4ac4-a54e-d8cbac7e3a9f",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 5
+        },
+        {
+          "location": {
+            "x": 14.697456997264453,
+            "y": 240.37419913678676
+          },
+          "nodeIndex": "dim_date_fiscal_TTMKey",
+          "nodeLineageTag": "688cf5f7-ded9-4474-8a63-e279ff1650b9",
+          "size": {
+            "height": 128,
+            "width": 234
+          },
+          "zIndex": 2
+        },
+        {
+          "location": {
+            "x": 803.13589409456335,
+            "y": 144.70585266758985
+          },
+          "nodeIndex": "fact_myPayRequestReport_Sharepoint",
+          "nodeLineageTag": "a77d6c7f-e35c-40de-aa09-f65615cc13af",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 33.236691802397218,
+            "y": 750.11371913344067
+          },
+          "nodeIndex": ".Measures",
+          "nodeLineageTag": "00ef07bf-7e7f-437a-887d-c83864fc2b65",
+          "size": {
+            "height": 128,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1321.5339892055802,
+            "y": 116.23744810236172
+          },
+          "nodeIndex": "dim_EmployeeSalary_Payroll",
+          "nodeLineageTag": "1fc15f02-a55f-4033-84f0-d27ab657bc02",
+          "size": {
+            "height": 296,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1635.463028672347,
+            "y": 740.98867843163509
+          },
+          "nodeIndex": "dim_gbs_mor_Goals",
+          "nodeLineageTag": "4468c842-3c74-4e19-86a5-ede1f30f093b",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 0,
+            "y": 36.71503142665722
+          },
+          "nodeIndex": "dim_date_Holidays",
+          "nodeLineageTag": "ab0b431e-16fe-4c81-8131-8cff99733383",
+          "size": {
+            "height": 104,
+            "width": 234
+          },
+          "zIndex": 0
+        }
+      ],
+      "name": "All tables",
+      "zoomValue": 63.287087723233995,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    }
+  ],
+  "selectedDiagram": "All tables",
+  "defaultDiagram": "All tables"
+}

@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "SemanticModel",
+    "displayName": "AccountsReceivable_Hit-Rate-Report"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "ae6efeb9-e609-48d1-807f-5c78be4a03be"
+  }
+}

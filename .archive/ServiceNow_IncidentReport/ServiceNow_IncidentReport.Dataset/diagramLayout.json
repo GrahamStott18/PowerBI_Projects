@@ -1,0 +1,139 @@
+{
+  "version": "1.1.0",
+  "diagrams": [
+    {
+      "ordinal": 0,
+      "scrollPosition": {
+        "x": 0,
+        "y": 0
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 635.87511085042081,
+            "y": 825.0634732499999
+          },
+          "nodeIndex": "SNow_MORMetrics",
+          "nodeLineageTag": "611bb92d-47ee-408b-9728-867e998fe696",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 6
+        },
+        {
+          "location": {
+            "x": 1566.4693247787473,
+            "y": 160.9996550805426
+          },
+          "nodeIndex": ".Measures",
+          "nodeLineageTag": "4a13359a-294c-41ce-90aa-75afee8f7e30",
+          "size": {
+            "height": 128,
+            "width": 234
+          },
+          "zIndex": 4
+        },
+        {
+          "location": {
+            "x": 94.670942180262273,
+            "y": 711.41900703148553
+          },
+          "nodeIndex": "dim_date_fiscal_DateKey",
+          "nodeLineageTag": "8c566ff8-7d66-441f-a997-34273850b481",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 147.94575803460577,
+            "y": 117.32276085521192
+          },
+          "nodeIndex": "dim_date_fiscal_MonthKey",
+          "nodeLineageTag": "7ec0e8e7-a81a-455d-b52f-ac5347932ea2",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1819.1655083107698,
+            "y": 380.84897348201804
+          },
+          "nodeIndex": "dim_date_fiscal_TTMKey",
+          "nodeLineageTag": "f09306d5-6901-415b-b6c4-ac7f6f4bbfc4",
+          "size": {
+            "height": 272,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1835.1912544969757,
+            "y": 167.34572604125412
+          },
+          "nodeIndex": "dim_date_Holidays",
+          "nodeLineageTag": "06450f37-2a2c-4dc9-bd3b-223771a4168e",
+          "size": {
+            "height": 152,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 859.824025570476,
+            "y": 29.795727407374631
+          },
+          "nodeIndex": "dim_gbs_mor_Goals",
+          "nodeLineageTag": "127b1f71-59c3-4712-a012-5b54d8e6c95e",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1442.7352173926843,
+            "y": 594.49528016050647
+          },
+          "nodeIndex": "dim_gbs_ProfitCenter",
+          "nodeLineageTag": "874a9581-2819-4e05-804c-b8e9fb3b63eb",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1054.1925316108955,
+            "y": 634.12995338451776
+          },
+          "nodeIndex": "dim_snow_AssignmentGroup",
+          "nodeLineageTag": "66beda21-384a-4fb3-a6f7-3b2b979d8fc3",
+          "size": {
+            "height": 248,
+            "width": 234
+          },
+          "zIndex": 0
+        }
+      ],
+      "name": "All tables",
+      "zoomValue": 56.4473930053778,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    }
+  ],
+  "selectedDiagram": "All tables",
+  "defaultDiagram": "All tables"
+}

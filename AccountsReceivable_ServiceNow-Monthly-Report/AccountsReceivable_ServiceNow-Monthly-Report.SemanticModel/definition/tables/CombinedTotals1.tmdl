@@ -1,0 +1,26 @@
+table CombinedTotals1
+	lineageTag: 9d87fce1-7e7d-4106-a5fe-b0e8ee872162
+
+	column Sub-Function
+		lineageTag: 95bee8fe-e743-4ad8-8e76-76a5c6c14094
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: dim_snow_AssignmentGroup[Sub-Function]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition CombinedTotals1 = calculated
+		mode: import
+		source = ```
+				
+				    UNION(
+				        CALCULATETABLE(
+				            DISTINCT(dim_snow_AssignmentGroup[Sub-Function]),
+				            dim_snow_AssignmentGroup[Functional-Area] = "Accounts Receivable"
+				        ),
+				        {"Total Combined"}
+				    )
+				```
+
+	annotation PBI_Id = e263dc74b8ab4fa68ebdd857fc99c728
+

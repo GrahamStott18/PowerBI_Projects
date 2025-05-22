@@ -1,0 +1,71 @@
+DEFINE
+	VAR __DS0FilterTable =
+	TREATAS(
+		{
+			"April FY-24"
+		},
+		'dim_date_fiscal_TTMKey'[Month FY-YY]
+	)
+
+	VAR __DS0FilterTable2 =
+	TREATAS(
+		{
+			"Accounts Payable"
+		},
+		'dim_gbs_mor_KPI'[Department-Name]
+	)
+
+	VAR __DS0FilterTable3 =
+	TREATAS(
+		{
+			"Accounts Payable"
+		},
+		'dim_gbs_ProfitCenter'[Department-Name]
+	)
+
+	VAR __DS0Core =
+	SUMMARIZECOLUMNS(
+		'dim_gbs_mor_KpiSort'[Kpi-Name],
+		'dim_gbs_mor_KpiSort'[Sort-Order],
+		__DS0FilterTable,
+		__DS0FilterTable2,
+		__DS0FilterTable3,
+		"Current_Period__AP_", '.Measures'[Current Period (AP)],
+		"v_Current_Period__AP__FormatString", IGNORE('.Measures'[_Current Period (AP) FormatString]),
+		"Current_QTD__AP_", '.Measures'[Current QTD (AP)],
+		"v_Current_QTD__AP__FormatString", IGNORE('.Measures'[_Current QTD (AP) FormatString]),
+		"Prior_Period__AP_", '.Measures'[Prior Period (AP)],
+		"v_Prior_Period__AP__FormatString", IGNORE('.Measures'[_Prior Period (AP) FormatString]),
+		"Prior_Year__Period___AP_", '.Measures'[Prior Year (Period) (AP)],
+		"v_Prior_Year__Period___AP__FormatString", IGNORE('.Measures'[_Prior Year (Period) (AP) FormatString]),
+		"Prior_Year__Quarter___AP_", '.Measures'[Prior Year (Quarter) (AP)],
+		"v_Prior_Year__Quarter___AP__FormatString", IGNORE('.Measures'[_Prior Year (Quarter) (AP) FormatString]),
+		"Goal__AP_", '.Measures'[Goal (AP)],
+		"v_Goal__AP__FormatString", IGNORE('.Measures'[_Goal (AP) FormatString]),
+		"Current_Period___Background__AP_", IGNORE('.Measures'[Current Period - Background (AP)]),
+		"Current_Period___Font__AP_", IGNORE('.Measures'[Current Period - Font (AP)]),
+		"Current_QTD___Background__AP_", IGNORE('.Measures'[Current QTD - Background (AP)]),
+		"Current_QTD___Font__AP_", IGNORE('.Measures'[Current QTD - Font (AP)]),
+		"Prior_Period___Background__AP_", IGNORE('.Measures'[Prior Period - Background (AP)]),
+		"Prior_Period___Font__AP_", IGNORE('.Measures'[Prior Period - Font (AP)]),
+		"Prior_Year__Quarter____Background__AP_", IGNORE('.Measures'[Prior Year (Quarter) - Background (AP)]),
+		"Prior_Year__Quarter____Font__AP_", IGNORE('.Measures'[Prior Year (Quarter) - Font (AP)]),
+		"Prior_Year__Period____Background__AP_", IGNORE('.Measures'[Prior Year (Period) - Background (AP)]),
+		"Prior_Year__Period____Font__AP_", IGNORE('.Measures'[Prior Year (Period) - Font (AP)])
+	)
+
+	VAR __DS0PrimaryWindowed =
+	TOPN(
+		501,
+		__DS0Core,
+		'dim_gbs_mor_KpiSort'[Sort-Order],
+		1,
+		'dim_gbs_mor_KpiSort'[Kpi-Name],
+		1
+	)
+
+EVALUATE
+	__DS0PrimaryWindowed
+	ORDER BY
+		'dim_gbs_mor_KpiSort'[Sort-Order],
+		'dim_gbs_mor_KpiSort'[Kpi-Name]

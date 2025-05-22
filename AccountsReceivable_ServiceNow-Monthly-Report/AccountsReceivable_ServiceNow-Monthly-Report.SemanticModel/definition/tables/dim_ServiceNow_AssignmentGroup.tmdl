@@ -1,0 +1,138 @@
+table dim_ServiceNow_AssignmentGroup
+	lineageTag: 30e4154b-3ea3-4526-a1be-68c81ed440ff
+
+	column RowNumber
+		dataType: string
+		lineageTag: b6f47463-dd13-4812-b2c8-d1faa370c875
+		summarizeBy: none
+		sourceColumn: RowNumber
+
+		annotation SummarizationSetBy = Automatic
+
+	column Functional-Area
+		dataType: string
+		lineageTag: 19dd39be-280e-4ecb-94df-5e492727423a
+		summarizeBy: none
+		sourceColumn: Functional-Area
+
+		annotation SummarizationSetBy = Automatic
+
+	column Assignment-Group
+		dataType: string
+		lineageTag: 8a185f4c-26e7-4830-9eee-87afe488f540
+		summarizeBy: none
+		sourceColumn: Assignment-Group
+
+		annotation SummarizationSetBy = Automatic
+
+	column Sub-Function
+		dataType: string
+		lineageTag: 72dc24b8-fd94-44f9-8864-60c0580d20fd
+		summarizeBy: none
+		sourceColumn: Sub-Function
+
+		annotation SummarizationSetBy = Automatic
+
+	column ProfitCenter-ID
+		dataType: string
+		lineageTag: d161723b-b15b-40e1-bd51-f4ff4b73a7b6
+		summarizeBy: none
+		sourceColumn: ProfitCenter-ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column SLA-BusinessDays
+		dataType: string
+		lineageTag: 32e3e0a8-2d3f-440d-874b-9e3b28e72bad
+		summarizeBy: none
+		sourceColumn: SLA-BusinessDays
+
+		annotation SummarizationSetBy = Automatic
+
+	column SLA-NetworkDays
+		dataType: string
+		lineageTag: a6de1b43-93bb-4185-b945-b427a5c11941
+		summarizeBy: none
+		sourceColumn: SLA-NetworkDays
+
+		annotation SummarizationSetBy = Automatic
+
+	column Start-Date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 8320fc7c-a3e1-44ab-9106-9af151956583
+		summarizeBy: none
+		sourceColumn: Start-Date
+
+		variation Variation
+			isDefault
+			relationship: f492379a-c35c-4b91-94fc-bb089cb8b578
+			defaultHierarchy: LocalDateTable_c40dbc0a-fc24-43da-a330-19ec7c7e577e.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column End-Date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 46820236-a641-4479-93d3-dc6204532c74
+		summarizeBy: none
+		sourceColumn: End-Date
+
+		variation Variation
+			isDefault
+			relationship: dc8cb8ed-9cda-4351-abad-4e329a776aff
+			defaultHierarchy: LocalDateTable_1b8b72c8-38f2-42a6-b0f7-3f2dfa4922cb.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Group
+		dataType: string
+		lineageTag: b1badceb-ecbd-4c68-90ac-cc285617a33b
+		summarizeBy: none
+		sourceColumn: Group
+
+		annotation SummarizationSetBy = Automatic
+
+	column Sub-Function-Alt
+		dataType: string
+		lineageTag: dc4d6e59-e43a-434a-946b-bfaa17f5399b
+		summarizeBy: none
+		sourceColumn: Sub-Function-Alt
+
+		annotation SummarizationSetBy = Automatic
+
+	column Queue
+		dataType: string
+		lineageTag: 15f348d6-77a9-48ba-897f-bf63b75f7f46
+		summarizeBy: none
+		sourceColumn: Queue
+
+		annotation SummarizationSetBy = Automatic
+
+	column Assignment-Group-Alt
+		dataType: string
+		lineageTag: d59b4b52-5a16-4789-92fa-79dc6c32cd6a
+		summarizeBy: none
+		sourceColumn: Assignment-Group-Alt
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_ServiceNow_AssignmentGroup = m
+		mode: import
+		source =
+				let
+				    Source = Smartsheet.Tables(),
+				    #"2976903809263492" = Source{[Key="2976903809263492"]}[Data],
+				    #"3045698648887172" = #"2976903809263492"{[Key="3045698648887172"]}[Data],
+				    #"Changed Type" = Table.TransformColumnTypes(#"3045698648887172",{{"Start-Date", type date}, {"End-Date", type date}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

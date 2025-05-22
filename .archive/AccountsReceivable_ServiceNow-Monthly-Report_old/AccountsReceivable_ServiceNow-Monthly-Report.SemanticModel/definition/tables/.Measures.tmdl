@@ -1,0 +1,22 @@
+table '.Measures'
+	lineageTag: 4a13359a-294c-41ce-90aa-75afee8f7e30
+
+	calculationGroup
+
+	column Name
+		dataType: string
+		lineageTag: fa159de8-74ac-4579-b081-e3c0c50378e7
+		summarizeBy: none
+		sourceColumn: Name
+		sortByColumn: Ordinal
+
+		annotation SummarizationSetBy = Automatic
+
+	column Ordinal
+		dataType: int64
+		lineageTag: 7942fe90-46a3-411e-bf53-8ac5477598f1
+		summarizeBy: sum
+		sourceColumn: Ordinal
+
+		annotation SummarizationSetBy = Automatic
+

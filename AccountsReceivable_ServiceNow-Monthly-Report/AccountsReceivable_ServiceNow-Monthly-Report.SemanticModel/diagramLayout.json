@@ -1,0 +1,282 @@
+{
+  "version": "1.1.0",
+  "diagrams": [
+    {
+      "ordinal": 0,
+      "scrollPosition": {
+        "x": 0,
+        "y": 0
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 1676.0204733249998,
+            "y": 0
+          },
+          "nodeIndex": ".Measures",
+          "nodeLineageTag": "4a13359a-294c-41ce-90aa-75afee8f7e30",
+          "size": {
+            "height": 128,
+            "width": 234
+          },
+          "zIndex": 14
+        },
+        {
+          "location": {
+            "x": 480.103939731775,
+            "y": 455.72547141125642
+          },
+          "nodeIndex": "dim_date_fiscal_DateKey",
+          "nodeLineageTag": "8c566ff8-7d66-441f-a997-34273850b481",
+          "size": {
+            "height": 276.9697070000002,
+            "width": 234
+          },
+          "zIndex": 9
+        },
+        {
+          "location": {
+            "x": 69.348243830207849,
+            "y": 476.53568024955541
+          },
+          "nodeIndex": "dim_date_fiscal_MonthKey",
+          "nodeLineageTag": "7ec0e8e7-a81a-455d-b52f-ac5347932ea2",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 10
+        },
+        {
+          "location": {
+            "x": 2495.1913897430654,
+            "y": 0
+          },
+          "nodeIndex": "dim_date_fiscal_TTMKey",
+          "nodeLineageTag": "f09306d5-6901-415b-b6c4-ac7f6f4bbfc4",
+          "size": {
+            "height": 272,
+            "width": 234
+          },
+          "zIndex": 17
+        },
+        {
+          "location": {
+            "x": 78.7428358754527,
+            "y": 30.055828908508659
+          },
+          "nodeIndex": "dim_gbs_mor_Goals",
+          "nodeLineageTag": "127b1f71-59c3-4712-a012-5b54d8e6c95e",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 11
+        },
+        {
+          "location": {
+            "x": 873.65012353717964,
+            "y": 1141.8765493154306
+          },
+          "nodeIndex": "dim_snow_AssignmentGroup",
+          "nodeLineageTag": "66beda21-384a-4fb3-a6f7-3b2b979d8fc3",
+          "size": {
+            "height": 248,
+            "width": 234
+          },
+          "zIndex": 15
+        },
+        {
+          "location": {
+            "x": 1936.8181219309215,
+            "y": 0
+          },
+          "nodeIndex": "dim_date_Holiday",
+          "nodeLineageTag": "d6573e35-20f9-4a70-861f-8a0bd8a063e7",
+          "size": {
+            "height": 152,
+            "width": 234
+          },
+          "zIndex": 12
+        },
+        {
+          "location": {
+            "x": 1253.2531041858106,
+            "y": 1170.858491584383
+          },
+          "nodeIndex": "dim_gbs_ProfitCenter",
+          "nodeLineageTag": "55cc8b75-3311-4090-92a2-d8b2223f8233",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 13
+        },
+        {
+          "location": {
+            "x": 1771.5187924941963,
+            "y": 1020.0861225717773
+          },
+          "nodeIndex": "dim_Employee_AccountsReceivable",
+          "nodeLineageTag": "dae1e020-aaf7-46ed-8dea-94f6fb9ef0df",
+          "size": {
+            "height": 272,
+            "width": 234
+          },
+          "zIndex": 16
+        },
+        {
+          "location": {
+            "x": 925.90086913528739,
+            "y": 87.069992978703482
+          },
+          "nodeIndex": "ServiceNow_TaskSLA_Ended",
+          "nodeLineageTag": "ca0aaee4-4000-499b-997d-faccd3faa374",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 7
+        },
+        {
+          "location": {
+            "x": 1105.0090217575857,
+            "y": 463.03776670310305
+          },
+          "nodeIndex": "ServiceNow_TaskSLA_Started",
+          "nodeLineageTag": "cf9615af-2ae3-4aa6-88d5-ff5bd5d11bcc",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 8
+        },
+        {
+          "location": {
+            "x": 1153.6410399902277,
+            "y": 813.61342284509817
+          },
+          "nodeIndex": "ServiceNow_TaskSLA_Active_CatalogTask_IncidentPS",
+          "nodeLineageTag": "55eedcae-66cf-44a7-ab16-44d81fa74621",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 18
+        },
+        {
+          "location": {
+            "x": 555.40717768436059,
+            "y": 1306.0287325869406
+          },
+          "nodeIndex": "dim_ar_ServiceNow_Groupings",
+          "nodeLineageTag": "8b3f9d82-8bfb-446b-aaa5-0dfa6540b15e",
+          "size": {
+            "height": 248,
+            "width": 234
+          },
+          "zIndex": 6
+        },
+        {
+          "location": {
+            "x": 2213.0944023055445,
+            "y": 534.60921372422013
+          },
+          "nodeIndex": "dim_ServiceNow_Queues_AccountsReceivable",
+          "nodeLineageTag": "3943b603-21ab-49f2-9357-cc73f50f53fc",
+          "size": {
+            "height": 296,
+            "width": 234
+          },
+          "zIndex": 19
+        },
+        {
+          "location": {
+            "x": 2227.1535812880829,
+            "y": 0
+          },
+          "nodeIndex": "MTD_Summary_Calculation",
+          "nodeLineageTag": "c0f1d22f-12c2-4d3e-8b58-6823bd8ef7f1",
+          "size": {
+            "height": 128,
+            "width": 234
+          },
+          "zIndex": 1
+        },
+        {
+          "location": {
+            "x": 334.34450115157807,
+            "y": 962.12399610843829
+          },
+          "nodeIndex": "fact_ServiceNow_TaskSLA",
+          "nodeLineageTag": "34e2a725-af8a-42a8-8430-ae723b4896f6",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 2
+        },
+        {
+          "location": {
+            "x": 0,
+            "y": 1154.9304285837077
+          },
+          "nodeIndex": "dim_ServiceNow_AssignmentGroup",
+          "nodeLineageTag": "30e4154b-3ea3-4526-a1be-68c81ed440ff",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 20
+        },
+        {
+          "location": {
+            "x": 1192.8432498170587,
+            "y": 1639.7631908533126
+          },
+          "nodeIndex": "CombinedTotals1",
+          "nodeLineageTag": "9d87fce1-7e7d-4106-a5fe-b0e8ee872162",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 3
+        },
+        {
+          "location": {
+            "x": 257.51181750697191,
+            "y": 1478.803881349811
+          },
+          "nodeIndex": "CombinedTotals",
+          "nodeLineageTag": "c7bf1f5f-1f0e-4546-8180-5025fe8acb37",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 4
+        },
+        {
+          "location": {
+            "x": 409.79948870487624,
+            "y": 93.481950717656332
+          },
+          "nodeIndex": "dim_date_Month",
+          "nodeLineageTag": "f2116cc9-fbb2-465a-86ad-80d68413dfad",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 5
+        }
+      ],
+      "name": "All tables",
+      "zoomValue": 43.639889186205771,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    }
+  ],
+  "selectedDiagram": "All tables",
+  "defaultDiagram": "All tables"
+}

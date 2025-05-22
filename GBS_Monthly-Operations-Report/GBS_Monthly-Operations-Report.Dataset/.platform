@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "SemanticModel",
+    "displayName": "GBS_Monthly-Operations-Report"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "84b7b7d4-e5f6-4147-b605-69eb578543d0"
+  }
+}

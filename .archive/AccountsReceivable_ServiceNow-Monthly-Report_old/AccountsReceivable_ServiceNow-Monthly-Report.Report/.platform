@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Report",
+    "displayName": "AccountsReceivable_ServiceNow-Monthly-Report"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "2be80f86-a029-4457-b1d3-4e78eebc01d2"
+  }
+}

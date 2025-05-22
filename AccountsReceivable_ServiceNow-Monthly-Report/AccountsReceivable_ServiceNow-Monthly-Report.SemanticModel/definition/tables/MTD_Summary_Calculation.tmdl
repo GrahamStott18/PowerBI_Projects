@@ -1,0 +1,94 @@
+table MTD_Summary_Calculation
+	lineageTag: c0f1d22f-12c2-4d3e-8b58-6823bd8ef7f1
+
+	calculationGroup
+		precedence: 1
+
+		calculationItem 'Current Month' = ```
+				VAR _CurrentDate = MAX( dim_date_fiscal_TTMKey[DateID] )
+				
+				VAR _Result =
+				    CALCULATE (
+				        SELECTEDMEASURE() , 
+				        dim_date_fiscal_MonthKey[DateID] == _CurrentDate )
+				
+				RETURN
+				    _Result
+				```
+
+		calculationItem 'Past 3 Months' = ```
+				VAR _CurrentDate = SELECTEDVALUE( dim_date_fiscal_TTMKey[DateID] )
+				
+				VAR _CurrentDate1 = SELECTEDVALUE( dim_date_fiscal_MonthKey[DateID] )
+				
+				VAR _CurrentMonth =
+				    DATE ( YEAR ( _CurrentDate ), MONTH ( _CurrentDate ), DAY ( _CurrentDate ) )
+				
+				VAR _CurrentMonthMinus1 =
+				    DATE ( YEAR ( _CurrentDate ), MONTH ( _CurrentDate ) - 1, DAY ( _CurrentDate ) )
+				
+				VAR _CurrentMonthMinus3 =
+				    DATE ( YEAR ( _CurrentDate ), MONTH ( _CurrentDate ) - 3, DAY ( _CurrentDate ) )
+				
+				
+				
+				VAR _Result =
+				    CALCULATE (
+				        SELECTEDMEASURE() , 
+				        FILTER(
+				            dim_date_fiscal_MonthKey, 
+				            dim_date_fiscal_MonthKey[DateID] <= _CurrentMonth
+				                && dim_date_fiscal_MonthKey[DateID] >= _CurrentMonthMinus3
+				        ) )
+				RETURN
+				    _Result
+				```
+
+		calculationItem 'Past 13 Months' = ```
+				    
+				VAR _CurrentDate = SELECTEDVALUE( dim_date_fiscal_TTMKey[DateID] )
+				
+				VAR _CurrentMonth =
+				    DATE ( YEAR ( _CurrentDate ), MONTH ( _CurrentDate ), DAY ( _CurrentDate ) )
+				
+				VAR _CurrentMonthMinus4 =
+				    DATE ( YEAR ( _CurrentDate ), MONTH ( _CurrentDate ) - 4, DAY ( _CurrentDate ) )
+				
+				VAR _CurrentMonthMinus13 =
+				    DATE ( YEAR ( _CurrentDate ), MONTH ( _CurrentDate ) - 13, DAY ( _CurrentDate ) )
+				
+				VAR _CurrentMonthMinus16 =
+				    DATE ( YEAR ( _CurrentDate ), MONTH ( _CurrentDate ) - 16, DAY ( _CurrentDate ) )
+				
+				
+				
+				VAR _Result =
+				    CALCULATE (
+				        SELECTEDMEASURE() , 
+				        dim_date_fiscal_MonthKey[DateID] <= _CurrentMonth
+				        && 
+				        dim_date_fiscal_MonthKey[DateID] >= _CurrentMonthMinus13
+				    )
+				    
+				RETURN
+				    _Result
+				```
+
+	column Name
+		dataType: string
+		lineageTag: 40d41ee1-f830-4521-ae2d-1125d6587f95
+		summarizeBy: none
+		sourceColumn: Name
+		sortByColumn: Ordinal
+
+		annotation SummarizationSetBy = Automatic
+
+	column Ordinal
+		dataType: int64
+		isHidden
+		lineageTag: 35833db1-9af1-4e31-beba-dfe58966b31d
+		summarizeBy: sum
+		sourceColumn: Ordinal
+
+		annotation SummarizationSetBy = Automatic
+

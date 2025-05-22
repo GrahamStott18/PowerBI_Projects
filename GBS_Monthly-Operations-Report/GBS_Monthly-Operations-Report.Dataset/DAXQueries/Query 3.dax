@@ -1,0 +1,21 @@
+
+
+VAR _comment = SELECTEDVALUE( 'fact_gbs_mor_Commentary'[AP_Cost-Per-Vendor] )
+
+VAR _currentDate = MAX ( dim_date_fiscal_TTMKey[DateID] )
+
+VAR _currentDate2 = MAX( dim_date_fiscal_MonthKey[DateID] )
+
+VAR _result = 
+    CALCULATE( 
+--        [AP - Cost Per Vendor] , 
+        _comment , 
+        FILTER(
+--        dim_date_fiscal_MonthKey,
+        dim_date_fiscal_TTMKey,
+--        dim_date_fiscal_MonthKey[DateID] == _currentDate
+        dim_date_fiscal_TTMKey[DateID] == _currentDate2
+        ) )
+
+RETURN 
+    _result

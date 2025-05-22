@@ -1,0 +1,97 @@
+table dim_snow_AssignmentGroup
+	lineageTag: 55764fcf-ff1b-4543-9787-fcbba7a2af0f
+
+	column RowNumber
+		dataType: string
+		lineageTag: 9e04c563-5ec6-40f4-ae0f-91786c08ec5a
+		summarizeBy: none
+		sourceColumn: RowNumber
+
+		annotation SummarizationSetBy = Automatic
+
+	column Assignment-Group
+		dataType: string
+		lineageTag: f89e3e79-c783-45e2-a674-2d9a87d31590
+		summarizeBy: none
+		sourceColumn: Assignment-Group
+
+		annotation SummarizationSetBy = Automatic
+
+	column Functional-Area
+		dataType: string
+		lineageTag: 0e3400f9-2f63-4d19-8f8e-17400b435c14
+		summarizeBy: none
+		sourceColumn: Functional-Area
+
+		annotation SummarizationSetBy = Automatic
+
+	column Sub-Function
+		dataType: string
+		lineageTag: e131b4a8-03b7-4264-b1ff-4d05c6bc50cc
+		summarizeBy: none
+		sourceColumn: Sub-Function
+
+		annotation SummarizationSetBy = Automatic
+
+	column ProfitCenter-ID
+		dataType: string
+		lineageTag: 167eea03-1856-459b-a9b2-9c1069337b83
+		summarizeBy: none
+		sourceColumn: ProfitCenter-ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column SLA-BusinessDays
+		dataType: string
+		lineageTag: 535599c7-72d5-41c8-8cc8-c6885fee34bf
+		summarizeBy: none
+		sourceColumn: SLA-BusinessDays
+
+		annotation SummarizationSetBy = Automatic
+
+	column SLA-NetworkDays
+		dataType: string
+		lineageTag: 1cba406b-02ba-49ae-a982-dabf53f9585f
+		summarizeBy: none
+		sourceColumn: SLA-NetworkDays
+
+		annotation SummarizationSetBy = Automatic
+
+	column Group
+		dataType: string
+		lineageTag: 447eb2c6-fae2-4953-801e-989c9d0d3af2
+		summarizeBy: none
+		sourceColumn: Group
+
+		annotation SummarizationSetBy = Automatic
+
+	column Sub-Function-Alt
+		dataType: string
+		lineageTag: 7750f152-c71b-40ec-9f46-5cfcebc665c8
+		summarizeBy: none
+		sourceColumn: Sub-Function-Alt
+
+		annotation SummarizationSetBy = Automatic
+
+	column Queue
+		dataType: string
+		lineageTag: 38c3c646-9d2a-437e-b496-b6d88148930e
+		summarizeBy: none
+		sourceColumn: Queue
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_snow_AssignmentGroup = m
+		mode: import
+		source =
+				let
+				    Source = SmartsheetGlobal.Contents("US", []),
+				    #"2976903809263492" = Source{[Key="2976903809263492"]}[Data],
+				    #"3485167733657476" = #"2976903809263492"{[Key="3485167733657476"]}[Data]
+				in
+				    #"3485167733657476"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

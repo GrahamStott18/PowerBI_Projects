@@ -1,0 +1,104 @@
+table fact_DailyBankAmounts_AccountsReceivable
+	lineageTag: 02021088-adde-4481-8b50-a7b12a81dfce
+
+	column RowNumber
+		dataType: string
+		lineageTag: 5bd33025-96da-4737-9c73-8597853217e1
+		summarizeBy: none
+		sourceColumn: RowNumber
+
+		annotation SummarizationSetBy = Automatic
+
+	column department
+		dataType: string
+		lineageTag: 94683f58-ee82-4984-be32-2918978b5d49
+		summarizeBy: none
+		sourceColumn: department
+
+		annotation SummarizationSetBy = Automatic
+
+	column team
+		dataType: string
+		lineageTag: 61de79b2-fe01-4f95-969d-a9f45c6f90bd
+		summarizeBy: none
+		sourceColumn: team
+
+		annotation SummarizationSetBy = Automatic
+
+	column chicago_jpmc_amount
+		dataType: decimal
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		lineageTag: ec244f28-4337-4ca2-92ef-ed91954b02b6
+		summarizeBy: sum
+		sourceColumn: chicago_jpmc_amount
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	column dallas_jpmc_amount
+		dataType: decimal
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		lineageTag: 98c719df-0450-4200-9460-5c18f3cd53d6
+		summarizeBy: sum
+		sourceColumn: dallas_jpmc_amount
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	column date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: ddd7eb5a-bb5f-43df-8077-e21e72ce7873
+		summarizeBy: none
+		sourceColumn: date
+
+		variation Variation
+			isDefault
+			relationship: cfe0d3e7-6661-4b50-bc6b-55573759fcb9
+			defaultHierarchy: LocalDateTable_2e026643-c43c-4ed9-a49f-2e58d6805c6f.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column submitted_by
+		dataType: string
+		lineageTag: bf89e893-90a9-4df5-aba0-22c470ba173e
+		summarizeBy: none
+		sourceColumn: submitted_by
+
+		annotation SummarizationSetBy = Automatic
+
+	column created_by
+		dataType: string
+		lineageTag: 9620ef96-be52-4f5b-8955-b420c41704fc
+		summarizeBy: none
+		sourceColumn: created_by
+
+		annotation SummarizationSetBy = Automatic
+
+	column created_on
+		dataType: string
+		lineageTag: 4f68c0bd-9fee-4628-be29-38dfc3adf158
+		summarizeBy: none
+		sourceColumn: created_on
+
+		annotation SummarizationSetBy = Automatic
+
+	partition fact_DailyBankAmounts_AccountsReceivable = m
+		mode: import
+		source =
+				let
+				    Source = SmartsheetGlobal.Contents("US", []),
+				    #"2976903809263492" = Source{[Key="2976903809263492"]}[Data],
+				    #"4012640373264260" = #"2976903809263492"{[Key="4012640373264260"]}[Data],
+				    #"Changed Type" = Table.TransformColumnTypes(#"4012640373264260",{{"chicago_jpmc_amount", Currency.Type}, {"dallas_jpmc_amount", Currency.Type}, {"date", type date}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

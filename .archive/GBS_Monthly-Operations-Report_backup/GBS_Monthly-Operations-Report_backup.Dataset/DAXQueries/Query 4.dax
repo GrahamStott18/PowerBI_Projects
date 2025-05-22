@@ -1,0 +1,267 @@
+DEFINE
+    MEASURE '.Measures'[mor-Numerator (GBS)] = SUM ( x_metricData_GBS[mor-Numerator] )
+    MEASURE '.Measures'[mor-TotalQty (GBS)] = SUM ( x_metricData_GBS[mor-TotalQty] )
+    MEASURE '.Measures'[KPI (GBS)] = [mor-Numerator (GBS)] / [mor-TotalQty (GBS)]
+    MEASURE '.Measures'[Labor Cost (AP_InvoiceMRPO)] = SUM( fact_gbs_MetricData[Labor-Cost_InvoiceMRPO_AP] )
+    MEASURE '.Measures'[marketPRO Invoices (AP_InvoiceMRPO)] = SUM( fact_gbs_MetricData[marketPRO-Invoices_AP] )
+    MEASURE '.Measures'[More4Apps Invoices (AP_InvoiceMRPO)] = SUM( fact_gbs_MetricData[M4A-Invoices_AP] )
+    MEASURE '.Measures'[Manual Invoices (AP_InvoiceMRPO)] = SUM( fact_gbs_MetricData[Manual-Invoices_AP] )
+    MEASURE '.Measures'[KPI - Cost Per Invoice (AP)] = [Labor Cost (AP_InvoiceMRPO)] / ( [marketPRO Invoices (AP_InvoiceMRPO)] + [More4Apps Invoices (AP_InvoiceMRPO)] + [Manual Invoices (AP_InvoiceMRPO)] )
+    MEASURE '.Measures'[Incidents within SLA (AP_InvoiceMRPO)] = SUM( fact_gbs_MetricData[Incidents-Within-SLA_InvoiceMRPO_AP] )
+    MEASURE '.Measures'[Incidents Total (AP_InvoiceMRPO)] = SUM( fact_gbs_MetricData[Incidents-Total_InvoiceMRPO_AP] )
+    MEASURE '.Measures'[KPI - Incident Resolution (AP_marketMRPO)] = [Incidents within SLA (AP_InvoiceMRPO)] / [Incidents Total (AP_InvoiceMRPO)]
+    MEASURE '.Measures'[Labor Cost (AP_Banking)] = SUM( fact_gbs_MetricData[Labor-Cost_Banking_AP] )
+    MEASURE '.Measures'[Payments Processed (AP_Banking)] = SUM( fact_gbs_MetricData[Payments-Processed_AP] )
+    MEASURE '.Measures'[KPI - Cost Per Payment Processed (AP)] = [Labor Cost (AP_Banking)] / [Payments Processed (AP_Banking)]
+    MEASURE '.Measures'[Incidents within SLA (AP_Banking)] = SUM( fact_gbs_MetricData[Incidents-Within-SLA_Banking_AP] )
+    MEASURE '.Measures'[Incidents Total (AP_Banking)] = SUM( fact_gbs_MetricData[Incidents-Total_Banking_AP] )
+    MEASURE '.Measures'[KPI - Incident Resolution (AP_Banking)] = [Incidents within SLA (AP_Banking)] / [Incidents Total (AP_Banking)]
+    MEASURE '.Measures'[Labor Cost (AP_VendorControl)] = SUM( fact_gbs_MetricData[Labor-Cost_VendorControl_AP] )
+    MEASURE '.Measures'[Active Setups (AP_VendorControl)] = SUM( fact_gbs_MetricData[Active-Setups_AP] )
+    MEASURE '.Measures'[Approval Setups (AP_VendorControl)] = SUM( fact_gbs_MetricData[Approval-Setups_AP] )
+    MEASURE '.Measures'[Manual Setups (AP_VendorControl)] = SUM( fact_gbs_MetricData[Manual-Setups_AP] )
+    MEASURE '.Measures'[KPI - Cost Per Vendor Setup (AP)] = [Labor Cost (AP_VendorControl)] / ( [Active Setups (AP_VendorControl)] + [Approval Setups (AP_VendorControl)] + [Manual Setups (AP_VendorControl)] )
+    MEASURE '.Measures'[Incidents within SLA (AP_VendorControl)] = SUM( fact_gbs_MetricData[Incidents-Within-SLA_VendorControl_AP] )
+    MEASURE '.Measures'[Incidents Total (AP_VendorControl)] = SUM( fact_gbs_MetricData[Incidents-Total_VendorControl_AP] )
+    MEASURE '.Measures'[KPI - Incident Resolution (AP_VendorControl)] = [Incidents within SLA (AP_VendorControl)] / [Incidents Total (AP_VendorControl)]
+    MEASURE '.Measures'[Recovered Amount (AP_AuditRecovery)] = SUM( fact_gbs_MetricData[Recovered-Amount_AP] )
+    MEASURE '.Measures'[Total Dollars Amount (AP_AuditRecovery)] = SUM( fact_gbs_MetricData[Total-Dollars-Amount_AP] )
+    MEASURE '.Measures'[KPI - Audit Recovery Rate] = [Recovered Amount (AP_AuditRecovery)] / [Total Dollars Amount (AP_AuditRecovery)]
+    MEASURE '.Measures'[Incidents within SLA (AR)] = SUM( fact_gbs_MetricData[Incidents-Within-SLA_AR] )
+    MEASURE '.Measures'[Incidents Total (AR)] = SUM( fact_gbs_MetricData[Incidents-Total_AR] )
+    MEASURE '.Measures'[KPI - Incident Resolution (AR)] = [Incidents within SLA (AR)] / [Incidents Total (AR)]
+    MEASURE '.Measures'[Applicable Cash Receipts (AR)] = SUM( fact_gbs_MetricData[Applicable-Cash-Receipts_AR] )
+    MEASURE '.Measures'[Total Gross AR (AR)] = SUM( fact_gbs_MetricData[Total-Gross-AR] )
+    MEASURE '.Measures'[KPI - Unapplied Cash (AR)] = [Applicable Cash Receipts (AR)] / [Total Gross AR (AR)]
+    MEASURE '.Measures'[Labor Cost Manual Receipts (AR)] = SUM( fact_gbs_MetricData[Labor-Cost_Manual-Receipts_AR] )
+    MEASURE '.Measures'[Manual Receipts Total Volume (AR)] = SUM( fact_gbs_MetricData[Total-Volume_Manual-Receipts_AR] )
+    MEASURE '.Measures'[KPI - Cost Per Manual Receipt (AR)] = [Labor Cost Manual Receipts (AR)] / [Manual Receipts Total Volume (AR)]
+    MEASURE '.Measures'[Labor Cost ServiceNow (AR)] = SUM( fact_gbs_MetricData[Labor-Cost_ServiceNow_AR] )
+    MEASURE '.Measures'[KPI - Cost Per SNow Request (AR)] = [Labor Cost ServiceNow (AR)] / [Incidents Total (AR)]
+    MEASURE '.Measures'[Pending Items Within Policy - US (CB)] = SUM( fact_gbs_MetricData[Pending-Items-Within-Policy-US_CB] )
+    MEASURE '.Measures'[Total Pending Items - US (CB)] = SUM( fact_gbs_MetricData[Total-Pending-Items-US_CB] )
+    MEASURE '.Measures'[KPI - Debit Pending Items-US (CB)] = [Pending Items Within Policy - US (CB)] / [Total Pending Items - US (CB)]
+    MEASURE '.Measures'[Bank Accounts Reconciled - US (CB)] = SUM( fact_gbs_MetricData[Bank-Accounts-Reconciled-US_CB] )
+    MEASURE '.Measures'[Total Bank Accounts - US (CB)] = SUM( fact_gbs_MetricData[Total-Bank-Accounts-US_CB] )
+    MEASURE '.Measures'[KPI - Bank Account Reconciliation-US (CB)] = [Bank Accounts Reconciled - US (CB)] / [Total Bank Accounts - US (CB)]
+    MEASURE '.Measures'[Labor Cost (CB)] = SUM( fact_gbs_MetricData[Labor-Cost_CB] )
+    MEASURE '.Measures'[Manually Reconciled Items (CB)] = SUM( fact_gbs_MetricData[Manually-Reconciled-Items_CB] )
+    MEASURE '.Measures'[KPI - Cost Per Manually Reconciled Item (CB)] = [Labor Cost (CB)] / [Manually Reconciled Items (CB)]
+    MEASURE '.Measures'[Pending Items Within Policy - CAN (CB)] = SUM( fact_gbs_MetricData[Pending-Items-Within-Policy-CAN_CB] )
+    MEASURE '.Measures'[Total Pending Items - CAN (CB)] = SUM( fact_gbs_MetricData[Total-Pending-Items-CAN_CB] )
+    MEASURE '.Measures'[KPI - Debit Pending Items-CAN (CB)] = [Pending Items Within Policy - CAN (CB)] / [Total Pending Items - CAN (CB)]
+    MEASURE '.Measures'[Bank Accounts Reconciled - CAN (CB)] = SUM( fact_gbs_MetricData[Bank-Accounts-Reconciled-CAN_CB] )
+    MEASURE '.Measures'[Total Bank Accounts - CAN (CB)] = SUM( fact_gbs_MetricData[Total-Bank-Accounts-CAN_CB] )
+    MEASURE '.Measures'[KPI - Bank Account Reconciliation-CAN (CB)] = [Bank Accounts Reconciled - CAN (CB)] / [Total Bank Accounts - CAN (CB)]
+    MEASURE '.Measures'[Accurate Journal Entries within SLA (GL)] = SUM( fact_gbs_MetricData[Accurate-Journal-Entries-Within-SLA_GL] )
+    MEASURE '.Measures'[Journal Entries - Total (GL)] = SUM( fact_gbs_MetricData[Journal-Entries-Total_GL] )
+    MEASURE '.Measures'[KPI - Accurate Journal Entries (GL)] = [Accurate Journal Entries within SLA (GL)] / [Journal Entries - Total (GL)]
+    MEASURE '.Measures'[Labor Cost (GL)] = SUM( fact_gbs_MetricData[Labor-Cost_GL] )
+    MEASURE '.Measures'[KPI - Cost Per Manual Journal Entry (GL)] = [Labor Cost (GL)] / [Journal Entries - Total (GL)]
+    MEASURE '.Measures'[RECs Completed within SLA (GL)] = SUM( fact_gbs_MetricData[Required-REQs-Completed-Within-SLA_GL] )
+    MEASURE '.Measures'[RECs Required to Complete (GL)] = SUM( fact_gbs_MetricData[RECs-Required-Total_GL] )
+    MEASURE '.Measures'[KPI - Reconciliations Prepared & Reviewed (GL)] = [RECs Completed within SLA (GL)] / [RECs Required to Complete (GL)]
+    MEASURE '.Measures'[CIP Balance (FA)] = SUM( fact_gbs_MetricData[CIP-Balance_FA] )
+    MEASURE '.Measures'[CIP Balance - Total (FA)] = SUM( fact_gbs_MetricData[CIP-Balance-Total_FA] )
+    MEASURE '.Measures'[KPI - CIP Balance (FA)] = [CIP Balance (FA)] / [CIP Balance - Total (FA)]
+    MEASURE '.Measures'[CIP Balance - Stale (FA)] = SUM( fact_gbs_MetricData[CIP-Balance-Stale_FA] )
+    MEASURE '.Measures'[KPI - CIP Balance-Stale (FA)] = [CIP Balance - Stale (FA)] / [CIP Balance - Total (FA)]
+    MEASURE '.Measures'[CERs Days Worked Total (FA)] = SUM( fact_gbs_MetricData[CERs-Days-Worked-Total_FA] )
+    MEASURE '.Measures'[CERs Closed Total (FA)] = SUM( fact_gbs_MetricData[CERs-Closed-Total_FA] )
+    MEASURE '.Measures'[KPI - CERs Closed Timely (FA)] = [CERs Days Worked Total (FA)] / [CERs Closed Total (FA)]
+    MEASURE '.Measures'[Labor Cost (FA)] = SUM( fact_gbs_MetricData[Labor-Cost_FA] )
+    MEASURE '.Measures'[FA Total Transactions (FA)] = SUM( fact_gbs_MetricData[FA-Transactions-Total_FA])
+    MEASURE '.Measures'[KPI - Cost Per FA Transaction (FA)] = [Labor Cost (FA)] / [FA Total Transactions (FA)]
+    MEASURE '.Measures'[RECs Completed within SLA (FA)] = SUM( fact_gbs_MetricData[Required-RECs-Completed-Within-SLA_FA] )
+    MEASURE '.Measures'[RECs Required to Complete - Total (FA)] = SUM( fact_gbs_MetricData[RECs-Required-Total_FA] )
+    MEASURE '.Measures'[KPI - Reconciliations Prepared & Reviewed (FA)] = [RECs Completed within SLA (FA)] / [RECs Required to Complete - Total (FA)]
+    MEASURE '.Measures'[Labor Cost (PR)] = SUM( fact_gbs_MetricData[Labor-Cost_PR] )
+    MEASURE '.Measures'[Transactions Processed (PR)] = SUM( fact_gbs_MetricData[Transactions-Processed-Total_PR] )
+    MEASURE '.Measures'[KPI - Cost Per Payment (PR)] = [Labor Cost (PR)] / [Transactions Processed (PR)]
+    MEASURE '.Measures'[REQs Completed within SLA (PR)] = SUM( fact_gbs_MetricData[REQs-Completed-Within-SLA_PR] )
+    MEASURE '.Measures'[REQs Total (PR)] = SUM( fact_gbs_MetricData[REQs-Total_PR] )
+    MEASURE '.Measures'[KPI - eForm Resolution (PR)] = [REQs Completed within SLA (PR)] / [REQs Total (PR)]
+    MEASURE '.Measures'[Incidents within SLA (PR)] = SUM( fact_gbs_MetricData[Incidents-Within-SLA_PR] )
+    MEASURE '.Measures'[Incidents Total (PR)] = SUM( fact_gbs_MetricData[Incidents-Total_PR] )
+    MEASURE '.Measures'[KPI - Incident Resolution (PR)] = [Incidents within SLA (PR)] / [Incidents Total (PR)]
+    MEASURE '.Measures'[Survey Score (CC)] = SUM( fact_gbs_MetricData[Survey-Score_CC] )
+    MEASURE '.Measures'[Surveys Completed (CC)] = SUM( fact_gbs_MetricData[Surveys-Completed_CC] )
+    MEASURE '.Measures'[KPI - Customer Satisfaction (CC)] = [Survey Score (CC)] / [Surveys Completed (CC)]
+    MEASURE '.Measures'[Surveys Offered (CC)] = SUM( fact_gbs_MetricData[Surveys-Offered_CC] )
+    MEASURE '.Measures'[KPI - Survey Participation Rate (CC)] = [Surveys Completed (CC)] / [Surveys Offered (CC)]
+    MEASURE '.Measures'[CONVERTED - Hold Time on Queue-Inbound (CC)] = SUM( fact_gbs_MetricData[CONVERT_Hold-Time-On-Queue-INBOUND_CC] )
+    MEASURE '.Measures'[Calls Answered (CC)] = SUM( fact_gbs_MetricData[Calls-Answered_CC] )
+    MEASURE '.Measures'[KPI - Average Answer Time (CC)] = [CONVERTED - Hold Time on Queue-Inbound (CC)] / [Calls Answered (CC)]
+    MEASURE '.Measures'[Calls Abandoned (CC)] = SUM( fact_gbs_MetricData[Calls-Abandoned_CC] )
+    MEASURE '.Measures'[Incoming Calls Offered (CC)] = SUM( fact_gbs_MetricData[Incoming-Calls-Offered_CC] )
+    MEASURE '.Measures'[KPI - Abandonment Rate (CC)] = [Calls Abandoned (CC)] / [Incoming Calls Offered (CC)]
+    MEASURE '.Measures'[Calls Answered within SLA (CC)] = SUM( fact_gbs_MetricData[Calls-Answered-Within-SLA_CC] )
+    MEASURE '.Measures'[KPI - Calls Answered Within SLA (CC)] = [Calls Answered within SLA (CC)] / [Calls Answered (CC)]
+    MEASURE '.Measures'[Emails within SLA (CC)] = SUM( fact_gbs_MetricData[Emails-Within-SLA_CC] )
+    MEASURE '.Measures'[Email Volume Total (CC)] = SUM( fact_gbs_MetricData[Email-Volume-Total_CC] )
+    MEASURE '.Measures'[KPI - Inbound Email Efficency (CC)] = [Emails within SLA (CC)] / [Email Volume Total (CC)]
+    MEASURE '.Measures'[CONVERTED - Hold Time on Queue-Callbacks (CC)] = SUM( fact_gbs_MetricData[CONVERT_Hold-Time-On-Queue-CALLBACKS_CC] )
+    MEASURE '.Measures'[Callbacks Completed (CC)] = SUM( fact_gbs_MetricData[Callbacks-Completed_CC] )
+    MEASURE '.Measures'[KPI - Callbacks (CC)] = [CONVERTED - Hold Time on Queue-Callbacks (CC)] / [Callbacks Completed (CC)]
+    MEASURE '.Measures'[Prior Year (Period) (ALL)] = VAR _KPI = [KPI (GBS)]
+
+VAR _KpiSelect =
+    SELECTEDVALUE ( dim_gbs_mor_KPI[Kpi-Name] )
+
+VAR _CurrentDate =
+    MAX ( dim_date_fiscal_TTMKey[DateID] )
+
+VAR _PreviousDate =
+    DATE ( YEAR ( _CurrentDate ) - 1, MONTH ( _CurrentDate ), DAY ( _CurrentDate ) )
+
+VAR _Result =
+    CALCULATE (
+        IF ( _KpiSelect = "Cost Per Invoice", [KPI - Cost Per Invoice (AP)] , 
+        IF ( _KpiSelect = "Incident Resolution - InvoiceMRPO", [KPI - Incident Resolution (AP_marketMRPO)] , 
+        IF ( _KpiSelect = "Cost Per Payment Processed", [KPI - Cost Per Payment Processed (AP)] ,
+        IF ( _KpiSelect = "Incident Resolution - Banking", [KPI - Incident Resolution (AP_Banking)] , 
+        IF ( _KpiSelect = "Cost Per Vendor Setup", [KPI - Cost Per Vendor Setup (AP)] , 
+        IF ( _KpiSelect = "Incident Resolution - Vendor Control", [KPI - Incident Resolution (AP_VendorControl)] , 
+        IF ( _KpiSelect = "Audit Recovery Rate", [KPI - Audit Recovery Rate] ,
+        IF ( _KpiSelect = "Incident Resolution - AR" , [KPI - Incident Resolution (AR)] , 
+        IF ( _KpiSelect = "Unapplied Cash", [KPI - Unapplied Cash (AR)] , 
+        IF ( _KpiSelect = "Cost Per Manual Receipt", [KPI - Cost Per Manual Receipt (AR)] ,
+        IF ( _KpiSelect = "Cost Per SNow Request" , [KPI - Cost Per SNow Request (AR)] , 
+        IF ( _KpiSelect = "Debit Pending Items - US", [KPI - Debit Pending Items-US (CB)] , 
+        IF ( _KpiSelect = "Bank Account Reconciliation - US", [KPI - Bank Account Reconciliation-US (CB)] ,
+        IF ( _KpiSelect = "Cost Per Manually Reconciled Item" , [KPI - Cost Per Manually Reconciled Item (CB)] , 
+        IF ( _KpiSelect = "Debit Pending Items - Canada", [KPI - Debit Pending Items-CAN (CB)] ,
+        IF ( _KpiSelect = "Bank Account Reconciliation - Canada" , [KPI - Bank Account Reconciliation-CAN (CB)] , 
+        IF ( _KpiSelect = "Accurate Journal Entries", [KPI - Accurate Journal Entries (GL)] , 
+        IF ( _KpiSelect = "Cost Per Manual Journal Entry", [KPI - Cost Per Manual Journal Entry (GL)] ,
+        IF ( _KpiSelect = "Reconciliations Prepared & Reviewed - GL" , [KPI - Reconciliations Prepared & Reviewed (GL)] , 
+        IF ( _KpiSelect = "CIP Balance", [KPI - CIP Balance (FA)] ,
+        IF ( _KpiSelect = "CIP Balance (Stale)" , [KPI - CIP Balance-Stale (FA)] , 
+        IF ( _KpiSelect = "CERs Closed Timely", [KPI - CERs Closed Timely (FA)] , 
+        IF ( _KpiSelect = "Cost Per Transaction - FA", [KPI - Cost Per FA Transaction (FA)] ,
+        IF ( _KpiSelect = "Reconciliations Prepared & Reviewed - FA" , [KPI - Reconciliations Prepared & Reviewed (FA)] , 
+        IF ( _KpiSelect = "Cost Per Payment - PR", [KPI - Cost Per Payment (PR)] , 
+        IF ( _KpiSelect = "eForm Resolution", [KPI - eForm Resolution (PR)] ,
+        IF ( _KpiSelect = "Incident Resolution - PR" , [KPI - Incident Resolution (PR)] , 
+        IF ( _KpiSelect = "Customer Satisfaction", [KPI - Customer Satisfaction (CC)], 
+        IF ( _KpiSelect = "Survey Participation Rate", [KPI - Survey Participation Rate (CC)],
+        IF ( _KpiSelect = "Average Answer Time", [KPI - Average Answer Time (CC)],
+        IF ( _KpiSelect = "Abandonment Rate", [KPI - Abandonment Rate (CC)], 
+        IF ( _KpiSelect = "Calls Answered within Service Level", [KPI - Calls Answered Within SLA (CC)], 
+        IF( _KpiSelect = "Inbound Email Efficiency", [KPI - Inbound Email Efficency (CC)] ,    
+        IF ( _KpiSelect = "Callbacks", [KPI - Callbacks (CC)]  
+        ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ,
+            dim_date_fiscal_MonthKey[DateID] == _PreviousDate 
+            )
+
+RETURN
+    _Result
+
+EVALUATE
+    SUMMARIZECOLUMNS(
+        "mor-Numerator (GBS)", '.Measures'[mor-Numerator (GBS)],
+        "mor-TotalQty (GBS)", '.Measures'[mor-TotalQty (GBS)],
+        "KPI (GBS)", '.Measures'[KPI (GBS)],
+        "Labor Cost (AP_InvoiceMRPO)", '.Measures'[Labor Cost (AP_InvoiceMRPO)],
+        "marketPRO Invoices (AP_InvoiceMRPO)", '.Measures'[marketPRO Invoices (AP_InvoiceMRPO)],
+        "More4Apps Invoices (AP_InvoiceMRPO)", '.Measures'[More4Apps Invoices (AP_InvoiceMRPO)],
+        "Manual Invoices (AP_InvoiceMRPO)", '.Measures'[Manual Invoices (AP_InvoiceMRPO)],
+        "KPI - Cost Per Invoice (AP)", '.Measures'[KPI - Cost Per Invoice (AP)],
+        "Incidents within SLA (AP_InvoiceMRPO)", '.Measures'[Incidents within SLA (AP_InvoiceMRPO)],
+        "Incidents Total (AP_InvoiceMRPO)", '.Measures'[Incidents Total (AP_InvoiceMRPO)],
+        "KPI - Incident Resolution (AP_marketMRPO)", '.Measures'[KPI - Incident Resolution (AP_marketMRPO)],
+        "Labor Cost (AP_Banking)", '.Measures'[Labor Cost (AP_Banking)],
+        "Payments Processed (AP_Banking)", '.Measures'[Payments Processed (AP_Banking)],
+        "KPI - Cost Per Payment Processed (AP)", '.Measures'[KPI - Cost Per Payment Processed (AP)],
+        "Incidents within SLA (AP_Banking)", '.Measures'[Incidents within SLA (AP_Banking)],
+        "Incidents Total (AP_Banking)", '.Measures'[Incidents Total (AP_Banking)],
+        "KPI - Incident Resolution (AP_Banking)", '.Measures'[KPI - Incident Resolution (AP_Banking)],
+        "Labor Cost (AP_VendorControl)", '.Measures'[Labor Cost (AP_VendorControl)],
+        "Active Setups (AP_VendorControl)", '.Measures'[Active Setups (AP_VendorControl)],
+        "Approval Setups (AP_VendorControl)", '.Measures'[Approval Setups (AP_VendorControl)],
+        "Manual Setups (AP_VendorControl)", '.Measures'[Manual Setups (AP_VendorControl)],
+        "KPI - Cost Per Vendor Setup (AP)", '.Measures'[KPI - Cost Per Vendor Setup (AP)],
+        "Incidents within SLA (AP_VendorControl)", '.Measures'[Incidents within SLA (AP_VendorControl)],
+        "Incidents Total (AP_VendorControl)", '.Measures'[Incidents Total (AP_VendorControl)],
+        "KPI - Incident Resolution (AP_VendorControl)", '.Measures'[KPI - Incident Resolution (AP_VendorControl)],
+        "Recovered Amount (AP_AuditRecovery)", '.Measures'[Recovered Amount (AP_AuditRecovery)],
+        "Total Dollars Amount (AP_AuditRecovery)", '.Measures'[Total Dollars Amount (AP_AuditRecovery)],
+        "KPI - Audit Recovery Rate", '.Measures'[KPI - Audit Recovery Rate],
+        "Incidents within SLA (AR)", '.Measures'[Incidents within SLA (AR)],
+        "Incidents Total (AR)", '.Measures'[Incidents Total (AR)],
+        "KPI - Incident Resolution (AR)", '.Measures'[KPI - Incident Resolution (AR)],
+        "Applicable Cash Receipts (AR)", '.Measures'[Applicable Cash Receipts (AR)],
+        "Total Gross AR (AR)", '.Measures'[Total Gross AR (AR)],
+        "KPI - Unapplied Cash (AR)", '.Measures'[KPI - Unapplied Cash (AR)],
+        "Labor Cost Manual Receipts (AR)", '.Measures'[Labor Cost Manual Receipts (AR)],
+        "Manual Receipts Total Volume (AR)", '.Measures'[Manual Receipts Total Volume (AR)],
+        "KPI - Cost Per Manual Receipt (AR)", '.Measures'[KPI - Cost Per Manual Receipt (AR)],
+        "Labor Cost ServiceNow (AR)", '.Measures'[Labor Cost ServiceNow (AR)],
+        "KPI - Cost Per SNow Request (AR)", '.Measures'[KPI - Cost Per SNow Request (AR)],
+        "Pending Items Within Policy - US (CB)", '.Measures'[Pending Items Within Policy - US (CB)],
+        "Total Pending Items - US (CB)", '.Measures'[Total Pending Items - US (CB)],
+        "KPI - Debit Pending Items-US (CB)", '.Measures'[KPI - Debit Pending Items-US (CB)],
+        "Bank Accounts Reconciled - US (CB)", '.Measures'[Bank Accounts Reconciled - US (CB)],
+        "Total Bank Accounts - US (CB)", '.Measures'[Total Bank Accounts - US (CB)],
+        "KPI - Bank Account Reconciliation-US (CB)", '.Measures'[KPI - Bank Account Reconciliation-US (CB)],
+        "Labor Cost (CB)", '.Measures'[Labor Cost (CB)],
+        "Manually Reconciled Items (CB)", '.Measures'[Manually Reconciled Items (CB)],
+        "KPI - Cost Per Manually Reconciled Item (CB)", '.Measures'[KPI - Cost Per Manually Reconciled Item (CB)],
+        "Pending Items Within Policy - CAN (CB)", '.Measures'[Pending Items Within Policy - CAN (CB)],
+        "Total Pending Items - CAN (CB)", '.Measures'[Total Pending Items - CAN (CB)],
+        "KPI - Debit Pending Items-CAN (CB)", '.Measures'[KPI - Debit Pending Items-CAN (CB)],
+        "Bank Accounts Reconciled - CAN (CB)", '.Measures'[Bank Accounts Reconciled - CAN (CB)],
+        "Total Bank Accounts - CAN (CB)", '.Measures'[Total Bank Accounts - CAN (CB)],
+        "KPI - Bank Account Reconciliation-CAN (CB)", '.Measures'[KPI - Bank Account Reconciliation-CAN (CB)],
+        "Accurate Journal Entries within SLA (GL)", '.Measures'[Accurate Journal Entries within SLA (GL)],
+        "Journal Entries - Total (GL)", '.Measures'[Journal Entries - Total (GL)],
+        "KPI - Accurate Journal Entries (GL)", '.Measures'[KPI - Accurate Journal Entries (GL)],
+        "Labor Cost (GL)", '.Measures'[Labor Cost (GL)],
+        "KPI - Cost Per Manual Journal Entry (GL)", '.Measures'[KPI - Cost Per Manual Journal Entry (GL)],
+        "RECs Completed within SLA (GL)", '.Measures'[RECs Completed within SLA (GL)],
+        "RECs Required to Complete (GL)", '.Measures'[RECs Required to Complete (GL)],
+        "KPI - Reconciliations Prepared & Reviewed (GL)", '.Measures'[KPI - Reconciliations Prepared & Reviewed (GL)],
+        "CIP Balance (FA)", '.Measures'[CIP Balance (FA)],
+        "CIP Balance - Total (FA)", '.Measures'[CIP Balance - Total (FA)],
+        "KPI - CIP Balance (FA)", '.Measures'[KPI - CIP Balance (FA)],
+        "CIP Balance - Stale (FA)", '.Measures'[CIP Balance - Stale (FA)],
+        "KPI - CIP Balance-Stale (FA)", '.Measures'[KPI - CIP Balance-Stale (FA)],
+        "CERs Days Worked Total (FA)", '.Measures'[CERs Days Worked Total (FA)],
+        "CERs Closed Total (FA)", '.Measures'[CERs Closed Total (FA)],
+        "KPI - CERs Closed Timely (FA)", '.Measures'[KPI - CERs Closed Timely (FA)],
+        "Labor Cost (FA)", '.Measures'[Labor Cost (FA)],
+        "FA Total Transactions (FA)", '.Measures'[FA Total Transactions (FA)],
+        "KPI - Cost Per FA Transaction (FA)", '.Measures'[KPI - Cost Per FA Transaction (FA)],
+        "RECs Completed within SLA (FA)", '.Measures'[RECs Completed within SLA (FA)],
+        "RECs Required to Complete - Total (FA)", '.Measures'[RECs Required to Complete - Total (FA)],
+        "KPI - Reconciliations Prepared & Reviewed (FA)", '.Measures'[KPI - Reconciliations Prepared & Reviewed (FA)],
+        "Labor Cost (PR)", '.Measures'[Labor Cost (PR)],
+        "Transactions Processed (PR)", '.Measures'[Transactions Processed (PR)],
+        "KPI - Cost Per Payment (PR)", '.Measures'[KPI - Cost Per Payment (PR)],
+        "REQs Completed within SLA (PR)", '.Measures'[REQs Completed within SLA (PR)],
+        "REQs Total (PR)", '.Measures'[REQs Total (PR)],
+        "KPI - eForm Resolution (PR)", '.Measures'[KPI - eForm Resolution (PR)],
+        "Incidents within SLA (PR)", '.Measures'[Incidents within SLA (PR)],
+        "Incidents Total (PR)", '.Measures'[Incidents Total (PR)],
+        "KPI - Incident Resolution (PR)", '.Measures'[KPI - Incident Resolution (PR)],
+        "Survey Score (CC)", '.Measures'[Survey Score (CC)],
+        "Surveys Completed (CC)", '.Measures'[Surveys Completed (CC)],
+        "KPI - Customer Satisfaction (CC)", '.Measures'[KPI - Customer Satisfaction (CC)],
+        "Surveys Offered (CC)", '.Measures'[Surveys Offered (CC)],
+        "KPI - Survey Participation Rate (CC)", '.Measures'[KPI - Survey Participation Rate (CC)],
+        "CONVERTED - Hold Time on Queue-Inbound (CC)", '.Measures'[CONVERTED - Hold Time on Queue-Inbound (CC)],
+        "Calls Answered (CC)", '.Measures'[Calls Answered (CC)],
+        "KPI - Average Answer Time (CC)", '.Measures'[KPI - Average Answer Time (CC)],
+        "Calls Abandoned (CC)", '.Measures'[Calls Abandoned (CC)],
+        "Incoming Calls Offered (CC)", '.Measures'[Incoming Calls Offered (CC)],
+        "KPI - Abandonment Rate (CC)", '.Measures'[KPI - Abandonment Rate (CC)],
+        "Calls Answered within SLA (CC)", '.Measures'[Calls Answered within SLA (CC)],
+        "KPI - Calls Answered Within SLA (CC)", '.Measures'[KPI - Calls Answered Within SLA (CC)],
+        "Emails within SLA (CC)", '.Measures'[Emails within SLA (CC)],
+        "Email Volume Total (CC)", '.Measures'[Email Volume Total (CC)],
+        "KPI - Inbound Email Efficency (CC)", '.Measures'[KPI - Inbound Email Efficency (CC)],
+        "CONVERTED - Hold Time on Queue-Callbacks (CC)", '.Measures'[CONVERTED - Hold Time on Queue-Callbacks (CC)],
+        "Callbacks Completed (CC)", '.Measures'[Callbacks Completed (CC)],
+        "KPI - Callbacks (CC)", '.Measures'[KPI - Callbacks (CC)],
+        "Prior Year (Period) (ALL)", '.Measures'[Prior Year (Period) (ALL)]
+    )

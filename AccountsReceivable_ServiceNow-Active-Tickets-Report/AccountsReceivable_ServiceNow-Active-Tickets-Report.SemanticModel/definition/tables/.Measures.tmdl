@@ -1,0 +1,649 @@
+table '.Measures'
+	lineageTag: 4a13359a-294c-41ce-90aa-75afee8f7e30
+
+	calculationGroup
+
+	measure 'Last Data Load (CST)' = MAX( Query1[loaded_date] ) - TIME( 1 , 0 , 0 )
+		formatString: General Date
+		lineageTag: a1615652-ce67-4c39-a8a0-885511679cbc
+
+	measure TotalTickets_Active_Query1_DISTINCTCOUNT = DISTINCTCOUNT( Query1[task] )
+		formatString: 0
+		lineageTag: 1d58555f-efa2-47cd-92fd-7033d7c1b1ec
+
+	measure TotalTickets_Active_Query1_COUNTROWS =
+			CALCULATE(
+			    COUNTROWS(Query1)
+			    )
+		formatString: 0
+		lineageTag: 003aece9-1747-4be3-a8d3-0ccdf6192e4f
+
+	measure 'Distinct_Total_Tickets_AwaitingEmail (Query1)' =
+			
+			CALCULATE(
+			    COUNTROWS(
+			        DISTINCT(Query1[task])
+			    ),
+			    Query1[stage] = "Paused"
+			)
+		formatString: 0
+		lineageTag: 79f92c61-bb4b-4177-83ca-d2b18c7bee37
+
+	measure OldestActiveTicket_Task_InProgress&NotAssigned = ```
+			
+			
+			VAR OldestDateTime = 
+			    CALCULATE( 
+			        MIN( Query1[start_time] ) ,
+			        Query1[stage] = "In Progress"
+			        && 
+			        Query1[task_assigned_to] = ""
+			    )
+			
+			RETURN
+			    CALCULATE( 
+			        MAX( Query1[task] ) , 
+			        Query1[start_time] = OldestDateTime 
+			    )
+			```
+		lineageTag: 9ab17b4d-37d0-47b3-88bd-7f6c64d9d53e
+
+	measure 'In Progress-Has Breached (Query1)' = ```
+			
+			    CALCULATE( 
+			        DISTINCTCOUNT( Query1[task] ) , 
+			        FILTER( Query1 , 
+			        Query1[stage] == "In progress" 
+			        &&
+			        Query1[has_breached] == "True" ) )
+			```
+		formatString: 0
+		lineageTag: 4bc504d1-aae9-4b1a-9a98-6fb6510f0114
+
+	measure 'In Progress-Not Breached (Query1)' = ```
+			
+			    CALCULATE( 
+			        DISTINCTCOUNT( Query1[task] ) , 
+			        FILTER( Query1 , 
+			        Query1[stage] == "In progress" 
+			        &&
+			        Query1[has_breached] == "False" ) )
+			```
+		formatString: 0
+		lineageTag: 4247fc9f-64fe-4f60-bc5e-f1207a704a41
+
+	measure 'Paused-Not Breached (Query1)' = ```
+			
+			    CALCULATE( 
+			        DISTINCTCOUNT( Query1[task] ) , 
+			        FILTER( Query1 , 
+			        Query1[stage] == "Paused" 
+			        &&
+			        Query1[has_breached] == "False" ) )
+			```
+		formatString: 0
+		lineageTag: 236b59ef-d081-49b8-bfed-18e785723c19
+
+	measure 'Paused-Has Breached (Query1)' = ```
+			
+			    CALCULATE( 
+			        DISTINCTCOUNT( Query1[task] ) , 
+			        FILTER( Query1 , 
+			        Query1[stage] == "Paused" 
+			        &&
+			        Query1[has_breached] == "True" ) )
+			```
+		formatString: 0
+		lineageTag: 4578fee1-f7e7-4d08-a1fe-15e997e5d85a
+
+	measure 'Breached-Total Count (Query1)' = ```
+			
+			    CALCULATE( 
+			        DISTINCTCOUNT( Query1[task] ) ,
+			        FILTER( Query1 , 
+			        Query1[has_breached] == "True" ) ) 
+			```
+		formatString: 0
+		lineageTag: 4c3eff8c-781c-4440-8558-3f1ff4efb361
+
+	measure cst_OldestActiveTicket_TimeLeft_InProgress&NotAssigned = ```
+			
+			VAR OldestDateTime = 
+			    CALCULATE( 
+			        MIN( Query1[start_time_utc] ),
+			        Query1[stage] = "In Progress"
+			        &&
+			        Query1[task_assigned_to] = ""
+			    )
+			VAR PlannedEndTime = 
+			    CALCULATE(
+			        MAX( Query1[planned_end_time_utc] ),
+			        Query1[start_time_utc] = OldestDateTime,
+			        Query1[stage] = "In Progress"
+			    )
+			
+			VAR TimeDifference = PlannedEndTime - ( UTCNOW() - TIME( 6 , 0 , 0 ) ) 
+			VAR Days = INT(TimeDifference)
+			VAR Hours = HOUR(TimeDifference)
+			VAR Minutes = MINUTE(TimeDifference)
+			RETURN
+			    IF(
+			        ISBLANK(OldestDateTime) || ISBLANK(PlannedEndTime),
+			        BLANK(),
+			        Days & " Days, " & Hours & " Hours, " & Minutes & " Minutes"
+			    )
+			```
+		lineageTag: c1e1ec2d-302a-47fa-b3a3-74ef591035c9
+
+	measure utc_OldestActiveTicket_StartTime_InProgress&NotAssigned = ```
+			
+			
+			VAR OldestDateTime = 
+			    CALCULATE( 
+			        MIN( Query1[start_time_utc] ) ,
+			        Query1[stage] = "In Progress"
+			        && 
+			        Query1[task_assigned_to] = ""
+			    )
+			
+			RETURN
+			    ROW( "Oldest DateTime" , OldestDateTime )
+			```
+		formatString: General Date
+		lineageTag: 7db7edea-adb9-49a0-a462-f166994b469a
+
+	measure utc_OldestActiveTicket_PlannedEndTime_InProgress&NotAssigned = ```
+			
+			
+			VAR OldestDateTime = 
+			    CALCULATE( 
+			        MIN( Query1[start_time_utc] ) ,
+			        Query1[stage] = "In Progress"
+			        && 
+			        Query1[task_assigned_to] = ""
+			    )
+			
+			RETURN
+			    CALCULATE( 
+			        MAX( Query1[planned_end_time_utc] ) , 
+			        Query1[start_time_utc] = OldestDateTime
+			    )
+			```
+		formatString: General Date
+		lineageTag: e95482f6-f537-4782-bbd5-5ac82462d313
+
+	measure 'Assignment Group / Queue' =
+			
+			SWITCH(
+			    TRUE(),
+			    SELECTEDVALUE( Query1[task_assignment_group] ) = "Accounts Receivable Adjustment Approval" && SELECTEDVALUE( Query1[task_type] ) = "Incident - PS", "Adjustments Queue",
+			    SELECTEDVALUE( Query1[task_assignment_group] ) = "Accounts Receivable Adjustment Approval" && SELECTEDVALUE( Query1[task_type] ) = "Catalog Task", "Adjustments eForm",
+			    SELECTEDVALUE( Query1[task_assignment_group] ) = "AR Accounting" && SELECTEDVALUE( Query1[task_type] ) = "Incident - PS", "Accounting Queue",
+			    SELECTEDVALUE( Query1[task_assignment_group] ) = "AR Accounting" && SELECTEDVALUE( Query1[task_type] ) = "Catalog Task", "Accounting eForm",
+			    SELECTEDVALUE( Query1[task_assignment_group] ) = "AR Refund Quick Check Accounting Team Review" && SELECTEDVALUE( Query1[task_type] ) = "Incident - PS", "AR Refund Quick Check Queue",
+			    SELECTEDVALUE( Query1[task_assignment_group] ) = "AR Refund Quick Check Accounting Team Review" && SELECTEDVALUE( Query1[task_type] ) = "Catalog Task", "AR Refund Quick Check eForm",
+			    SELECTEDVALUE( Query1[task_assignment_group] ) = "AUS to GBS Transfers" && SELECTEDVALUE( Query1[task_type] ) = "Incident - PS", "AUS to GBS Transfers Queue",
+			    SELECTEDVALUE( Query1[task_assignment_group] ) = "AUS to GBS Transfers" && SELECTEDVALUE( Query1[task_type] ) = "Catalog Task", "AUS to GBS Transfers eForm",
+			    SELECTEDVALUE( Query1[task_assignment_group] ) = "GBS SR Billing" && SELECTEDVALUE( Query1[task_type] ) = "Incident - PS", "Billing Queue",
+			    SELECTEDVALUE( Query1[task_assignment_group] ) = "GBS SR Billing" && SELECTEDVALUE( Query1[task_type] ) = "Catalog Task", "Billing eForm",
+			    SELECTEDVALUE( Query1[task_assignment_group] ) = "GBS SR ReceivablesInquiry" && SELECTEDVALUE( Query1[task_type] ) = "Incident - PS", "ReceivablesInquiry Queue",
+			    SELECTEDVALUE( Query1[task_assignment_group] ) = "GBS SR ReceivablesInquiry" && SELECTEDVALUE( Query1[task_type] ) = "Catalog Task", "ReceivablesInquiry eForm",
+			    SELECTEDVALUE( Query1[task_assignment_group] ) = "Manual Invoice Approval" && SELECTEDVALUE( Query1[task_type] ) = "Incident - PS", "Invoice Approval Queue",
+			    SELECTEDVALUE( Query1[task_assignment_group] ) = "Manual Invoice Approval" && SELECTEDVALUE( Query1[task_type] ) = "Catalog Task", "Invoice Approval eForm",
+			    SELECTEDVALUE( Query1[task_assignment_group] ) = "GBS Transfers" && SELECTEDVALUE( Query1[task_type] ) = "Incident - PS", "Transfers Queue",
+			    SELECTEDVALUE( Query1[task_assignment_group] ) = "GBS Transfers" && SELECTEDVALUE( Query1[task_type] ) = "Catalog Task", "Transfers eForm",
+			    SELECTEDVALUE( Query1[task_assignment_group] ) = "GBS_CA_Payments" && SELECTEDVALUE( Query1[task_type] ) = "Incident - PS", "CA Payments Queue",
+			    SELECTEDVALUE( Query1[task_assignment_group] ) = "GBS_CA_Payments" && SELECTEDVALUE( Query1[task_type] ) = "Catalog Task", "CA Payments eForm",
+			    SELECTEDVALUE( Query1[task_assignment_group] ) = "GBS Payments" && SELECTEDVALUE( Query1[task_type] ) = "Incident - PS", "Payments Queue",
+			    SELECTEDVALUE( Query1[task_assignment_group] ) = "GBS Payments" && SELECTEDVALUE( Query1[task_type] ) = "Catalog Task", "Payments eForm",
+			    SELECTEDVALUE( Query1[task_assignment_group] ) = "GBS Research" && SELECTEDVALUE( Query1[task_type] ) = "Incident - PS", "Research Queue",
+			    SELECTEDVALUE( Query1[task_assignment_group] ) = "GBS Research" && SELECTEDVALUE( Query1[task_type] ) = "Catalog Task", "Research eForm",
+			    SELECTEDVALUE( Query1[task_assignment_group] ) = "GBS SR Cash Applications" && SELECTEDVALUE( Query1[task_type] ) = "Incident - PS", "Cash Apps Queue",
+			    SELECTEDVALUE( Query1[task_assignment_group] ) = "GBS SR Cash Applications" && SELECTEDVALUE( Query1[task_type] ) = "Catalog Task", "Cash Apps eForm",
+			    SELECTEDVALUE( Query1[task_assignment_group] ) = "GBS_SR_ClarityAR" && SELECTEDVALUE( Query1[task_type] ) = "Incident - PS", "ClarityAR Queue",
+			    SELECTEDVALUE( Query1[task_assignment_group] ) = "GBS_SR_ClarityAR" && SELECTEDVALUE( Query1[task_type] ) = "Catalog Task", "ClarityAR eForm",
+			    BLANK()
+			)
+		lineageTag: 0e00ce50-977c-4542-ad6f-14b758fdeb04
+
+	measure AssignmentGroupQueue = ```
+			
+			/*
+			SWITCH(
+			    TRUE(),
+			    SELECTEDVALUE(Query1[task_assignment_group]) = "GBS Payments" && SELECTEDVALUE(Query1[task_type]) = "Catalog Task", "Payments eForm",
+			    SELECTEDVALUE(Query1[task_assignment_group]) = "GBS Payments" && SELECTEDVALUE(Query1[task_type]) = "Incident - PS", "Payments queue",
+			    -- Add more conditions here as needed
+			    BLANK() -- Default value if no conditions are met
+			)
+			*/ 
+			
+			SWITCH(
+			    TRUE(),
+			    CALCULATE(SELECTEDVALUE(Query1[task_assignment_group])) = "Accounts Receivable Adjustment Approval" && SELECTEDVALUE(Query1[task_type]) = "Incident - PS", "Adjustments Queue",
+			    CALCULATE(SELECTEDVALUE(Query1[task_assignment_group])) = "Accounts Receivable Adjustment Approval" && SELECTEDVALUE(Query1[task_type]) = "Catalog Task", "Adjustments eForm",
+			    CALCULATE(SELECTEDVALUE(Query1[task_assignment_group])) = "AR Accounting" && SELECTEDVALUE(Query1[task_type]) = "Incident - PS", "Accounting Queue",
+			    CALCULATE(SELECTEDVALUE(Query1[task_assignment_group])) = "AR Accounting" && SELECTEDVALUE(Query1[task_type]) = "Catalog Task", "Accounting eForm",
+			    CALCULATE(SELECTEDVALUE(Query1[task_assignment_group])) = "AR Refund Quick Check Accounting Team Review" && SELECTEDVALUE(Query1[task_type]) = "Incident - PS", "AR Refund Quick Check Queue",
+			    CALCULATE(SELECTEDVALUE(Query1[task_assignment_group])) = "AR Refund Quick Check Accounting Team Review" && SELECTEDVALUE(Query1[task_type]) = "Catalog Task", "AR Refund Quick Check eForm",
+			    CALCULATE(SELECTEDVALUE(Query1[task_assignment_group])) = "AUS to GBS Transfers" && SELECTEDVALUE(Query1[task_type]) = "Incident - PS", "AUS to GBS Transfers Queue",
+			    CALCULATE(SELECTEDVALUE(Query1[task_assignment_group])) = "AUS to GBS Transfers" && SELECTEDVALUE(Query1[task_type]) = "Catalog Task", "AUS to GBS Transfers eForm",
+			    CALCULATE(SELECTEDVALUE(Query1[task_assignment_group])) = "GBS SR Billing" && SELECTEDVALUE(Query1[task_type]) = "Incident - PS", "Billing Queue",
+			    CALCULATE(SELECTEDVALUE(Query1[task_assignment_group])) = "GBS SR Billing" && SELECTEDVALUE(Query1[task_type]) = "Catalog Task", "Billing eForm",
+			    CALCULATE(SELECTEDVALUE(Query1[task_assignment_group])) = "GBS SR ReceivablesInquiry" && SELECTEDVALUE(Query1[task_type]) = "Incident - PS", "ReceivablesInquiry Queue",
+			    CALCULATE(SELECTEDVALUE(Query1[task_assignment_group])) = "GBS SR ReceivablesInquiry" && SELECTEDVALUE(Query1[task_type]) = "Catalog Task", "ReceivablesInquiry eForm",
+			    CALCULATE(SELECTEDVALUE(Query1[task_assignment_group])) = "Manual Invoice Approval" && SELECTEDVALUE(Query1[task_type]) = "Incident - PS", "Invoice Approval Queue",
+			    CALCULATE(SELECTEDVALUE(Query1[task_assignment_group])) = "Manual Invoice Approval" && SELECTEDVALUE(Query1[task_type]) = "Catalog Task", "Invoice Approval eForm",
+			    CALCULATE(SELECTEDVALUE(Query1[task_assignment_group])) = "GBS Transfers" && SELECTEDVALUE(Query1[task_type]) = "Incident - PS", "Transfers Queue",
+			    CALCULATE(SELECTEDVALUE(Query1[task_assignment_group])) = "GBS Transfers" && SELECTEDVALUE(Query1[task_type]) = "Catalog Task", "Transfers eForm",
+			    CALCULATE(SELECTEDVALUE(Query1[task_assignment_group])) = "GBS_CA_Payments" && SELECTEDVALUE(Query1[task_type]) = "Incident - PS", "CA Payments Queue",
+			    CALCULATE(SELECTEDVALUE(Query1[task_assignment_group])) = "GBS_CA_Payments" && SELECTEDVALUE(Query1[task_type]) = "Catalog Task", "CA Payments eForm",
+			    CALCULATE(SELECTEDVALUE(Query1[task_assignment_group])) = "GBS Payments" && SELECTEDVALUE(Query1[task_type]) = "Incident - PS", "Payments Queue",
+			    CALCULATE(SELECTEDVALUE(Query1[task_assignment_group])) = "GBS Payments" && SELECTEDVALUE(Query1[task_type]) = "Catalog Task", "Payments eForm",
+			    CALCULATE(SELECTEDVALUE(Query1[task_assignment_group])) = "GBS Research" && SELECTEDVALUE(Query1[task_type]) = "Incident - PS", "Research Queue",
+			    CALCULATE(SELECTEDVALUE(Query1[task_assignment_group])) = "GBS Research" && SELECTEDVALUE(Query1[task_type]) = "Catalog Task", "Research eForm",
+			    CALCULATE(SELECTEDVALUE(Query1[task_assignment_group])) = "GBS SR Cash Applications" && SELECTEDVALUE(Query1[task_type]) = "Incident - PS", "Cash Apps Queue",
+			    CALCULATE(SELECTEDVALUE(Query1[task_assignment_group])) = "GBS SR Cash Applications" && SELECTEDVALUE(Query1[task_type]) = "Catalog Task", "Cash Apps eForm",
+			    CALCULATE(SELECTEDVALUE(Query1[task_assignment_group])) = "GBS_SR_ClarityAR" && SELECTEDVALUE(Query1[task_type]) = "Incident - PS", "ClarityAR Queue",
+			    CALCULATE(SELECTEDVALUE(Query1[task_assignment_group])) = "GBS_SR_ClarityAR" && SELECTEDVALUE(Query1[task_type]) = "Catalog Task", "ClarityAR eForm",
+			    BLANK()
+			)
+			
+			```
+		lineageTag: 8a7e402f-4694-4d7f-b9be-61567ef80cd9
+
+	measure OldestActiveTicket_TimeLeft = ```
+			
+			VAR OldestDateTime = 
+			    CALCULATE( 
+			        MIN( Query1[start_time] ),
+			        Query1[stage] = "In Progress"
+			        &&
+			        Query1[task_assigned_to] = ""
+			    )
+			VAR PlannedEndTime = 
+			    CALCULATE(
+			        MAX( Query1[planned_end_time] ),
+			        Query1[start_time] = OldestDateTime,
+			        Query1[stage] = "In Progress"
+			    )
+			VAR TimeDifference = PlannedEndTime - NOW()
+			VAR TotalHours = (INT(TimeDifference) * 24) + HOUR(TimeDifference) + (MINUTE(TimeDifference) / 60 ) + (SECOND(TimeDifference) / 3600)
+			-- VAR Days = INT(TimeDifference)
+			-- VAR Hours = HOUR(TimeDifference)
+			-- VAR Minutes = MINUTE(TimeDifference)
+			RETURN
+			    IF(
+			        ISBLANK(OldestDateTime) || ISBLANK(PlannedEndTime),
+			        BLANK(),
+			        TotalHours
+			    )
+			```
+		lineageTag: cc09d76e-1015-4dc3-87f6-ca2e98eb1b64
+
+		formatStringDefinition = "0.00"
+
+	measure Formatting_TimeLeft_Background =
+			
+			SWITCH (
+			    TRUE(),
+			    ISBLANK([OldestActiveTicket_TimeLeft]), "0",
+			    [OldestActiveTicket_TimeLeft] <= VALUE(3), "#CC0000",
+			    AND([OldestActiveTicket_TimeLeft] > VALUE(3), [OldestActiveTicket_TimeLeft] < VALUE(18)), "#FFFF00",
+			    ""
+			--    "#009900" - Green
+			)
+		displayFolder: .formatting
+		lineageTag: 292691b8-faea-481d-b114-c1d6ccaaee76
+
+	measure Formatting_TimeLeft_Font = ```
+			
+			SWITCH (
+			    TRUE(),
+			    ISBLANK([OldestActiveTicket_TimeLeft]), "",
+			    [OldestActiveTicket_TimeLeft] <= VALUE(3), "#FFFFFF",
+			    AND([OldestActiveTicket_TimeLeft] > VALUE(3), [OldestActiveTicket_TimeLeft] < VALUE(18)), "#252423",
+			    ""    
+			--    "#FFFFFF"
+			)
+			```
+		displayFolder: .formatting
+		lineageTag: 099f501b-9902-4a8f-bdac-654417c24803
+
+	measure utc_OldestActiveTicket_TimeLeft_InProgress&NotAssigned = ```
+			
+			VAR OldestDateTime = 
+			    CALCULATE( 
+			        MIN( Query1[start_time_utc] ),
+			        Query1[stage] = "In Progress"
+			        &&
+			        Query1[task_assigned_to] = ""
+			    )
+			VAR PlannedEndTime = 
+			    CALCULATE(
+			        MAX( Query1[planned_end_time_utc] ),
+			        Query1[start_time_utc] = OldestDateTime,
+			        Query1[stage] = "In Progress"
+			    )
+			
+			VAR CurrentTime = NOW()
+			VAR TimeDifference = PlannedEndTime - CurrentTime
+			VAR Days = INT(TimeDifference) 
+			VAR Hours = HOUR(TimeDifference - Days)
+			VAR Minutes = MINUTE(TimeDifference - Days - Hours)
+			RETURN
+			    IF(
+			        ISBLANK(OldestDateTime) || ISBLANK(PlannedEndTime),
+			        BLANK(),
+			        Days & " Days, " & Hours & " Hours, " & Minutes & " Minutes"
+			    )
+			```
+		lineageTag: ddebc12f-3657-4fba-86ce-14ec54e037bf
+
+	measure cst_OldestActiveTicket_StartTime_InProgress&NotAssigned = ```
+			
+			VAR OldestDateTime = 
+			    CALCULATE( 
+			        MIN( Query1[start_time_utc] ) ,
+			        Query1[stage] = "In Progress"
+			        && 
+			        Query1[task_assigned_to] = ""
+			    )
+			
+			RETURN
+			    ROW( "Oldest DateTime" , OldestDateTime )
+			```
+		formatString: General Date
+		lineageTag: 9688cb27-8bf3-4a41-9ec8-0ffc0cd4c55d
+
+	measure cst_OldestActiveTicket_OriginalBreachTime_InProgress&NotAssigned = ```
+			
+			
+			VAR OldestDateTime = 
+			    CALCULATE( 
+			        MIN( Query1[start_time_utc] ) ,
+			        Query1[stage] = "In Progress"
+			        && 
+			        Query1[task_assigned_to] = ""
+			    )
+			
+			RETURN
+			    CALCULATE( 
+			        MAX( Query1[original_breach_time_utc] ) , 
+			        Query1[start_time_utc] = OldestDateTime
+			    )
+			```
+		formatString: General Date
+		lineageTag: bd052424-d7c1-4113-a872-5150472828ed
+
+	measure utc_OldestActiveTicket_OriginalBreachTime_InProgress&NotAssigned_NEW = ```
+			
+			
+			VAR OldestDateTime = 
+			    CALCULATE( 
+			        MIN( Query1[start_time_utc] ) ,
+			        Query1[stage] = "In Progress"
+			        && 
+			        Query1[task_assigned_to] = ""
+			    )
+			
+			RETURN
+			    CALCULATE( 
+			        MAX( Query1[original_breach_time_utc] ) , 
+			        Query1[start_time_utc] = OldestDateTime
+			    )
+			```
+		formatString: General Date
+		lineageTag: 3fb2a1e2-4de8-4dbe-b567-ef9d89a34d06
+
+	measure OldestActiveTicket_StartTime_InProgress&NotAssigned = ```
+			
+			
+			VAR OldestDateTime = 
+			    CALCULATE( 
+			        MIN( Query1[start_time] ) ,
+			        Query1[stage] = "In Progress"
+			        && 
+			        Query1[task_assigned_to] = ""
+			    )
+			
+			RETURN
+			    ROW( "Oldest DateTime" , OldestDateTime )
+			```
+		formatString: General Date
+		lineageTag: 0dccee06-3e8a-444d-92d5-8481c4842064
+
+	measure OldestActiveTicket_TimeLeft_InProgress&NotAssigned = ```
+			
+			VAR OldestDateTime = 
+			    CALCULATE( 
+			        MIN( Query1[start_time] ),
+			        Query1[stage] = "In Progress"
+			        &&
+			        Query1[task_assigned_to] = ""
+			    )
+			VAR PlannedEndTime = 
+			    CALCULATE(
+			        MAX( Query1[planned_end_time] ),
+			        Query1[start_time] = OldestDateTime,
+			        Query1[stage] = "In Progress"
+			        &&
+			        Query1[task_assigned_to] = ""
+			    )
+			
+			VAR CurrentTime = NOW()
+			VAR TimeDifference = PlannedEndTime - CurrentTime
+			VAR Days = INT( TimeDifference ) 
+			VAR Hours = HOUR( TimeDifference - (Days * 24 ) )
+			VAR Minutes = MINUTE( TimeDifference - Days - Hours )
+			
+			RETURN
+			-- TimeDifference
+			 
+			    IF(
+			        ISBLANK(OldestDateTime) || ISBLANK(PlannedEndTime),
+			        BLANK(),
+			        Days & " Days, " & Hours & " Hours, " & Minutes & " Minutes"
+			    )
+			     
+			  
+			```
+		lineageTag: 3ec56a24-c695-4ec5-9ef0-b98ec22d55d7
+
+	measure OldestActiveTicket_OriginalBreachTime_InProgress&NotAssigned = ```
+			
+			
+			VAR OldestDateTime = 
+			    CALCULATE( 
+			        MIN( Query1[start_time] ) ,
+			        Query1[stage] = "In Progress"
+			        && 
+			        Query1[task_assigned_to] = ""
+			    )
+			
+			RETURN
+			    CALCULATE( 
+			        MAX( Query1[original_breach_time] ) , 
+			        Query1[start_time] = OldestDateTime
+			    )
+			```
+		formatString: General Date
+		lineageTag: 3816b2c0-d2ff-42f1-b79d-623758e020ee
+
+	measure OldestActiveTicket_PlannedEndTime_InProgress&NotAssigned = ```
+			
+			
+			VAR OldestDateTime = 
+			    CALCULATE( 
+			        MIN( Query1[start_time] ) ,
+			        Query1[stage] = "In Progress"
+			        && 
+			        Query1[task_assigned_to] = ""
+			    )
+			
+			RETURN
+			    CALCULATE( 
+			        MAX( Query1[planned_end_time] ) , 
+			        Query1[start_time] = OldestDateTime
+			    )
+			```
+		formatString: General Date
+		lineageTag: 4f97841c-53e8-41cd-9dc8-93092f04ef69
+
+	measure OldestActiveTicket_Timezone_InProgress&NotAssigned = ```
+			
+			
+			VAR OldestDateTime = 
+			    CALCULATE( 
+			        MIN( Query1[start_time] ) ,
+			        Query1[stage] = "In Progress"
+			        && 
+			        Query1[task_assigned_to] = ""
+			    )
+			
+			RETURN
+			    CALCULATE( 
+			        MAX( Query1[timezone] ) , 
+			        Query1[start_time] = OldestDateTime
+			    )
+			```
+		lineageTag: 8a7b7326-bf6d-4bb9-b5fb-d80ba5964cf7
+
+	measure 'Total Breached (Query1)' = ```
+			
+			    CALCULATE( 
+			        DISTINCTCOUNT( Query1[task] ) , 
+			        FILTER( Query1 , 
+			        Query1[has_breached] == "True" ) )
+			```
+		formatString: 0
+		lineageTag: 8db13edc-f1fd-483b-8c16-59af9bd5ef0c
+
+	measure 'Has Breached Total (Query1)' = ```
+			
+			    CALCULATE( 
+			        DISTINCTCOUNT( Query1[task] ) , 
+			        FILTER( Query1 , 
+			        Query1[has_breached] == "True" ) )
+			```
+		formatString: 0
+		lineageTag: d59497b2-0443-4b79-bd96-c4cb21b5c80f
+
+	measure 'Within SLA Total (Query1)' = ```
+			
+			    CALCULATE( 
+			        DISTINCTCOUNT( Query1[task] ) , 
+			        FILTER( Query1 , 
+			        Query1[has_breached] == "False" ) )
+			```
+		formatString: 0
+		lineageTag: 58e026f1-5117-44c0-ae98-36a527ba8872
+
+	measure Formatting_Separator_Measure = BLANK()
+		formatString: 0
+		displayFolder: .formatting
+		lineageTag: 3d95470c-8395-48d4-8939-ada2ae4ecc1b
+
+	measure Formatting_Breached_Background =
+			
+			SWITCH (
+			    TRUE(),
+			    ISBLANK([Has Breached Total (Query1)]), "",
+			    [Has Breached Total (Query1)] > VALUE(0), "#CC0000"
+			--    "#FFFF00" - Yellow
+			--    "#CC0000" - RED
+			--    "#009900" - Green
+			)
+		displayFolder: .formatting
+		lineageTag: fd5457a7-8ba4-4d40-9c14-1ae8eb04b4e4
+
+	measure Formatting_Breached_Font =
+			
+			SWITCH (
+			    TRUE(),
+			    ISBLANK([Has Breached Total (Query1)]), "",
+			    [Has Breached Total (Query1)] > VALUE(0), "#FFFFFF"
+			--  #FFFFFF - White
+			)
+		displayFolder: .formatting
+		lineageTag: 80fe937f-771b-4d40-9102-cc55d971132f
+
+	measure OldestActiveTicket_TimeLeft_InProgress&NotAssigned_NEW = ```
+			
+			VAR OldestDateTime =
+			    CALCULATE(
+			        MIN(Query1[start_time]),
+			        Query1[stage] = "In Progress"
+			        &&
+			        Query1[task_assigned_to] = ""
+			    )
+			VAR PlannedEndTime =
+			    CALCULATE(
+			        MAX(Query1[planned_end_time]),
+			        Query1[start_time] = OldestDateTime,
+			        Query1[stage] = "In Progress"
+			        &&
+			        Query1[task_assigned_to] = ""
+			    )
+			VAR CurrentTime = NOW()
+			VAR TimeDifference = PlannedEndTime - CurrentTime
+			VAR TotalDays = INT( TimeDifference )
+			VAR TotalHours = HOUR( TimeDifference )
+			VAR TotalMinutes = MINUTE( TimeDifference )
+			-- VAR TotalHours = TotalHours * 24 ) 
+			VAR RemainingHours = MOD(TotalHours, 24) 
+			VAR Minutes = MINUTE(TimeDifference)
+			
+			RETURN
+			TimeDifference
+			/* 
+			    IF(
+			        ISBLANK(OldestDateTime) || ISBLANK(PlannedEndTime),
+			        BLANK(),
+			        Days & " Days, " & RemainingHours & " Hours, " & Minutes & " Minutes"
+			    )
+			*/ 
+			```
+		formatString: d.HH:MM
+		lineageTag: 202379c8-27b6-49df-be87-753f44f012bf
+
+		annotation PBI_FormatHint = {"isCustom":true}
+
+	measure OldestActiveTicket_Duration_InProgress&NotAssigned = ```
+			
+			
+			VAR OldestDateTime = 
+			    CALCULATE( 
+			        MIN( Query1[start_time] ) ,
+			        Query1[stage] = "In Progress"
+			        && 
+			        Query1[task_assigned_to] = ""
+			    )
+			
+			RETURN
+			    CALCULATE( 
+			        MAX( Query1[time_left] ) , 
+			        Query1[start_time] = OldestDateTime
+			    )
+			```
+		lineageTag: cd9d9683-e895-47ef-a06e-caa0c1be77c9
+
+	column Name
+		dataType: string
+		isHidden
+		lineageTag: fa159de8-74ac-4579-b081-e3c0c50378e7
+		summarizeBy: none
+		sourceColumn: Name
+		sortByColumn: Ordinal
+
+		annotation SummarizationSetBy = Automatic
+
+	column Ordinal
+		dataType: int64
+		isHidden
+		lineageTag: 7942fe90-46a3-411e-bf53-8ac5477598f1
+		summarizeBy: sum
+		sourceColumn: Ordinal
+
+		annotation SummarizationSetBy = Automatic
+

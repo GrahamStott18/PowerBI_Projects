@@ -1,0 +1,593 @@
+cultureInfo en-US
+
+	linguisticMetadata =
+			{
+			  "Version": "2.0.0",
+			  "Language": "en-US",
+			  "Entities": {
+			    "dim_date_fiscal_monthkey.month_fyyy": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "dim_date_fiscal_MonthKey",
+			          "ConceptualProperty": "Month FY-YY"
+			        }
+			      },
+			      "State": "Generated"
+			    },
+			    "measures.distinct_total_ticket_count_awaitingemail_active": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": ".Measures",
+			          "ConceptualProperty": "Distinct_Total_Tickets_AwaitingEmail (Query1)"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Awaiting Email": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "measures.oldestactiveticket_task_inprogress": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": ".Measures",
+			          "ConceptualProperty": "OldestActiveTicket_Task_InProgress&NotAssigned"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Ticket": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "measures.totaltickets_acticecatalogtaskincidentps_countrows": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": ".Measures",
+			          "ConceptualProperty": "TotalTickets_Active_Query1_COUNTROWS"
+			        }
+			      },
+			      "State": "Generated"
+			    },
+			    "measures.totaltickets_acticecatalogtaskincidentps_distinctcount": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": ".Measures",
+			          "ConceptualProperty": "TotalTickets_Active_Query1_DISTINCTCOUNT"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Total Active": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "measures.ttm_goal": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": ".Measures",
+			          "ConceptualProperty": "TTM_Goal"
+			        }
+			      },
+			      "State": "Generated"
+			    },
+			    "measures.ttm_quantity": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": ".Measures",
+			          "ConceptualProperty": "TTM_Quantity"
+			        }
+			      },
+			      "State": "Generated"
+			    },
+			    "measures.in_progresshas_breached_query1": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": ".Measures",
+			          "ConceptualProperty": "In Progress-Has Breached (Query1)"
+			        }
+			      },
+			      "State": "Generated"
+			    },
+			    "measures.in_progressnot_breached_query1": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": ".Measures",
+			          "ConceptualProperty": "In Progress-Not Breached (Query1)"
+			        }
+			      },
+			      "State": "Generated"
+			    },
+			    "measures.pausednot_breached_query1": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": ".Measures",
+			          "ConceptualProperty": "Paused-Not Breached (Query1)"
+			        }
+			      },
+			      "State": "Generated"
+			    },
+			    "measures.breachedtotal_count_query1": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": ".Measures",
+			          "ConceptualProperty": "Breached-Total Count (Query1)"
+			        }
+			      },
+			      "State": "Generated"
+			    },
+			    "measures.pausedhas_breached_query1": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": ".Measures",
+			          "ConceptualProperty": "Paused-Has Breached (Query1)"
+			        }
+			      },
+			      "State": "Generated"
+			    },
+			    "measures.oldestactiveticket_timeleft_inprogressnotassigned": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": ".Measures",
+			          "ConceptualProperty": "cst_OldestActiveTicket_TimeLeft_InProgress&NotAssigned"
+			        }
+			      },
+			      "State": "Generated"
+			    },
+			    "measures.oldestactiveticket_starttime_inprogressnotassigned": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": ".Measures",
+			          "ConceptualProperty": "utc_OldestActiveTicket_StartTime_InProgress&NotAssigned"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Start Time_utc": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "measures.oldestactiveticket_plannedendtime_inprogressnotassigned": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": ".Measures",
+			          "ConceptualProperty": "utc_OldestActiveTicket_PlannedEndTime_InProgress&NotAssigned"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Planned End Time_utc": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "query1.task_type": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Query1",
+			          "ConceptualProperty": "task_type"
+			        }
+			      },
+			      "State": "Generated"
+			    },
+			    "measures.assignment_group___queue": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": ".Measures",
+			          "ConceptualProperty": "Assignment Group / Queue"
+			        }
+			      },
+			      "State": "Generated"
+			    },
+			    "query1.queue_name": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Query1",
+			          "ConceptualProperty": "queue_name"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Queue": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "query1.assignmentgroup": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Query1",
+			          "ConceptualProperty": "Assignment-Group"
+			        }
+			      },
+			      "State": "Generated"
+			    },
+			    "query1.assignment_group": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Query1",
+			          "ConceptualProperty": "assignment_group"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Assignment Group": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "measures.oldestactiveticket_starttime_inprogressnotassigned1": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": ".Measures",
+			          "ConceptualProperty": "cst_OldestActiveTicket_StartTime_InProgress&NotAssigned"
+			        }
+			      },
+			      "State": "Generated"
+			    },
+			    "measures.oldestactiveticket_originalbreachtime_inprogressnotassigned1": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": ".Measures",
+			          "ConceptualProperty": "cst_OldestActiveTicket_OriginalBreachTime_InProgress&NotAssigned"
+			        }
+			      },
+			      "State": "Generated"
+			    },
+			    "measures.utc_oldestactiveticket_timeleft_inprogressnotassigned": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": ".Measures",
+			          "ConceptualProperty": "utc_OldestActiveTicket_TimeLeft_InProgress&NotAssigned"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Time Left_utc": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "measures.cst_oldestactiveticket_originalbreachtime_inprogressnotassigned_new": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": ".Measures",
+			          "ConceptualProperty": "utc_OldestActiveTicket_OriginalBreachTime_InProgress&NotAssigned_NEW"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Original Breach Time_utc": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "measures.oldestactiveticket_starttime_inprogressnotassigned2": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": ".Measures",
+			          "ConceptualProperty": "OldestActiveTicket_StartTime_InProgress&NotAssigned"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Start Time": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "measures.oldestactiveticket_timeleft_inprogressnotassigned1": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": ".Measures",
+			          "ConceptualProperty": "OldestActiveTicket_TimeLeft_InProgress&NotAssigned"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Time Left": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "measures.oldestactiveticket_originalbreachtime_inprogressnotassigned2": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": ".Measures",
+			          "ConceptualProperty": "OldestActiveTicket_OriginalBreachTime_InProgress&NotAssigned"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Original Breach Time": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "measures.oldestactiveticket_plannedendtime_inprogressnotassigned1": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": ".Measures",
+			          "ConceptualProperty": "OldestActiveTicket_PlannedEndTime_InProgress&NotAssigned"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Planned End Time": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "query1.timezone": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Query1",
+			          "ConceptualProperty": "timezone"
+			        }
+			      },
+			      "State": "Generated"
+			    },
+			    "measures.oldestactiveticket_timezone_inprogressnotassigned": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": ".Measures",
+			          "ConceptualProperty": "OldestActiveTicket_Timezone_InProgress&NotAssigned"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Timezone": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "measures.total_breached_query1": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": ".Measures",
+			          "ConceptualProperty": "Total Breached (Query1)"
+			        }
+			      },
+			      "State": "Generated"
+			    },
+			    "query1.stage": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Query1",
+			          "ConceptualProperty": "stage"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "‌": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "measures.within_sla_query1": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": ".Measures",
+			          "ConceptualProperty": "Within SLA Total (Query1)"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Within SLA": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "measures.has_breached_query1": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": ".Measures",
+			          "ConceptualProperty": "Has Breached Total (Query1)"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Breached": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "measures.formatting_separator_measure": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": ".Measures",
+			          "ConceptualProperty": "Formatting_Separator_Measure"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "‌‌": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "measures.oldestactiveticket_timeleft_inprogressnotassigned_new": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": ".Measures",
+			          "ConceptualProperty": "OldestActiveTicket_TimeLeft_InProgress&NotAssigned_NEW"
+			        }
+			      },
+			      "State": "Generated"
+			    },
+			    "measures.oldestactiveticket_duration_inprogressnotassigned": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": ".Measures",
+			          "ConceptualProperty": "OldestActiveTicket_Duration_InProgress&NotAssigned"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Time Left": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "dim_servicenow_queues_accountsreceivable.queue_name": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "dim_ServiceNow_Queues_AccountsReceivable",
+			          "ConceptualProperty": "queue_name"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Queue Name": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    }
+			  }
+			}
+		contentType: json
+

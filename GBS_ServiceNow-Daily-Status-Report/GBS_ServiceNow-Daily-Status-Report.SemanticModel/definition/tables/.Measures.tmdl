@@ -1,0 +1,99 @@
+table '.Measures'
+	lineageTag: 4a13359a-294c-41ce-90aa-75afee8f7e30
+
+	calculationGroup
+
+	measure 'Ticket Count' =
+			
+			
+			-- IF(ISBLANK(COUNTROWS(fact_ServiceNow_DailyStatus)), 0, COUNTROWS(fact_ServiceNow_DailyStatus))
+			
+			COUNTROWS( fact_ServiceNow_DailyStatus )
+		formatString: 0
+		lineageTag: 4fd83e59-ac10-469b-8470-33e1ab4bc870
+
+	measure 'Last Refreshed' =
+			
+			MIN(fact_ServiceNow_DailyStatus[loaded_date])
+		formatString: General Date
+		lineageTag: b51f0b27-0811-4435-a819-22c9b27089c2
+
+	measure 'Awaiting Info' = ```
+			
+			CALCULATE( 
+			    COUNTROWS( fact_ServiceNow_DailyStatus ) , 
+			    fact_ServiceNow_DailyStatus[age_category] == "Awaiting Info"
+			)
+			```
+		formatString: 0
+		lineageTag: 0c9c83f3-e0b4-4c02-b99d-aabc4e331afe
+
+	measure 'Closed Yesterday' = ```
+			IF(
+			    ISBLANK(CALCULATE(COUNTROWS(fact_ServiceNow_DailyStatus), fact_ServiceNow_DailyStatus[age_category] == "Closed Yesterday")),
+			    0,
+			    CALCULATE(COUNTROWS(fact_ServiceNow_DailyStatus), fact_ServiceNow_DailyStatus[age_category] == "Closed Yesterday")
+			)
+			
+			
+			/*
+			CALCULATE( 
+			    COUNTROWS( fact_ServiceNow_DailyStatus ) , 
+			    fact_ServiceNow_DailyStatus[age_category] == "Closed Yesterday"
+			)
+			*/ 
+			```
+		formatString: 0
+		lineageTag: ab90378a-3f10-4c59-8883-1811c778346a
+
+	measure Open = ```
+			IF(
+			    ISBLANK(CALCULATE(COUNTROWS(fact_ServiceNow_DailyStatus), fact_ServiceNow_DailyStatus[age_category] == "Open")),
+			    0,
+			    CALCULATE(COUNTROWS(fact_ServiceNow_DailyStatus), fact_ServiceNow_DailyStatus[age_category] == "Open")
+			)
+			
+			/* 
+			CALCULATE( 
+			    COUNTROWS( fact_ServiceNow_DailyStatus ) , 
+			    fact_ServiceNow_DailyStatus[age_category] == "Open"
+			)
+			*/ 
+			```
+		formatString: 0
+		lineageTag: 75e60012-af72-4f08-8145-1e3ed441cb28
+
+	measure 'Open 5+ Days' = ```
+			IF(
+			    ISBLANK(CALCULATE(COUNTROWS(fact_ServiceNow_DailyStatus), fact_ServiceNow_DailyStatus[age_category] == "Open 5+ Days")),
+			    0,
+			    CALCULATE(COUNTROWS(fact_ServiceNow_DailyStatus), fact_ServiceNow_DailyStatus[age_category] == "Open 5+ Days")
+			)
+			
+			/*
+			CALCULATE( 
+			    COUNTROWS( fact_ServiceNow_DailyStatus ) , 
+			    fact_ServiceNow_DailyStatus[age_category] == "Open 5+ Days"
+			)
+			*/ 
+			```
+		formatString: 0
+		lineageTag: f7245d65-621f-4d55-a627-96e7975d9c2b
+
+	column Name
+		dataType: string
+		lineageTag: fa159de8-74ac-4579-b081-e3c0c50378e7
+		summarizeBy: none
+		sourceColumn: Name
+		sortByColumn: Ordinal
+
+		annotation SummarizationSetBy = Automatic
+
+	column Ordinal
+		dataType: int64
+		lineageTag: 7942fe90-46a3-411e-bf53-8ac5477598f1
+		summarizeBy: sum
+		sourceColumn: Ordinal
+
+		annotation SummarizationSetBy = Automatic
+

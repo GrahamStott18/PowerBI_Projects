@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "SemanticModel",
+    "displayName": "CashBanking_Hit-Rate-Report"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "8c01012e-9f7f-4193-9411-db5fcc5177ad"
+  }
+}

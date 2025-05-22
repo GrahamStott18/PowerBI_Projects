@@ -1,0 +1,695 @@
+cultureInfo en-US
+
+	linguisticMetadata =
+			{
+			  "Version": "2.0.0",
+			  "Language": "en-US",
+			  "Entities": {
+			    "dim_date_fiscal_datekey.dateid": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "dim_date_fiscal_DateKey",
+			          "ConceptualProperty": "DateID"
+			        }
+			      },
+			      "State": "Generated"
+			    },
+			    "dim_date_fiscal_monthkey.month_fyyy": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "dim_date_fiscal_MonthKey",
+			          "ConceptualProperty": "Month FY-YY"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Fiscal Period": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "dim_gbs_lockbox.lockboxid": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "dim_gbs_Lockbox",
+			          "ConceptualProperty": "Lockbox-ID"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Lockbox #": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "dim_gbs_lockbox.type": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "dim_gbs_Lockbox",
+			          "ConceptualProperty": "Type"
+			        }
+			      },
+			      "State": "Generated"
+			    },
+			    "fact_oracle_export_us_accountsreceivable.lockbox": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "fact_Oracle_Export_US_AccountsReceivable",
+			          "ConceptualProperty": "lockbox"
+			        }
+			      },
+			      "State": "Generated"
+			    },
+			    "measures.applied_amount": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": ".Measures",
+			          "ConceptualProperty": "Applied Amount"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Applied Amt": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "measures.apply_rate": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": ".Measures",
+			          "ConceptualProperty": "Apply Rate"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Apply Rate": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "measures.control_amount": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": ".Measures",
+			          "ConceptualProperty": "Control Amount"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Oracle Amount": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        },
+			        {
+			          "Control Amt": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "measures.hit_rate": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": ".Measures",
+			          "ConceptualProperty": "Hit Rate"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Hit Rate": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "measures.manual_receipts": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": ".Measures",
+			          "ConceptualProperty": "Manual Receipts"
+			        }
+			      },
+			      "State": "Generated"
+			    },
+			    "measures.miscellaneous_amount": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": ".Measures",
+			          "ConceptualProperty": "Miscellaneous Amount"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Miscellaneous Amt": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "measures.on_account_amount": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": ".Measures",
+			          "ConceptualProperty": "On Account Amount"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "On Account Amt": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "measures.ttm_goal": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": ".Measures",
+			          "ConceptualProperty": "TTM_Goal"
+			        }
+			      },
+			      "State": "Generated"
+			    },
+			    "measures.ttm_quantity": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": ".Measures",
+			          "ConceptualProperty": "TTM_Quantity"
+			        }
+			      },
+			      "State": "Generated"
+			    },
+			    "measures.unapplied_amount": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": ".Measures",
+			          "ConceptualProperty": "Unapplied Amount"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Unapplied Amt": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "measures.unidentified_amount": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": ".Measures",
+			          "ConceptualProperty": "Unidentified Amount"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Unidentified Amt": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "measures.variance__bank_to_oracle": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": ".Measures",
+			          "ConceptualProperty": "Variance - Treasury Bank vs Oracle Total"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Variance": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "fact_daily_chicago_lockbox.additional_transaction_type": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "fact_Daily_Chicago_Lockbox",
+			          "ConceptualProperty": "additional_transaction_type"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "‌": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        },
+			        {
+			          "Additional1": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "measures.lockboxamount_sum": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": ".Measures",
+			          "ConceptualProperty": "LockboxAmount_Sum"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "‌": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "fact_daily_chicago_lockbox.account_no": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "fact_Daily_Chicago_Lockbox",
+			          "ConceptualProperty": "account_no"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Bank Acct": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        },
+			        {
+			          "AccountNo": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "fact_oracle_export_us_accountsreceivable.gl_date": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "fact_Oracle_Export_US_AccountsReceivable",
+			          "ConceptualProperty": "gl_date"
+			        }
+			      },
+			      "State": "Generated"
+			    },
+			    "measures.treasury_file_variance__comment": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": ".Measures",
+			          "ConceptualProperty": "Treasury File Variance - Comment"
+			        }
+			      },
+			      "State": "Generated"
+			    },
+			    "fact_daily_chicago_lockbox.bank_comments": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "fact_Daily_Chicago_Lockbox",
+			          "ConceptualProperty": "bank_comments"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Bank Comments": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "fact_daily_chicago_lockbox.bank_reference": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "fact_Daily_Chicago_Lockbox",
+			          "ConceptualProperty": "bank_reference"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Bank Reference": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "fact_daily_chicago_lockbox.transaction_type": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "fact_Daily_Chicago_Lockbox",
+			          "ConceptualProperty": "transaction_type"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Transaction Type": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "fact_daily_chicago_lockbox.bai_code": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "fact_Daily_Chicago_Lockbox",
+			          "ConceptualProperty": "bai_code"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "BAI Code": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "fact_daily_chicago_lockbox.amount": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "fact_Daily_Chicago_Lockbox",
+			          "ConceptualProperty": "amount"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Amount": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "fact_daily_chicago_lockbox.date": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "fact_Daily_Chicago_Lockbox",
+			          "ConceptualProperty": "date"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Date": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "measures.treasury_bank_file_amount": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": ".Measures",
+			          "ConceptualProperty": "Treasury Bank File Amount"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Treasury Bank File": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "dim_gbs_lockbox.lockboxname": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "dim_gbs_Lockbox",
+			          "ConceptualProperty": "Lockbox-Name"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "‌": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "measures.oracle_amount__bank_report_comparison": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": ".Measures",
+			          "ConceptualProperty": "Oracle Amount"
+			        }
+			      },
+			      "State": "Generated"
+			    },
+			    "measures.variance__bank_amount_vs_oracle_total": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": ".Measures",
+			          "ConceptualProperty": "Variance - JPMC Amount vs Oracle Total"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Variance": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "measures.treasury_file_variance__submitted_by": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": ".Measures",
+			          "ConceptualProperty": "Treasury File Variance - Submitted By"
+			        }
+			      },
+			      "State": "Generated"
+			    },
+			    "measures.treasury_file_variance__date": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": ".Measures",
+			          "ConceptualProperty": "Treasury File Variance - Created Date"
+			        }
+			      },
+			      "State": "Generated"
+			    },
+			    "measures.treasury_file_variance__date1": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": ".Measures",
+			          "ConceptualProperty": "Treasury File Variance - Date"
+			        }
+			      },
+			      "State": "Generated"
+			    },
+			    "fact_treasuryvariancecomments_accountsreceivable.treasury_file_date": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "fact_TreasuryVarianceComments_AccountsReceivable",
+			          "ConceptualProperty": "treasury_file_date"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Date": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "fact_treasuryvariancecomments_accountsreceivable.submitted_by": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "fact_TreasuryVarianceComments_AccountsReceivable",
+			          "ConceptualProperty": "submitted_by"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Submitted By": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "fact_treasuryvariancecomments_accountsreceivable.variance_comments": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "fact_TreasuryVarianceComments_AccountsReceivable",
+			          "ConceptualProperty": "variance_comments"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Variance Comments": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    }
+			  }
+			}
+		contentType: json
+

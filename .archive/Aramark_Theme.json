@@ -1,0 +1,49 @@
+﻿{
+  "name": "GBS-Nashville",
+  "textClasses": {
+    "label": { "fontFace": "Calibri", "fontSize": 8 },
+    "callout": { "fontFace": "Calibri" },
+    "title": { "fontFace": "Calibri", "fontSize": 16 },
+    "header": { "fontFace": "Calibri" }
+  },
+  "dataColors": [
+    "#98999B",
+    "#0070C0",
+    "#00FF00",
+    "#000000",
+    "#EBEBEB",
+    "#FFF2CC",
+    "#54565A",
+    "#EB002A"
+  ],
+  "bad": "#9C0006",
+  "neutral": "#9C6500",
+  "good": "#006100",
+  "foreground": "#000000",
+  "foregroundNeutralSecondary": "#54565A",
+  "backgroundLight": "#EBEBEB",
+  "foregroundNeutralTertiary": "#98999B",
+  "backgroundNeutral": "#54565A",
+  "background": "#EBEBEB",
+  "visualStyles": {
+    "*": {
+      "*": {
+        "background": [{ 
+            "color": { "solid": { "color": "#EBEBEB" } } }],
+        "border": [{ 
+            "show": false }],
+        "visualHeader": [{ 
+            "background": { "solid": { "color": "#FFFFFF" } } }]
+      }
+    },
+
+    
+    "page": {
+      "*": {
+        "background": [
+          { "color": { "solid": { "color": "#FFFFFF" } }, "transparency": 100 }
+        ]
+      }
+    }
+  }
+}

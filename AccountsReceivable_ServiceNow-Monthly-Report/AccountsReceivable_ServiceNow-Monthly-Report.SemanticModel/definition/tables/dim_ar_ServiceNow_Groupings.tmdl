@@ -1,0 +1,71 @@
+table dim_ar_ServiceNow_Groupings
+	lineageTag: 8b3f9d82-8bfb-446b-aaa5-0dfa6540b15e
+
+	column RowNumber
+		dataType: string
+		lineageTag: df217eaf-cd64-4cd0-a073-28e6a46ad2cc
+		summarizeBy: none
+		sourceColumn: RowNumber
+
+		annotation SummarizationSetBy = Automatic
+
+	column Department
+		dataType: string
+		lineageTag: 22bb8db3-058d-40c4-bbe4-6da9358b8cd9
+		summarizeBy: none
+		sourceColumn: Department
+
+		annotation SummarizationSetBy = Automatic
+
+	column Assignment-Group
+		dataType: string
+		lineageTag: 3fbc3afa-089b-4182-b5a2-aab90db2024e
+		summarizeBy: none
+		sourceColumn: Assignment-Group
+
+		annotation SummarizationSetBy = Automatic
+
+	column Group
+		dataType: string
+		lineageTag: 12eb82eb-d56d-4ac5-a785-3671c9923458
+		summarizeBy: none
+		sourceColumn: Group
+
+		annotation SummarizationSetBy = Automatic
+
+	column Queue
+		dataType: string
+		lineageTag: f2ec377d-cf5e-45b5-a2d3-2e0f980cb7f8
+		summarizeBy: none
+		sourceColumn: Queue
+
+		annotation SummarizationSetBy = Automatic
+
+	column Group-Alt
+		dataType: string
+		lineageTag: 46cd6d8f-e911-4f5c-ae58-e38b6fe23248
+		summarizeBy: none
+		sourceColumn: Group-Alt
+
+		annotation SummarizationSetBy = Automatic
+
+	column Department-Alt
+		dataType: string
+		lineageTag: bd8afa61-3946-41f3-bdd2-3fb01735b3e4
+		summarizeBy: none
+		sourceColumn: Department-Alt
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_ar_ServiceNow_Groupings = m
+		mode: import
+		source =
+				let
+				    Source = SmartsheetGlobal.Contents("US", []),
+				    #"2976903809263492" = Source{[Key="2976903809263492"]}[Data],
+				    #"7069943149318020" = #"2976903809263492"{[Key="7069943149318020"]}[Data]
+				in
+				    #"7069943149318020"
+
+	annotation PBI_ResultType = Table
+

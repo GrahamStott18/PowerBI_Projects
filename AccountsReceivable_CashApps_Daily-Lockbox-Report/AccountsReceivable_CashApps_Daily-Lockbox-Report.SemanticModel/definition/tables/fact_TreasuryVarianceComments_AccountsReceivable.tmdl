@@ -1,0 +1,107 @@
+table fact_TreasuryVarianceComments_AccountsReceivable
+	lineageTag: ade59943-f197-4915-9883-e685c951fa4a
+
+	column RowNumber
+		dataType: string
+		lineageTag: fa5f97e5-4c63-4d32-97da-03e46c9d3f9f
+		summarizeBy: none
+		sourceColumn: RowNumber
+
+		annotation SummarizationSetBy = Automatic
+
+	column department
+		dataType: string
+		lineageTag: c87004eb-900a-473d-9b42-ffc948c6840e
+		summarizeBy: none
+		sourceColumn: department
+
+		annotation SummarizationSetBy = Automatic
+
+	column country
+		dataType: string
+		lineageTag: 259236ec-14cb-415f-a26a-128fdae91435
+		summarizeBy: none
+		sourceColumn: country
+
+		annotation SummarizationSetBy = Automatic
+
+	column bank
+		dataType: string
+		lineageTag: 4f194f74-9cb9-4669-b833-3bcfaba245d8
+		summarizeBy: none
+		sourceColumn: bank
+
+		annotation SummarizationSetBy = Automatic
+
+	column lockbox
+		dataType: string
+		lineageTag: e19854fc-8e19-4061-8ef0-a41fd6b25b4d
+		summarizeBy: none
+		sourceColumn: lockbox
+
+		annotation SummarizationSetBy = Automatic
+
+	column treasury_file_date
+		dataType: dateTime
+		formatString: Short Date
+		lineageTag: a5b29f61-c6b3-4469-a81b-4803a726bf60
+		summarizeBy: none
+		sourceColumn: treasury_file_date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column variance_comments
+		dataType: string
+		lineageTag: ecfcda05-4ec8-431b-a5a3-e1263e29ef29
+		summarizeBy: none
+		sourceColumn: variance_comments
+
+		annotation SummarizationSetBy = Automatic
+
+	column submitted_by
+		dataType: string
+		lineageTag: 65ca2ccc-bdd4-4d76-b770-b163d892ec1b
+		summarizeBy: none
+		sourceColumn: submitted_by
+
+		annotation SummarizationSetBy = Automatic
+
+	column created_by
+		dataType: string
+		lineageTag: f895f8cc-0644-47e9-80fb-8a0367d3516b
+		summarizeBy: none
+		sourceColumn: created_by
+
+		annotation SummarizationSetBy = Automatic
+
+	column created_on
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 3c79986a-746f-4fed-9fc6-11e6251b9cfb
+		summarizeBy: none
+		sourceColumn: created_on
+
+		variation Variation
+			isDefault
+			relationship: a5b8e774-50fc-4446-ac35-b0b1617b70e4
+			defaultHierarchy: LocalDateTable_abb2f710-5de8-4f03-b645-a806ac59a981.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	partition fact_TreasuryVarianceComments_AccountsReceivable = m
+		mode: import
+		source =
+				let
+				    Source = SmartsheetGlobal.Contents("US", []),
+				    #"2976903809263492" = Source{[Key="2976903809263492"]}[Data],
+				    #"8798560783912836" = #"2976903809263492"{[Key="8798560783912836"]}[Data],
+				    #"Changed Type" = Table.TransformColumnTypes(#"8798560783912836",{{"treasury_file_date", type date}, {"created_on", type datetime}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

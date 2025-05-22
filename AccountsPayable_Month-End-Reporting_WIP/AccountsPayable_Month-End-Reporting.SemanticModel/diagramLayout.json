@@ -1,0 +1,113 @@
+{
+  "version": "1.1.0",
+  "diagrams": [
+    {
+      "ordinal": 0,
+      "scrollPosition": {
+        "x": 0,
+        "y": 0
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 0,
+            "y": 0
+          },
+          "nodeIndex": ".Measures",
+          "nodeLineageTag": "4a13359a-294c-41ce-90aa-75afee8f7e30",
+          "size": {
+            "height": 128,
+            "width": 234
+          },
+          "zIndex": 4
+        },
+        {
+          "location": {
+            "x": 863.41674121563426,
+            "y": 245.49606858662563
+          },
+          "nodeIndex": "dim_date_fiscal_DateKey",
+          "nodeLineageTag": "8c566ff8-7d66-441f-a997-34273850b481",
+          "size": {
+            "height": 276.9697070000002,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 485.17799464958426,
+            "y": 242.45218480803075
+          },
+          "nodeIndex": "dim_date_fiscal_MonthKey",
+          "nodeLineageTag": "7ec0e8e7-a81a-455d-b52f-ac5347932ea2",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 0,
+            "y": 160.8431046086769
+          },
+          "nodeIndex": "dim_date_fiscal_TTMKey",
+          "nodeLineageTag": "f09306d5-6901-415b-b6c4-ac7f6f4bbfc4",
+          "size": {
+            "height": 272,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1254.7283312492825,
+            "y": 0
+          },
+          "nodeIndex": "dim_gbs_ProfitCenter",
+          "nodeLineageTag": "b61b8fd8-119c-4636-aa91-153e7196a353",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1349.0434682844334,
+            "y": 639.898777566648
+          },
+          "nodeIndex": "AP_INVOICES_ALL",
+          "nodeLineageTag": "0a51a297-2301-4d71-9f2d-b5555227739e",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1633.0434682844334,
+            "y": 319.949388783324
+          },
+          "nodeIndex": "fact_BirchStreet_Invoices_AccountsPayable",
+          "nodeLineageTag": "26398603-44d4-4af8-a24a-a2b7be78680e",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        }
+      ],
+      "name": "All tables",
+      "zoomValue": 61.503142371951924,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    }
+  ],
+  "selectedDiagram": "All tables",
+  "defaultDiagram": "All tables"
+}

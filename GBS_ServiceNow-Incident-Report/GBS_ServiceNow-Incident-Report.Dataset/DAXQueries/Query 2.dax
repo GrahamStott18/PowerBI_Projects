@@ -1,0 +1,32 @@
+DEFINE
+	VAR __DS0FilterTable = 
+		TREATAS({"FY-24"}, 'dim_date_fiscal_MonthKey'[FY-YY])
+
+	VAR __DS0FilterTable2 = 
+		TREATAS({"Payroll"}, 'dim_snow_AssignmentGroup'[Functional-Area])
+
+	VAR __DS0FilterTable3 = 
+		TREATAS({"Payroll Operations"}, 'dim_snow_AssignmentGroup'[Sub-Function])
+
+	VAR __DS0Core = 
+		SUMMARIZECOLUMNS(
+			'dim_date_fiscal_MonthKey'[DateID - Mmm],
+			__DS0FilterTable,
+			__DS0FilterTable2,
+			__DS0FilterTable3,
+			"Goal__Payroll_", '.Measures'[Goal (Payroll)],
+			"v_Goal__Payroll__FormatString", IGNORE('.Measures'[_Goal (Payroll) FormatString]),
+			"SLA____ServiceNow_IncidentPS_Resolved_", '.Measures'[SLA % (ServiceNow_IncidentPS_Resolved)],
+			"v_SLA____ServiceNow_IncidentPS_Resolved__FormatString", IGNORE('.Measures'[_SLA % (ServiceNow_IncidentPS_Resolved) FormatString]),
+			"Total_Ticket_Count__ServiceNow_IncidentPS_Resolved_", '.Measures'[Total Ticket Count (ServiceNow_IncidentPS_Resolved)],
+			"v_Total_Ticket_Count__ServiceNow_IncidentPS_Resolved__FormatString", IGNORE('.Measures'[_Total Ticket Count (ServiceNow_IncidentPS_Resolved) FormatString])
+		)
+
+	VAR __DS0PrimaryWindowed = 
+		TOPN(1001, __DS0Core, 'dim_date_fiscal_MonthKey'[DateID - Mmm], 1)
+
+EVALUATE
+	__DS0PrimaryWindowed
+
+ORDER BY
+	'dim_date_fiscal_MonthKey'[DateID - Mmm]

@@ -1,0 +1,93 @@
+table dim_ServiceNow_AssignmentGroup
+	lineageTag: d7d02eda-82dd-4260-a3a2-e20a9ca529bf
+
+	column RowNumber
+		dataType: string
+		lineageTag: 9c0935c3-0dbe-4341-8fcb-277f5bd50e79
+		summarizeBy: none
+		sourceColumn: RowNumber
+
+		annotation SummarizationSetBy = Automatic
+
+	column Functional-Area
+		dataType: string
+		lineageTag: c842239d-7e2c-4761-9c42-b37798b486c9
+		summarizeBy: none
+		sourceColumn: Functional-Area
+
+		annotation SummarizationSetBy = Automatic
+
+	column Assignment-Group
+		dataType: string
+		lineageTag: 4df23a54-f569-4dc4-bfb7-1abfb2c44f9f
+		summarizeBy: none
+		sourceColumn: Assignment-Group
+
+		annotation SummarizationSetBy = Automatic
+
+	column Sub-Function
+		dataType: string
+		lineageTag: d6f88c63-7714-4478-9e54-b3d459d7fdb0
+		summarizeBy: none
+		sourceColumn: Sub-Function
+
+		annotation SummarizationSetBy = Automatic
+
+	column ProfitCenter-ID
+		dataType: string
+		lineageTag: d222732b-9e06-4c51-a2b5-7dd6178d24f6
+		summarizeBy: none
+		sourceColumn: ProfitCenter-ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column SLA-BusinessDays
+		dataType: string
+		lineageTag: a8196f62-12da-48a6-ab64-527b345f25bc
+		summarizeBy: none
+		sourceColumn: SLA-BusinessDays
+
+		annotation SummarizationSetBy = Automatic
+
+	column SLA-NetworkDays
+		dataType: string
+		lineageTag: 25ea8a4e-50fc-4b8f-8d49-d8191068416d
+		summarizeBy: none
+		sourceColumn: SLA-NetworkDays
+
+		annotation SummarizationSetBy = Automatic
+
+	column Group
+		dataType: string
+		lineageTag: 7dc8dc16-8856-46da-8a99-f125c2204529
+		summarizeBy: none
+		sourceColumn: Group
+
+		annotation SummarizationSetBy = Automatic
+
+	column Sub-Function-Alt
+		dataType: string
+		lineageTag: 81b638da-ba04-45c0-b959-c97d89dae08e
+		summarizeBy: none
+		sourceColumn: Sub-Function-Alt
+
+		annotation SummarizationSetBy = Automatic
+
+	column Queue
+		dataType: string
+		lineageTag: 3f179523-8da8-4cd8-bcef-a2a60c165c1d
+		summarizeBy: none
+		sourceColumn: Queue
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_ServiceNow_AssignmentGroup = m
+		mode: import
+		source =
+				let
+				    Source = Smartsheet.Tables(),
+				    #"2976903809263492" = Source{[Key="2976903809263492"]}[Data],
+				    #"3045698648887172" = #"2976903809263492"{[Key="3045698648887172"]}[Data]
+				in
+				    #"3045698648887172"
+

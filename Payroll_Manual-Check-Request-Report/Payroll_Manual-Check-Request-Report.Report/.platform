@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Report",
+    "displayName": "Payroll_Manual-Check-Request-Report"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "ae1abecd-c0fc-48ca-8c05-29b024388486"
+  }
+}

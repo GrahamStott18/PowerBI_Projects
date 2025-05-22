@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Report",
+    "displayName": "GBS_ServiceNow-Daily-Status-Report"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "395e0028-e76f-45f6-8219-218b51814e9b"
+  }
+}

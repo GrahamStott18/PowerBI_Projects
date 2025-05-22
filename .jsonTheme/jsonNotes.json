@@ -1,0 +1,211 @@
+visualStyles:{
+    visualName:{        --- Replace with "JSON.visualName" name of the visual for the PowerBI visual, they can differ
+        styleName:{
+            cardName:[{         --- Replace with "JSON.cardName" for the PBI visual style option name
+                propertyName: propertyValue }]  --- Replace with "JSON.propertyName" that matches for the items under each of the VISUAL option catagories
+            }
+        }
+    }
+
+
+
+# Matrix Example
+    "visualStyles":{
+        "pivotTable":{   
+            styleName:{
+                "grid":[{
+                    propertyName: propertyValue }]
+                }
+            }
+        }
+
+
+
+"visualStyles": {
+"visualName":{
+    "styleName":{
+        "cardName":[{        
+            "propertyName": "propertyValue" }] 
+        }
+    }
+}
+
+
+Stacked bar chart
+barChart
+
+Stacked column chart
+columnChart
+
+Clustered bar chart
+clusteredBarChart
+
+Clustered column chart
+clusteredColumnChart
+
+100% Stacked bar chart
+hundredPercentStackedBarChart
+
+100% Stacked column chart
+hundredPercentStackedColumnChart
+
+Line chart
+lineChart
+
+Area chart
+areaChart
+
+Stacked area chart
+stackedAreaChart
+
+Line and stacked column chart       *******
+lineStackedColumnComboChart
+
+Line and clustered column chart
+lineClusteredColumnComboChart
+
+Ribbon chart
+ribbonChart
+
+Waterfall chart
+waterfallChart
+
+Funnel
+funnel
+
+Scatter chart
+scatterChart
+
+Pie chart
+pieChart
+
+Donut chart
+donutChart
+
+Treemap
+treemap
+
+Map
+map
+
+Filled Map
+filledMap
+
+Azure map
+azureMap
+
+Gauge
+gauge
+
+Card
+card
+
+Multi-row card
+multiRowCard
+
+KPI
+kpi
+
+Slicer         **********
+slicer
+
+Table           *********
+tableEx
+
+Matrix                  ************
+pivotTable
+
+R script visual
+scriptVisual
+
+Python visual
+pythonVisual
+
+Key influencers
+keyDriversVisual
+
+Decomposition Tree
+decompositionTreeVisual
+
+Q&A
+qnaVisual
+
+Text box                    *************
+textbox
+
+Metrics (Preview)
+scorecard
+
+Paginated report
+rdlVisual
+
+Card (new)
+cardVisual
+
+ArcGIS for Power BI
+esriVisual
+
+PowerApps 2.2.25
+PowerApps_PBI_CV_C29F1DCC_81F5_4973_94AD_0517D44CC06A
+
+Power Automate for Power BI
+FlowVisual_C29F1DCC_81F5_4973_94AD_0517D44CC06A
+
+Hierarchy Slicer
+HierarchySlicer1458836712039
+
+Line and stacked column chart with table
+lineStackedColumnMatrixADACEA3309644A92B1A6D50A68C81088
+
+
+
+
+"pivotTable":{
+    "styleName":{
+        "cardName":[{        
+            "propertyName": "propertyValue" }] 
+        }
+    },
+  "textbox":{
+    "styleName":{
+        "cardName":[{        
+            "propertyName": "propertyValue" }] 
+        }
+    },
+
+
+
+
+
+    "visualStyles": {
+        "*": {
+          "*": {
+            "background": [
+              {
+                "color": { "solid": { "color": "#EBEBEB" } }
+              }
+            ],
+            "border": [
+              {
+                "show": false
+              }
+            ],
+            "visualHeader": [
+              {
+                "background": { "solid": { "color": "#FFFFFF" } }
+              }
+            ] 
+          }
+        },
+
+
+
+
+
+        "*": [
+            {
+              "fontSize": 25,
+              "fontColor": { "solid": { "color": "#252423" } },
+              "transparency": 100
+            }
+          ],

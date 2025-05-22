@@ -1,0 +1,36 @@
+table dim_date_Holiday
+	lineageTag: d6573e35-20f9-4a70-861f-8a0bd8a063e7
+
+	column Holiday-Date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: ffcc9b11-ef32-4677-93f7-9e0032ec9d38
+		summarizeBy: none
+		sourceColumn: Holiday-Date
+
+		variation Variation
+			isDefault
+			relationship: 90370a7b-ebc9-43f3-a6fb-f9fc49a8c69c
+			defaultHierarchy: LocalDateTable_ea96c6d0-1e78-4218-9ae5-7a7b60ec3fbf.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	partition dim_date_Holiday = m
+		mode: import
+		source =
+				let
+				    Source = PowerPlatform.Dataflows(null),
+				    Workspaces = Source{[Id="Workspaces"]}[Data],
+				    #"c52e4ff9-a75a-4ede-b43a-ee2e8b5aaae1" = Workspaces{[workspaceId="c52e4ff9-a75a-4ede-b43a-ee2e8b5aaae1"]}[Data],
+				    #"c4eefec3-54ff-4c2d-95b2-631d551349a7" = #"c52e4ff9-a75a-4ede-b43a-ee2e8b5aaae1"{[dataflowId="c4eefec3-54ff-4c2d-95b2-631d551349a7"]}[Data],
+				    dim_date_Holiday_ = #"c4eefec3-54ff-4c2d-95b2-631d551349a7"{[entity="dim_date_Holiday",version=""]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(dim_date_Holiday_,{"RowNumber", "Holiday-Name"})
+				in
+				    #"Removed Columns"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

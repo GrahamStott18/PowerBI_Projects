@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "SemanticModel",
+    "displayName": "FixedAssets_Capital-Expense-Requests"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "c41a12eb-ae67-4f62-bbb1-be9ff0d39d1f"
+  }
+}

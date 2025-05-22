@@ -1,0 +1,126 @@
+{
+  "version": "1.1.0",
+  "diagrams": [
+    {
+      "ordinal": 0,
+      "scrollPosition": {
+        "x": 0,
+        "y": 0
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 0,
+            "y": 16.875
+          },
+          "nodeIndex": ".Measures",
+          "nodeLineageTag": "4a13359a-294c-41ce-90aa-75afee8f7e30",
+          "size": {
+            "height": 128,
+            "width": 234
+          },
+          "zIndex": 7
+        },
+        {
+          "location": {
+            "x": 850.91633813648389,
+            "y": 727.25494130733807
+          },
+          "nodeIndex": "dim_date_fiscal_DateKey",
+          "nodeLineageTag": "8c566ff8-7d66-441f-a997-34273850b481",
+          "size": {
+            "height": 276.9697070000002,
+            "width": 234
+          },
+          "zIndex": 1
+        },
+        {
+          "location": {
+            "x": 403.76059860470622,
+            "y": 380.1203012722936
+          },
+          "nodeIndex": "dim_date_fiscal_MonthKey",
+          "nodeLineageTag": "7ec0e8e7-a81a-455d-b52f-ac5347932ea2",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 2
+        },
+        {
+          "location": {
+            "x": 0,
+            "y": 177.7181046086769
+          },
+          "nodeIndex": "dim_date_fiscal_TTMKey",
+          "nodeLineageTag": "f09306d5-6901-415b-b6c4-ac7f6f4bbfc4",
+          "size": {
+            "height": 272,
+            "width": 234
+          },
+          "zIndex": 3
+        },
+        {
+          "location": {
+            "x": 1866.8975407672449,
+            "y": 572.56628345790216
+          },
+          "nodeIndex": "dim_Employee_FixedAssets",
+          "nodeLineageTag": "0838257f-954b-4c0a-a2e6-e75bd01d7084",
+          "size": {
+            "height": 272,
+            "width": 234
+          },
+          "zIndex": 4
+        },
+        {
+          "location": {
+            "x": 864.59535376157953,
+            "y": 235.1683160645041
+          },
+          "nodeIndex": "dim_gbs_mor_Goals",
+          "nodeLineageTag": "86288f6e-5036-4eeb-8362-3d75821fd682",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 5
+        },
+        {
+          "location": {
+            "x": 0,
+            "y": 476.28242832589859
+          },
+          "nodeIndex": "dim_gbs_ProfitCenter",
+          "nodeLineageTag": "57fe0cd1-27f4-45ef-9719-c979e47b7a79",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 6
+        },
+        {
+          "location": {
+            "x": 1343.3322535977989,
+            "y": 506.07322075992727
+          },
+          "nodeIndex": "ServiceNow_CERrequest_Closed",
+          "nodeLineageTag": "3badcaa4-db73-411d-b6ea-51b7675f4d7e",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        }
+      ],
+      "name": "All tables",
+      "zoomValue": 54.856245933097938,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    }
+  ],
+  "selectedDiagram": "All tables",
+  "defaultDiagram": "All tables"
+}

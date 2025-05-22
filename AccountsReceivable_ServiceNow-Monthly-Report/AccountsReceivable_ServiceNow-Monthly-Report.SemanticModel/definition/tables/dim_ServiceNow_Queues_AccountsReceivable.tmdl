@@ -1,0 +1,85 @@
+table dim_ServiceNow_Queues_AccountsReceivable
+	lineageTag: 3943b603-21ab-49f2-9357-cc73f50f53fc
+
+	column RowNumber
+		dataType: string
+		lineageTag: 2b5a7e93-f144-4c48-999e-6b31e6f6708b
+		summarizeBy: none
+		sourceColumn: RowNumber
+
+		annotation SummarizationSetBy = Automatic
+
+	column assignment_group
+		dataType: string
+		lineageTag: dadb5375-93bb-4332-a799-f15adfcbdb36
+		summarizeBy: none
+		sourceColumn: assignment_group
+
+		annotation SummarizationSetBy = Automatic
+
+	column queue_name
+		dataType: string
+		lineageTag: 3c2200ad-00cf-4768-a696-ea027e0aa215
+		summarizeBy: none
+		sourceColumn: queue_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column sub_function
+		dataType: string
+		lineageTag: e3e6dd6c-246e-4fba-9e6a-d2cb3713161e
+		summarizeBy: none
+		sourceColumn: sub_function
+
+		annotation SummarizationSetBy = Automatic
+
+	column sub_function_alt
+		dataType: string
+		lineageTag: 00c3643d-9d9d-4deb-b438-d4d3d138c800
+		summarizeBy: none
+		sourceColumn: sub_function_alt
+
+		annotation SummarizationSetBy = Automatic
+
+	column sla
+		dataType: string
+		lineageTag: 2fe60c9e-5b84-4be3-8a1e-ff6944c4f9ee
+		summarizeBy: none
+		sourceColumn: sla
+
+		annotation SummarizationSetBy = Automatic
+
+	column ticket_type
+		dataType: string
+		lineageTag: 5100040a-1d1e-437b-bb70-acf021c44228
+		summarizeBy: none
+		sourceColumn: ticket_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column functional_area
+		dataType: string
+		lineageTag: 3ba743ae-6790-4c47-946d-22ca1b579641
+		summarizeBy: none
+		sourceColumn: functional_area
+
+		annotation SummarizationSetBy = Automatic
+
+	column functional_alt
+		dataType: string
+		lineageTag: a2d7f8f8-b9e2-494d-94ae-80d784a134c2
+		summarizeBy: none
+		sourceColumn: functional_alt
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_ServiceNow_Queues_AccountsReceivable = m
+		mode: import
+		source =
+				let
+				    Source = SmartsheetGlobal.Contents("US", []),
+				    #"2976903809263492" = Source{[Key="2976903809263492"]}[Data],
+				    #"2383437710184324" = #"2976903809263492"{[Key="2383437710184324"]}[Data]
+				in
+				    #"2383437710184324"
+

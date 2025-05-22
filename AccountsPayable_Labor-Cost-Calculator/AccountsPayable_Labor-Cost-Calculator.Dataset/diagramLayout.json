@@ -1,0 +1,178 @@
+{
+  "version": "1.1.0",
+  "diagrams": [
+    {
+      "ordinal": 0,
+      "scrollPosition": {
+        "x": 17.312936525428597,
+        "y": 0
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 0,
+            "y": 0
+          },
+          "nodeIndex": "dim_date_fiscal_DateKey",
+          "nodeLineageTag": "a97fe3ba-0321-420c-9f6f-8dc3e13f1e31",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 9
+        },
+        {
+          "location": {
+            "x": 1108.7278937953215,
+            "y": 446.9768674942755
+          },
+          "nodeIndex": "dim_date_fiscal_MonthKey",
+          "nodeLineageTag": "93611b21-f518-4acc-941f-20788b0dae42",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 10
+        },
+        {
+          "location": {
+            "x": 0,
+            "y": 330.19298409067744
+          },
+          "nodeIndex": ".Measures",
+          "nodeLineageTag": "648e0315-86e4-4461-98c4-14eb7327dba1",
+          "size": {
+            "height": 128,
+            "width": 234
+          },
+          "zIndex": 5
+        },
+        {
+          "location": {
+            "x": 1141.0947502713786,
+            "y": 1016.9563311285931
+          },
+          "nodeIndex": "UFR GL_L2_SUMMARY_F",
+          "nodeLineageTag": "01425bcc-7482-4dce-bbd2-187ddfe0ad50",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 6
+        },
+        {
+          "location": {
+            "x": 198.43559137605155,
+            "y": 1029.1679254505946
+          },
+          "nodeIndex": "Dashboard_Account_Hierarchy",
+          "nodeLineageTag": "92827299-acf3-4c75-9ee3-9b95e60649d5",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 7
+        },
+        {
+          "location": {
+            "x": 708.82902477427115,
+            "y": 1047.401189474662
+          },
+          "nodeIndex": "Account_Hierarchy_Linking",
+          "nodeLineageTag": "f2836372-478a-4cca-9dd0-5cc5b6c1e502",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 8
+        },
+        {
+          "location": {
+            "x": 1114.6196464132377,
+            "y": 7.6375993671224336
+          },
+          "nodeIndex": "dim_date_Year",
+          "nodeLineageTag": "848db482-faa9-437e-92ed-76987661784f",
+          "size": {
+            "height": 176,
+            "width": 234
+          },
+          "zIndex": 4
+        },
+        {
+          "location": {
+            "x": 1568.9732897389713,
+            "y": 1006.4503981597616
+          },
+          "nodeIndex": "dim_gbs_ProfitCenter",
+          "nodeLineageTag": "1562ae73-0f46-484b-a905-291bd1ef7789",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 3
+        },
+        {
+          "location": {
+            "x": 2555.3100072922953,
+            "y": 0
+          },
+          "nodeIndex": "dim_Employee_AccountsPayable",
+          "nodeLineageTag": "8a6fbebe-3f59-4e0d-942a-89719c870046",
+          "size": {
+            "height": 272,
+            "width": 234
+          },
+          "zIndex": 2
+        },
+        {
+          "location": {
+            "x": 1903.4101061269369,
+            "y": 212.0834724365003
+          },
+          "nodeIndex": "fact_LaborAllocation_AccountsPayable (Smartsheet)",
+          "nodeLineageTag": "1890a308-6d18-4e86-8170-6e5290fb6210",
+          "size": {
+            "height": 272,
+            "width": 234
+          },
+          "zIndex": 1
+        },
+        {
+          "location": {
+            "x": 1950.7235392991277,
+            "y": 636.789816009226
+          },
+          "nodeIndex": "fact_LaborAllocation_AccountsPayable",
+          "nodeLineageTag": "9b6c16b6-1c8c-4d85-9af7-7cd67f2828dc",
+          "size": {
+            "height": 272,
+            "width": 234
+          },
+          "zIndex": 11
+        },
+        {
+          "location": {
+            "x": 2285.29603847858,
+            "y": 1026.720312386441
+          },
+          "nodeIndex": "dim_ap_GalantusFee",
+          "nodeLineageTag": "8ae560e1-7d7f-4f4b-b756-6c11e864f776",
+          "size": {
+            "height": 176,
+            "width": 234
+          },
+          "zIndex": 0
+        }
+      ],
+      "name": "All tables",
+      "zoomValue": 46.208221166004378,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    }
+  ],
+  "selectedDiagram": "All tables",
+  "defaultDiagram": "All tables"
+}

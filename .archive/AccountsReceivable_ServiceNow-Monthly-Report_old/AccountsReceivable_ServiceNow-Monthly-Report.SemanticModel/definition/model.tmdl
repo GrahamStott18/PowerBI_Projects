@@ -1,0 +1,32 @@
+model Model
+	culture: en-US
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	discourageImplicitMeasures
+	sourceQueryCulture: en-US
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation PBI_QueryOrder = ["dim_date_fiscal_DateKey","dim_date_fiscal_MonthKey","dim_date_fiscal_TTMKey","dim_gbs_ProfitCenter"]
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBIDesktopVersion = 2.141.1558.0 (25.03)+75b5f06a991f8f8a8a4d6b6fcd0f66e1ec2d6fdc
+
+annotation PBI_ProTooling = ["DevMode","CalcGroup"]
+
+annotation __TEdtr = 1
+
+ref table DateTableTemplate_dca4052d-aff4-404f-874c-a1f4d0e63d60
+ref table '.Measures'
+ref table dim_date_fiscal_DateKey
+ref table LocalDateTable_85f61c1d-c101-4656-afa2-8b2ed3b11878
+ref table dim_date_fiscal_MonthKey
+ref table LocalDateTable_336abc93-57dc-46da-acaa-273f0a494a3a
+ref table LocalDateTable_d7c77918-59e0-47ad-bc6e-76d5c4af2469
+ref table dim_date_fiscal_TTMKey
+ref table LocalDateTable_07d4074b-6db8-4afb-a27b-ef3a916e6b94
+ref table dim_gbs_ProfitCenter
+
+ref cultureInfo en-US
+

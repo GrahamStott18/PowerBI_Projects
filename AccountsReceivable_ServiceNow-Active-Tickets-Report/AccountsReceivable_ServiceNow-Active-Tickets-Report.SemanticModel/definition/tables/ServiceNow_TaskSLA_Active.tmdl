@@ -1,0 +1,330 @@
+table ServiceNow_TaskSLA_Active
+	lineageTag: 871a8d8a-f97f-423f-8466-3323ef4f758e
+
+	column pause_duration
+		dataType: string
+		sourceProviderType: nvarchar(max)
+		lineageTag: dada7819-a665-46a1-b987-86586a5324b2
+		summarizeBy: none
+		sourceColumn: pause_duration
+
+		annotation SummarizationSetBy = Automatic
+
+	column task_assigned_to
+		dataType: string
+		sourceProviderType: nvarchar(max)
+		lineageTag: 2445e8cf-026e-4eb1-b010-6d995fb5298b
+		summarizeBy: none
+		sourceColumn: task_assigned_to
+
+		annotation SummarizationSetBy = Automatic
+
+	column pause_time
+		dataType: string
+		sourceProviderType: nvarchar(max)
+		lineageTag: 49dee384-8383-4d99-88f5-a47d7b7c1579
+		summarizeBy: none
+		sourceColumn: pause_time
+
+		annotation SummarizationSetBy = Automatic
+
+	column timezone
+		dataType: string
+		sourceProviderType: nvarchar(max)
+		lineageTag: 29999f81-9fc8-42d0-858b-357a78ed49ba
+		summarizeBy: none
+		sourceColumn: timezone
+
+		annotation SummarizationSetBy = Automatic
+
+	column sys_updated_on
+		dataType: string
+		sourceProviderType: nvarchar(max)
+		lineageTag: 262c9fd7-a878-48f9-996e-bd9ce8a424f2
+		summarizeBy: none
+		sourceColumn: sys_updated_on
+
+		annotation SummarizationSetBy = Automatic
+
+	column business_time_left
+		dataType: string
+		sourceProviderType: nvarchar(max)
+		lineageTag: ab90ff12-b8d5-42eb-bc8f-c5128d8f7f01
+		summarizeBy: none
+		sourceColumn: business_time_left
+
+		annotation SummarizationSetBy = Automatic
+
+	column duration
+		dataType: string
+		sourceProviderType: nvarchar(max)
+		lineageTag: 6adc2d85-ccf5-4e31-a030-7dd727fc574f
+		summarizeBy: none
+		sourceColumn: duration
+
+		annotation SummarizationSetBy = Automatic
+
+	column sys_id
+		dataType: string
+		sourceProviderType: nvarchar(max)
+		lineageTag: 27904db4-af73-4dc7-a157-a5f5b1684494
+		summarizeBy: none
+		sourceColumn: sys_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column time_left
+		dataType: string
+		sourceProviderType: nvarchar(max)
+		lineageTag: fc2ac8f6-25af-44b9-8119-ea39b29162bb
+		summarizeBy: none
+		sourceColumn: time_left
+
+		annotation SummarizationSetBy = Automatic
+
+	column sys_updated_by
+		dataType: string
+		sourceProviderType: nvarchar(max)
+		lineageTag: dae29706-c68f-43a6-acd7-538b5bc871ef
+		summarizeBy: none
+		sourceColumn: sys_updated_by
+
+		annotation SummarizationSetBy = Automatic
+
+	column sys_created_on
+		dataType: string
+		sourceProviderType: nvarchar(max)
+		lineageTag: 6b2d871f-0b0f-45a1-9757-d9e93f2ff6fc
+		summarizeBy: none
+		sourceColumn: sys_created_on
+
+		annotation SummarizationSetBy = Automatic
+
+	column percentage
+		dataType: string
+		sourceProviderType: nvarchar(max)
+		lineageTag: 8f4b4cc4-05f6-4be9-a1c6-db0a092e011b
+		summarizeBy: none
+		sourceColumn: percentage
+
+		annotation SummarizationSetBy = Automatic
+
+	column original_breach_time
+		dataType: string
+		sourceProviderType: nvarchar(max)
+		lineageTag: 67e52659-967b-4c39-8d5f-3de22125cf4b
+		summarizeBy: none
+		sourceColumn: original_breach_time
+
+		annotation SummarizationSetBy = Automatic
+
+	column sys_created_by
+		dataType: string
+		sourceProviderType: nvarchar(max)
+		lineageTag: 8de705e4-d225-46e6-92ec-ee31e1922b26
+		summarizeBy: none
+		sourceColumn: sys_created_by
+
+		annotation SummarizationSetBy = Automatic
+
+	column business_percentage
+		dataType: string
+		sourceProviderType: nvarchar(max)
+		lineageTag: 838b944d-6525-40d2-9116-8bd83587941f
+		summarizeBy: none
+		sourceColumn: business_percentage
+
+		annotation SummarizationSetBy = Automatic
+
+	column task_assignment_group
+		dataType: string
+		sourceProviderType: nvarchar(max)
+		lineageTag: 872b547d-7985-43b3-8b07-6ab6ccc51ee9
+		summarizeBy: none
+		sourceColumn: task_assignment_group
+
+		annotation SummarizationSetBy = Automatic
+
+	column end_time
+		dataType: string
+		sourceProviderType: nvarchar(max)
+		lineageTag: 4d9efb26-2f9c-4930-8870-d120f779b38e
+		summarizeBy: none
+		sourceColumn: end_time
+
+		annotation SummarizationSetBy = Automatic
+
+	column sys_mod_count
+		dataType: string
+		sourceProviderType: nvarchar(max)
+		lineageTag: fd8308e3-864b-4d92-a8fa-1ce4a0ceb65b
+		summarizeBy: none
+		sourceColumn: sys_mod_count
+
+		annotation SummarizationSetBy = Automatic
+
+	column active
+		dataType: string
+		sourceProviderType: nvarchar(max)
+		lineageTag: 958007e1-ab46-4039-b3fe-ffd050507ce3
+		summarizeBy: none
+		sourceColumn: active
+
+		annotation SummarizationSetBy = Automatic
+
+	column business_pause_duration
+		dataType: string
+		sourceProviderType: nvarchar(max)
+		lineageTag: 9f50c694-5bb4-47f7-8293-c3928bcd5cd8
+		summarizeBy: none
+		sourceColumn: business_pause_duration
+
+		annotation SummarizationSetBy = Automatic
+
+	column sys_tags
+		dataType: string
+		sourceProviderType: nvarchar(max)
+		lineageTag: 7bd08c42-be3d-4193-be2d-f8da7788cb8a
+		summarizeBy: none
+		sourceColumn: sys_tags
+
+		annotation SummarizationSetBy = Automatic
+
+	column schedule
+		dataType: string
+		sourceProviderType: nvarchar(max)
+		lineageTag: aae13e92-e7d2-41fb-adc1-5617a1030806
+		summarizeBy: none
+		sourceColumn: schedule
+
+		annotation SummarizationSetBy = Automatic
+
+	column start_time
+		dataType: string
+		sourceProviderType: nvarchar(max)
+		lineageTag: fe34f010-7b13-49c8-a875-0e514b5e1b9b
+		summarizeBy: none
+		sourceColumn: start_time
+
+		annotation SummarizationSetBy = Automatic
+
+	column business_duration
+		dataType: string
+		sourceProviderType: nvarchar(max)
+		lineageTag: f8e6f3da-ebc0-4356-8f3d-7c3b485c48cc
+		summarizeBy: none
+		sourceColumn: business_duration
+
+		annotation SummarizationSetBy = Automatic
+
+	column task
+		dataType: string
+		sourceProviderType: nvarchar(max)
+		lineageTag: d0b16c70-dae0-437a-947b-7bc62a1dcf15
+		summarizeBy: none
+		sourceColumn: task
+
+		annotation SummarizationSetBy = Automatic
+
+	column task_type
+		dataType: string
+		sourceProviderType: nvarchar(max)
+		lineageTag: 54069ac3-514f-4cb1-9f85-c96a77f7d12c
+		summarizeBy: none
+		sourceColumn: task_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column stage
+		dataType: string
+		sourceProviderType: nvarchar(max)
+		lineageTag: 25401c49-85d9-47ba-998d-26b15efacd03
+		summarizeBy: none
+		sourceColumn: stage
+
+		annotation SummarizationSetBy = Automatic
+
+	column planned_end_time
+		dataType: string
+		sourceProviderType: nvarchar(max)
+		lineageTag: ef3faeca-68f2-4f7c-89d4-1db946330550
+		summarizeBy: none
+		sourceColumn: planned_end_time
+
+		annotation SummarizationSetBy = Automatic
+
+	column has_breached
+		dataType: string
+		sourceProviderType: nvarchar(max)
+		lineageTag: 1da5c50f-7591-4ce4-a149-30db9c3f3c0c
+		summarizeBy: none
+		sourceColumn: has_breached
+
+		annotation SummarizationSetBy = Automatic
+
+	column start_date
+		dataType: dateTime
+		formatString: Long Date
+		sourceProviderType: date
+		lineageTag: 9f57514a-3a08-4fd5-8a26-5a59c14c4f6a
+		summarizeBy: none
+		sourceColumn: start_date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column end_date
+		dataType: dateTime
+		formatString: Long Date
+		sourceProviderType: date
+		lineageTag: b349d99c-28ec-4d67-93af-9775754c2ead
+		summarizeBy: none
+		sourceColumn: end_date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column loaded_date
+		dataType: dateTime
+		formatString: General Date
+		sourceProviderType: datetime
+		lineageTag: 16a4d6bc-1c9a-4e74-b3cc-01b9f04b61f9
+		summarizeBy: none
+		sourceColumn: loaded_date
+
+		annotation SummarizationSetBy = Automatic
+
+	column sla
+		dataType: string
+		sourceProviderType: nvarchar(max)
+		lineageTag: 78806e9b-bd5a-41bf-9c61-41fc58040f27
+		summarizeBy: none
+		sourceColumn: sla
+
+		annotation SummarizationSetBy = Automatic
+
+	column planned_end_time_utc
+		dataType: dateTime
+		formatString: General Date
+		sourceProviderType: datetime
+		lineageTag: e00bed2b-6347-470b-8375-08f7acc94e21
+		summarizeBy: none
+		sourceColumn: planned_end_time_utc
+
+		annotation SummarizationSetBy = Automatic
+
+	partition ServiceNow_TaskSLA_Active = m
+		mode: directQuery
+		source =
+				let
+				    Source = Sql.Database("USPHL0PRPADBA1", "Graham_Workspace"),
+				    dbo_ServiceNow_TaskSLA_Active = Source{[Schema="dbo",Item="ServiceNow_TaskSLA_Active"]}[Data]
+				in
+				    dbo_ServiceNow_TaskSLA_Active
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

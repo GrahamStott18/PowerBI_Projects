@@ -1,0 +1,82 @@
+table dim_Employee_AccountsReceivable
+	lineageTag: dae1e020-aaf7-46ed-8dea-94f6fb9ef0df
+
+	column RowNumber
+		dataType: string
+		lineageTag: 6176a920-c082-4e3d-82c0-7b81c561e027
+		summarizeBy: none
+		sourceColumn: RowNumber
+
+		annotation SummarizationSetBy = Automatic
+
+	column Fiscal-Year
+		dataType: string
+		lineageTag: 9d745695-09d0-486d-91b2-81b9b5d445b0
+		summarizeBy: none
+		sourceColumn: Fiscal-Year
+
+		annotation SummarizationSetBy = Automatic
+
+	column Employee-Name
+		dataType: string
+		lineageTag: 56d5aa5e-65a4-46e5-a05c-5732e69fd5c3
+		summarizeBy: none
+		sourceColumn: Employee-Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column Employee-Salary
+		dataType: string
+		lineageTag: 3c88484c-b184-4a99-9208-a6a6ee06a8a4
+		summarizeBy: none
+		sourceColumn: Employee-Salary
+
+		annotation SummarizationSetBy = Automatic
+
+	column Department-Name
+		dataType: string
+		lineageTag: 0b79a460-4bb8-4239-913f-e49e57202567
+		summarizeBy: none
+		sourceColumn: Department-Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column Team-Name
+		dataType: string
+		lineageTag: b203a9ab-a49a-4994-b850-2f03a06529f0
+		summarizeBy: none
+		sourceColumn: Team-Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column Maximum-%
+		dataType: string
+		lineageTag: ff7ac63f-9e51-49e8-9ca4-96485787e42f
+		summarizeBy: none
+		sourceColumn: Maximum-%
+
+		annotation SummarizationSetBy = Automatic
+
+	column Status
+		dataType: string
+		lineageTag: 40485784-c591-48a0-8646-981cda82cd5a
+		summarizeBy: none
+		sourceColumn: Status
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_Employee_AccountsReceivable = m
+		mode: import
+		source =
+				let
+				    Source = Smartsheet.Tables(),
+				    #"2976903809263492" = Source{[Key="2976903809263492"]}[Data],
+				    #"6689296246695812" = #"2976903809263492"{[Key="6689296246695812"]}[Data],
+				    #"3646037025574788" = #"6689296246695812"{[Key="3646037025574788"]}[Data]
+				in
+				    #"3646037025574788"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

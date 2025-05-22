@@ -1,0 +1,295 @@
+{
+  "version": "1.1.0",
+  "diagrams": [
+    {
+      "ordinal": 0,
+      "scrollPosition": {
+        "x": 0,
+        "y": 378.0944522933205
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 0,
+            "y": 2149.1542695325315
+          },
+          "nodeIndex": ".Measures",
+          "nodeLineageTag": "8c2f4ad0-a580-4c6e-9380-f7a9ca31b15d",
+          "size": {
+            "height": 128,
+            "width": 234
+          },
+          "zIndex": 19
+        },
+        {
+          "location": {
+            "x": 272.68630195700189,
+            "y": 1764.5458535960502
+          },
+          "nodeIndex": "UFR GL_L2_SUMMARY_F",
+          "nodeLineageTag": "261de6be-8a58-4e81-924b-67aafbd7e16c",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 18
+        },
+        {
+          "location": {
+            "x": 0,
+            "y": 1027.8965559577262
+          },
+          "nodeIndex": "Account_Hierarchy_Linking",
+          "nodeLineageTag": "836a6d5f-ac28-43e4-a7ae-a5a1f4a8bca2",
+          "size": {
+            "height": 263.55903743699992,
+            "width": 234
+          },
+          "zIndex": 16
+        },
+        {
+          "location": {
+            "x": 0,
+            "y": 1445.3488649974438
+          },
+          "nodeIndex": "Dashboard_Account_Hierarchy",
+          "nodeLineageTag": "7801888c-179c-4582-a9cc-3ee42996db79",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 17
+        },
+        {
+          "location": {
+            "x": 680.18679246710792,
+            "y": 767.12343685402675
+          },
+          "nodeIndex": "HR_ActiveEmployee",
+          "nodeLineageTag": "f2d477bc-5ae8-41c0-a41c-e296df50dca9",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 20
+        },
+        {
+          "location": {
+            "x": 698.93187564909681,
+            "y": 1420.5763183494369
+          },
+          "nodeIndex": "HR_ActiveEmployee_BeginCount",
+          "nodeLineageTag": "31e16303-a4a8-4f28-a971-92c04c7c3706",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 14
+        },
+        {
+          "location": {
+            "x": 681.11664089066051,
+            "y": 1092.9548857279053
+          },
+          "nodeIndex": "HR_Metrics",
+          "nodeLineageTag": "c176f493-0a3e-4e19-a4ce-fadc8e99213d",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 15
+        },
+        {
+          "location": {
+            "x": 2976.9272878418974,
+            "y": 1019.8878561544134
+          },
+          "nodeIndex": "fact_gbs_mor_Commentary",
+          "nodeLineageTag": "da9f5406-2a41-4dda-bdad-7607384fbb0f",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 13
+        },
+        {
+          "location": {
+            "x": 1657.968660292398,
+            "y": 949.93470623680264
+          },
+          "nodeIndex": "dim_date_fiscal_MonthKey",
+          "nodeLineageTag": "5bdad20b-4f59-4a5b-90ed-152648675341",
+          "size": {
+            "height": 387.34830316029411,
+            "width": 234
+          },
+          "zIndex": 21
+        },
+        {
+          "location": {
+            "x": 0,
+            "y": 1831.8991506748594
+          },
+          "nodeIndex": "dim_date_fiscal_TTMKey",
+          "nodeLineageTag": "534c1716-1dfb-4946-878b-8515fed32d39",
+          "size": {
+            "height": 272,
+            "width": 234
+          },
+          "zIndex": 5
+        },
+        {
+          "location": {
+            "x": 3456.7428158688126,
+            "y": 261.48692663047905
+          },
+          "nodeIndex": "dim_gbs_mor_KPI",
+          "nodeLineageTag": "4761d9c6-1048-46a4-8f82-ded39a92a19f",
+          "size": {
+            "height": 224,
+            "width": 234
+          },
+          "zIndex": 6
+        },
+        {
+          "location": {
+            "x": 3012.9297983688216,
+            "y": 670.11690502781425
+          },
+          "nodeIndex": "dim_gbs_ProfitCenter",
+          "nodeLineageTag": "ed5531bd-e16c-44ee-88cb-d7ea0cf5628b",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 7
+        },
+        {
+          "location": {
+            "x": 781.39520140619584,
+            "y": 95.889366862515928
+          },
+          "nodeIndex": "dim_cc_mor_QueueList",
+          "nodeLineageTag": "b0c2c38c-9ce9-4e24-ad2c-21298df58097",
+          "size": {
+            "height": 176,
+            "width": 234
+          },
+          "zIndex": 8
+        },
+        {
+          "location": {
+            "x": 3932.8036347223856,
+            "y": 38.37723385074446
+          },
+          "nodeIndex": "dim_gbs_mor_KpiSort",
+          "nodeLineageTag": "51afbaf9-e665-45e7-898c-a6eec9021f5d",
+          "size": {
+            "height": 176,
+            "width": 234
+          },
+          "zIndex": 9
+        },
+        {
+          "location": {
+            "x": 894.89894977588165,
+            "y": 2214.4859463260027
+          },
+          "nodeIndex": "dim_gbs_mor_s&bSort",
+          "nodeLineageTag": "c9004a09-0eef-4f5d-a7e5-b232d700ad71",
+          "size": {
+            "height": 176,
+            "width": 234
+          },
+          "zIndex": 10
+        },
+        {
+          "location": {
+            "x": 1330.3449585149208,
+            "y": 2123.7897199823683
+          },
+          "nodeIndex": "dim_gbs_ProfitCenter_hr",
+          "nodeLineageTag": "d8b70097-9f20-4282-9823-c4d3bc671cc3",
+          "size": {
+            "height": 243.90019592285489,
+            "width": 234
+          },
+          "zIndex": 11
+        },
+        {
+          "location": {
+            "x": 1738.2842556070696,
+            "y": 2151.9127134405326
+          },
+          "nodeIndex": "fact_gbs_HeadcountPlan",
+          "nodeLineageTag": "dc96bfc1-ad92-4674-bd03-5bca81efe70a",
+          "size": {
+            "height": 293.49789384792189,
+            "width": 234
+          },
+          "zIndex": 12
+        },
+        {
+          "location": {
+            "x": 2509.8573284386089,
+            "y": 351.94623122185362
+          },
+          "nodeIndex": "fact_gbs_MetricData",
+          "nodeLineageTag": "c88e5dae-97e3-42b4-8d9c-4309c504b32b",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 1
+        },
+        {
+          "location": {
+            "x": 1308.5191131968681,
+            "y": 28.847335625743284
+          },
+          "nodeIndex": "fact_gbs_metricData_ContactCenter_EmailVolume",
+          "nodeLineageTag": "df16693a-b933-4ed1-8784-f5a6bf5d1335",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 2
+        },
+        {
+          "location": {
+            "x": 2686.3012663145573,
+            "y": 1542.1670690509375
+          },
+          "nodeIndex": "dim_gbs_mor_Goals",
+          "nodeLineageTag": "aa14bcbf-356b-42df-858c-e82f8b240d35",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 3
+        },
+        {
+          "location": {
+            "x": 2571.4544006678593,
+            "y": 0
+          },
+          "nodeIndex": "test_fact_gbs_metricData_ContactCenter",
+          "nodeLineageTag": "7cd21ee0-2f2c-465c-ac3e-a008c4113e71",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 4
+        }
+      ],
+      "name": "All tables",
+      "zoomValue": 43.639889186206645,
+      "pinKeyFieldsToTop": true,
+      "showExtraHeaderInfo": true,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    }
+  ],
+  "selectedDiagram": "All tables",
+  "defaultDiagram": "All tables"
+}

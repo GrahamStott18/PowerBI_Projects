@@ -1,0 +1,436 @@
+table fact_Oracle_Export_US_AccountsReceivable
+	lineageTag: 4fe81642-f209-4fb3-ab2b-61a1f54eb0c0
+
+	column transmission_name
+		dataType: string
+		lineageTag: 230b4e30-1e08-4bb0-9ad6-5c339d92c05c
+		summarizeBy: none
+		sourceColumn: transmission_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column batch_number
+		dataType: string
+		lineageTag: 04049995-0b94-4d21-9f08-720089415235
+		summarizeBy: none
+		sourceColumn: batch_number
+
+		annotation SummarizationSetBy = Automatic
+
+	column lockbox
+		dataType: string
+		lineageTag: 9ff958b5-9057-40eb-a28f-b0e33bbea779
+		summarizeBy: none
+		sourceColumn: lockbox
+
+		annotation SummarizationSetBy = Automatic
+
+	column control_amount
+		dataType: double
+		lineageTag: 0669568b-f32a-44f8-bceb-998a8c3bbed4
+		summarizeBy: sum
+		sourceColumn: control_amount
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column control_count
+		dataType: double
+		lineageTag: 64040c80-898f-4953-8803-c0e108386d69
+		summarizeBy: sum
+		sourceColumn: control_count
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column applied_amount
+		dataType: double
+		lineageTag: 6e363182-20a8-438e-a6f2-9de2e044a191
+		summarizeBy: sum
+		sourceColumn: applied_amount
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column applied_count
+		dataType: double
+		lineageTag: a116d772-c278-4c91-9100-2eb5529e8d25
+		summarizeBy: sum
+		sourceColumn: applied_count
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column unapplied_amount
+		dataType: double
+		lineageTag: 2218af39-c7fd-4b5a-b8e6-41a7193a1ccc
+		summarizeBy: sum
+		sourceColumn: unapplied_amount
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column unapplied_count
+		dataType: double
+		lineageTag: 5ad85250-4133-423d-bd4a-cf5bc0a88baf
+		summarizeBy: sum
+		sourceColumn: unapplied_count
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column on_account_amount
+		dataType: double
+		lineageTag: 2c8bd735-16b1-4f09-ac48-f2b90f9a78cc
+		summarizeBy: sum
+		sourceColumn: on_account_amount
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column on_account_count
+		dataType: double
+		lineageTag: b58811dd-99ca-44d4-9a24-76d390ea83e9
+		summarizeBy: sum
+		sourceColumn: on_account_count
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column unidentified_amount
+		dataType: double
+		lineageTag: 03f9bfe8-ec8e-4c8c-b305-3b77a6292216
+		summarizeBy: sum
+		sourceColumn: unidentified_amount
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column unidentified_count
+		dataType: double
+		lineageTag: b9f9c965-6a7e-412e-abed-a67ce147bb6b
+		summarizeBy: sum
+		sourceColumn: unidentified_count
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column reversed_amount
+		dataType: double
+		lineageTag: e7a781bd-cc96-452c-bb85-0d79f1a4c30e
+		summarizeBy: sum
+		sourceColumn: reversed_amount
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column reversed_count
+		dataType: double
+		lineageTag: a1d73525-caad-4501-9d36-d122c07cb165
+		summarizeBy: sum
+		sourceColumn: reversed_count
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column difference_amount
+		dataType: double
+		lineageTag: 477792ee-7ba1-40b3-b4b3-6c5bffbe43b2
+		summarizeBy: sum
+		sourceColumn: difference_amount
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column difference_count
+		dataType: double
+		lineageTag: de8096ae-2193-4b85-96a5-4270b6f5136f
+		summarizeBy: sum
+		sourceColumn: difference_count
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column miscellaneous_amount
+		dataType: double
+		lineageTag: 64f8f111-f018-4483-982c-9ab351b63426
+		summarizeBy: sum
+		sourceColumn: miscellaneous_amount
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column miscellaneous_count
+		dataType: double
+		lineageTag: 9af48c00-f943-4428-885c-00218d01c634
+		summarizeBy: sum
+		sourceColumn: miscellaneous_count
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column batch_source
+		dataType: string
+		lineageTag: d1eb7b93-18c5-4383-b9df-2d96493b3a21
+		summarizeBy: none
+		sourceColumn: batch_source
+
+		annotation SummarizationSetBy = Automatic
+
+	column batch_date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: bafe381d-d8fc-4d65-ba52-7773930eddc9
+		summarizeBy: none
+		sourceColumn: batch_date
+
+		variation Variation
+			isDefault
+			relationship: 7ccac70d-637b-4adb-a5d8-8d2e84cd6287
+			defaultHierarchy: LocalDateTable_f9a191cc-6262-4880-9bf8-48b7963b4e22.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column gl_date
+		dataType: dateTime
+		formatString: m/d/yyyy
+		lineageTag: e43500a8-33e4-4cf4-8695-d54e499dd5bf
+		summarizeBy: none
+		sourceColumn: gl_date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	column deposit_date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 14e3d498-bd5b-4796-8eb5-96bfc3e25f86
+		summarizeBy: none
+		sourceColumn: deposit_date
+
+		variation Variation
+			isDefault
+			relationship: bfbeb7a0-64d4-45fa-b0ba-d83bd9c1ee2f
+			defaultHierarchy: LocalDateTable_05cf1d3e-4c2a-4853-97b4-d0a9fd79cb2f.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column batch_type
+		dataType: string
+		lineageTag: 3c423967-9a46-46d9-be6f-b52b8a38c2ee
+		summarizeBy: none
+		sourceColumn: batch_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column currency
+		dataType: string
+		lineageTag: e8c5f70d-a148-4760-83ba-fca3f0c2019e
+		summarizeBy: none
+		sourceColumn: currency
+
+		annotation SummarizationSetBy = Automatic
+
+	column receipt_class
+		dataType: string
+		lineageTag: 4c6f21f6-6931-4d97-bd79-ada414208ae5
+		summarizeBy: none
+		sourceColumn: receipt_class
+
+		annotation SummarizationSetBy = Automatic
+
+	column receipt_method
+		dataType: string
+		lineageTag: e3b5d8f8-b7b4-4dd1-92a7-75964b11e955
+		summarizeBy: none
+		sourceColumn: receipt_method
+
+		annotation SummarizationSetBy = Automatic
+
+	column transmission_batch
+		dataType: string
+		lineageTag: ab92e057-a240-474c-83aa-ad0f22782b90
+		summarizeBy: none
+		sourceColumn: transmission_batch
+
+		annotation SummarizationSetBy = Automatic
+
+	column operating_unit
+		dataType: string
+		lineageTag: 65302433-5640-49e7-898f-ca3b3689d20b
+		summarizeBy: none
+		sourceColumn: operating_unit
+
+		annotation SummarizationSetBy = Automatic
+
+	column media_reference
+		dataType: string
+		lineageTag: d8b74878-5142-45bb-b0b6-ae0035ec660c
+		summarizeBy: none
+		sourceColumn: media_reference
+
+		annotation SummarizationSetBy = Automatic
+
+	column remittance_method
+		dataType: string
+		lineageTag: 3cdf79ad-7984-4d69-8d22-9c6e4774c522
+		summarizeBy: none
+		sourceColumn: remittance_method
+
+		annotation SummarizationSetBy = Automatic
+
+	column remittance_bank
+		dataType: string
+		lineageTag: a2adf5cd-9cb3-467d-8b10-0d5a3a792724
+		summarizeBy: none
+		sourceColumn: remittance_bank
+
+		annotation SummarizationSetBy = Automatic
+
+	column remittance_branch
+		dataType: string
+		lineageTag: 658f3987-ac9c-4ae2-a036-790d763c1863
+		summarizeBy: none
+		sourceColumn: remittance_branch
+
+		annotation SummarizationSetBy = Automatic
+
+	column remittance_account
+		dataType: string
+		lineageTag: 5c5e5732-6d05-42af-bdd1-531c08266a6f
+		summarizeBy: none
+		sourceColumn: remittance_account
+
+		annotation SummarizationSetBy = Automatic
+
+	column deposit_number
+		dataType: string
+		lineageTag: cab6df9e-6178-4dfe-85a7-e5eae4d94bc8
+		summarizeBy: none
+		sourceColumn: deposit_number
+
+		annotation SummarizationSetBy = Automatic
+
+	column remittance_count
+		dataType: string
+		lineageTag: 94103e58-c03e-482c-a896-2d9de320ce25
+		summarizeBy: none
+		sourceColumn: remittance_count
+
+		annotation SummarizationSetBy = Automatic
+
+	column remittance_amount
+		dataType: string
+		lineageTag: bec6cc75-5068-4eb5-937a-371b61ca0793
+		summarizeBy: none
+		sourceColumn: remittance_amount
+
+		annotation SummarizationSetBy = Automatic
+
+	column bank_currency
+		dataType: string
+		lineageTag: d276ee64-40ba-4a4d-b01d-3a658bd2b7c7
+		summarizeBy: none
+		sourceColumn: bank_currency
+
+		annotation SummarizationSetBy = Automatic
+
+	column comments
+		dataType: string
+		lineageTag: 40ef5c34-d777-4e0b-86ca-eb05946111da
+		summarizeBy: none
+		sourceColumn: comments
+
+		annotation SummarizationSetBy = Automatic
+
+	column process_status
+		dataType: string
+		lineageTag: 3d45fc38-5bae-4557-ad18-26bbe489eb05
+		summarizeBy: none
+		sourceColumn: process_status
+
+		annotation SummarizationSetBy = Automatic
+
+	column status
+		dataType: string
+		lineageTag: d0614f11-31de-45a3-a1fa-e83304e92ae0
+		summarizeBy: none
+		sourceColumn: status
+
+		annotation SummarizationSetBy = Automatic
+
+	column request_id
+		dataType: string
+		lineageTag: 713da9ee-949b-43a6-a72b-1a6b552d3ee7
+		summarizeBy: none
+		sourceColumn: request_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column partially_purged
+		dataType: string
+		lineageTag: ea261459-54eb-4379-8c0f-e41427bc9ccd
+		summarizeBy: none
+		sourceColumn: partially_purged
+
+		annotation SummarizationSetBy = Automatic
+
+	column loaded_date
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 70ab23b3-0344-49fb-9aea-3178e24232d7
+		summarizeBy: none
+		sourceColumn: loaded_date
+
+		variation Variation
+			isDefault
+			relationship: 6c5d7200-adac-4815-baa6-41238c3a87de
+			defaultHierarchy: LocalDateTable_a370022a-83b3-4092-9c35-08cf2c56cd11.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column report_name
+		dataType: string
+		lineageTag: 61deb254-4b93-4f90-a2cf-32f14ae01587
+		summarizeBy: none
+		sourceColumn: report_name
+
+		annotation SummarizationSetBy = Automatic
+
+	partition fact_Oracle_Export_US_AccountsReceivable = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("USPHL0PRPADBA1", "Graham_Workspace"),
+				    dbo_fact_Oracle_Export_US_AccountsReceivable = Source{[Schema="dbo",Item="fact_Oracle_Export_US_AccountsReceivable"]}[Data],
+				    #"Changed Type" = Table.TransformColumnTypes(dbo_fact_Oracle_Export_US_AccountsReceivable,{{"control_amount", type number}, {"control_count", type number}, {"applied_amount", type number}, {"applied_count", type number}, {"unapplied_amount", type number}, {"unapplied_count", type number}, {"on_account_amount", type number}, {"on_account_count", type number}, {"unidentified_amount", type number}, {"unidentified_count", type number}, {"reversed_amount", type number}, {"reversed_count", type number}, {"difference_amount", type number}, {"difference_count", type number}, {"miscellaneous_amount", type number}, {"miscellaneous_count", type number}, {"batch_date", type date}, {"gl_date", type date}, {"deposit_date", type date}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

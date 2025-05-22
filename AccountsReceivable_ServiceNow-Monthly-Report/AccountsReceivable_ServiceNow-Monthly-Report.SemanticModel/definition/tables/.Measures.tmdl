@@ -1,0 +1,3876 @@
+table '.Measures'
+	lineageTag: 4a13359a-294c-41ce-90aa-75afee8f7e30
+
+	calculationGroup
+
+	measure 'SLA Business Days' = SELECTEDVALUE( dim_snow_AssignmentGroup[SLA-BusinessDays] )
+		displayFolder: .Base Measures
+		lineageTag: 55eeed9a-05a5-4901-8d7d-0f8f7db84255
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Fiscal Period' = ```
+			VALUES( dim_date_fiscal_MonthKey[Month FY-YY] ) 
+			```
+		displayFolder: .Base Measures
+		lineageTag: 88889f33-4ec4-410c-a821-a84e79bb0ba7
+
+	measure 'Goal (AR_Incident Resolution)' = VALUES( dim_gbs_mor_Goals[AR_Incident-Resolution] )
+		displayFolder: .Goals
+		lineageTag: 0dc1cd11-6d05-4752-a2b0-77e4861900d5
+
+		formatStringDefinition = "0%"
+
+	measure 'Total Count (Active Tasks)' = ```
+			COUNTROWS( DISTINCT( ServiceNow_TaskSLA_Active_CatalogTask_IncidentPS[task] ) ) 
+			```
+		formatString: 0
+		displayFolder: .TaskSLA_Active_CatalogTask_IncidentPS
+		lineageTag: 20be8931-18bb-44c0-b37b-f476c1107766
+
+	measure 'Total Count-Employee (Started Tasks)' = ```
+			
+			    CALCULATE( 
+			        COUNTROWS( ServiceNow_TaskSLA_Started ) ,
+			        USERELATIONSHIP( ServiceNow_TaskSLA_Started[task_assigned_to] , dim_Employee_AccountsReceivable[Employee-Name] ))
+			```
+		displayFolder: .TaskSLA_Started
+		lineageTag: f12f3b99-517c-4094-b8f4-5ca655397626
+
+	measure 'Total Count (Started)' = COUNTROWS( ServiceNow_TaskSLA_Started )
+		formatString: 0
+		displayFolder: .TaskSLA_Started
+		lineageTag: d00eee69-65e0-4c6e-86e1-2ea10d3cd2ce
+
+	measure 'Paused-Total Count (Active)' = ```
+			
+			    CALCULATE( 
+			        COUNTROWS( ServiceNow_TaskSLA_Active_CatalogTask_IncidentPS ) , 
+			        FILTER( ServiceNow_TaskSLA_Active_CatalogTask_IncidentPS , 
+			        ServiceNow_TaskSLA_Active_CatalogTask_IncidentPS[stage] == "Paused" ) ) 
+			```
+		displayFolder: .TaskSLA_Active_CatalogTask_IncidentPS
+		lineageTag: b8243810-acb2-4519-a181-cd599a160465
+
+		formatStringDefinition = "#,0"
+
+	measure 'Breached-Total Count (Active)' = ```
+			
+			    CALCULATE( 
+			        COUNTROWS( ServiceNow_TaskSLA_Active_CatalogTask_IncidentPS ) ,
+			        FILTER( ServiceNow_TaskSLA_Active_CatalogTask_IncidentPS , 
+			        ServiceNow_TaskSLA_Active_CatalogTask_IncidentPS[has_breached] == "True" ) ) 
+			```
+		displayFolder: .TaskSLA_Active_CatalogTask_IncidentPS
+		lineageTag: d191f476-e507-4a10-874b-66565beef14d
+
+		formatStringDefinition = "#,0"
+
+	measure 'SLA - Background (Ended-Recent)' = ```
+			
+			SWITCH( 
+			    TRUE(), 
+			        [SLA%_AllTickets_Ended (MostRecent)] >= [Goal (AR_Incident Resolution)], "#009900",
+			        [SLA%_AllTickets_Ended (MostRecent)] < ( [Goal (AR_Incident Resolution)] * 0.9 ), "#CC0000", 
+			        "#FFFF00" ) 
+			```
+		displayFolder: .Formatting
+		lineageTag: a51f35cf-26d6-4ee0-a797-f491572959d5
+
+	measure 'SLA - Font (Ended-Recent)' = ```
+			
+			SWITCH( 
+			    TRUE(), 
+			        [SLA%_AllTickets_Ended (MostRecent)] >= [Goal (AR_Incident Resolution)], "#009900",
+			        [SLA%_AllTickets_Ended (MostRecent)] < ( [Goal (AR_Incident Resolution)] * 0.9 ), "#CC0000", 
+			        "#FFFF00" ) 
+			
+			
+			```
+		displayFolder: .Formatting
+		lineageTag: c9096c57-4a7f-42a7-9954-016578acbc52
+
+	measure 'In Progress-Total Count (Active)' = ```
+			
+			    CALCULATE( 
+			        COUNTROWS( ServiceNow_TaskSLA_Active_CatalogTask_IncidentPS ) , 
+			        FILTER( ServiceNow_TaskSLA_Active_CatalogTask_IncidentPS , 
+			        ServiceNow_TaskSLA_Active_CatalogTask_IncidentPS[stage] == "In Progress" ) ) 
+			```
+		displayFolder: .TaskSLA_Active_CatalogTask_IncidentPS
+		lineageTag: 522b68da-9107-47ad-a9c5-023312a9712f
+
+		formatStringDefinition = "#,0"
+
+	measure 'TotalQty_Comparison_Ended (Current Month)' = ```
+			
+			
+			VAR _CurrentDate = MAX( dim_date_fiscal_TTMKey[DateID] )
+			
+			VAR _Result =
+			    CALCULATE (
+			        [TotalTicketCount_AllTickets_MostRecent_Ended] , 
+			        dim_date_fiscal_MonthKey[DateID] == _CurrentDate )
+			
+			RETURN
+			    _Result
+			```
+		displayFolder: .TaskSLA_Ended
+		lineageTag: f050aa69-f307-46f0-be60-38abd2b563f5
+
+		formatStringDefinition = "#,0"
+
+	measure 'TotalQty_Comparison_Ended (Last 3 Months)' = ```
+			
+			    
+			VAR _CurrentDate = SELECTEDVALUE( dim_date_fiscal_TTMKey[DateID] )
+			
+			VAR _CurrentDate1 = SELECTEDVALUE( dim_date_fiscal_MonthKey[DateID] )
+			
+			VAR _CurrentMonth =
+			    DATE ( YEAR ( _CurrentDate ), MONTH ( _CurrentDate ), DAY ( _CurrentDate ) )
+			
+			VAR _CurrentMonthMinus1 =
+			    DATE ( YEAR ( _CurrentDate ), MONTH ( _CurrentDate ) - 1, DAY ( _CurrentDate ) )
+			
+			VAR _CurrentMonthMinus3 =
+			    DATE ( YEAR ( _CurrentDate ), MONTH ( _CurrentDate ) - 3, DAY ( _CurrentDate ) )
+			
+			
+			
+			VAR _Result =
+			    CALCULATE (
+			        [TotalTicketCount_AllTickets_MostRecent_Ended] , 
+			        FILTER(
+			            dim_date_fiscal_MonthKey, 
+			            dim_date_fiscal_MonthKey[DateID] <= _CurrentMonth
+			                && dim_date_fiscal_MonthKey[DateID] >= _CurrentMonthMinus3
+			        ) )
+			RETURN
+			    _Result
+			```
+		displayFolder: .TaskSLA_Ended
+		lineageTag: 5e9cc889-df76-48e6-8713-408c5b9bebd8
+
+		formatStringDefinition = "#,0"
+
+	measure 'TotalQty_Comparison_Ended (Prior 13 Months)' = ```
+			
+			    
+			VAR _CurrentDate = SELECTEDVALUE( dim_date_fiscal_TTMKey[DateID] )
+			
+			VAR _CurrentMonth =
+			    DATE ( YEAR ( _CurrentDate ), MONTH ( _CurrentDate ), DAY ( _CurrentDate ) )
+			
+			VAR _CurrentMonthMinus4 =
+			    DATE ( YEAR ( _CurrentDate ), MONTH ( _CurrentDate ) - 4, DAY ( _CurrentDate ) )
+			
+			VAR _CurrentMonthMinus13 =
+			    DATE ( YEAR ( _CurrentDate ), MONTH ( _CurrentDate ) - 13, DAY ( _CurrentDate ) )
+			
+			VAR _CurrentMonthMinus16 =
+			    DATE ( YEAR ( _CurrentDate ), MONTH ( _CurrentDate ) - 16, DAY ( _CurrentDate ) )
+			
+			
+			
+			VAR _Result =
+			    CALCULATE (
+			        [TotalTicketCount_AllTickets_MostRecent_Ended] , 
+			        dim_date_fiscal_MonthKey[DateID] <= _CurrentMonth
+			        && 
+			        dim_date_fiscal_MonthKey[DateID] >= _CurrentMonthMinus13
+			    )
+			    
+			RETURN
+			    _Result
+			```
+		displayFolder: .TaskSLA_Ended
+		lineageTag: 978a63a1-6978-4ad9-80cc-2aa1696883c9
+
+		formatStringDefinition = "#,0"
+
+	measure 'SLA%_Comparison_Ended (Current Month)' = ```
+			
+			
+			VAR _CurrentDate = MAX( dim_date_fiscal_TTMKey[DateID] )
+			
+			VAR _Result =
+			    CALCULATE (
+			        [SLA%_AllTickets_Ended (MostRecent)], 
+			        dim_date_fiscal_MonthKey[DateID] == _CurrentDate )
+			
+			RETURN
+			    _Result
+			```
+		displayFolder: .TaskSLA_Ended
+		lineageTag: 4b44ea35-8ed8-4b11-ba42-9a592420a1b3
+
+		formatStringDefinition = "0.00%"
+
+	measure 'SLA%_Comparison_Ended (Previous 3 Months)' = ```
+			
+			    
+			VAR _CurrentDate = SELECTEDVALUE( dim_date_fiscal_TTMKey[DateID] )
+			
+			VAR _CurrentDate1 = SELECTEDVALUE( dim_date_fiscal_MonthKey[DateID] )
+			
+			VAR _CurrentMonth =
+			    DATE ( YEAR ( _CurrentDate ), MONTH ( _CurrentDate ), DAY ( _CurrentDate ) )
+			
+			VAR _CurrentMonthMinus1 =
+			    DATE ( YEAR ( _CurrentDate ), MONTH ( _CurrentDate ) - 1, DAY ( _CurrentDate ) )
+			
+			VAR _CurrentMonthMinus3 =
+			    DATE ( YEAR ( _CurrentDate ), MONTH ( _CurrentDate ) - 3, DAY ( _CurrentDate ) )
+			
+			
+			
+			VAR _Result =
+			    CALCULATE (
+			        [SLA%_AllTickets_Ended (MostRecent)] , 
+			        FILTER(
+			            dim_date_fiscal_MonthKey, 
+			            dim_date_fiscal_MonthKey[DateID] <= _CurrentMonth
+			                && dim_date_fiscal_MonthKey[DateID] >= _CurrentMonthMinus3
+			    ) 
+			)
+			
+			RETURN
+			    _Result
+			```
+		displayFolder: .TaskSLA_Ended
+		lineageTag: dde4987b-d4d7-40ee-a65f-362896c0941d
+
+		formatStringDefinition = "0.00%"
+
+	measure 'SLA%_Comparison_Ended (Prior 13 Months)' = ```
+			
+			    
+			VAR _CurrentDate = SELECTEDVALUE( dim_date_fiscal_TTMKey[DateID] )
+			
+			VAR _CurrentMonth =
+			    DATE ( YEAR ( _CurrentDate ), MONTH ( _CurrentDate ), DAY ( _CurrentDate ) )
+			
+			VAR _CurrentMonthMinus4 =
+			    DATE ( YEAR ( _CurrentDate ), MONTH ( _CurrentDate ) - 4, DAY ( _CurrentDate ) )
+			
+			VAR _CurrentMonthMinus13 =
+			    DATE ( YEAR ( _CurrentDate ), MONTH ( _CurrentDate ) - 13, DAY ( _CurrentDate ) )
+			
+			VAR _CurrentMonthMinus16 =
+			    DATE ( YEAR ( _CurrentDate ), MONTH ( _CurrentDate ) - 16, DAY ( _CurrentDate ) )
+			
+			
+			
+			VAR _Result =
+			    CALCULATE (
+			        [SLA%_AllTickets_Ended (MostRecent)] , 
+			        FILTER(
+			            dim_date_fiscal_MonthKey, 
+			            dim_date_fiscal_MonthKey[DateID] <= _CurrentMonth
+			                && dim_date_fiscal_MonthKey[DateID] >= _CurrentMonthMinus13
+			        ) )
+			RETURN
+			    _Result
+			```
+		displayFolder: .TaskSLA_Ended
+		lineageTag: ebb4f96b-cd9f-4123-acd4-89dffaba796a
+
+		formatStringDefinition = "0.00%"
+
+	measure 'BreachedQty_Comparison_Ended (Current Month)' = ```
+			
+			
+			VAR _CurrentDate = MAX( dim_date_fiscal_TTMKey[DateID] )
+			
+			VAR _Result =
+			    CALCULATE (
+			        [Breached_SLA_AllTickets_Ended (MostRecent)] , 
+			        dim_date_fiscal_MonthKey[DateID] == _CurrentDate )
+			
+			RETURN
+			    _Result
+			```
+		displayFolder: .TaskSLA_Ended
+		lineageTag: 7b528691-5db0-4a0e-b316-f18c6866e3b9
+
+		formatStringDefinition = "#,0"
+
+	measure 'BreachedQty_Comparison_Ended (Previous 3 Months)' = ```
+			
+			    
+			VAR _CurrentDate = SELECTEDVALUE( dim_date_fiscal_TTMKey[DateID] )
+			
+			VAR _CurrentDate1 = SELECTEDVALUE( dim_date_fiscal_MonthKey[DateID] )
+			
+			VAR _CurrentMonth =
+			    DATE ( YEAR ( _CurrentDate ), MONTH ( _CurrentDate ), DAY ( _CurrentDate ) )
+			
+			VAR _CurrentMonthMinus1 =
+			    DATE ( YEAR ( _CurrentDate ), MONTH ( _CurrentDate ) - 1, DAY ( _CurrentDate ) )
+			
+			VAR _CurrentMonthMinus3 =
+			    DATE ( YEAR ( _CurrentDate ), MONTH ( _CurrentDate ) - 3, DAY ( _CurrentDate ) )
+			
+			
+			
+			VAR _Result =
+			    CALCULATE (
+			        [Breached_SLA_AllTickets_Ended (MostRecent)] , 
+			        FILTER(
+			            dim_date_fiscal_MonthKey, 
+			            dim_date_fiscal_MonthKey[DateID] <= _CurrentMonth
+			                && dim_date_fiscal_MonthKey[DateID] >= _CurrentMonthMinus3
+			        ) )
+			RETURN
+			    _Result
+			```
+		displayFolder: .TaskSLA_Ended
+		lineageTag: a60e7b3a-3d01-4e36-a100-766f9f99aeb9
+
+		formatStringDefinition = "#,0"
+
+	measure 'BreachedQty_Comparison_Ended (Prior 13 Months)' = ```
+			
+			    
+			VAR _CurrentDate = SELECTEDVALUE( dim_date_fiscal_TTMKey[DateID] )
+			
+			VAR _CurrentMonth =
+			    DATE ( YEAR ( _CurrentDate ), MONTH ( _CurrentDate ), DAY ( _CurrentDate ) )
+			
+			VAR _CurrentMonthMinus4 =
+			    DATE ( YEAR ( _CurrentDate ), MONTH ( _CurrentDate ) - 4, DAY ( _CurrentDate ) )
+			
+			VAR _CurrentMonthMinus13 =
+			    DATE ( YEAR ( _CurrentDate ), MONTH ( _CurrentDate ) - 13, DAY ( _CurrentDate ) )
+			
+			VAR _CurrentMonthMinus16 =
+			    DATE ( YEAR ( _CurrentDate ), MONTH ( _CurrentDate ) - 16, DAY ( _CurrentDate ) )
+			
+			
+			
+			VAR _Result =
+			    CALCULATE (
+			        [Breached_SLA_AllTickets_Ended (MostRecent)] , 
+			        FILTER(
+			            dim_date_fiscal_MonthKey, 
+			            dim_date_fiscal_MonthKey[DateID] <= _CurrentMonth
+			                && dim_date_fiscal_MonthKey[DateID] >= _CurrentMonthMinus13
+			        ) )
+			RETURN
+			    _Result
+			```
+		displayFolder: .TaskSLA_Ended
+		lineageTag: d8413e83-aa95-47b8-83a5-f347969441b5
+
+		formatStringDefinition = "#,0"
+
+	measure 'Distinct Total Ticket Count (Started)' = DISTINCTCOUNT( ServiceNow_TaskSLA_Started[task] )
+		formatString: 0
+		displayFolder: .TaskSLA_Started
+		lineageTag: b59f79fc-7f0f-4c2b-bcbe-38fa67fce6e7
+
+	measure 'Distinct Total Ticket Count (Active)' = ```
+			DISTINCTCOUNT( ServiceNow_TaskSLA_Active_CatalogTask_IncidentPS[task] ) 
+			```
+		formatString: 0
+		displayFolder: .TaskSLA_Active_CatalogTask_IncidentPS
+		lineageTag: 97dee3ba-0b2c-412d-865d-e6471254b986
+
+	measure 'Data Updated (Active)' = ```
+			MAX(ServiceNow_TaskSLA_Active_CatalogTask_IncidentPS[loaded_date] )  
+			```
+		formatString: General Date
+		displayFolder: .TaskSLA_Active_CatalogTask_IncidentPS
+		lineageTag: 7a12d56a-8254-44a1-bfef-649b02e21d05
+
+	measure 'Passed_SLA_AllTickets_Ended (MostRecent)' = ```
+			
+			    CALCULATE(
+			        DISTINCTCOUNT( ServiceNow_TaskSLA_Ended[task] ),
+			        FILTER(
+			            ServiceNow_TaskSLA_Ended,
+			            ServiceNow_TaskSLA_Ended[end_time] = 
+			                CALCULATE(
+			                    MAX(ServiceNow_TaskSLA_Ended[end_time]),
+			                    ALLEXCEPT(ServiceNow_TaskSLA_Ended, ServiceNow_TaskSLA_Ended[task])
+			                ) &&
+			            ServiceNow_TaskSLA_Ended[has_breached] == "False"
+			        )
+			    )
+			```
+		displayFolder: .TaskSLA_Ended
+		lineageTag: 76d49b38-ce0d-462e-95e5-f3c0880d66a0
+
+		formatStringDefinition = "#,0"
+
+	measure 'Breached_SLA_AllTickets_Ended (MostRecent)' = ```
+			
+			CALCULATE( 
+			    DISTINCTCOUNT( ServiceNow_TaskSLA_Ended[task] ) ,
+			    FILTER( 
+			        ServiceNow_TaskSLA_Ended , 
+			        ServiceNow_TaskSLA_Ended[end_time] = 
+			        CALCULATE( 
+			            MAX( ServiceNow_TaskSLA_Ended[end_time] ) , 
+			            ALLEXCEPT( ServiceNow_TaskSLA_Ended , ServiceNow_TaskSLA_Ended[task] ) 
+			        ) 
+			        &&
+			        ServiceNow_TaskSLA_Ended[has_breached] == "True"
+			    )
+			)
+			
+			```
+		displayFolder: .TaskSLA_Ended
+		lineageTag: 8763d8c3-4039-4bf1-8181-3fbc1f1ae98e
+
+		formatStringDefinition = "#,0"
+
+	measure TotalTicketCount_AllTickets_MostRecent_Ended = ```
+			
+			    CALCULATE(
+			        DISTINCTCOUNT( ServiceNow_TaskSLA_Ended[task] ),
+			        FILTER(
+			            ServiceNow_TaskSLA_Ended,
+			            ServiceNow_TaskSLA_Ended[end_time] = 
+			                CALCULATE(
+			                    MAX(ServiceNow_TaskSLA_Ended[end_time]),
+			                    ALLEXCEPT(ServiceNow_TaskSLA_Ended, ServiceNow_TaskSLA_Ended[task])
+			                ) 
+			        )
+			    )
+			```
+		displayFolder: .TaskSLA_Ended
+		lineageTag: 765271b3-73ab-4f41-ba1a-a1c0e844456d
+
+		formatStringDefinition = "#,0"
+
+	measure 'SLA%_AllTickets_Ended (MostRecent)' = ROUND( DIVIDE( [Passed_SLA_AllTickets_Ended (MostRecent)] , [TotalTicketCount_AllTickets_MostRecent_Ended] ) , 4 )
+		displayFolder: .TaskSLA_Ended
+		lineageTag: f75f0ae6-a23d-40e4-8025-755d93beb740
+
+		formatStringDefinition = "0.00%"
+
+	measure 'Breached_SLA_IncidentPS_Ended (MostRecent)' = ```
+			
+			    CALCULATE(
+			        DISTINCTCOUNT( ServiceNow_TaskSLA_Ended[task] ),
+			        FILTER(
+			            ServiceNow_TaskSLA_Ended,
+			            ServiceNow_TaskSLA_Ended[end_time] = 
+			                CALCULATE(
+			                    MAX(ServiceNow_TaskSLA_Ended[end_time]),
+			                    ALLEXCEPT(ServiceNow_TaskSLA_Ended, ServiceNow_TaskSLA_Ended[task])
+			                ) &&
+			            ServiceNow_TaskSLA_Ended[has_breached] == "True"
+			            && 
+			            ServiceNow_TaskSLA_Ended[task_type] == "Incident - PS"
+			        )
+			    )
+			```
+		displayFolder: .TaskSLA_Ended
+		lineageTag: 882621cb-78ca-4288-af2d-d3f4cc4fd222
+
+		formatStringDefinition = "#,0"
+
+	measure 'Passed_SLA_IncidentPS_Ended (MostRecent)' = ```
+			
+			    CALCULATE(
+			        DISTINCTCOUNT( ServiceNow_TaskSLA_Ended[task] ),
+			        FILTER(
+			            ServiceNow_TaskSLA_Ended,
+			            ServiceNow_TaskSLA_Ended[end_time] = 
+			                CALCULATE(
+			                    MAX(ServiceNow_TaskSLA_Ended[end_time]),
+			                    ALLEXCEPT(ServiceNow_TaskSLA_Ended, ServiceNow_TaskSLA_Ended[task])
+			                ) &&
+			            ServiceNow_TaskSLA_Ended[has_breached] == "False"
+			            && 
+			            ServiceNow_TaskSLA_Ended[task_type] == "Incident - PS"
+			        )
+			    )
+			```
+		displayFolder: .TaskSLA_Ended
+		lineageTag: ed40a6ba-ccbe-419a-8082-69381c1386ed
+
+		formatStringDefinition = "#,0"
+
+	measure 'TotalTicketCount_IncidentPS_Ended (MostRecent)' = ```
+			
+			    CALCULATE(
+			        DISTINCTCOUNT( ServiceNow_TaskSLA_Ended[task] ),
+			        FILTER(
+			            ServiceNow_TaskSLA_Ended,
+			            ServiceNow_TaskSLA_Ended[end_time] = 
+			                CALCULATE(
+			                    MAX(ServiceNow_TaskSLA_Ended[end_time]),
+			                    ALLEXCEPT(ServiceNow_TaskSLA_Ended, ServiceNow_TaskSLA_Ended[task])
+			                ) 
+			            && 
+			            ServiceNow_TaskSLA_Ended[task_type] == "Incident - PS"
+			        )
+			    )
+			```
+		displayFolder: .TaskSLA_Ended
+		lineageTag: 4f50881d-eca5-4162-b9e3-730939a53e6e
+
+		formatStringDefinition = "#,0"
+
+	measure 'SLA%_IncidentPS_Ended (MostRecent)' = ROUND( DIVIDE( [Passed_SLA_IncidentPS_Ended (MostRecent)] , [TotalTicketCount_IncidentPS_Ended (MostRecent)] ) , 4 )
+		displayFolder: .TaskSLA_Ended
+		lineageTag: dd6b4a39-180b-407a-b6a5-2f11dac1a6dd
+
+		formatStringDefinition = "0.00%"
+
+	measure 'SLA - CatalogTask - Font (Ended-Recent)' = ```
+			
+			SWITCH( 
+			    TRUE(), 
+			        [SLA%_CatalogTask_Ended (MostRecent)] >= [Goal (AR_Incident Resolution)], "#FFFFFF",
+			        [SLA%_CatalogTask_Ended (MostRecent)] < ( [Goal (AR_Incident Resolution)] * 0.9 ), "#FFFFFF", 
+			        "#000000" ) 
+			```
+		displayFolder: .Formatting
+		lineageTag: 59e14681-bf20-4b24-9638-6fe6d7f1c14c
+
+	measure 'Breached_SLA_CatalogTask_Ended (MostRecent)' = ```
+			
+			    CALCULATE(
+			        DISTINCTCOUNT( ServiceNow_TaskSLA_Ended[task] ),
+			        FILTER(
+			            ServiceNow_TaskSLA_Ended,
+			            ServiceNow_TaskSLA_Ended[end_time] = 
+			                CALCULATE(
+			                    MAX(ServiceNow_TaskSLA_Ended[end_time]),
+			                    ALLEXCEPT(ServiceNow_TaskSLA_Ended, ServiceNow_TaskSLA_Ended[task])
+			                ) &&
+			            ServiceNow_TaskSLA_Ended[has_breached] == "True"
+			            && 
+			            ServiceNow_TaskSLA_Ended[task_type] == "Catalog Task"
+			        )
+			    )
+			```
+		displayFolder: .TaskSLA_Ended
+		lineageTag: 5626ff96-447b-48d3-b68d-53db0ad1279c
+
+		formatStringDefinition = "#,0"
+
+	measure 'Passed_SLA_CatalogTask_Ended (MostRecent)' = ```
+			
+			    CALCULATE(
+			        DISTINCTCOUNT( ServiceNow_TaskSLA_Ended[task] ),
+			        FILTER(
+			            ServiceNow_TaskSLA_Ended,
+			            ServiceNow_TaskSLA_Ended[end_time] = 
+			                CALCULATE(
+			                    MAX(ServiceNow_TaskSLA_Ended[end_time]),
+			                    ALLEXCEPT(ServiceNow_TaskSLA_Ended, ServiceNow_TaskSLA_Ended[task])
+			                ) &&
+			            ServiceNow_TaskSLA_Ended[has_breached] == "False"
+			            && 
+			            ServiceNow_TaskSLA_Ended[task_type] == "Catalog Task"
+			        )
+			    )
+			```
+		displayFolder: .TaskSLA_Ended
+		lineageTag: 3d6bb3c9-bbc3-4c7e-9e35-945e372a6937
+
+		formatStringDefinition = "#,0"
+
+	measure 'TotalTicketCount_CatalogTask_Ended (MostRecent)' = ```
+			
+			    CALCULATE(
+			        DISTINCTCOUNT( ServiceNow_TaskSLA_Ended[task] ),
+			        FILTER(
+			            ServiceNow_TaskSLA_Ended,
+			            ServiceNow_TaskSLA_Ended[end_time] = 
+			                CALCULATE(
+			                    MAX(ServiceNow_TaskSLA_Ended[end_time]),
+			                    ALLEXCEPT(ServiceNow_TaskSLA_Ended, ServiceNow_TaskSLA_Ended[task])
+			                ) 
+			            && 
+			            ServiceNow_TaskSLA_Ended[task_type] == "Catalog Task"
+			        )
+			    )
+			```
+		displayFolder: .TaskSLA_Ended
+		lineageTag: 0f604d03-8a66-4972-8bc3-c800e6f09b8e
+
+		formatStringDefinition = "#,0"
+
+	measure 'SLA%_CatalogTask_Ended (MostRecent)' = ROUND( DIVIDE( [Passed_SLA_CatalogTask_Ended (MostRecent)] , [TotalTicketCount_CatalogTask_Ended (MostRecent)] ) , 4 )
+		displayFolder: .TaskSLA_Ended
+		lineageTag: f4c0b484-a658-4b11-a4ee-df6bfd5aee7c
+
+		formatStringDefinition = "0.00%"
+
+	measure 'SLA - CatalogTask - Background (Ended-Recent)' = ```
+			
+			SWITCH( 
+			    TRUE(), 
+			        [SLA%_CatalogTask_Ended (MostRecent)] >= [Goal (AR_Incident Resolution)], "#009900",
+			        [SLA%_CatalogTask_Ended (MostRecent)] < ( [Goal (AR_Incident Resolution)] * 0.9 ), "#CC0000", 
+			        "#FFFF00" )
+			```
+		displayFolder: .Formatting
+		lineageTag: a4461cfd-67f2-4ee5-94fb-b463e9d278f0
+
+	measure 'TotalTicketCount_AllTickets_Started (MostRecent)' = ```
+			
+			
+			VAR MostRecentStartTime =
+			    CALCULATE(
+			        MAX( ServiceNow_TaskSLA_Started[start_time] ),
+			        ALLEXCEPT( ServiceNow_TaskSLA_Started, ServiceNow_TaskSLA_Started[task] )
+			    )
+			
+			RETURN
+			    CALCULATE(
+			        DISTINCTCOUNT( ServiceNow_TaskSLA_Started[task] ),
+			        FILTER(
+			            ServiceNow_TaskSLA_Started,
+			            ServiceNow_TaskSLA_Started[end_time] = 
+			                CALCULATE(
+			                    MAX(ServiceNow_TaskSLA_Started[end_time]),
+			                    ALLEXCEPT(ServiceNow_TaskSLA_Started, ServiceNow_TaskSLA_Started[task])
+			                ) 
+			        )
+			    )
+			```
+		displayFolder: .TaskSLA_Started
+		lineageTag: c58ca94b-dfc3-416b-97db-ddded558c17a
+
+		formatStringDefinition = "#,0"
+
+	measure 'TTM_Breached_SLA_AllTickets_Ended (MostRecent)' = ```
+			
+			
+			VAR _CurrentDate = MAX( dim_date_fiscal_TTMKey[DateID] )
+			
+			VAR _currentPeriod =
+			    DATE ( YEAR ( _CurrentDate ), MONTH ( _CurrentDate ), DAY ( _CurrentDate ) )
+			
+			VAR _previousPeriod =
+			    DATE ( YEAR ( _CurrentDate ), MONTH ( _CurrentDate ) - 12, DAY ( _CurrentDate ) )
+			
+			VAR _result = 
+			    CALCULATE(
+			        DISTINCTCOUNT( ServiceNow_TaskSLA_Ended[task] ),
+			        FILTER(
+			            ServiceNow_TaskSLA_Ended,
+			            ServiceNow_TaskSLA_Ended[end_time] = 
+			                CALCULATE(
+			                    MAX(ServiceNow_TaskSLA_Ended[end_time]),
+			                    ALLEXCEPT(ServiceNow_TaskSLA_Ended, ServiceNow_TaskSLA_Ended[task])
+			                ) &&
+			            ServiceNow_TaskSLA_Ended[has_breached] == "True"
+			        ),
+			        dim_date_fiscal_MonthKey[DateID] <= _currentPeriod
+			        && 
+			        dim_date_fiscal_MonthKey[DateID] >= _previousPeriod 
+			    )
+			
+			return 
+			_result
+			```
+		displayFolder: .TTM - Ended
+		lineageTag: db237948-e2ce-47e6-888d-df8a4e798674
+
+		formatStringDefinition = "#,0"
+
+	measure 'TTM_Passed_SLA_AllTickets_Ended (MostRecent)' = ```
+			
+			
+			VAR _CurrentDate = MAX( dim_date_fiscal_TTMKey[DateID] )
+			
+			VAR _currentPeriod =
+			    DATE ( YEAR ( _CurrentDate ), MONTH ( _CurrentDate ), DAY ( _CurrentDate ) )
+			
+			VAR _previousPeriod =
+			    DATE ( YEAR ( _CurrentDate ), MONTH ( _CurrentDate ) - 12, DAY ( _CurrentDate ) )
+			
+			VAR _result = 
+			    CALCULATE(
+			        DISTINCTCOUNT( ServiceNow_TaskSLA_Ended[task] ),
+			        FILTER(
+			            ServiceNow_TaskSLA_Ended,
+			            ServiceNow_TaskSLA_Ended[end_time] = 
+			                CALCULATE(
+			                    MAX(ServiceNow_TaskSLA_Ended[end_time]),
+			                    ALLEXCEPT(ServiceNow_TaskSLA_Ended, ServiceNow_TaskSLA_Ended[task])
+			                ) &&
+			            ServiceNow_TaskSLA_Ended[has_breached] == "False"
+			        ),
+			        dim_date_fiscal_MonthKey[DateID] <= _currentPeriod
+			        && 
+			        dim_date_fiscal_MonthKey[DateID] >= _previousPeriod 
+			    )
+			
+			return 
+			_result
+			```
+		displayFolder: .TTM - Ended
+		lineageTag: 60ea05c9-76b0-4688-97f9-8575b598caa1
+
+		formatStringDefinition = "#,0"
+
+	measure 'TTM_TotalTicketCount_AllTickets_Ended (MostRecent)' = ```
+			
+			
+			VAR _CurrentDate = MAX( dim_date_fiscal_TTMKey[DateID] )
+			
+			VAR _currentPeriod =
+			    DATE ( YEAR ( _CurrentDate ), MONTH ( _CurrentDate ), DAY ( _CurrentDate ) )
+			
+			VAR _previousPeriod =
+			    DATE ( YEAR ( _CurrentDate ), MONTH ( _CurrentDate ) - 12, DAY ( _CurrentDate ) )
+			
+			VAR _result = 
+			    CALCULATE(
+			        DISTINCTCOUNT( ServiceNow_TaskSLA_Ended[task] ),
+			        FILTER(
+			            ServiceNow_TaskSLA_Ended,
+			            ServiceNow_TaskSLA_Ended[end_time] = 
+			                CALCULATE(
+			                    MAX(ServiceNow_TaskSLA_Ended[end_time]),
+			                    ALLEXCEPT(ServiceNow_TaskSLA_Ended, ServiceNow_TaskSLA_Ended[task])
+			                ) 
+			        ),
+			        dim_date_fiscal_MonthKey[DateID] <= _currentPeriod
+			        && 
+			        dim_date_fiscal_MonthKey[DateID] >= _previousPeriod 
+			    )
+			
+			return 
+			_result
+			```
+		displayFolder: .TTM - Ended
+		lineageTag: e63d47b2-a663-495b-8a3c-92116215e1b9
+
+		formatStringDefinition = "#,0"
+
+	measure TTM_Goal = ```
+			
+			
+			VAR _CurrentDate = MAX( dim_date_fiscal_TTMKey[DateID] )
+			
+			VAR _previousPeriod =
+			    DATE ( YEAR ( _CurrentDate ), MONTH ( _CurrentDate ) - 12, DAY ( _CurrentDate ) ) 
+			
+			VAR _result = 
+			    CALCULATE( [Goal (AR_Incident Resolution)] ,
+			        dim_date_fiscal_MonthKey[DateID] <= _CurrentDate
+			        && 
+			        dim_date_fiscal_MonthKey[DateID] >= _previousPeriod 
+			    )
+			
+			return 
+			_result
+			```
+		displayFolder: .Goals
+		lineageTag: b06bc70f-5a92-4265-b2d7-c512275819ef
+
+		formatStringDefinition = "0%"
+
+	measure 'TTM_SLA%_AllTickets (Most Recent)' = ```
+			
+			
+			VAR _CurrentDate = MAX( dim_date_fiscal_TTMKey[DateID] )
+			
+			VAR _previousPeriod =
+			    DATE ( YEAR ( _CurrentDate ), MONTH ( _CurrentDate ) - 12, DAY ( _CurrentDate ) )
+			
+			VAR _result = 
+			    CALCULATE(
+			        ROUND( DIVIDE( [Passed_SLA_AllTickets_Ended (MostRecent)] , [TotalTicketCount_AllTickets_MostRecent_Ended] ) , 4 ) , 
+			        dim_date_fiscal_MonthKey[DateID] <= _CurrentDate
+			        && 
+			        dim_date_fiscal_MonthKey[DateID] >= _previousPeriod 
+			    )
+			
+			return 
+			_result
+			```
+		displayFolder: .TTM - Ended
+		lineageTag: 3f75d7e9-c9c6-491f-8e0f-43b65d4f7c6b
+
+		formatStringDefinition = "0.##%"
+
+	measure 'TTM_Passed_SLA_Incident-PS_Ended (MostRecent)' = ```
+			
+			
+			VAR _CurrentDate = MAX( dim_date_fiscal_TTMKey[DateID] )
+			
+			VAR _currentPeriod =
+			    DATE ( YEAR ( _CurrentDate ), MONTH ( _CurrentDate ), DAY ( _CurrentDate ) )
+			
+			VAR _previousPeriod =
+			    DATE ( YEAR ( _CurrentDate ), MONTH ( _CurrentDate ) - 12, DAY ( _CurrentDate ) )
+			
+			VAR _result = 
+			    CALCULATE(
+			        DISTINCTCOUNT( ServiceNow_TaskSLA_Ended[task] ),
+			        FILTER(
+			            ServiceNow_TaskSLA_Ended,
+			            ServiceNow_TaskSLA_Ended[end_time] = 
+			                CALCULATE(
+			                    MAX(ServiceNow_TaskSLA_Ended[end_time]),
+			                    ALLEXCEPT(ServiceNow_TaskSLA_Ended, ServiceNow_TaskSLA_Ended[task])
+			                ) &&
+			            ServiceNow_TaskSLA_Ended[has_breached] == "False"
+			            &&
+			            ServiceNow_TaskSLA_Ended[task_type] == "Incident - PS"
+			        ),
+			        dim_date_fiscal_MonthKey[DateID] <= _currentPeriod
+			        && 
+			        dim_date_fiscal_MonthKey[DateID] >= _previousPeriod 
+			    )
+			
+			return 
+			_result
+			```
+		displayFolder: .TTM - Ended
+		lineageTag: 2c0af79a-480c-4159-8d91-31f69bde27de
+
+		formatStringDefinition = "#,0"
+
+	measure 'TTM_Breached_SLA_Incident-PS_Ended (MostRecent)' = ```
+			
+			
+			VAR _CurrentDate = MAX( dim_date_fiscal_TTMKey[DateID] )
+			
+			VAR _currentPeriod =
+			    DATE ( YEAR ( _CurrentDate ), MONTH ( _CurrentDate ), DAY ( _CurrentDate ) )
+			
+			VAR _previousPeriod =
+			    DATE ( YEAR ( _CurrentDate ), MONTH ( _CurrentDate ) - 12, DAY ( _CurrentDate ) )
+			
+			VAR _result = 
+			    CALCULATE(
+			        DISTINCTCOUNT( ServiceNow_TaskSLA_Ended[task] ),
+			        FILTER(
+			            ServiceNow_TaskSLA_Ended,
+			            ServiceNow_TaskSLA_Ended[end_time] = 
+			                CALCULATE(
+			                    MAX(ServiceNow_TaskSLA_Ended[end_time]),
+			                    ALLEXCEPT(ServiceNow_TaskSLA_Ended, ServiceNow_TaskSLA_Ended[task])
+			                ) &&
+			            ServiceNow_TaskSLA_Ended[has_breached] == "True"
+			            &&
+			            ServiceNow_TaskSLA_Ended[task_type] == "Incident - PS"
+			        ),
+			        dim_date_fiscal_MonthKey[DateID] <= _currentPeriod
+			        && 
+			        dim_date_fiscal_MonthKey[DateID] >= _previousPeriod 
+			    )
+			
+			return 
+			_result
+			```
+		displayFolder: .TTM - Ended
+		lineageTag: 435381bc-fda0-44dc-8277-6e10c09ffe72
+
+		formatStringDefinition = "#,0"
+
+	measure 'TTM_TotalTicketCount_Incident-PS_Ended (MostRecent)' = ```
+			
+			
+			VAR _CurrentDate = MAX( dim_date_fiscal_TTMKey[DateID] )
+			
+			VAR _currentPeriod =
+			    DATE ( YEAR ( _CurrentDate ), MONTH ( _CurrentDate ), DAY ( _CurrentDate ) )
+			
+			VAR _previousPeriod =
+			    DATE ( YEAR ( _CurrentDate ), MONTH ( _CurrentDate ) - 12, DAY ( _CurrentDate ) )
+			
+			VAR _result = 
+			    CALCULATE(
+			        DISTINCTCOUNT( ServiceNow_TaskSLA_Ended[task] ),
+			        FILTER(
+			            ServiceNow_TaskSLA_Ended,
+			            ServiceNow_TaskSLA_Ended[end_time] = 
+			                CALCULATE(
+			                    MAX(ServiceNow_TaskSLA_Ended[end_time]),
+			                    ALLEXCEPT(ServiceNow_TaskSLA_Ended, ServiceNow_TaskSLA_Ended[task])
+			                ) 
+			                &&
+			                ServiceNow_TaskSLA_Ended[task_type] == "Incident - PS"
+			        ),
+			        dim_date_fiscal_MonthKey[DateID] <= _currentPeriod
+			        && 
+			        dim_date_fiscal_MonthKey[DateID] >= _previousPeriod 
+			    )
+			
+			return 
+			_result
+			```
+		displayFolder: .TTM - Ended
+		lineageTag: eed554c9-e2cf-4b74-879b-94eb88a8a8cf
+
+		formatStringDefinition = "#,0"
+
+	measure 'TTM_SLA%_Incidents-PS (Most Recent)' = ```
+			
+			
+			VAR _CurrentDate = MAX( dim_date_fiscal_TTMKey[DateID] )
+			
+			VAR _previousPeriod =
+			    DATE ( YEAR ( _CurrentDate ), MONTH ( _CurrentDate ) - 12, DAY ( _CurrentDate ) )
+			
+			VAR _result = 
+			    CALCULATE(
+			        ROUND( DIVIDE( [Passed_SLA_IncidentPS_Ended (MostRecent)] , [TotalTicketCount_IncidentPS_Ended (MostRecent)] ) , 4 ) , 
+			        dim_date_fiscal_MonthKey[DateID] <= _CurrentDate
+			        && 
+			        dim_date_fiscal_MonthKey[DateID] >= _previousPeriod 
+			    )
+			
+			return 
+			_result
+			```
+		displayFolder: .TTM - Ended
+		lineageTag: d879d5f5-e8dd-452a-a270-a9614624aa0a
+
+		formatStringDefinition = "0.00%"
+
+	measure 'TTM_Breached_SLA_CatalogTask_Ended (MostRecent)' = ```
+			
+			
+			VAR _CurrentDate = MAX( dim_date_fiscal_TTMKey[DateID] )
+			
+			VAR _currentPeriod =
+			    DATE ( YEAR ( _CurrentDate ), MONTH ( _CurrentDate ), DAY ( _CurrentDate ) )
+			
+			VAR _previousPeriod =
+			    DATE ( YEAR ( _CurrentDate ), MONTH ( _CurrentDate ) - 12, DAY ( _CurrentDate ) )
+			
+			VAR _result = 
+			    CALCULATE(
+			        DISTINCTCOUNT( ServiceNow_TaskSLA_Ended[task] ),
+			        FILTER(
+			            ServiceNow_TaskSLA_Ended,
+			            ServiceNow_TaskSLA_Ended[end_time] = 
+			                CALCULATE(
+			                    MAX(ServiceNow_TaskSLA_Ended[end_time]),
+			                    ALLEXCEPT(ServiceNow_TaskSLA_Ended, ServiceNow_TaskSLA_Ended[task])
+			                ) &&
+			            ServiceNow_TaskSLA_Ended[has_breached] == "True"
+			            &&
+			            ServiceNow_TaskSLA_Ended[task_type] == "Catalog Task"
+			        ),
+			        dim_date_fiscal_MonthKey[DateID] <= _currentPeriod
+			        && 
+			        dim_date_fiscal_MonthKey[DateID] >= _previousPeriod 
+			    )
+			
+			return 
+			_result
+			```
+		displayFolder: .TTM - Ended
+		lineageTag: 38fc94c6-30fe-4322-bb08-0fdb88f8c9e2
+
+		formatStringDefinition = "#,0"
+
+	measure 'TTM_Passed_SLA_CatalogTask_Ended (MostRecent)' = ```
+			
+			
+			VAR _CurrentDate = MAX( dim_date_fiscal_TTMKey[DateID] )
+			
+			VAR _currentPeriod =
+			    DATE ( YEAR ( _CurrentDate ), MONTH ( _CurrentDate ), DAY ( _CurrentDate ) )
+			
+			VAR _previousPeriod =
+			    DATE ( YEAR ( _CurrentDate ), MONTH ( _CurrentDate ) - 12, DAY ( _CurrentDate ) )
+			
+			VAR _result = 
+			    CALCULATE(
+			        DISTINCTCOUNT( ServiceNow_TaskSLA_Ended[task] ),
+			        FILTER(
+			            ServiceNow_TaskSLA_Ended,
+			            ServiceNow_TaskSLA_Ended[end_time] = 
+			                CALCULATE(
+			                    MAX(ServiceNow_TaskSLA_Ended[end_time]),
+			                    ALLEXCEPT(ServiceNow_TaskSLA_Ended, ServiceNow_TaskSLA_Ended[task])
+			                ) &&
+			            ServiceNow_TaskSLA_Ended[has_breached] == "False"
+			            &&
+			            ServiceNow_TaskSLA_Ended[task_type] == "Catalog Task"
+			        ),
+			        dim_date_fiscal_MonthKey[DateID] <= _currentPeriod
+			        && 
+			        dim_date_fiscal_MonthKey[DateID] >= _previousPeriod 
+			    )
+			
+			return 
+			_result
+			```
+		displayFolder: .TTM - Ended
+		lineageTag: 97a2171a-f547-453e-844f-0de71423ef5a
+
+		formatStringDefinition = "#,0"
+
+	measure 'TTM_TotalTicketCount_CatalogTask_Ended (MostRecent)' = ```
+			
+			
+			VAR _CurrentDate = MAX( dim_date_fiscal_TTMKey[DateID] )
+			
+			VAR _currentPeriod =
+			    DATE ( YEAR ( _CurrentDate ), MONTH ( _CurrentDate ), DAY ( _CurrentDate ) )
+			
+			VAR _previousPeriod =
+			    DATE ( YEAR ( _CurrentDate ), MONTH ( _CurrentDate ) - 12, DAY ( _CurrentDate ) )
+			
+			VAR _result = 
+			    CALCULATE(
+			        DISTINCTCOUNT( ServiceNow_TaskSLA_Ended[task] ),
+			        FILTER(
+			            ServiceNow_TaskSLA_Ended,
+			            ServiceNow_TaskSLA_Ended[end_time] = 
+			                CALCULATE(
+			                    MAX(ServiceNow_TaskSLA_Ended[end_time]),
+			                    ALLEXCEPT(ServiceNow_TaskSLA_Ended, ServiceNow_TaskSLA_Ended[task])
+			                ) 
+			                &&
+			                ServiceNow_TaskSLA_Ended[task_type] == "Catalog Task"
+			        ),
+			        dim_date_fiscal_MonthKey[DateID] <= _currentPeriod
+			        && 
+			        dim_date_fiscal_MonthKey[DateID] >= _previousPeriod 
+			    )
+			
+			return 
+			_result
+			```
+		displayFolder: .TTM - Ended
+		lineageTag: 181d5bc9-c9f0-442f-881c-6371ae32045a
+
+		formatStringDefinition = "#,0"
+
+	measure 'TTM_SLA%_CatalogTask (Most Recent)' = ```
+			
+			
+			VAR _CurrentDate = MAX( dim_date_fiscal_TTMKey[DateID] )
+			
+			VAR _previousPeriod =
+			    DATE ( YEAR ( _CurrentDate ), MONTH ( _CurrentDate ) - 12, DAY ( _CurrentDate ) )
+			
+			VAR _result = 
+			    CALCULATE(
+			        ROUNDDOWN( DIVIDE( [Passed_SLA_CatalogTask_Ended (MostRecent)] , [TotalTicketCount_CatalogTask_Ended (MostRecent)] ) , 4 ) , 
+			        dim_date_fiscal_MonthKey[DateID] <= _CurrentDate
+			        && 
+			        dim_date_fiscal_MonthKey[DateID] >= _previousPeriod 
+			    )
+			
+			return 
+			_result
+			```
+		displayFolder: .TTM - Ended
+		lineageTag: eb4de91c-1b0d-47e6-916c-e5040487ed62
+
+		formatStringDefinition = "0.00%"
+
+	measure 'SLA%_Comparison_withCombinedTotals_Ended (Previous 3 Months)' = ```
+			
+			
+			VAR _CurrentDate = SELECTEDVALUE(dim_date_fiscal_TTMKey[DateID])
+			VAR _CurrentMonth = DATE(YEAR(_CurrentDate), MONTH(_CurrentDate), DAY(_CurrentDate))
+			VAR _CurrentMonthMinus1 = DATE(YEAR(_CurrentDate), MONTH(_CurrentDate) - 1, DAY(_CurrentDate))
+			VAR _CurrentMonthMinus3 = DATE(YEAR(_CurrentDate), MONTH(_CurrentDate) - 3, DAY(_CurrentDate))
+			
+			VAR _total = 
+			CALCULATE (
+			        [SLA%_AllTickets_Ended (MostRecent)],
+			        ALL( CombinedTotals1[Sub-Function] ) , 
+			        dim_date_fiscal_MonthKey[DateID] <= _CurrentMonth
+			        && dim_date_fiscal_MonthKey[DateID] >= _CurrentMonthMinus3 )
+			
+			RETURN
+			SWITCH(
+			    TRUE() , 
+			    SELECTEDVALUE( CombinedTotals1[Sub-Function] ) = "Total Combined" , _total , [SLA%_Comparison_Ended (Previous 3 Months)] )
+			```
+		displayFolder: .TaskSLA_Ended
+		lineageTag: 126ca8fe-5e06-4c61-bb44-697a7316f2c5
+
+		formatStringDefinition = "0.00%"
+
+	measure 'SLA%_Comparison_withCombinedTotals_Ended (Prior 13 Months)' = ```
+			
+			
+			VAR _CurrentDate = SELECTEDVALUE(dim_date_fiscal_TTMKey[DateID])
+			VAR _CurrentMonth = DATE(YEAR(_CurrentDate), MONTH(_CurrentDate), DAY(_CurrentDate))
+			VAR _CurrentMonthMinus4 = DATE(YEAR(_CurrentDate), MONTH(_CurrentDate) - 4, DAY(_CurrentDate))
+			VAR _CurrentMonthMinus13 = DATE(YEAR(_CurrentDate), MONTH(_CurrentDate) - 13, DAY(_CurrentDate))
+			VAR _CurrentMonthMinus16 = DATE(YEAR(_CurrentDate), MONTH(_CurrentDate) - 16, DAY(_CurrentDate))
+			
+			VAR _total = 
+			CALCULATE (
+			        [SLA%_AllTickets_Ended (MostRecent)],
+			        ALL( CombinedTotals1[Sub-Function] ) , 
+			        dim_date_fiscal_MonthKey[DateID] <= _CurrentMonth
+			        && dim_date_fiscal_MonthKey[DateID] >= _CurrentMonthMinus13 )
+			
+			RETURN
+			SWITCH(
+			    TRUE() , 
+			    SELECTEDVALUE( CombinedTotals1[Sub-Function] ) = "Total Combined" , _total , [SLA%_Comparison_Ended (Prior 13 Months)] )
+			```
+		displayFolder: .TaskSLA_Ended
+		lineageTag: fd5ee224-0ddf-4759-8b96-b8dc368c9d8f
+
+		formatStringDefinition = "0.00%"
+
+	measure 'SLA%_Comparison_withCombinedTotals_Ended (Current Month)' = ```
+			
+			
+			VAR _CurrentDate = MAX( dim_date_fiscal_TTMKey[DateID] )
+			
+			VAR _total = 
+			CALCULATE (
+			        [SLA%_AllTickets_Ended (MostRecent)],
+			        ALL( CombinedTotals1[Sub-Function] ) , 
+			        dim_date_fiscal_MonthKey[DateID] == _CurrentDate )
+			
+			RETURN
+			SWITCH(
+			    TRUE() , 
+			    SELECTEDVALUE( CombinedTotals1[Sub-Function] ) = "Total Combined" , _total , [SLA%_Comparison_Ended (Current Month)] )
+			```
+		displayFolder: .TaskSLA_Ended
+		lineageTag: afc7d997-6924-4c70-8112-4063a6eb1c98
+
+		formatStringDefinition = "0.00%"
+
+	measure 'Total Days in Period' =
+			
+			COUNTROWS(
+			    FILTER(
+			        dim_date_fiscal_DateKey,
+			        dim_date_fiscal_DateKey[DateID] >= STARTOFMONTH(dim_date_fiscal_DateKey[DateID]) &&
+			        dim_date_fiscal_DateKey[DateID] <= ENDOFMONTH(dim_date_fiscal_DateKey[DateID])
+			    )
+			)
+		formatString: 0
+		displayFolder: .Base Measures
+		lineageTag: 1d1bbd04-8bec-48c3-8a64-7f4e63173422
+
+	measure 'Working Days in Period' =
+			
+			CALCULATE(
+			    COUNTROWS(dim_date_fiscal_DateKey),
+			    FILTER(
+			        dim_date_fiscal_DateKey,
+			        dim_date_fiscal_DateKey[IsWeekend] = FALSE() &&
+			        NOT dim_date_fiscal_DateKey[DateID] IN VALUES(dim_date_Holiday[Holiday-Date])
+			    )
+			)
+		formatString: 0
+		displayFolder: .Base Measures
+		lineageTag: 0adce875-c57e-4cbf-872c-d7307609671f
+
+	measure DailyAvg_TotalTickets_WorkingDays_Ended =
+			
+			DIVIDE(
+			    [TotalTicketCount_AllTickets_MostRecent_Ended],
+			    [Working Days in Period]
+			)
+		displayFolder: .TaskSLA_Ended
+		lineageTag: f31bf347-3ef0-454d-9087-f311b0bd12ac
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure Distinct_EndDates_Ended = DISTINCTCOUNT(ServiceNow_TaskSLA_Ended[end_date])
+		formatString: 0
+		displayFolder: .TaskSLA_Ended
+		lineageTag: 4fd27fdc-37a1-4f2d-bad4-3c1ab7d2b870
+
+	measure DailyAvg_TotalTickets_DistinctDays_Ended =
+			
+			DIVIDE(
+			    [TotalTicketCount_AllTickets_MostRecent_Ended] ,
+			    [Distinct_EndDates_Ended]
+			)
+		displayFolder: .TaskSLA_Ended
+		lineageTag: 4192a1b6-13bb-4d5b-8dd5-791e892b45e9
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure IncomingTickets_DailyAvg_Started =
+			
+			DIVIDE(
+			    [TotalTicketCount_AllTickets_Started (MostRecent)],
+			    [Working Days in Period]
+			)
+		displayFolder: .TaskSLA_Started
+		lineageTag: 6cded639-499f-410c-9030-52b5380f7b0f
+
+		formatStringDefinition = "0.0"
+
+	measure AverageIncomingTicketsPerDay_DatesTicketsStarted_Started =
+			
+			DIVIDE(
+			    [TotalTicketCount_AllTickets_Started (MostRecent)] ,
+			    [DistinctDatesofTicketsStarted_Started]
+			)
+		displayFolder: .TaskSLA_Started
+		lineageTag: 7360d13d-eb31-487e-a622-e9639a54e823
+
+		formatStringDefinition = "0.0"
+
+	measure DistinctDatesofTicketsStarted_Started = DISTINCTCOUNT(ServiceNow_TaskSLA_Started[start_date] )
+		formatString: 0
+		displayFolder: .TaskSLA_Started
+		lineageTag: d4ee021f-4c22-4eed-bb1a-a1747766d5ca
+
+	measure 'TTM_TotalTicketCount_AllTickets_Started (MostRecent)' = ```
+			
+			
+			VAR _CurrentDate = MAX( dim_date_fiscal_TTMKey[DateID] )
+			
+			VAR _currentPeriod =
+			    DATE ( YEAR ( _CurrentDate ), MONTH ( _CurrentDate ), DAY ( _CurrentDate ) )
+			
+			VAR _previousPeriod =
+			    DATE ( YEAR ( _CurrentDate ), MONTH ( _CurrentDate ) - 12, DAY ( _CurrentDate ) )
+			
+			VAR _result = 
+			    CALCULATE(
+			       [TotalTicketCount_AllTickets_Started (MostRecent)] ,
+			        dim_date_fiscal_MonthKey[DateID] <= _currentPeriod
+			        && 
+			        dim_date_fiscal_MonthKey[DateID] >= _previousPeriod 
+			    )
+			
+			return 
+			_result
+			```
+		displayFolder: .TTM - Started
+		lineageTag: cf53eddd-7b86-4859-bf90-c8a8e28b14b9
+
+		formatStringDefinition = "#,0"
+
+	measure TTM_IncomingDailyAvg_AllTickets_Started = ```
+			
+			
+			VAR _CurrentDate = MAX( dim_date_fiscal_TTMKey[DateID] )
+			
+			VAR _currentPeriod =
+			    DATE ( YEAR ( _CurrentDate ), MONTH ( _CurrentDate ), DAY ( _CurrentDate ) )
+			
+			VAR _previousPeriod =
+			    DATE ( YEAR ( _CurrentDate ), MONTH ( _CurrentDate ) - 12, DAY ( _CurrentDate ) )
+			
+			VAR _result = 
+			    CALCULATE(
+			        DIVIDE( [TotalTicketCount_AllTickets_Started (MostRecent)] , [Working Days in Period] ) ,
+			
+			        dim_date_fiscal_MonthKey[DateID] <= _currentPeriod
+			        && 
+			        dim_date_fiscal_MonthKey[DateID] >= _previousPeriod 
+			    )
+			
+			return 
+			_result
+			```
+		displayFolder: .TTM - Started
+		lineageTag: d990210f-3247-4509-b0e7-b89ddc25b891
+
+		formatStringDefinition = "0.0"
+
+	measure TTM_CurrentYear_TicketTotal_Started = ```
+			
+			
+			VAR _CurrentDate = MAX(dim_date_fiscal_MonthKey[DateID])
+			VAR _CurrentDate1 = MAX(dim_date_fiscal_TTMKey[DateID])
+			
+			VAR _currentPeriod =
+			    DATE(YEAR(_CurrentDate), MONTH(_CurrentDate) , DAY(_CurrentDate))
+			
+			VAR _previousPeriod =
+			    DATE(YEAR(_CurrentDate), MONTH(_CurrentDate) - 12 , DAY(_CurrentDate))
+			
+			/* VAR _result =
+			    CALCULATE(
+			        DISTINCTCOUNT( ServiceNow_TaskSLA_Started[task] ) ,
+			        FILTER( 
+			            ALL( dim_date_fiscal_MonthKey ) , 
+			        dim_date_fiscal_MonthKey[DateID] <= _currentPeriod &&
+			        dim_date_fiscal_MonthKey[DateID] >= _previousPeriod
+			    )
+			)
+			*/ 
+			
+			VAR _result =
+			    CALCULATE(
+			        [TotalTicketCount_AllTickets_Started (MostRecent)] ,
+			        FILTER( 
+			            ALL( dim_date_fiscal_MonthKey ) , 
+			        dim_date_fiscal_MonthKey[DateID] <= _currentPeriod &&
+			        dim_date_fiscal_MonthKey[DateID] >= _previousPeriod
+			    )
+			)
+			
+			RETURN
+			_result
+			```
+		displayFolder: .TTM - Started
+		lineageTag: 760799ba-c99d-4620-8d72-846d4fab6191
+
+		formatStringDefinition = "#,0"
+
+	measure TTM_PriorYear_TicketTotal_Started = ```
+			
+			
+			VAR _CurrentDate1 = MAX(dim_date_fiscal_MonthKey[DateID])
+			VAR _CurrentDate = MAX(dim_date_fiscal_TTMKey[DateID])
+			
+			VAR _currentPeriod =
+			    DATE(YEAR(_CurrentDate), MONTH(_CurrentDate) - 12 , DAY(_CurrentDate))
+			
+			VAR _previousPeriod =
+			    DATE(YEAR(_CurrentDate), MONTH(_CurrentDate) - 24, DAY(_CurrentDate))
+			
+			/*
+			VAR _result =
+			    CALCULATE(
+			        DISTINCTCOUNT( ServiceNow_TaskSLA_Started[task] ) ,
+			        FILTER( 
+			            ALL( dim_date_fiscal_MonthKey ) , 
+			        dim_date_fiscal_MonthKey[DateID] <= _currentPeriod &&
+			        dim_date_fiscal_MonthKey[DateID] >= _previousPeriod
+			    )
+			)
+			*/ 
+			
+			VAR _result =
+			    CALCULATE(
+			        [TotalTicketCount_AllTickets_Started (MostRecent)] ,
+			        FILTER( 
+			            ALL( dim_date_fiscal_MonthKey ) , 
+			        dim_date_fiscal_MonthKey[DateID] <= _currentPeriod &&
+			        dim_date_fiscal_MonthKey[DateID] >= _previousPeriod
+			    )
+			)
+			
+			RETURN
+			_result
+			```
+		displayFolder: .TTM - Started
+		lineageTag: 638e2507-c9a0-45bb-a1dc-e9532efc129a
+
+		formatStringDefinition = "#,0"
+
+	measure YoY_Started_%Change_Started =
+			
+			DIVIDE( [TTM_CurrentYear_TicketTotal_Started] , [TTM_PriorYear_TicketTotal_Started] ) - 1
+		displayFolder: .TTM - Started
+		lineageTag: 0f64262a-91fd-4235-8af6-2c8dc481b410
+
+		formatStringDefinition = "+0.0%; -0.0%"
+
+	measure 'SLA - Font (YoY_Started_Period)' = ```
+			
+			SWITCH( 
+			    TRUE(), 
+			        [YoY_Started_Period_#Change] >= 0 , "#009900",
+			        [YoY_Started_Period_#Change] < 0 , "#CC0000" ) 
+			```
+		displayFolder: .Formatting
+		lineageTag: b24ccffe-64bc-4da9-bce8-8154056ae5a6
+
+	measure TTM_BreachedDailyAvg_AllTickets_Ended = ```
+			
+			
+			VAR _CurrentDate = MAX( dim_date_fiscal_TTMKey[DateID] )
+			
+			VAR _currentPeriod =
+			    DATE ( YEAR ( _CurrentDate ), MONTH ( _CurrentDate ), DAY ( _CurrentDate ) )
+			
+			VAR _previousPeriod =
+			    DATE ( YEAR ( _CurrentDate ), MONTH ( _CurrentDate ) - 12, DAY ( _CurrentDate ) )
+			
+			VAR _result = 
+			    CALCULATE(
+			        DIVIDE( [Breached_SLA_AllTickets_Ended (MostRecent)] , [Working Days in Period] ) ,
+			
+			        dim_date_fiscal_MonthKey[DateID] <= _currentPeriod
+			        && 
+			        dim_date_fiscal_MonthKey[DateID] >= _previousPeriod 
+			    )
+			
+			return 
+			_result
+			```
+		displayFolder: .TTM - Ended
+		lineageTag: 7fbb9241-d10f-4759-9322-03d4b69ba0db
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure DailyAvg_BreachedTickets_DistinctDays_Ended =
+			
+			DIVIDE(
+			    [Breached_SLA_AllTickets_Ended (MostRecent)],
+			    [Distinct_EndDates_Ended]
+			)
+		displayFolder: .TaskSLA_Ended
+		lineageTag: 10ebb411-0cd7-415f-b576-3691aa6ee6a2
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure DailyAvg_BreachedTickets_WorkingDays_Ended =
+			
+			DIVIDE(
+			    [Breached_SLA_AllTickets_Ended (MostRecent)],
+			    [Working Days in Period]
+			)
+		displayFolder: .TaskSLA_Ended
+		lineageTag: 19d2d2cc-3009-4b36-9d09-f52ed8a7e7b3
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'TTM_Breached_PriorYear_SLA_AllTickets_Ended (MostRecent)' = ```
+			
+			
+			VAR _CurrentDate = MAX( dim_date_fiscal_TTMKey[DateID] )
+			
+			VAR _currentPeriod =
+			    DATE ( YEAR ( _CurrentDate ), MONTH ( _CurrentDate ) - 13 , DAY ( _CurrentDate ) )
+			
+			VAR _previousPeriod =
+			    DATE ( YEAR ( _CurrentDate ), MONTH ( _CurrentDate ) - 24 , DAY ( _CurrentDate ) )
+			
+			VAR _result = 
+			    CALCULATE(
+			        DISTINCTCOUNT( ServiceNow_TaskSLA_Ended[task] ),
+			        FILTER(
+			            ServiceNow_TaskSLA_Ended ,
+			            ServiceNow_TaskSLA_Ended[end_time] = 
+			                CALCULATE(
+			                    MAX( ServiceNow_TaskSLA_Ended[end_time] ) ,
+			                    ALLEXCEPT( ServiceNow_TaskSLA_Ended, ServiceNow_TaskSLA_Ended[task] )
+			                ) &&
+			            ServiceNow_TaskSLA_Ended[has_breached] == "True"
+			        ) ,
+			        dim_date_fiscal_MonthKey[DateID] <= _currentPeriod
+			        && 
+			        dim_date_fiscal_MonthKey[DateID] >= _previousPeriod 
+			    )
+			
+			return 
+			_result
+			```
+		displayFolder: .TTM - Ended
+		lineageTag: 614d43a6-20d8-4023-98d7-6dcd370b9878
+
+		formatStringDefinition = "#,0"
+
+	measure YoY_Breached_%Change_Ended =
+			
+			DIVIDE( [TTM_Breached_SLA_AllTickets_Ended (MostRecent)] , [TTM_Breached_PriorYear_SLA_AllTickets_Ended (MostRecent)] ) - 1
+		displayFolder: .TaskSLA_Ended
+		lineageTag: a34f2d82-4226-470d-bfd7-59915accd6ad
+
+		formatStringDefinition = "+0.0%;-0.0%"
+
+	measure YoY_Breached_#Change_Ended = [CurrentMonth_Breached_AllTickets_Ended (MostRecent)] - [PriorYearMonth_Breached_AllTickets_Ended (MostRecent)]
+		displayFolder: .TaskSLA_Ended
+		lineageTag: 5b3551a4-ac53-4ffb-8b1a-f253a6d6947c
+
+		formatStringDefinition = "+#,0;-#,0"
+
+	measure 'TTM_Breached_PriorMonth_SLA_AllTickets_Ended (MostRecent)' = ```
+			
+			
+			VAR _CurrentDate = MAX( dim_date_fiscal_TTMKey[DateID] )
+			
+			VAR _currentPeriod =
+			    DATE ( YEAR ( _CurrentDate ), MONTH ( _CurrentDate ) - 1, DAY ( _CurrentDate ) )
+			
+			VAR _previousPeriod =
+			    DATE ( YEAR ( _CurrentDate ), MONTH ( _CurrentDate ) - 2 , DAY ( _CurrentDate ) )
+			
+			VAR _result = 
+			    CALCULATE(
+			        DISTINCTCOUNT( ServiceNow_TaskSLA_Ended[task] ),
+			        FILTER(
+			            ServiceNow_TaskSLA_Ended,
+			            ServiceNow_TaskSLA_Ended[end_time] = 
+			                CALCULATE(
+			                    MAX(ServiceNow_TaskSLA_Ended[end_time]),
+			                    ALLEXCEPT(ServiceNow_TaskSLA_Ended, ServiceNow_TaskSLA_Ended[task])
+			                ) &&
+			            ServiceNow_TaskSLA_Ended[has_breached] == "True"
+			        ),
+			        dim_date_fiscal_MonthKey[DateID] >= _currentPeriod
+			        && 
+			        dim_date_fiscal_MonthKey[DateID] <= _previousPeriod 
+			    )
+			
+			return 
+			_result
+			```
+		formatString: 0
+		displayFolder: .TTM - Ended
+		lineageTag: 4417976e-3a6a-46f3-8260-659a42b0533e
+
+	measure YoY_Started_#Change_Started = ```
+			[TTM_CurrentYear_TicketTotal_Started] - [TTM_PriorYear_TicketTotal_Started] 
+			```
+		displayFolder: .TTM - Started
+		lineageTag: bb80c1cc-0833-4dde-aa49-ce58633c5163
+
+		formatStringDefinition = "+#,0;-#,0"
+
+	measure 'TTM_PriorYearMonth_TotalTicketCount_AllTickets_Started (MostRecent)' = ```
+			
+			
+			VAR _CurrentDate = MAX(dim_date_fiscal_MonthKey[DateID])
+			VAR _CurrentDate1 = MAX(dim_date_fiscal_TTMKey[DateID])
+			
+			VAR _currentPeriod =
+			    DATE(YEAR(_CurrentDate), MONTH(_CurrentDate) , DAY(_CurrentDate))
+			
+			VAR _previousPeriod =
+			    DATE(YEAR(_CurrentDate), MONTH(_CurrentDate) - 12 , DAY(_CurrentDate))
+			
+			/*
+			VAR _result =
+			    CALCULATE(
+			        DISTINCTCOUNT( ServiceNow_TaskSLA_Started[task] ) ,
+			        FILTER( 
+			            ALL( dim_date_fiscal_MonthKey ) , 
+			        dim_date_fiscal_MonthKey[DateID] = _previousPeriod
+			    )
+			)
+			*/ 
+			
+			VAR _result =
+			    CALCULATE(
+			        [TotalTicketCount_AllTickets_Started (MostRecent)] ,
+			        FILTER( 
+			            ALL( dim_date_fiscal_MonthKey ) , 
+			        dim_date_fiscal_MonthKey[DateID] = _previousPeriod
+			    )
+			)
+			
+			RETURN
+			_result
+			```
+		displayFolder: .TTM - Started
+		lineageTag: bf19ccfc-15cf-493d-b3e2-448d9ef79166
+
+		formatStringDefinition = "#,0"
+
+	measure 'TTM_PriorMonth_TotalTicketCount_AllTickets_Started (MostRecent)' = ```
+			
+			
+			VAR _CurrentDate = MAX(dim_date_fiscal_MonthKey[DateID])
+			VAR _CurrentDate1 = MAX(dim_date_fiscal_TTMKey[DateID])
+			
+			VAR _currentPeriod =
+			    DATE(YEAR(_CurrentDate), MONTH(_CurrentDate) , DAY(_CurrentDate))
+			
+			VAR _previousPeriod =
+			    DATE(YEAR(_CurrentDate), MONTH(_CurrentDate) - 1 , DAY(_CurrentDate))
+			
+			/*
+			VAR _result =
+			    CALCULATE(
+			        [TotalTicketCount_AllTickets_Started (MostRecent)] ,
+			        FILTER( 
+			            ALL( dim_date_fiscal_MonthKey ) , 
+			        dim_date_fiscal_MonthKey[DateID] = _previousPeriod
+			    )
+			)
+			*/
+			
+			VAR _result =
+			    CALCULATE(
+			        [TotalTicketCount_AllTickets_Started (MostRecent)] ,
+			        FILTER( 
+			            ALL( dim_date_fiscal_MonthKey ) , 
+			        dim_date_fiscal_MonthKey[DateID] = _previousPeriod
+			    )
+			)
+			
+			RETURN
+			_result
+			```
+		displayFolder: .TTM - Started
+		lineageTag: f79c8dc7-8262-43d2-a8d4-91d9581449ce
+
+		formatStringDefinition = "#,0"
+
+	measure MoM_Started_#Change_Started = [TTM_CurrentMonth_TotalTicketCount_AllTickets_Started (MostRecent)] - [TTM_PriorMonth_TotalTicketCount_AllTickets_Started (MostRecent)]
+		displayFolder: .TTM - Started
+		lineageTag: 65f659c1-f6b3-42d6-83ec-eb09e4a9497e
+
+		formatStringDefinition = "#,0"
+
+	measure 'TTM_CurrentMonth_TotalTicketCount_AllTickets_Started (MostRecent)' = ```
+			
+			
+			VAR _CurrentDate = MAX(dim_date_fiscal_MonthKey[DateID])
+			VAR _CurrentDate1 = MAX(dim_date_fiscal_TTMKey[DateID])
+			
+			VAR _currentPeriod =
+			    DATE(YEAR(_CurrentDate), MONTH(_CurrentDate) , DAY(_CurrentDate))
+			
+			VAR _previousPeriod =
+			    DATE(YEAR(_CurrentDate), MONTH(_CurrentDate) - 1 , DAY(_CurrentDate))
+			
+			/*
+			VAR _result =
+			    CALCULATE(
+			        DISTINCTCOUNT( ServiceNow_TaskSLA_Started[task] ) ,
+			        FILTER( 
+			            ALL( dim_date_fiscal_MonthKey ) , 
+			        dim_date_fiscal_MonthKey[DateID] = _currentPeriod
+			    )
+			)
+			*/
+			
+			VAR _result =
+			    CALCULATE(
+			        [TotalTicketCount_AllTickets_Started (MostRecent)] ,
+			        FILTER( 
+			            ALL( dim_date_fiscal_MonthKey ) , 
+			        dim_date_fiscal_MonthKey[DateID] = _currentPeriod
+			    )
+			)
+			
+			RETURN
+			_result
+			```
+		displayFolder: .TTM - Started
+		lineageTag: 0c38c375-a400-4e59-8beb-dfcdf620d91f
+
+		formatStringDefinition = "#,0"
+
+	measure 'CurrentMonth_TotalTicketCount_AllTickets_Ended (MostRecent)' = ```
+			
+			
+			VAR _CurrentDate = MAX(dim_date_fiscal_MonthKey[DateID])
+			VAR _CurrentDate1 = MAX(dim_date_fiscal_TTMKey[DateID])
+			
+			VAR _currentPeriod =
+			    DATE(YEAR(_CurrentDate), MONTH(_CurrentDate) , DAY(_CurrentDate))
+			
+			VAR _previousPeriod =
+			    DATE(YEAR(_CurrentDate), MONTH(_CurrentDate) - 1 , DAY(_CurrentDate))
+			
+			VAR _result =
+			    CALCULATE(
+			        [TotalTicketCount_AllTickets_MostRecent_Ended],
+			        FILTER( 
+			            ALL( dim_date_fiscal_MonthKey ) , 
+			        dim_date_fiscal_MonthKey[DateID] = _currentPeriod
+			    )
+			)
+			
+			RETURN
+			_result
+			```
+		displayFolder: .TaskSLA_Ended
+		lineageTag: 68512d9f-d202-472f-907f-69fa6a2814a0
+
+		formatStringDefinition = "#,0"
+
+	measure 'PriorYearMonth_TotalTicketCount_AllTickets_Ended (MostRecent)' = ```
+			
+			
+			VAR _CurrentDate = MAX(dim_date_fiscal_MonthKey[DateID])
+			VAR _CurrentDate1 = MAX(dim_date_fiscal_TTMKey[DateID])
+			
+			VAR _currentPeriod =
+			    DATE(YEAR(_CurrentDate), MONTH(_CurrentDate) , DAY(_CurrentDate))
+			
+			VAR _previousPeriod =
+			    DATE(YEAR(_CurrentDate), MONTH(_CurrentDate) - 12 , DAY(_CurrentDate))
+			
+			VAR _result =
+			    CALCULATE(
+			        [TotalTicketCount_AllTickets_MostRecent_Ended] ,
+			        FILTER( 
+			            ALL( dim_date_fiscal_MonthKey ) , 
+			        dim_date_fiscal_MonthKey[DateID] = _previousPeriod
+			    )
+			)
+			
+			RETURN
+			_result
+			```
+		displayFolder: .TaskSLA_Ended
+		lineageTag: 4149346a-8d4c-437a-be44-5ab6bcf0db83
+
+		formatStringDefinition = "#,0"
+
+	measure YoY_AllTickets_#Change_Ended = [CurrentMonth_TotalTicketCount_AllTickets_Ended (MostRecent)] - [PriorYearMonth_TotalTicketCount_AllTickets_Ended (MostRecent)]
+		displayFolder: .TaskSLA_Ended
+		lineageTag: 87138da3-c29a-45b5-a29a-5b3a1a44267d
+
+		formatStringDefinition = "+#,0;-#,0"
+
+	measure YoY_AllTickets_%Change_Ended =
+			
+			DIVIDE( ( [CurrentMonth_TotalTicketCount_AllTickets_Ended (MostRecent)] - [PriorYearMonth_TotalTicketCount_AllTickets_Ended (MostRecent)] ) , [PriorYearMonth_TotalTicketCount_AllTickets_Ended (MostRecent)] )
+		displayFolder: .TaskSLA_Ended
+		lineageTag: 1d6125c1-e07d-4850-8e43-e0f1c0eb370c
+
+		formatStringDefinition = "+0.0%;-0.0%"
+
+	measure 'SLA - Font (YoY_TotalTickets)' = ```
+			
+			SWITCH( 
+			    TRUE(), 
+			        [YoY_TotalTickets_Period_#Change] >= 0 , "#009900",
+			        [YoY_TotalTickets_Period_#Change] < 0 , "#CC0000" )
+			```
+		displayFolder: .Formatting
+		lineageTag: da5dbf39-1eff-47ac-9c8f-536a2c25778c
+
+	measure 'CurrentMonth_TotalTicketCount_CatalogTask_Ended (MostRecent)' = ```
+			
+			
+			VAR _CurrentDate = MAX(dim_date_fiscal_MonthKey[DateID])
+			VAR _CurrentDate1 = MAX(dim_date_fiscal_TTMKey[DateID])
+			
+			VAR _currentPeriod =
+			    DATE(YEAR(_CurrentDate), MONTH(_CurrentDate) , DAY(_CurrentDate))
+			
+			VAR _previousPeriod =
+			    DATE(YEAR(_CurrentDate), MONTH(_CurrentDate) - 1 , DAY(_CurrentDate))
+			
+			/*
+			VAR _result =
+			    CALCULATE(
+			        DISTINCTCOUNT( ServiceNow_TaskSLA_Started[task] ) ,
+			        FILTER( 
+			            ALL( dim_date_fiscal_MonthKey ) , 
+			        dim_date_fiscal_MonthKey[DateID] = _currentPeriod
+			    )
+			)
+			*/
+			
+			VAR _result =
+			    CALCULATE(
+			        [TotalTicketCount_CatalogTask_Ended (MostRecent)] ,
+			        FILTER( 
+			            ALL( dim_date_fiscal_MonthKey ) , 
+			        dim_date_fiscal_MonthKey[DateID] = _currentPeriod
+			    )
+			)
+			
+			RETURN
+			_result
+			```
+		displayFolder: .TaskSLA_Ended
+		lineageTag: 224b2045-e2fd-45e9-b193-2174aa8062fd
+
+		formatStringDefinition = "#,0"
+
+	measure 'PriorYearMonth_TotalTicketCount_CatalogTask_Ended (MostRecent)' = ```
+			
+			
+			VAR _CurrentDate = MAX(dim_date_fiscal_MonthKey[DateID])
+			VAR _CurrentDate1 = MAX(dim_date_fiscal_TTMKey[DateID])
+			
+			VAR _currentPeriod =
+			    DATE(YEAR(_CurrentDate), MONTH(_CurrentDate) , DAY(_CurrentDate))
+			
+			VAR _previousPeriod =
+			    DATE(YEAR(_CurrentDate), MONTH(_CurrentDate) - 12 , DAY(_CurrentDate))
+			
+			/*
+			VAR _result =
+			    CALCULATE(
+			        DISTINCTCOUNT( ServiceNow_TaskSLA_Started[task] ) ,
+			        FILTER( 
+			            ALL( dim_date_fiscal_MonthKey ) , 
+			        dim_date_fiscal_MonthKey[DateID] = _previousPeriod
+			    )
+			)
+			*/ 
+			
+			VAR _result =
+			    CALCULATE(
+			        [TotalTicketCount_CatalogTask_Ended (MostRecent)] ,
+			        FILTER( 
+			            ALL( dim_date_fiscal_MonthKey ) , 
+			        dim_date_fiscal_MonthKey[DateID] = _previousPeriod
+			    )
+			)
+			
+			RETURN
+			_result
+			```
+		displayFolder: .TaskSLA_Ended
+		lineageTag: 1cb9f1e0-4b76-49c4-9950-fc00c3f1d4b8
+
+		formatStringDefinition = "#,0"
+
+	measure YoY_CatalogTask_#Change_Ended = [CurrentMonth_TotalTicketCount_CatalogTask_Ended (MostRecent)] - [PriorYearMonth_TotalTicketCount_CatalogTask_Ended (MostRecent)]
+		displayFolder: .TaskSLA_Ended
+		lineageTag: 12372d33-6376-414b-bc1c-1a58f1ea23c9
+
+		formatStringDefinition = "+#,0;-#,0"
+
+	measure YoY_CatalogTask_%Change_Ended =
+			
+			DIVIDE( ( [CurrentMonth_TotalTicketCount_CatalogTask_Ended (MostRecent)] - [PriorYearMonth_TotalTicketCount_CatalogTask_Ended (MostRecent)] ) , [PriorYearMonth_TotalTicketCount_CatalogTask_Ended (MostRecent)] )
+		displayFolder: .TaskSLA_Ended
+		lineageTag: 95f651ed-89c0-41b3-a228-c8b10df2c0f8
+
+		formatStringDefinition = "+0.0%;-0.0%"
+
+	measure 'CurrentMonth_TotalTicketCount_IncidentPS_Ended (MostRecent)' = ```
+			
+			
+			VAR _CurrentDate = MAX(dim_date_fiscal_MonthKey[DateID])
+			VAR _CurrentDate1 = MAX(dim_date_fiscal_TTMKey[DateID])
+			
+			VAR _currentPeriod =
+			    DATE(YEAR(_CurrentDate), MONTH(_CurrentDate) , DAY(_CurrentDate))
+			
+			VAR _previousPeriod =
+			    DATE(YEAR(_CurrentDate), MONTH(_CurrentDate) - 1 , DAY(_CurrentDate))
+			
+			/*
+			VAR _result =
+			    CALCULATE(
+			        DISTINCTCOUNT( ServiceNow_TaskSLA_Started[task] ) ,
+			        FILTER( 
+			            ALL( dim_date_fiscal_MonthKey ) , 
+			        dim_date_fiscal_MonthKey[DateID] = _currentPeriod
+			    )
+			)
+			*/
+			
+			VAR _result =
+			    CALCULATE(
+			        [TotalTicketCount_IncidentPS_Ended (MostRecent)] ,
+			        FILTER( 
+			            ALL( dim_date_fiscal_MonthKey ) , 
+			        dim_date_fiscal_MonthKey[DateID] = _currentPeriod
+			    )
+			)
+			
+			RETURN
+			_result
+			```
+		displayFolder: .TaskSLA_Ended
+		lineageTag: 607ecaff-f1b2-47d9-bfb0-25e14702193f
+
+		formatStringDefinition = "#,0"
+
+	measure 'PriorYearMonth_TotalTicketCount_IncidentPS_Ended (MostRecent)' = ```
+			
+			
+			VAR _CurrentDate = MAX(dim_date_fiscal_MonthKey[DateID])
+			VAR _CurrentDate1 = MAX(dim_date_fiscal_TTMKey[DateID])
+			
+			VAR _currentPeriod =
+			    DATE(YEAR(_CurrentDate), MONTH(_CurrentDate) , DAY(_CurrentDate))
+			
+			VAR _previousPeriod =
+			    DATE(YEAR(_CurrentDate), MONTH(_CurrentDate) - 12 , DAY(_CurrentDate))
+			
+			/*
+			VAR _result =
+			    CALCULATE(
+			        DISTINCTCOUNT( ServiceNow_TaskSLA_Started[task] ) ,
+			        FILTER( 
+			            ALL( dim_date_fiscal_MonthKey ) , 
+			        dim_date_fiscal_MonthKey[DateID] = _previousPeriod
+			    )
+			)
+			*/ 
+			
+			VAR _result =
+			    CALCULATE(
+			        [TotalTicketCount_IncidentPS_Ended (MostRecent)] ,
+			        FILTER( 
+			            ALL( dim_date_fiscal_MonthKey ) , 
+			        dim_date_fiscal_MonthKey[DateID] = _previousPeriod
+			    )
+			)
+			
+			RETURN
+			_result
+			```
+		displayFolder: .TaskSLA_Ended
+		lineageTag: 13b01caf-1daf-4b64-af83-97a0169dbd52
+
+		formatStringDefinition = "#,0"
+
+	measure YoY_IncidentPS_#Change_Ended = [CurrentMonth_TotalTicketCount_IncidentPS_Ended (MostRecent)] - [PriorYearMonth_TotalTicketCount_IncidentPS_Ended (MostRecent)]
+		displayFolder: .TaskSLA_Ended
+		lineageTag: a58aa611-512a-464a-a7ec-5949ae70c218
+
+		formatStringDefinition = "+#,0;-#,0"
+
+	measure YoY_IncidentPS_%Change_Ended =
+			
+			DIVIDE( ( [CurrentMonth_TotalTicketCount_IncidentPS_Ended (MostRecent)] - [PriorYearMonth_TotalTicketCount_IncidentPS_Ended (MostRecent)] ) , [PriorYearMonth_TotalTicketCount_IncidentPS_Ended (MostRecent)] )
+		displayFolder: .TaskSLA_Ended
+		lineageTag: bac288a3-d113-4343-a1e7-57233a3a84f3
+
+		formatStringDefinition = "+0.0%;-0.0%"
+
+	measure 'CurrentMonth_Breached_AllTickets_Ended (MostRecent)' = ```
+			
+			
+			VAR _CurrentDate = MAX(dim_date_fiscal_MonthKey[DateID])
+			
+			VAR _currentPeriod =
+			    DATE(YEAR(_CurrentDate), MONTH(_CurrentDate) , DAY(_CurrentDate))
+			
+			VAR _result =
+			    CALCULATE(
+			        [Breached_SLA_AllTickets_Ended (MostRecent)],
+			        FILTER( 
+			            ALL( dim_date_fiscal_MonthKey ) , 
+			        dim_date_fiscal_MonthKey[DateID] = _currentPeriod
+			    )
+			)
+			
+			RETURN
+			_result
+			```
+		formatString: 0
+		displayFolder: .TaskSLA_Ended
+		lineageTag: 4be4b63e-0e5d-4404-a5d3-763ba3b1a672
+
+	measure 'PriorYearMonth_Breached_AllTickets_Ended (MostRecent)' = ```
+			
+			
+			VAR _CurrentDate = MAX(dim_date_fiscal_MonthKey[DateID])
+			
+			VAR _currentPeriod =
+			    DATE(YEAR(_CurrentDate), MONTH(_CurrentDate) , DAY(_CurrentDate))
+			
+			VAR _previousPeriod =
+			    DATE(YEAR(_CurrentDate), MONTH(_CurrentDate) - 12 , DAY(_CurrentDate))
+			
+			VAR _result =
+			    CALCULATE(
+			        [Breached_SLA_AllTickets_Ended (MostRecent)],
+			        FILTER( 
+			            ALL( dim_date_fiscal_MonthKey ) , 
+			        dim_date_fiscal_MonthKey[DateID] = _previousPeriod
+			    )
+			)
+			
+			RETURN
+			_result
+			```
+		formatString: 0
+		displayFolder: .TaskSLA_Ended
+		lineageTag: 169ee6d3-c105-4190-8de0-6ea5757d5801
+
+	measure 'PriorMonth_Breached_AllTickets_Ended (MostRecent)' = ```
+			
+			
+			VAR _CurrentDate = MAX(dim_date_fiscal_MonthKey[DateID])
+			
+			VAR _currentPeriod =
+			    DATE(YEAR(_CurrentDate), MONTH(_CurrentDate) , DAY(_CurrentDate))
+			
+			VAR _previousPeriod =
+			    DATE(YEAR(_CurrentDate), MONTH(_CurrentDate) - 1 , DAY(_CurrentDate))
+			
+			VAR _result =
+			    CALCULATE(
+			        [Breached_SLA_AllTickets_Ended (MostRecent)],
+			        FILTER( 
+			            ALL( dim_date_fiscal_MonthKey ) , 
+			        dim_date_fiscal_MonthKey[DateID] = _previousPeriod
+			    )
+			)
+			
+			RETURN
+			_result
+			```
+		formatString: 0
+		displayFolder: .TaskSLA_Ended
+		lineageTag: 9c324f38-1f10-4d55-9298-b4aa0218176d
+
+	measure HourlyAvg_TotalTickets_WorkingDays_Ended = ```
+			
+			VAR _dailyAvg = 
+			CALCULATE(
+			    DIVIDE(
+			    [TotalTicketCount_AllTickets_MostRecent_Ended],
+			    [Working Days in Period]
+			    )
+			)
+			
+			VAR _result = 
+			DIVIDE( _dailyAvg , 8 )
+			
+			RETURN
+			_result
+			```
+		displayFolder: .TaskSLA_Ended
+		lineageTag: 18f7d08b-1183-4dbc-a3c5-597d5e86e33c
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure TTM_TicketsStarted_CurrentYear_Ended = ```
+			
+			
+			VAR _CurrentDate = MAX(dim_date_fiscal_TTMKey[DateID])
+			
+			VAR _currentPeriod = DATE(YEAR(_CurrentDate), MONTH(_CurrentDate) , DAY(_CurrentDate))
+			
+			VAR _previousPeriod = DATE(YEAR(_CurrentDate), MONTH(_CurrentDate) - 12 , DAY(_CurrentDate))
+			
+			VAR _result =
+			    CALCULATE(
+			        [TicketsStarted_AllTickets_MostRecent_Ended] ,
+			        dim_date_fiscal_MonthKey[DateID] <= _currentPeriod 
+			        &&
+			        dim_date_fiscal_MonthKey[DateID] >= _previousPeriod
+			)
+			
+			RETURN
+			_result
+			```
+		displayFolder: .TTM - Ended
+		lineageTag: f9fbd115-7134-4990-82bb-5c37650995c7
+
+		formatStringDefinition = "#,0"
+
+	measure TicketsStarted_AllTickets_MostRecent_Ended = ```
+			
+			CALCULATE(
+			    DISTINCTCOUNT( ServiceNow_TaskSLA_Ended[task] ),
+			    FILTER(
+			        ServiceNow_TaskSLA_Ended,
+			        ServiceNow_TaskSLA_Ended[start_time] = 
+			            CALCULATE(
+			                MAX(ServiceNow_TaskSLA_Ended[start_time]),
+			                ALLEXCEPT(ServiceNow_TaskSLA_Ended, ServiceNow_TaskSLA_Ended[task])
+			            ) 
+			    )
+			)
+			```
+		formatString: 0
+		displayFolder: .TaskSLA_Ended
+		lineageTag: 1cf052b9-4ab8-4f5a-9c12-e07179d86a58
+
+	measure TTM_TicketsStarted_PriorYear_Ended = ```
+			
+			
+			VAR _CurrentDate = MAX(dim_date_fiscal_MonthKey[DateID])
+			
+			VAR _currentPeriod = DATE(YEAR(_CurrentDate), MONTH(_CurrentDate) - 12 , DAY(_CurrentDate))
+			
+			VAR _previousPeriod = DATE(YEAR(_CurrentDate), MONTH(_CurrentDate) - 24 , DAY(_CurrentDate))
+			
+			VAR _result =
+			    CALCULATE(
+			        [TicketsStarted_AllTickets_MostRecent_Ended] ,
+			        FILTER( 
+			            ALL( dim_date_fiscal_MonthKey ) , 
+			        dim_date_fiscal_MonthKey[DateID] <= _currentPeriod &&
+			        dim_date_fiscal_MonthKey[DateID] >= _previousPeriod
+			    )
+			)
+			
+			RETURN
+			_result
+			```
+		displayFolder: .TTM - Ended
+		lineageTag: e19a5b61-a556-47f5-ae70-bb58e5e1382b
+
+		formatStringDefinition = "#,0"
+
+	measure TTM_TicketsStarted_CurrentMonth_Ended = ```
+			
+			
+			VAR _CurrentDate = MAX(dim_date_fiscal_MonthKey[DateID])
+			
+			VAR _currentPeriod = DATE(YEAR(_CurrentDate), MONTH(_CurrentDate) , DAY(_CurrentDate))
+			
+			VAR _result =
+			    CALCULATE(
+			        [TicketsStarted_AllTickets_MostRecent_Ended] ,
+			        FILTER( 
+			            ALL( dim_date_fiscal_MonthKey ) , 
+			        dim_date_fiscal_MonthKey[DateID] = _currentPeriod
+			    )
+			)
+			
+			RETURN
+			_result
+			```
+		displayFolder: .TTM - Ended
+		lineageTag: 444dee31-a8ab-45f4-ab71-9e68d52309e3
+
+		formatStringDefinition = "#,0"
+
+	measure TicketsStarted_AllTickets_Ended =
+			
+			CALCULATE(
+			    DISTINCTCOUNT( ServiceNow_TaskSLA_Ended[task] )
+			)
+		formatString: 0
+		displayFolder: .TaskSLA_Ended
+		lineageTag: 68feb428-0f90-41df-bd4c-34dd805fde8a
+
+	measure TTM_TicketsStarted_CurrentYear_DISTINCT_Ended = ```
+			
+			
+			VAR _CurrentDate = MAX(dim_date_fiscal_TTMKey[DateID])
+			
+			VAR _currentPeriod = DATE(YEAR(_CurrentDate), MONTH(_CurrentDate) , DAY(_CurrentDate))
+			
+			VAR _previousPeriod = DATE(YEAR(_CurrentDate), MONTH(_CurrentDate) - 12 , DAY(_CurrentDate))
+			
+			VAR _result =
+			    CALCULATE(
+			        [TicketsStarted_AllTickets_Ended] ,
+			        dim_date_fiscal_MonthKey[DateID] <= _currentPeriod 
+			        &&
+			        dim_date_fiscal_MonthKey[DateID] >= _previousPeriod
+			)
+			
+			RETURN
+			_result
+			```
+		displayFolder: .TTM - Ended
+		lineageTag: baa04a70-2d45-4f8c-989c-fa1bfecc36c8
+
+		formatStringDefinition = "#,0"
+
+	measure IncomingTickets_Total =
+			
+			CALCULATE(
+			    [.Base_Total_Started_wHistAssignGroups]
+			)
+		displayFolder: TaskSLA
+		lineageTag: bd6b99df-173e-476c-ae5e-81fde5a996f2
+
+		formatStringDefinition = "#,0"
+
+	measure TTM_Total_StartedInPeriod_CurrentPeriod = ```
+			
+			
+			VAR _CurrentDate = MAX(dim_date_fiscal_TTMKey[DateID])
+			
+			VAR _currentPeriod = DATE(YEAR(_CurrentDate), MONTH(_CurrentDate) , DAY(_CurrentDate))
+			
+			VAR _result =
+			    CALCULATE(
+			        [IncomingTickets_Total] ,
+			        FILTER( 
+			            ALL( dim_date_fiscal_MonthKey ) , 
+			        dim_date_fiscal_MonthKey[DateID] = _currentPeriod
+			    )
+			)
+			
+			RETURN
+			_result
+			```
+		displayFolder: TTM
+		lineageTag: b53e21e4-7def-4917-bee5-bee9d58ddf2c
+
+		formatStringDefinition = "#,0"
+
+	measure TTM_Total_Started_CurrentYear = ```
+			
+			
+			VAR _CurrentDate = MAX(dim_date_fiscal_TTMKey[DateID])
+			
+			VAR _currentPeriod = DATE(YEAR(_CurrentDate), MONTH(_CurrentDate) , DAY(_CurrentDate))
+			
+			VAR _previousPeriod = DATE(YEAR(_CurrentDate), MONTH(_CurrentDate) - 12 , DAY(_CurrentDate))
+			
+			VAR _result =
+			CALCULATE(
+			    [.Base_Total_Started_wHistAssignGroups] , 
+			        dim_date_fiscal_MonthKey[DateID] <= _currentPeriod 
+			        &&
+			        dim_date_fiscal_MonthKey[DateID] >= _previousPeriod
+			)
+			
+			RETURN
+			_result
+			```
+		displayFolder: TTM
+		lineageTag: 6b74ca5e-e0b7-4016-bf44-b2abd03bea09
+
+		formatStringDefinition = "#,0"
+
+	measure TTM_DailyAvg_StartedInPeriod_CurrentYear = ```
+			
+			
+			VAR _CurrentDate = MAX( dim_date_fiscal_TTMKey[DateID] )
+			
+			VAR _currentPeriod =
+			    DATE ( YEAR ( _CurrentDate ), MONTH ( _CurrentDate ), DAY ( _CurrentDate ) )
+			
+			VAR _previousPeriod =
+			    DATE ( YEAR ( _CurrentDate ), MONTH ( _CurrentDate ) - 12, DAY ( _CurrentDate ) )
+			
+			VAR _result = 
+			    CALCULATE(
+			        DIVIDE( [.Base_Total_Started_wHistAssignGroups] , [Working Days in Period] ) ,
+			        dim_date_fiscal_MonthKey[DateID] <= _currentPeriod
+			        && 
+			        dim_date_fiscal_MonthKey[DateID] >= _previousPeriod 
+			    )
+			
+			return 
+			_result
+			```
+		displayFolder: TTM
+		lineageTag: 1ecae30e-7d2f-4a83-be61-b6693aa3836b
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure TTM_Total_StartedInPeriod_PriorPeriod = ```
+			
+			
+			VAR _CurrentDate = MAX(dim_date_fiscal_TTMKey[DateID])
+			
+			VAR _currentPeriod = DATE(YEAR(_CurrentDate), MONTH(_CurrentDate) , DAY(_CurrentDate))
+			
+			VAR _previousPeriod = DATE(YEAR(_CurrentDate), MONTH(_CurrentDate) - 1 , DAY(_CurrentDate))
+			
+			
+			VAR _result =
+			    CALCULATE(
+			        [IncomingTickets_Total] ,
+			        FILTER( 
+			            ALL( dim_date_fiscal_MonthKey ) , 
+			        dim_date_fiscal_MonthKey[DateID] = _previousPeriod
+			    )
+			)
+			
+			RETURN
+			_result
+			```
+		displayFolder: TTM
+		lineageTag: 68eff254-e5fa-4a1e-b865-18145b5fbbb4
+
+		formatStringDefinition = "#,0"
+
+	measure TTM_Total_StartedInPeriod_PYPeriod = ```
+			
+			
+			VAR _CurrentDate = MAX(dim_date_fiscal_TTMKey[DateID])
+			
+			VAR _currentPeriod = DATE(YEAR(_CurrentDate), MONTH(_CurrentDate) , DAY(_CurrentDate))
+			
+			VAR _previousPeriod = DATE(YEAR(_CurrentDate), MONTH(_CurrentDate) - 12 , DAY(_CurrentDate))
+			
+			VAR _result =
+			    CALCULATE(
+			        [IncomingTickets_Total] ,
+			        FILTER( 
+			            ALL( dim_date_fiscal_MonthKey ) , 
+			        dim_date_fiscal_MonthKey[DateID] = _previousPeriod
+			    )
+			)
+			
+			RETURN
+			_result
+			```
+		displayFolder: TTM
+		lineageTag: b6a91580-7722-4900-9b48-af3dea0bbc8c
+
+		formatStringDefinition = "#,0"
+
+	measure CatalogTask_TotalTickets_DISTINCTCOUNT_TaskSLA = ```
+			
+			CALCULATE(
+			    DISTINCTCOUNT(fact_ServiceNow_TaskSLA[task]) ,
+			    fact_ServiceNow_TaskSLA[ticket_type] == "Catalog Task" 
+			)
+			```
+		displayFolder: TaskSLA
+		lineageTag: f45bc2dc-8842-48ad-83a9-05016c9b6367
+
+		formatStringDefinition = "#,0"
+
+	measure IncidentPS_TotalTickets_DISTINCTCOUNT_TaskSLA = ```
+			
+			CALCULATE(
+			    DISTINCTCOUNT(fact_ServiceNow_TaskSLA[task]) ,
+			    fact_ServiceNow_TaskSLA[ticket_type] == "Incident - PS" 
+			)
+			```
+		displayFolder: TaskSLA
+		lineageTag: 58fda2ad-8b2a-49f5-b1a6-30638b18ff3d
+
+		formatStringDefinition = "#,0"
+
+	measure CatalogTask_TotalTickets_wHistAssignGroups = ```
+			
+			CALCULATE(
+			    DISTINCTCOUNT(fact_ServiceNow_TaskSLA[task]) , 
+			    FILTER( 
+			        dim_ServiceNow_AssignmentGroup , 
+			        dim_ServiceNow_AssignmentGroup[Start-Date] <= MAX( fact_ServiceNow_TaskSLA[end_date] ) && 
+			        (ISBLANK( dim_ServiceNow_AssignmentGroup[End-Date] ) || dim_ServiceNow_AssignmentGroup[End-Date] >= MIN( fact_ServiceNow_TaskSLA[end_date] ) ) 
+			    ) , 
+			    fact_ServiceNow_TaskSLA[ticket_type] == "Catalog Task" 
+			)
+			```
+		displayFolder: TaskSLA
+		lineageTag: 357b5e56-5b23-4a95-89ae-44084d57a549
+
+		formatStringDefinition = "#,0"
+
+	measure IncidentPS_TotalTickets_wHistAssignGroups = ```
+			
+			CALCULATE(
+			    DISTINCTCOUNT(fact_ServiceNow_TaskSLA[task]) , 
+			    FILTER( 
+			        dim_ServiceNow_AssignmentGroup , 
+			        dim_ServiceNow_AssignmentGroup[Start-Date] <= MAX( fact_ServiceNow_TaskSLA[end_date] ) && 
+			        (ISBLANK( dim_ServiceNow_AssignmentGroup[End-Date] ) || dim_ServiceNow_AssignmentGroup[End-Date] >= MIN( fact_ServiceNow_TaskSLA[end_date] ) ) 
+			    ) , 
+			    fact_ServiceNow_TaskSLA[ticket_type] == "Incident - PS" 
+			)
+			```
+		displayFolder: TaskSLA
+		lineageTag: 242c1a56-679e-46be-8009-4ee80240b71b
+
+		formatStringDefinition = "#,0"
+
+	measure Breached_Total_MostRecent = ```
+			
+			CALCULATE( 
+			    [.Base_Total_Ended_wHistAssignGroups] ,
+			    FILTER( 
+			        fact_ServiceNow_TaskSLA , 
+			        fact_ServiceNow_TaskSLA[end_time] = 
+			        CALCULATE( 
+			            MAX( fact_ServiceNow_TaskSLA[end_time] ) , 
+			            ALLEXCEPT( fact_ServiceNow_TaskSLA , fact_ServiceNow_TaskSLA[task] ) 
+			        ) 
+			        &&
+			        fact_ServiceNow_TaskSLA[has_breached] == "True"
+			    )
+			)
+			
+			```
+		displayFolder: TaskSLA
+		lineageTag: dcf479c9-a1ed-479d-af3f-0c3f0a2a439f
+
+		formatStringDefinition = "#,0"
+
+	measure TTM_Breached_Rolling_CurrentYear = ```
+			
+			
+			VAR _CurrentDate = MAX( dim_date_fiscal_TTMKey[DateID] )
+			
+			VAR _currentPeriod = DATE ( YEAR ( _CurrentDate ), MONTH ( _CurrentDate ), DAY ( _CurrentDate ) )
+			
+			VAR _previousPeriod = DATE ( YEAR ( _CurrentDate ), MONTH ( _CurrentDate ) - 12, DAY ( _CurrentDate ) )
+			
+			VAR _result = 
+			CALCULATE(
+			[Breached_Total_MostRecent] ,
+			    dim_date_fiscal_MonthKey[DateID] <= _currentPeriod 
+			    &&
+			    dim_date_fiscal_MonthKey[DateID] >= _previousPeriod
+			)
+			
+			
+			return 
+			_result
+			```
+		displayFolder: TTM
+		lineageTag: 274e6f93-edbc-44b1-b4f8-0d8acaaca9c1
+
+		formatStringDefinition = "#,0"
+
+	measure '.Base_Total_Ended_wHistAssignGroups' = ```
+			
+			CALCULATE(
+			    DISTINCTCOUNT(fact_ServiceNow_TaskSLA[task]) , 
+			    FILTER( 
+			        dim_ServiceNow_AssignmentGroup , 
+			        dim_ServiceNow_AssignmentGroup[Start-Date] <= MAX( fact_ServiceNow_TaskSLA[end_date] ) && 
+			        (ISBLANK( dim_ServiceNow_AssignmentGroup[End-Date] ) || dim_ServiceNow_AssignmentGroup[End-Date] >= MIN( fact_ServiceNow_TaskSLA[end_date] ) ) 
+			    )
+			)
+			```
+		formatString: 0
+		displayFolder: TaskSLA
+		lineageTag: 8da40359-612b-404b-be77-18e0b1c4656a
+
+	measure Passed_Ended_MostRecent = ```
+			
+			CALCULATE( 
+			    [.Base_Total_Ended_wHistAssignGroups] ,
+			    FILTER( 
+			        fact_ServiceNow_TaskSLA , 
+			        fact_ServiceNow_TaskSLA[end_time] = 
+			        CALCULATE( 
+			            MAX( fact_ServiceNow_TaskSLA[end_time] ) , 
+			            ALLEXCEPT( fact_ServiceNow_TaskSLA , fact_ServiceNow_TaskSLA[task] ) 
+			        ) 
+			        &&
+			        fact_ServiceNow_TaskSLA[has_breached] == "False"
+			    )
+			)
+			
+			```
+		displayFolder: TaskSLA
+		lineageTag: d0efa957-4111-4cc6-9ff7-e9e62888413f
+
+		formatStringDefinition = "#,0"
+
+	measure TTM_Passed_CurrentYear = ```
+			
+			
+			VAR _CurrentDate = MAX( dim_date_fiscal_TTMKey[DateID] )
+			
+			VAR _currentPeriod = DATE ( YEAR ( _CurrentDate ), MONTH ( _CurrentDate ), DAY ( _CurrentDate ) )
+			
+			VAR _previousPeriod = DATE ( YEAR ( _CurrentDate ), MONTH ( _CurrentDate ) - 12, DAY ( _CurrentDate ) )
+			
+			VAR _result = 
+			    CALCULATE(
+			        [Passed_Ended_MostRecent] ,
+			        dim_date_fiscal_MonthKey[DateID] <= _currentPeriod 
+			        &&
+			        dim_date_fiscal_MonthKey[DateID] >= _previousPeriod
+			)
+			
+			
+			return 
+			_result
+			```
+		displayFolder: TTM
+		lineageTag: 3e3adc59-851d-4181-88d8-7fda3fe26f6d
+
+		formatStringDefinition = "#,0"
+
+	measure TotalTickets_Ended_MostRecent = ```
+			
+			CALCULATE( 
+			    [.Base_Total_Ended_wHistAssignGroups] ,
+			    FILTER( 
+			        fact_ServiceNow_TaskSLA , 
+			        fact_ServiceNow_TaskSLA[end_time] = 
+			        CALCULATE( 
+			            MAX( fact_ServiceNow_TaskSLA[end_time] ) , 
+			            ALLEXCEPT( fact_ServiceNow_TaskSLA , fact_ServiceNow_TaskSLA[task] ) 
+			        )
+			    )
+			)
+			
+			```
+		displayFolder: TaskSLA
+		lineageTag: 67973192-22df-40bb-a187-ea3606e0fcef
+
+		formatStringDefinition = "#,0"
+
+	measure TTM_Total_Ended_12months = ```
+			
+			
+			VAR _CurrentDate = MAX( dim_date_fiscal_TTMKey[DateID] )
+			
+			VAR _currentPeriod = DATE ( YEAR ( _CurrentDate ), MONTH ( _CurrentDate ), DAY ( _CurrentDate ) )
+			
+			VAR _previousPeriod = DATE ( YEAR ( _CurrentDate ), MONTH ( _CurrentDate ) - 12, DAY ( _CurrentDate ) )
+			
+			VAR _result = 
+			    CALCULATE(
+			        [TotalTickets_Ended_MostRecent] ,
+			        dim_date_fiscal_MonthKey[DateID] <= _currentPeriod 
+			        &&
+			        dim_date_fiscal_MonthKey[DateID] >= _previousPeriod
+			)
+			
+			
+			return 
+			_result
+			```
+		displayFolder: TTM
+		lineageTag: 10d5c253-47c1-4ee7-910f-4cfa7c93872b
+
+		formatStringDefinition = "#,0"
+
+	measure TTM_SLA%_CurrentYear = ```
+			
+			
+			VAR _CurrentDate = MAX( dim_date_fiscal_TTMKey[DateID] )
+			
+			VAR _currentPeriod = DATE ( YEAR ( _CurrentDate ), MONTH ( _CurrentDate ) , DAY ( _CurrentDate ) )
+			
+			VAR _previousPeriod = DATE ( YEAR ( _CurrentDate ), MONTH ( _CurrentDate ) - 12, DAY ( _CurrentDate ) )
+			
+			VAR _result = 
+			CALCULATE(
+			    ROUND( DIVIDE( [Passed_Ended_MostRecent] , [TotalTickets_Ended_MostRecent] ) , 4 ) , 
+			    dim_date_fiscal_MonthKey[DateID] <= _currentPeriod 
+			    &&
+			    dim_date_fiscal_MonthKey[DateID] >= _previousPeriod
+			)
+			
+			return 
+			_result
+			```
+		displayFolder: TTM
+		lineageTag: b7b6e698-784f-4121-b332-62833ed6a35d
+
+		formatStringDefinition = "0.0#%"
+
+	measure CatalogTaskTickets_wHistAssignGroups = ```
+			
+			CALCULATE(
+			    [.Base_Total_Ended_wHistAssignGroups] , 
+			    fact_ServiceNow_TaskSLA[ticket_type] == "Catalog Task" 
+			)
+			```
+		formatString: 0
+		displayFolder: TaskSLA
+		lineageTag: 094fe48b-92b6-42d0-b37e-add21d6f466d
+
+	measure TTM_Total_Ended_PYPeriod = ```
+			
+			
+			VAR _CurrentDate = MAX( dim_date_fiscal_MonthKey[DateID] )
+			
+			VAR _priorPeriod = DATE ( YEAR ( _CurrentDate ), MONTH ( _CurrentDate ) - 12, DAY ( _CurrentDate ) )
+			
+			VAR _result = 
+			    CALCULATE(
+			        [TotalTickets_Ended_MostRecent] ,
+			        FILTER( 
+			            ALL( dim_date_fiscal_MonthKey ) ,
+			        dim_date_fiscal_MonthKey[DateID] = _priorPeriod 
+			    )
+			)
+			
+			return 
+			_result
+			```
+		displayFolder: TTM
+		lineageTag: 3af5963e-83cf-453d-9415-d553e3873dbf
+
+		formatStringDefinition = "#,0"
+
+	measure YoY_TotalTickets_Period_#Change = [TotalTickets_Ended_MostRecent] - [TTM_Total_Ended_PYPeriod]
+		displayFolder: TaskSLA
+		lineageTag: 39458682-f63d-43b3-ae81-100d744762bf
+
+		formatStringDefinition = "+ #,0;- #,0"
+
+	measure YoY_TotalTickets_Year_%Change = DIVIDE( ( [TTM_Total_Ended_12months] - [TTM_Total_Ended_PYPeriod] ) , [TTM_Total_Ended_PYPeriod] )
+		displayFolder: TaskSLA
+		lineageTag: 87004cc3-2fd0-4cbe-8617-6a4d3c308fb6
+
+		formatStringDefinition = "+ 0.0%;- 0.0%"
+
+	measure TTM_SLA%_CurrentPeriod = ```
+			
+			
+			VAR _CurrentDate = MAX( dim_date_fiscal_TTMKey[DateID] )
+			
+			VAR _Result =
+			    CALCULATE (
+			        [SLA%_MostRecent] , 
+			        dim_date_fiscal_MonthKey[DateID] == _CurrentDate )
+			
+			RETURN
+			    _Result
+			```
+		displayFolder: TTM
+		lineageTag: 4e7f4893-466a-49f7-83c1-caef07848fbc
+
+		formatStringDefinition = "0.00%"
+
+	measure SLA%_MostRecent = ROUND( DIVIDE( [Passed_Ended_MostRecent] , [TotalTickets_Ended_MostRecent] ) , 4 )
+		displayFolder: TaskSLA
+		lineageTag: cab022be-f52d-45eb-82ea-907c32d0312a
+
+		formatStringDefinition = "0.00%"
+
+	measure SLA%Comparison_wCombinedTotals_CurrentMonth = ```
+			
+			
+			VAR _CurrentDate = MAX( dim_date_fiscal_TTMKey[DateID] )
+			
+			VAR _total = 
+			CALCULATE (
+			        [SLA%_MostRecent],
+			        ALL( CombinedTotals[Sub-Function] ) , 
+			        dim_date_fiscal_MonthKey[DateID] == _CurrentDate )
+			
+			RETURN
+			SWITCH(
+			    TRUE() , 
+			    SELECTEDVALUE( CombinedTotals[Sub-Function] ) = "Total Combined" , _total , [TTM_SLA%_CurrentPeriod] )
+			```
+		displayFolder: TaskSLA
+		lineageTag: d2c147ab-9be5-4f1e-9faa-f0fb31761eb3
+
+		formatStringDefinition = "0.00%"
+
+	measure SLA%Comparison_wCombinedTotals_Prior3Months = ```
+			
+			
+			VAR _CurrentDate = SELECTEDVALUE(dim_date_fiscal_TTMKey[DateID])
+			VAR _CurrentMonth = DATE(YEAR(_CurrentDate), MONTH(_CurrentDate), DAY(_CurrentDate))
+			VAR _CurrentMonthMinus1 = DATE(YEAR(_CurrentDate), MONTH(_CurrentDate) - 1, DAY(_CurrentDate))
+			VAR _CurrentMonthMinus3 = DATE(YEAR(_CurrentDate), MONTH(_CurrentDate) - 3, DAY(_CurrentDate))
+			
+			VAR _total = 
+			CALCULATE (
+			        [SLA%_MostRecent] ,
+			        ALL( CombinedTotals[Sub-Function] ) , 
+			        dim_date_fiscal_MonthKey[DateID] <= _CurrentMonth
+			        && dim_date_fiscal_MonthKey[DateID] >= _CurrentMonthMinus3 )
+			
+			RETURN
+			SWITCH(
+			    TRUE() , 
+			    SELECTEDVALUE( CombinedTotals[Sub-Function] ) = "Total Combined" , _total , [SLA%_Prior3Months] )
+			```
+		displayFolder: TaskSLA
+		lineageTag: 334082c3-3d62-4d4f-b96e-66e5c2194c4f
+
+		formatStringDefinition = "0.00%"
+
+	measure SLA%_Prior3Months = ```
+			
+			    
+			VAR _CurrentDate = SELECTEDVALUE( dim_date_fiscal_TTMKey[DateID] )
+			
+			VAR _CurrentMonth = DATE ( YEAR ( _CurrentDate ), MONTH ( _CurrentDate ), DAY ( _CurrentDate ) )
+			
+			VAR _CurrentMonthMinus3 = DATE ( YEAR ( _CurrentDate ), MONTH ( _CurrentDate ) - 3, DAY ( _CurrentDate ) )
+			
+			VAR _Result =
+			    CALCULATE (
+			        [SLA%_MostRecent] , 
+			        FILTER(
+			            dim_date_fiscal_MonthKey, 
+			            dim_date_fiscal_MonthKey[DateID] <= _CurrentMonth
+			                && dim_date_fiscal_MonthKey[DateID] >= _CurrentMonthMinus3
+			    ) 
+			)
+			
+			RETURN
+			    _Result
+			```
+		displayFolder: TaskSLA
+		lineageTag: 4cfe9819-5d68-4d2c-8256-fd70d8ef0019
+
+		formatStringDefinition = "0.00%"
+
+	measure SLA%_Prior13Months = ```
+			
+			
+			VAR _CurrentDate = SELECTEDVALUE( dim_date_fiscal_TTMKey[DateID] )
+			
+			VAR _CurrentMonth = DATE ( YEAR ( _CurrentDate ), MONTH ( _CurrentDate ), DAY ( _CurrentDate ) )
+			
+			VAR _CurrentMonthMinus13 = DATE ( YEAR ( _CurrentDate ), MONTH ( _CurrentDate ) - 13, DAY ( _CurrentDate ) )
+			
+			VAR _Result =
+			CALCULATE (
+			    [SLA%_MostRecent] , 
+			    FILTER(
+			        dim_date_fiscal_MonthKey, 
+			        dim_date_fiscal_MonthKey[DateID] <= _CurrentMonth
+			            && dim_date_fiscal_MonthKey[DateID] >= _CurrentMonthMinus13
+			    ) 
+			)
+			
+			RETURN
+			    _Result
+			```
+		displayFolder: TaskSLA
+		lineageTag: 9121607b-d158-47f3-8de0-4520d9015a05
+
+		formatStringDefinition = "0.00%"
+
+	measure SLA%Comparison_wCombinedTotals_Prior13Months = ```
+			
+			
+			VAR _CurrentDate = SELECTEDVALUE(dim_date_fiscal_TTMKey[DateID])
+			VAR _CurrentMonth = DATE(YEAR(_CurrentDate), MONTH(_CurrentDate), DAY(_CurrentDate))
+			VAR _CurrentMonthMinus4 = DATE(YEAR(_CurrentDate), MONTH(_CurrentDate) - 4, DAY(_CurrentDate))
+			VAR _CurrentMonthMinus13 = DATE(YEAR(_CurrentDate), MONTH(_CurrentDate) - 13, DAY(_CurrentDate))
+			VAR _CurrentMonthMinus16 = DATE(YEAR(_CurrentDate), MONTH(_CurrentDate) - 16, DAY(_CurrentDate))
+			
+			VAR _total = 
+			CALCULATE (
+			        [SLA%_MostRecent] ,
+			        ALL( CombinedTotals[Sub-Function] ) , 
+			        dim_date_fiscal_MonthKey[DateID] <= _CurrentMonth
+			        && dim_date_fiscal_MonthKey[DateID] >= _CurrentMonthMinus13 )
+			
+			RETURN
+			SWITCH(
+			    TRUE() , 
+			    SELECTEDVALUE( CombinedTotals[Sub-Function] ) = "Total Combined" , _total , [SLA%_Prior13Months] )
+			```
+		displayFolder: TaskSLA
+		lineageTag: fcc5cdec-362c-461b-8322-b057f172ae43
+
+		formatStringDefinition = "0.00%"
+
+	measure TTM_DailyAvg_Breached_Rolling_CurrentYear = ```
+			
+			
+			VAR _CurrentDate = MAX( dim_date_fiscal_TTMKey[DateID] )
+			
+			VAR _currentPeriod =
+			    DATE ( YEAR ( _CurrentDate ), MONTH ( _CurrentDate ), DAY ( _CurrentDate ) )
+			
+			VAR _previousPeriod =
+			    DATE ( YEAR ( _CurrentDate ), MONTH ( _CurrentDate ) - 12, DAY ( _CurrentDate ) )
+			
+			VAR _result = 
+			CALCULATE(
+			    DIVIDE( [Breached_Total_MostRecent] , [Working Days in Period] ) ,
+			    dim_date_fiscal_MonthKey[DateID] <= _currentPeriod
+			    && 
+			    dim_date_fiscal_MonthKey[DateID] >= _previousPeriod 
+			)
+			
+			return 
+			_result
+			```
+		displayFolder: TTM
+		lineageTag: acdb1d25-810f-4668-9e49-bacd45310f27
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure TTM_Breached_PreviousPeriod = ```
+			
+			
+			VAR _CurrentDate = MAX(dim_date_fiscal_TTMKey[DateID])
+			
+			VAR _previousPeriod = DATE(YEAR(_CurrentDate), MONTH(_CurrentDate) - 1 , DAY(_CurrentDate))
+			
+			VAR _result =
+			    CALCULATE(
+			        [Breached_Total_MostRecent],
+			        FILTER( 
+			            ALL( dim_date_fiscal_MonthKey ) , 
+			        dim_date_fiscal_MonthKey[DateID] = _previousPeriod
+			    )
+			)
+			
+			RETURN
+			_result
+			```
+		displayFolder: TTM
+		lineageTag: 0f5056e1-c3db-4912-84b6-a1fb991846fd
+
+		formatStringDefinition = "#,0"
+
+	measure TTM_Breached_PYPeriod = ```
+			
+			
+			VAR _CurrentDate = MAX( dim_date_fiscal_TTMKey[DateID] )
+			
+			VAR _priorPeriod = DATE ( YEAR ( _CurrentDate ), MONTH ( _CurrentDate ) - 12, DAY ( _CurrentDate ) )
+			
+			VAR _result = 
+			    CALCULATE(
+			        [Breached_Total_MostRecent] ,
+			        FILTER( 
+			            ALL( dim_date_fiscal_MonthKey ) ,
+			        dim_date_fiscal_MonthKey[DateID] = _priorPeriod 
+			    )
+			)
+			
+			return 
+			_result
+			```
+		displayFolder: TTM
+		lineageTag: ce9688ef-ef9e-4d04-8462-bb8192bcf107
+
+		formatStringDefinition = "#,0"
+
+	measure DailyAvg_Breached_WorkingDays =
+			
+			DIVIDE(
+			    [Breached_Total_MostRecent],
+			    [Working Days in Period]
+			)
+		displayFolder: TaskSLA
+		lineageTag: caefc745-3ee1-4d35-a2d8-b6d42f427f36
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure TTM_Breached_PriorYear = ```
+			
+			
+			VAR _CurrentDate = MAX( dim_date_fiscal_TTMKey[DateID] )
+			
+			VAR _currentPeriod = DATE ( YEAR ( _CurrentDate ), MONTH ( _CurrentDate ) - 12, DAY ( _CurrentDate ) )
+			
+			VAR _previousPeriod = DATE ( YEAR ( _CurrentDate ), MONTH ( _CurrentDate ) - 24, DAY ( _CurrentDate ) )
+			
+			VAR _result = 
+			CALCULATE(
+			    [Breached_Total_MostRecent] ,
+			    FILTER( 
+			    ALL( dim_date_fiscal_MonthKey ) , 
+			        dim_date_fiscal_MonthKey[DateID] <= _currentPeriod 
+			        &&
+			        dim_date_fiscal_MonthKey[DateID] >= _previousPeriod
+			    )
+			)
+			
+			
+			return 
+			_result
+			```
+		displayFolder: TTM
+		lineageTag: 28bc1ecf-e130-45b1-ab55-5a1d36ed43ec
+
+		formatStringDefinition = "#,0"
+
+	measure YoY_Breached_Period_#Change = [Breached_Total_MostRecent] - [TTM_Breached_PYPeriod]
+		displayFolder: TaskSLA
+		lineageTag: 528a4507-203f-4be8-ae9e-8e1aac189a42
+
+		formatStringDefinition = "+ #,0;- #,0"
+
+	measure YoY_Breached_Period_%Change = DIVIDE( ( [Breached_Total_MostRecent] - [TTM_Breached_PYPeriod] ) , [TTM_Breached_PYPeriod] )
+		displayFolder: TaskSLA
+		lineageTag: f384ecd8-682a-4fdf-9243-c48aea01a965
+
+		formatStringDefinition = "+ 0.0%;- 0.0%"
+
+	measure YoY_Breached_Year_#Change = [TTM_Total_Breached_Last12Months] - [TTM_Breached_PriorYear]
+		displayFolder: TaskSLA
+		lineageTag: a6847b5b-cf88-4905-bfc2-fc708a77ccf6
+
+		formatStringDefinition = "+ #,0;- #,0"
+
+	measure YoY_Breached_Year_%Change = DIVIDE( ( [TTM_Total_Breached_Last12Months] - [TTM_Breached_PriorYear] ) , [TTM_Breached_PriorYear] )
+		displayFolder: TaskSLA
+		lineageTag: aaf2167c-d952-4f01-ac6c-2ffbef140987
+
+		formatStringDefinition = "+ 0.0%;- 0.0%"
+
+	measure 'SLA - Font (YoY_Breached_Year)' = ```
+			
+			SWITCH( 
+			    TRUE(), 
+			        [YoY_Breached_Year_#Change] <= 0 , "#009900",
+			        [YoY_Breached_Year_#Change] > 0 , "#CC0000" )
+			```
+		displayFolder: .Formatting
+		lineageTag: 7ad664e4-ac41-4f4c-9f4e-d3945389acd3
+
+	measure 'SLA - Font (YoY_Breached_Period)' = ```
+			
+			SWITCH( 
+			    TRUE(), 
+			        [YoY_Breached_Period_#Change] <= 0 , "#009900",
+			        [YoY_Breached_Period_#Change] > 0 , "#CC0000" )
+			```
+		displayFolder: .Formatting
+		lineageTag: 757abd21-1e21-4333-8005-aeae1d8a8d3e
+
+	measure TTM_Total_Ended_CurrentPeriod = ```
+			
+			
+			VAR _CurrentDate = MAX( dim_date_fiscal_TTMKey[DateID] )
+			
+			VAR _currentPeriod = DATE ( YEAR ( _CurrentDate ), MONTH ( _CurrentDate ), DAY ( _CurrentDate ) )
+			
+			VAR _result = 
+			    CALCULATE(
+			        [TotalTickets_Ended_MostRecent] ,
+			        dim_date_fiscal_MonthKey[DateID] = _currentPeriod 
+			)
+			
+			
+			return 
+			_result
+			```
+		displayFolder: TTM
+		lineageTag: d5d04954-7a81-4f71-a85d-341d9c95a4f5
+
+		formatStringDefinition = "#,0"
+
+	measure '.Base_Total_Started_wHistAssignGroups' = ```
+			
+			CALCULATE(
+			    DISTINCTCOUNT(fact_ServiceNow_TaskSLA[task]) ,  
+			    USERELATIONSHIP( dim_date_fiscal_DateKey[DateID] , fact_ServiceNow_TaskSLA[start_date] ) ,
+			    FILTER( 
+			        dim_ServiceNow_AssignmentGroup , 
+			        dim_ServiceNow_AssignmentGroup[Start-Date] <= MIN( fact_ServiceNow_TaskSLA[start_date] ) && 
+			        (ISBLANK( dim_ServiceNow_AssignmentGroup[End-Date] ) || dim_ServiceNow_AssignmentGroup[End-Date] >= MAX( fact_ServiceNow_TaskSLA[start_date] ) ) 
+			    ) 
+			)
+			```
+		formatString: 0
+		displayFolder: TaskSLA
+		lineageTag: 07de2cdd-c1ec-41db-b908-9b27cd215b09
+
+	measure DailyAvg_IncomingTickets_WorkingDays =
+			
+			DIVIDE(
+			    [IncomingTickets_Total],
+			    [Working Days in Period]
+			)
+		displayFolder: TaskSLA
+		lineageTag: 79748fab-0df1-460f-a19e-dc87292a9e54
+
+		formatStringDefinition = "0.0"
+
+	measure TTM_Total_StartedInPeriod_PriorYear = ```
+			
+			
+			VAR _CurrentDate = MAX(dim_date_fiscal_TTMKey[DateID])
+			
+			VAR _currentPeriod = DATE(YEAR(_CurrentDate), MONTH(_CurrentDate) - 12 , DAY(_CurrentDate))
+			
+			VAR _previousPeriod = DATE(YEAR(_CurrentDate), MONTH(_CurrentDate) - 24 , DAY(_CurrentDate))
+			
+			VAR _result =
+			CALCULATE(
+			    [IncomingTickets_Total] , 
+			        dim_date_fiscal_MonthKey[DateID] <= _currentPeriod 
+			        &&
+			        dim_date_fiscal_MonthKey[DateID] >= _previousPeriod
+			)
+			
+			RETURN
+			_result
+			```
+		displayFolder: TTM
+		lineageTag: b05f2d5d-c9b1-4217-9ab2-e7dc092fa60b
+
+		formatStringDefinition = "#,0"
+
+	measure YoY_IncomingTickets_Period_#Change = [IncomingTickets_Total] - [TTM_Total_StartedInPeriod_PYPeriod]
+		displayFolder: TaskSLA
+		lineageTag: a880f796-a5eb-48c6-9d87-f521005aa0d6
+
+		formatStringDefinition = "+#,0;-#,0"
+
+	measure YoY_IncomingTickets_Period_%Change = DIVIDE( ( [IncomingTickets_Total] - [TTM_Total_StartedInPeriod_PYPeriod] ) , [TTM_Total_StartedInPeriod_PYPeriod] )
+		displayFolder: TaskSLA
+		lineageTag: 098d4f80-feb5-424f-8bae-ffbb2994b94e
+
+		formatStringDefinition = "+0.0%;-0.0%"
+
+	measure YoY_IncomingTickets_Year_#Change = [TTM_Total_Started_CurrentYear] - [TTM_Total_StartedInPeriod_PriorYear]
+		displayFolder: TaskSLA
+		lineageTag: 5bcb73d2-e4e1-4819-879e-f9c8bb29fc5a
+
+		formatStringDefinition = "+#,0;-#,0"
+
+	measure 'SLA - Font (YoY_Started_Year)' = ```
+			
+			SWITCH( 
+			    TRUE(), 
+			        [YoY_Started_Year_#Change] >= 0 , "#009900",
+			        [YoY_Started_Year_#Change] < 0 , "#CC0000" ) 
+			```
+		displayFolder: .Formatting
+		lineageTag: 3b9dd013-3649-4b29-8360-f75cbf2a6546
+
+	measure YoY_IncomingTickets_Year_%Change = DIVIDE( ( [TTM_Total_Started_CurrentYear] - [TTM_Total_StartedInPeriod_PriorYear] ) , [TTM_Total_StartedInPeriod_PriorYear] )
+		displayFolder: TaskSLA
+		lineageTag: 0277fbaa-90dd-4183-b364-371aa1088e4c
+
+		formatStringDefinition = "+0.0%;-0.0%"
+
+	measure 'SLA - TTM Background(KPI)' = ```
+			
+			SWITCH( 
+			    TRUE(), 
+			        [TTM_SLA%_CurrentYear] >= [Goal (AR_Incident Resolution)], "#009900",
+			        [TTM_SLA%_CurrentYear] < ( [Goal (AR_Incident Resolution)] * 0.9 ), "#CC0000", 
+			        "#FFFF00" ) 
+			```
+		displayFolder: .Formatting
+		lineageTag: a22d7e57-365e-44cf-996f-853c016850a5
+
+	measure 'SLA - TTM Font (KPI)' = ```
+			
+			SWITCH( 
+			    TRUE(), 
+			        [TTM_SLA%_CurrentYear] >= [Goal (AR_Incident Resolution)], "#FFFFFF",
+			        [TTM_SLA%_CurrentYear] < ( [Goal (AR_Incident Resolution)] * 0.9 ), "#FFFFFF", 
+			        "#000000" 
+			) 
+			```
+		displayFolder: .Formatting
+		lineageTag: 454852db-3add-43ed-8818-5f507bc30f1a
+
+	measure 'SLA - Background(KPI)' = ```
+			
+			SWITCH( 
+			    TRUE(), 
+			        [SLA%_MostRecent] >= [Goal (AR_Incident Resolution)], "#009900",
+			        [SLA%_MostRecent] < ( [Goal (AR_Incident Resolution)] * 0.9 ), "#CC0000", 
+			        "#FFFF00" ) 
+			```
+		displayFolder: .Formatting
+		lineageTag: 2bac8858-3ca2-4f47-8638-416acc8b1673
+
+	measure 'SLA - Font (KPI)' = ```
+			
+			SWITCH( 
+			    TRUE(), 
+			        [SLA%_MostRecent] >= [Goal (AR_Incident Resolution)], "#FFFFFF",
+			        [SLA%_MostRecent] < ( [Goal (AR_Incident Resolution)] * 0.9 ), "#FFFFFF", 
+			        "#000000" 
+			) 
+			```
+		displayFolder: .Formatting
+		lineageTag: eecc9d1a-f320-446d-89d1-eee4cd1a28f6
+
+	measure DailyAvg_TicketsResolved_WorkingDays =
+			
+			DIVIDE(
+			    [TotalTickets_Ended_MostRecent],
+			    [Working Days in Period]
+			)
+		displayFolder: TaskSLA
+		lineageTag: 81f39299-b6f8-4af8-b62f-eb275943148f
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure HourlyAvg_TotalResolved_WorkingDays = ```
+			
+			VAR _dailyAvg = 
+			CALCULATE(
+			    DIVIDE(
+			    [TotalTickets_Ended_MostRecent] ,
+			    [Working Days in Period]
+			    )
+			)
+			
+			VAR _result = 
+			DIVIDE( _dailyAvg , 8 )
+			
+			RETURN
+			_result
+			```
+		displayFolder: TaskSLA
+		lineageTag: 7ad7bfde-fc1a-4903-8cf6-f374aad32a20
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure AvgBusinessTimeWorked_wHistAssignGroups = ```
+			
+			CALCULATE( 
+			    AVERAGE(fact_ServiceNow_TaskSLA[business_time_worked] ) / 60  , 
+			    FILTER( 
+			        dim_ServiceNow_AssignmentGroup , 
+			        dim_ServiceNow_AssignmentGroup[Start-Date] <= MAX( fact_ServiceNow_TaskSLA[end_date] ) && 
+			        (ISBLANK( dim_ServiceNow_AssignmentGroup[End-Date] ) || dim_ServiceNow_AssignmentGroup[End-Date] >= MIN( fact_ServiceNow_TaskSLA[end_date] ) ) 
+			    )
+			)
+			```
+		displayFolder: TaskSLA
+		lineageTag: 13abe2b8-00eb-469a-9786-07750d1649b2
+
+		formatStringDefinition = "#.0 hr"
+
+	measure TTM_Total_Ended_PreviousPeriod = ```
+			
+			
+			VAR _CurrentDate = MAX( dim_date_fiscal_TTMKey[DateID] )
+			
+			VAR _previousPeriod = DATE ( YEAR ( _CurrentDate ), MONTH ( _CurrentDate ) - 1 , DAY ( _CurrentDate ) )
+			
+			VAR _result = 
+			    CALCULATE(
+			        [TotalTickets_Ended_MostRecent] ,
+			        FILTER( 
+			            ALL( dim_date_fiscal_MonthKey ) , 
+			        dim_date_fiscal_MonthKey[DateID] = _previousPeriod
+			    )
+			)
+			
+			
+			return 
+			_result
+			```
+		displayFolder: TTM
+		lineageTag: a6ec7039-28f0-415a-b136-508c4556fe97
+
+		formatStringDefinition = "#,0"
+
+	measure TTM_AvgBusinessTimeWorked_PreviousPeriod = ```
+			
+			
+			VAR _CurrentDate = MAX(dim_date_fiscal_TTMKey[DateID])
+			
+			VAR _previousPeriod = DATE(YEAR(_CurrentDate), MONTH(_CurrentDate) - 1 , DAY(_CurrentDate))
+			
+			VAR _result =
+			    CALCULATE(
+			        [AvgBusinessTimeWorked_wHistAssignGroups] ,
+			        FILTER( 
+			            ALL( dim_date_fiscal_MonthKey ) , 
+			        dim_date_fiscal_MonthKey[DateID] = _previousPeriod
+			    )
+			)
+			
+			RETURN
+			_result
+			```
+		displayFolder: TTM
+		lineageTag: 496b7d43-5482-4239-9e60-b4cf6ef23983
+
+		formatStringDefinition = "0.0 hr"
+
+	measure TTM_Passed_PreviousPeriod = ```
+			
+			
+			VAR _CurrentDate = MAX( dim_date_fiscal_TTMKey[DateID] )
+			
+			VAR _currentPeriod = DATE ( YEAR ( _CurrentDate ), MONTH ( _CurrentDate ) - 1 , DAY ( _CurrentDate ) )
+			
+			VAR _result = 
+			    CALCULATE(
+			        [Passed_Ended_MostRecent] ,
+			        dim_date_fiscal_MonthKey[DateID] = _currentPeriod 
+			)
+			
+			
+			return 
+			_result
+			```
+		displayFolder: TTM
+		lineageTag: 4298ed3d-f5f7-4649-868e-eda5c1814de7
+
+		formatStringDefinition = "#,0"
+
+	measure TTM_SLA%_PreviousPeriod = ```
+			
+			
+			VAR _CurrentDate = MAX( dim_date_fiscal_TTMKey[DateID] )
+			
+			VAR _previousPeriod = DATE(YEAR(_CurrentDate), MONTH(_CurrentDate) - 1 , DAY(_CurrentDate))
+			
+			VAR _Result =
+			    CALCULATE (
+			        [SLA%_MostRecent] , 
+			        dim_date_fiscal_MonthKey[DateID] == _previousPeriod )
+			
+			RETURN
+			    _Result
+			```
+		displayFolder: TTM
+		lineageTag: 74afe4ae-d858-4f5f-8ea1-74abe842be3c
+
+		formatStringDefinition = "0.00%"
+
+	measure PoP_AvgBusinessTime_#Change = [AvgBusinessTimeWorked_wHistAssignGroups] - [TTM_AvgBusinessTimeWorked_PreviousPeriod]
+		displayFolder: TaskSLA
+		lineageTag: 2070f1bb-acc3-4030-9f6d-0af14f162327
+
+		formatStringDefinition = "+#.0 hr;-#.0 hr"
+
+	measure PoP_TotalTickets_#Change = [TTM_Total_Ended_CurrentPeriod] - [TTM_Total_Ended_PreviousPeriod]
+		displayFolder: TaskSLA
+		lineageTag: 8e7ac728-fa34-48e8-b5db-a50a635810db
+
+		formatStringDefinition = "+#,0;-#,0"
+
+	measure TTM_Passed_CurrentPeriod = ```
+			
+			
+			VAR _CurrentDate = MAX( dim_date_fiscal_TTMKey[DateID] )
+			
+			VAR _currentPeriod = DATE ( YEAR ( _CurrentDate ), MONTH ( _CurrentDate ), DAY ( _CurrentDate ) )
+			
+			VAR _result = 
+			    CALCULATE(
+			        [Passed_Ended_MostRecent] ,
+			        dim_date_fiscal_MonthKey[DateID] = _currentPeriod 
+			)
+			
+			
+			return 
+			_result
+			```
+		formatString: 0
+		displayFolder: TTM
+		lineageTag: 057a77e1-bed3-4f89-ac06-108654b6e2ad
+
+	measure PoP_Passed_#Change = [TTM_Passed_CurrentPeriod] - [TTM_Passed_PreviousPeriod]
+		displayFolder: TaskSLA
+		lineageTag: 79f8f78e-75fd-41d0-8e7c-69546053ebb4
+
+		formatStringDefinition = "+ #,0;- #,0"
+
+	measure PoP_Breached_#Change = [TTM_Breached_CurrentPeriod] - [TTM_Breached_PreviousPeriod]
+		displayFolder: TaskSLA
+		lineageTag: f45f5067-b72f-4218-9872-67ba31876cb2
+
+		formatStringDefinition = "+ #,0;- #,0"
+
+	measure TTM_Breached_CurrentPeriod = ```
+			
+			
+			VAR _CurrentDate = MAX(dim_date_fiscal_TTMKey[DateID])
+			
+			VAR _result =
+			    CALCULATE(
+			        [Breached_Total_MostRecent],
+			        FILTER( 
+			            ALL( dim_date_fiscal_MonthKey ) , 
+			        dim_date_fiscal_MonthKey[DateID] = _CurrentDate
+			    )
+			)
+			
+			RETURN
+			_result
+			```
+		formatString: 0
+		displayFolder: TTM
+		lineageTag: 8e05a369-921d-4a1b-ba09-bc93b7d8ad16
+
+	measure WeeklyAvg_TotalResolved_WorkingDays =
+			
+			DIVIDE(
+			    [TotalTickets_Ended_MostRecent],
+			    ( [Total Days in Period] / 7 )
+			)
+		displayFolder: TaskSLA
+		lineageTag: 5dbacbc0-44eb-4b4a-8208-bd6dd6f4fa52
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure HourlyAvg_Breached_WorkingDays = ```
+			
+			VAR _dailyAvg = 
+			CALCULATE(
+			    DIVIDE(
+			    [Breached_Total_MostRecent] ,
+			    [Working Days in Period]
+			    )
+			)
+			
+			VAR _result = 
+			DIVIDE( _dailyAvg , 8 )
+			
+			RETURN
+			_result
+			```
+		displayFolder: TaskSLA
+		lineageTag: faba65f7-bcf9-473a-a1bc-f14902273dc3
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure WeeklyAvg_Breached_WorkingDays =
+			
+			DIVIDE(
+			    [Breached_Total_MostRecent] ,
+			    ( [Total Days in Period] / 7 )
+			)
+		displayFolder: TaskSLA
+		lineageTag: 53174716-7ee4-4be2-8679-5207894c9014
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure TTM_DailyAvg_TotalWorked_PreviousPeriod = ```
+			
+			
+			VAR _CurrentDate = MAX( dim_date_fiscal_TTMKey[DateID] )
+			
+			VAR _currentPeriod =
+			    DATE ( YEAR ( _CurrentDate ), MONTH ( _CurrentDate ), DAY ( _CurrentDate ) )
+			
+			VAR _previousPeriod =
+			    DATE ( YEAR ( _CurrentDate ), MONTH ( _CurrentDate ) - 1, DAY ( _CurrentDate ) )
+			
+			VAR _result = 
+			    CALCULATE(
+			        DIVIDE( [TotalTickets_Ended_MostRecent] , [Working Days in Period] ) ,
+			
+			        dim_date_fiscal_MonthKey[DateID] <= _currentPeriod
+			        && 
+			        dim_date_fiscal_MonthKey[DateID] >= _previousPeriod 
+			    )
+			
+			return 
+			_result
+			```
+		displayFolder: TTM
+		lineageTag: 2823f2f4-1183-4ca7-856f-f9e9199b26b6
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure TTM_Total_Breached_Last12Months = ```
+			
+			
+			VAR _CurrentDate = MAX( dim_date_fiscal_TTMKey[DateID] )
+			
+			VAR _currentPeriod = DATE ( YEAR ( _CurrentDate ), MONTH ( _CurrentDate ), DAY ( _CurrentDate ) )
+			
+			VAR _previousPeriod = DATE ( YEAR ( _CurrentDate ), MONTH ( _CurrentDate ) - 11, DAY ( _CurrentDate ) )
+			
+			VAR _result = 
+			CALCULATE(
+			[Breached_Total_MostRecent] ,
+			    FILTER( 
+			    ALL( dim_date_fiscal_MonthKey ) , 
+			        dim_date_fiscal_MonthKey[DateID] <= _currentPeriod 
+			        &&
+			        dim_date_fiscal_MonthKey[DateID] >= _previousPeriod
+			    )
+			)
+			
+			
+			return 
+			_result
+			```
+		displayFolder: TTM
+		lineageTag: 46a65c54-2e58-4fcf-952f-afe80edeb323
+
+		formatStringDefinition = "#,0"
+
+	measure TTM_DailyAvg_Breached_PYPeriod = ```
+			
+			
+			VAR _CurrentDate = MAX( dim_date_fiscal_TTMKey[DateID] )
+			
+			VAR _priorPeriod = DATE ( YEAR ( _CurrentDate ), MONTH ( _CurrentDate ) - 12, DAY ( _CurrentDate ) )
+			
+			VAR _result = 
+			    CALCULATE(
+			        [DailyAvg_Breached_WorkingDays] ,
+			        FILTER( 
+			            ALL( dim_date_fiscal_MonthKey ) ,
+			        dim_date_fiscal_MonthKey[DateID] = _priorPeriod 
+			    )
+			)
+			
+			return 
+			_result
+			```
+		displayFolder: TTM
+		lineageTag: 14ee5c84-58e0-43c3-86cd-4e949a2aace5
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure TTM_Breached_PY-PreviousPeriod = ```
+			
+			
+			VAR _CurrentDate = MAX(dim_date_fiscal_TTMKey[DateID])
+			
+			VAR _previousPeriod = DATE(YEAR(_CurrentDate), MONTH(_CurrentDate) - 13 , DAY(_CurrentDate))
+			
+			VAR _result =
+			    CALCULATE(
+			        [Breached_Total_MostRecent],
+			        FILTER( 
+			            ALL( dim_date_fiscal_MonthKey ) , 
+			        dim_date_fiscal_MonthKey[DateID] = _previousPeriod
+			    )
+			)
+			
+			RETURN
+			_result
+			```
+		formatString: 0
+		displayFolder: TTM
+		lineageTag: 82e99dcb-73e8-45da-8680-f0af1e6a6f37
+
+	measure TTM_FiscalPeriod_PYPeriod = ```
+			
+			
+			VAR _CurrentDate = MAX(dim_date_fiscal_TTMKey[DateID])
+			
+			VAR _previousPeriod = DATE(YEAR(_CurrentDate), MONTH(_CurrentDate) - 12 , DAY(_CurrentDate))
+			
+			VAR _result =
+			    CALCULATE(
+			        VALUES( dim_date_fiscal_MonthKey[Month FY-YY] ) ,
+			        FILTER( 
+			            ALL( dim_date_fiscal_MonthKey ) , 
+			        dim_date_fiscal_MonthKey[DateID] = _previousPeriod
+			    )
+			)
+			
+			RETURN
+			_result
+			```
+		displayFolder: TTM
+		lineageTag: e59ff293-6b02-4e48-9fd4-329169a599c2
+
+	measure TTM_FiscalPeriod_CurrentPeriod = ```
+			
+			
+			VAR _CurrentDate = MAX(dim_date_fiscal_TTMKey[DateID])
+			
+			VAR _previousPeriod = DATE(YEAR(_CurrentDate), MONTH(_CurrentDate) , DAY(_CurrentDate))
+			
+			VAR _result =
+			    CALCULATE(
+			        VALUES( dim_date_fiscal_MonthKey[Month FY-YY] ) ,
+			        FILTER( 
+			            ALL( dim_date_fiscal_MonthKey ) , 
+			        dim_date_fiscal_MonthKey[DateID] = _CurrentDate
+			    )
+			)
+			
+			RETURN
+			_result
+			```
+		displayFolder: TTM
+		lineageTag: c888bc64-e638-4564-b517-239fa36f8d27
+
+	measure 'SLA - Font (PoP_Breached_Period)' = ```
+			
+			SWITCH( 
+			    TRUE(), 
+			        [PoP_Breached_#Change]<= 0 , "#009900",
+			        [PoP_Breached_#Change] > 0 , "#CC0000" )
+			```
+		displayFolder: .Formatting
+		lineageTag: d25ee15c-4dfb-4b77-b05e-f35d8ada330c
+
+	measure TTM_Breached_Rolling_PriorYear = ```
+			
+			
+			VAR _CurrentDate = MAX( dim_date_fiscal_TTMKey[DateID] )
+			
+			VAR _currentPeriod = DATE ( YEAR ( _CurrentDate ), MONTH ( _CurrentDate ) - 12, DAY ( _CurrentDate ) )
+			
+			VAR _oct = DATE ( YEAR ( _CurrentDate ), MONTH ( _CurrentDate ) - 12 , DAY ( _CurrentDate ) )
+			VAR _nov = DATE ( YEAR ( _CurrentDate ), MONTH ( _CurrentDate ) - 13 , DAY ( _CurrentDate ) )
+			VAR _dec = DATE ( YEAR ( _CurrentDate ), MONTH ( _CurrentDate ) - 14 , DAY ( _CurrentDate ) )
+			VAR _jan = DATE ( YEAR ( _CurrentDate ), MONTH ( _CurrentDate ) - 15 , DAY ( _CurrentDate ) )
+			VAR _feb = DATE ( YEAR ( _CurrentDate ), MONTH ( _CurrentDate ) - 16 , DAY ( _CurrentDate ) )
+			VAR _mar = DATE ( YEAR ( _CurrentDate ), MONTH ( _CurrentDate ) - 17 , DAY ( _CurrentDate ) )
+			VAR _apr = DATE ( YEAR ( _CurrentDate ), MONTH ( _CurrentDate ) - 18 , DAY ( _CurrentDate ) )
+			VAR _may = DATE ( YEAR ( _CurrentDate ), MONTH ( _CurrentDate ) - 19 , DAY ( _CurrentDate ) )
+			VAR _jun = DATE ( YEAR ( _CurrentDate ), MONTH ( _CurrentDate ) - 20 , DAY ( _CurrentDate ) )
+			VAR _jul = DATE ( YEAR ( _CurrentDate ), MONTH ( _CurrentDate ) - 21 , DAY ( _CurrentDate ) )
+			VAR _aug = DATE ( YEAR ( _CurrentDate ), MONTH ( _CurrentDate ) - 22 , DAY ( _CurrentDate ) )
+			VAR _sep = DATE ( YEAR ( _CurrentDate ), MONTH ( _CurrentDate ) - 23 , DAY ( _CurrentDate ) )
+			
+			VAR _oct1 = DATE ( YEAR ( _CurrentDate ), MONTH ( _CurrentDate ) - 1 , DAY ( _CurrentDate ) )
+			VAR _nov1 = DATE ( YEAR ( _CurrentDate ), MONTH ( _CurrentDate ) - 2 , DAY ( _CurrentDate ) )
+			VAR _dec1 = DATE ( YEAR ( _CurrentDate ), MONTH ( _CurrentDate ) - 3 , DAY ( _CurrentDate ) )
+			VAR _jan1 = DATE ( YEAR ( _CurrentDate ), MONTH ( _CurrentDate ) - 4 , DAY ( _CurrentDate ) )
+			VAR _feb1 = DATE ( YEAR ( _CurrentDate ), MONTH ( _CurrentDate ) - 5 , DAY ( _CurrentDate ) )
+			VAR _mar1 = DATE ( YEAR ( _CurrentDate ), MONTH ( _CurrentDate ) - 6 , DAY ( _CurrentDate ) )
+			VAR _apr1 = DATE ( YEAR ( _CurrentDate ), MONTH ( _CurrentDate ) - 7 , DAY ( _CurrentDate ) )
+			VAR _may1 = DATE ( YEAR ( _CurrentDate ), MONTH ( _CurrentDate ) - 16 , DAY ( _CurrentDate ) )
+			VAR _jun1 = DATE ( YEAR ( _CurrentDate ), MONTH ( _CurrentDate ) - 15 , DAY ( _CurrentDate ) )
+			VAR _jul1 = DATE ( YEAR ( _CurrentDate ), MONTH ( _CurrentDate ) - 14 , DAY ( _CurrentDate ) )
+			VAR _aug1 = DATE ( YEAR ( _CurrentDate ), MONTH ( _CurrentDate ) - 13 , DAY ( _CurrentDate ) )
+			VAR _sep1 = DATE ( YEAR ( _CurrentDate ), MONTH ( _CurrentDate ) - 12 , DAY ( _CurrentDate ) )
+			
+			VAR _startMonth =
+			IF ( MONTH ( _CurrentDate ) == 10, _oct,
+			IF ( MONTH ( _CurrentDate ) == 11, _nov,
+			IF ( MONTH ( _CurrentDate ) == 12, _dec,
+			IF ( MONTH ( _CurrentDate ) == 1, _jan,
+			IF ( MONTH ( _CurrentDate ) == 2, _feb,
+			IF ( MONTH ( _CurrentDate ) == 3, _mar,
+			IF ( MONTH ( _CurrentDate ) == 4, _apr,
+			IF ( MONTH ( _CurrentDate ) == 5, _may,
+			IF ( MONTH ( _CurrentDate ) == 6, _jun,
+			IF ( MONTH ( _CurrentDate ) == 7, _jul,
+			IF ( MONTH ( _CurrentDate ) == 8, _aug, 
+			IF ( MONTH ( _CurrentDate ) == 9, _sep ) ) ) ) ) ) ) ) ) ) ) )
+			
+			VAR _endMonth =
+			IF ( MONTH ( _CurrentDate ) == 10, _oct1,
+			IF ( MONTH ( _CurrentDate ) == 11, _nov1,
+			IF ( MONTH ( _CurrentDate ) == 12, _dec1,
+			IF ( MONTH ( _CurrentDate ) == 1, _jan1,
+			IF ( MONTH ( _CurrentDate ) == 2, _feb1,
+			IF ( MONTH ( _CurrentDate ) == 3, _mar1,
+			IF ( MONTH ( _CurrentDate ) == 4, _apr1,
+			IF ( MONTH ( _CurrentDate ) == 5, _may1,
+			IF ( MONTH ( _CurrentDate ) == 6, _jun1,
+			IF ( MONTH ( _CurrentDate ) == 7, _jul1,
+			IF ( MONTH ( _CurrentDate ) == 8, _aug1, 
+			IF ( MONTH ( _CurrentDate ) == 9, _sep1 ) ) ) ) ) ) ) ) ) ) ) )
+			
+			VAR _result = 
+			CALCULATE(
+			    [Breached_Total_MostRecent] ,
+			        dim_date_fiscal_MonthKey[DateID] <= _endMonth
+			        &&
+			        dim_date_fiscal_MonthKey[DateID] >= _startMonth
+			)
+			
+			
+			return 
+			_result
+			```
+		displayFolder: TTM
+		lineageTag: 533c7d09-4673-4d89-b21b-7487b27ebc30
+
+		formatStringDefinition = "#,0"
+
+	measure TTM_Breached_Rolling_YearToNow = ```
+			
+			
+			VAR _CurrentDate = MAX( dim_date_fiscal_TTMKey[DateID] )
+			VAR _currentPeriod = DATE ( YEAR ( _CurrentDate ), MONTH ( _CurrentDate ), DAY ( _CurrentDate ) )
+			
+			VAR _oct = DATE ( YEAR ( _CurrentDate ), MONTH ( _CurrentDate ) , DAY ( _CurrentDate ) )
+			VAR _nov = DATE ( YEAR ( _CurrentDate ), MONTH ( _CurrentDate ) - 1, DAY ( _CurrentDate ) )
+			VAR _dec = DATE ( YEAR ( _CurrentDate ), MONTH ( _CurrentDate ) - 2, DAY ( _CurrentDate ) )
+			VAR _jan = DATE ( YEAR ( _CurrentDate ), MONTH ( _CurrentDate ) - 3, DAY ( _CurrentDate ) )
+			VAR _feb = DATE ( YEAR ( _CurrentDate ), MONTH ( _CurrentDate ) - 4, DAY ( _CurrentDate ) )
+			VAR _mar = DATE ( YEAR ( _CurrentDate ), MONTH ( _CurrentDate ) - 5, DAY ( _CurrentDate ) )
+			VAR _apr = DATE ( YEAR ( _CurrentDate ), MONTH ( _CurrentDate ) - 6, DAY ( _CurrentDate ) )
+			VAR _may = DATE ( YEAR ( _CurrentDate ), MONTH ( _CurrentDate ) - 7, DAY ( _CurrentDate ) )
+			VAR _jun = DATE ( YEAR ( _CurrentDate ), MONTH ( _CurrentDate ) - 8, DAY ( _CurrentDate ) )
+			VAR _jul = DATE ( YEAR ( _CurrentDate ), MONTH ( _CurrentDate ) - 9, DAY ( _CurrentDate ) )
+			VAR _aug = DATE ( YEAR ( _CurrentDate ), MONTH ( _CurrentDate ) - 10, DAY ( _CurrentDate ) )
+			VAR _sep = DATE ( YEAR ( _CurrentDate ), MONTH ( _CurrentDate ) - 11, DAY ( _CurrentDate ) )
+			
+			
+			VAR _EndMonth =
+			IF ( MONTH ( _CurrentDate ) == 10, _oct,
+			IF ( MONTH ( _CurrentDate ) == 11, _nov,
+			IF ( MONTH ( _CurrentDate ) == 12, _dec,
+			IF ( MONTH ( _CurrentDate ) == 1, _jan,
+			IF ( MONTH ( _CurrentDate ) == 2, _feb,
+			IF ( MONTH ( _CurrentDate ) == 3, _mar,
+			IF ( MONTH ( _CurrentDate ) == 4, _apr,
+			IF ( MONTH ( _CurrentDate ) == 5, _may,
+			IF ( MONTH ( _CurrentDate ) == 6, _jun,
+			IF ( MONTH ( _CurrentDate ) == 7, _jul,
+			IF ( MONTH ( _CurrentDate ) == 8, _aug, 
+			IF ( MONTH ( _CurrentDate ) == 9, _sep ) ) ) ) ) ) ) ) ) ) ) )
+			
+			VAR _result = 
+			CALCULATE(
+			[Breached_Total_MostRecent] ,
+			    dim_date_fiscal_MonthKey[DateID] <= _currentPeriod 
+			    &&
+			    dim_date_fiscal_MonthKey[DateID] >= _EndMonth
+			)
+			
+			
+			return 
+			_result
+			```
+		displayFolder: TTM
+		lineageTag: ed94b28e-632d-4cb2-8c42-69140250733d
+
+		formatStringDefinition = "#,0"
+
+	measure PoP_Breached_%Change = DIVIDE( ( [Breached_Total_MostRecent] - [TTM_Breached_PreviousPeriod] ) , [TTM_Breached_PreviousPeriod] )
+		displayFolder: TaskSLA
+		lineageTag: b05ac732-11ba-4b32-afc7-d65377640976
+
+		formatStringDefinition = "+ 0.0%;- 0.0%"
+
+	measure TTM_Started_Rolling_PriorYear = ```
+			
+			
+			VAR _CurrentDate = MAX( dim_date_fiscal_TTMKey[DateID] )
+			
+			VAR _currentPeriod = DATE ( YEAR ( _CurrentDate ), MONTH ( _CurrentDate ) - 12, DAY ( _CurrentDate ) )
+			
+			VAR _oct = DATE ( YEAR ( _CurrentDate ), MONTH ( _CurrentDate ) - 12 , DAY ( _CurrentDate ) )
+			VAR _nov = DATE ( YEAR ( _CurrentDate ), MONTH ( _CurrentDate ) - 13 , DAY ( _CurrentDate ) )
+			VAR _dec = DATE ( YEAR ( _CurrentDate ), MONTH ( _CurrentDate ) - 14 , DAY ( _CurrentDate ) )
+			VAR _jan = DATE ( YEAR ( _CurrentDate ), MONTH ( _CurrentDate ) - 15 , DAY ( _CurrentDate ) )
+			VAR _feb = DATE ( YEAR ( _CurrentDate ), MONTH ( _CurrentDate ) - 16 , DAY ( _CurrentDate ) )
+			VAR _mar = DATE ( YEAR ( _CurrentDate ), MONTH ( _CurrentDate ) - 17 , DAY ( _CurrentDate ) )
+			VAR _apr = DATE ( YEAR ( _CurrentDate ), MONTH ( _CurrentDate ) - 18 , DAY ( _CurrentDate ) )
+			VAR _may = DATE ( YEAR ( _CurrentDate ), MONTH ( _CurrentDate ) - 19 , DAY ( _CurrentDate ) )
+			VAR _jun = DATE ( YEAR ( _CurrentDate ), MONTH ( _CurrentDate ) - 20 , DAY ( _CurrentDate ) )
+			VAR _jul = DATE ( YEAR ( _CurrentDate ), MONTH ( _CurrentDate ) - 21 , DAY ( _CurrentDate ) )
+			VAR _aug = DATE ( YEAR ( _CurrentDate ), MONTH ( _CurrentDate ) - 22 , DAY ( _CurrentDate ) )
+			VAR _sep = DATE ( YEAR ( _CurrentDate ), MONTH ( _CurrentDate ) - 23 , DAY ( _CurrentDate ) )
+			
+			VAR _oct1 = DATE ( YEAR ( _CurrentDate ), MONTH ( _CurrentDate ) - 1 , DAY ( _CurrentDate ) )
+			VAR _nov1 = DATE ( YEAR ( _CurrentDate ), MONTH ( _CurrentDate ) - 2 , DAY ( _CurrentDate ) )
+			VAR _dec1 = DATE ( YEAR ( _CurrentDate ), MONTH ( _CurrentDate ) - 3 , DAY ( _CurrentDate ) )
+			VAR _jan1 = DATE ( YEAR ( _CurrentDate ), MONTH ( _CurrentDate ) - 4 , DAY ( _CurrentDate ) )
+			VAR _feb1 = DATE ( YEAR ( _CurrentDate ), MONTH ( _CurrentDate ) - 5 , DAY ( _CurrentDate ) )
+			VAR _mar1 = DATE ( YEAR ( _CurrentDate ), MONTH ( _CurrentDate ) - 6 , DAY ( _CurrentDate ) )
+			VAR _apr1 = DATE ( YEAR ( _CurrentDate ), MONTH ( _CurrentDate ) - 7 , DAY ( _CurrentDate ) )
+			VAR _may1 = DATE ( YEAR ( _CurrentDate ), MONTH ( _CurrentDate ) - 16 , DAY ( _CurrentDate ) )
+			VAR _jun1 = DATE ( YEAR ( _CurrentDate ), MONTH ( _CurrentDate ) - 15 , DAY ( _CurrentDate ) )
+			VAR _jul1 = DATE ( YEAR ( _CurrentDate ), MONTH ( _CurrentDate ) - 14 , DAY ( _CurrentDate ) )
+			VAR _aug1 = DATE ( YEAR ( _CurrentDate ), MONTH ( _CurrentDate ) - 13 , DAY ( _CurrentDate ) )
+			VAR _sep1 = DATE ( YEAR ( _CurrentDate ), MONTH ( _CurrentDate ) - 12 , DAY ( _CurrentDate ) )
+			
+			VAR _startMonth =
+			IF ( MONTH ( _CurrentDate ) == 10, _oct,
+			IF ( MONTH ( _CurrentDate ) == 11, _nov,
+			IF ( MONTH ( _CurrentDate ) == 12, _dec,
+			IF ( MONTH ( _CurrentDate ) == 1, _jan,
+			IF ( MONTH ( _CurrentDate ) == 2, _feb,
+			IF ( MONTH ( _CurrentDate ) == 3, _mar,
+			IF ( MONTH ( _CurrentDate ) == 4, _apr,
+			IF ( MONTH ( _CurrentDate ) == 5, _may,
+			IF ( MONTH ( _CurrentDate ) == 6, _jun,
+			IF ( MONTH ( _CurrentDate ) == 7, _jul,
+			IF ( MONTH ( _CurrentDate ) == 8, _aug, 
+			IF ( MONTH ( _CurrentDate ) == 9, _sep ) ) ) ) ) ) ) ) ) ) ) )
+			
+			VAR _endMonth =
+			IF ( MONTH ( _CurrentDate ) == 10, _oct1,
+			IF ( MONTH ( _CurrentDate ) == 11, _nov1,
+			IF ( MONTH ( _CurrentDate ) == 12, _dec1,
+			IF ( MONTH ( _CurrentDate ) == 1, _jan1,
+			IF ( MONTH ( _CurrentDate ) == 2, _feb1,
+			IF ( MONTH ( _CurrentDate ) == 3, _mar1,
+			IF ( MONTH ( _CurrentDate ) == 4, _apr1,
+			IF ( MONTH ( _CurrentDate ) == 5, _may1,
+			IF ( MONTH ( _CurrentDate ) == 6, _jun1,
+			IF ( MONTH ( _CurrentDate ) == 7, _jul1,
+			IF ( MONTH ( _CurrentDate ) == 8, _aug1, 
+			IF ( MONTH ( _CurrentDate ) == 9, _sep1 ) ) ) ) ) ) ) ) ) ) ) )
+			
+			VAR _result = 
+			CALCULATE(
+			    [.Base_Total_Started_wHistAssignGroups] ,
+			        dim_date_fiscal_MonthKey[DateID] <= _endMonth 
+			        &&
+			        dim_date_fiscal_MonthKey[DateID] >= _startMonth
+			)
+			
+			
+			return 
+			_result
+			```
+		displayFolder: TTM
+		lineageTag: 1ca538a7-31be-477f-86aa-6a927d091a5b
+
+		formatStringDefinition = "#,0"
+
+	measure TTM_Started_Rolling_YearToNow = ```
+			
+			
+			VAR _CurrentDate = MAX( dim_date_fiscal_TTMKey[DateID] )
+			VAR _currentPeriod = DATE ( YEAR ( _CurrentDate ), MONTH ( _CurrentDate ), DAY ( _CurrentDate ) )
+			
+			VAR _oct = DATE ( YEAR ( _CurrentDate ), MONTH ( _CurrentDate ) , DAY ( _CurrentDate ) )
+			VAR _nov = DATE ( YEAR ( _CurrentDate ), MONTH ( _CurrentDate ) - 1, DAY ( _CurrentDate ) )
+			VAR _dec = DATE ( YEAR ( _CurrentDate ), MONTH ( _CurrentDate ) - 2, DAY ( _CurrentDate ) )
+			VAR _jan = DATE ( YEAR ( _CurrentDate ), MONTH ( _CurrentDate ) - 3, DAY ( _CurrentDate ) )
+			VAR _feb = DATE ( YEAR ( _CurrentDate ), MONTH ( _CurrentDate ) - 4, DAY ( _CurrentDate ) )
+			VAR _mar = DATE ( YEAR ( _CurrentDate ), MONTH ( _CurrentDate ) - 5, DAY ( _CurrentDate ) )
+			VAR _apr = DATE ( YEAR ( _CurrentDate ), MONTH ( _CurrentDate ) - 6, DAY ( _CurrentDate ) )
+			VAR _may = DATE ( YEAR ( _CurrentDate ), MONTH ( _CurrentDate ) - 7, DAY ( _CurrentDate ) )
+			VAR _jun = DATE ( YEAR ( _CurrentDate ), MONTH ( _CurrentDate ) - 8, DAY ( _CurrentDate ) )
+			VAR _jul = DATE ( YEAR ( _CurrentDate ), MONTH ( _CurrentDate ) - 9, DAY ( _CurrentDate ) )
+			VAR _aug = DATE ( YEAR ( _CurrentDate ), MONTH ( _CurrentDate ) - 10, DAY ( _CurrentDate ) )
+			VAR _sep = DATE ( YEAR ( _CurrentDate ), MONTH ( _CurrentDate ) - 11, DAY ( _CurrentDate ) )
+			
+			
+			VAR _EndMonth =
+			IF ( MONTH ( _CurrentDate ) == 10, _oct,
+			IF ( MONTH ( _CurrentDate ) == 11, _nov,
+			IF ( MONTH ( _CurrentDate ) == 12, _dec,
+			IF ( MONTH ( _CurrentDate ) == 1, _jan,
+			IF ( MONTH ( _CurrentDate ) == 2, _feb,
+			IF ( MONTH ( _CurrentDate ) == 3, _mar,
+			IF ( MONTH ( _CurrentDate ) == 4, _apr,
+			IF ( MONTH ( _CurrentDate ) == 5, _may,
+			IF ( MONTH ( _CurrentDate ) == 6, _jun,
+			IF ( MONTH ( _CurrentDate ) == 7, _jul,
+			IF ( MONTH ( _CurrentDate ) == 8, _aug, 
+			IF ( MONTH ( _CurrentDate ) == 9, _sep ) ) ) ) ) ) ) ) ) ) ) )
+			
+			VAR _result = 
+			CALCULATE(
+			[.Base_Total_Started_wHistAssignGroups] ,
+			    dim_date_fiscal_MonthKey[DateID] <= _currentPeriod 
+			    &&
+			    dim_date_fiscal_MonthKey[DateID] >= _EndMonth
+			)
+			
+			
+			return 
+			_result
+			```
+		displayFolder: TTM
+		lineageTag: 5c1267b6-f827-4d6c-8b5e-87a0211d63fb
+
+		formatStringDefinition = "#,0"
+
+	measure TTM_DailyAvg_Started_PYPeriod = ```
+			
+			
+			VAR _CurrentDate = MAX( dim_date_fiscal_TTMKey[DateID] )
+			
+			VAR _priorPeriod = DATE ( YEAR ( _CurrentDate ), MONTH ( _CurrentDate ) - 12, DAY ( _CurrentDate ) )
+			
+			VAR _result = 
+			    CALCULATE(
+			        [DailyAvg_IncomingTickets_WorkingDays] ,
+			        FILTER( 
+			            ALL( dim_date_fiscal_MonthKey ) ,
+			        dim_date_fiscal_MonthKey[DateID] = _priorPeriod 
+			    )
+			)
+			
+			return 
+			_result
+			```
+		displayFolder: TTM
+		lineageTag: 182e3577-3c77-4c6d-ab71-5a8256a02bdb
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure TTM_Started_PY-PreviousPeriod = ```
+			
+			
+			VAR _CurrentDate = MAX(dim_date_fiscal_TTMKey[DateID])
+			
+			VAR _previousPeriod = DATE(YEAR(_CurrentDate), MONTH(_CurrentDate) - 13 , DAY(_CurrentDate))
+			
+			VAR _result =
+			    CALCULATE(
+			        [.Base_Total_Started_wHistAssignGroups],
+			        FILTER( 
+			            ALL( dim_date_fiscal_MonthKey ) , 
+			        dim_date_fiscal_MonthKey[DateID] = _previousPeriod
+			    )
+			)
+			
+			RETURN
+			_result
+			```
+		displayFolder: TTM
+		lineageTag: b0eaa2cd-a926-4f08-87ce-869dec73e4bc
+
+		formatStringDefinition = "#,0"
+
+	measure TTM_Started_PriorYear = ```
+			
+			
+			VAR _CurrentDate = MAX( dim_date_fiscal_TTMKey[DateID] )
+			
+			VAR _currentPeriod = DATE ( YEAR ( _CurrentDate ), MONTH ( _CurrentDate ) - 12, DAY ( _CurrentDate ) )
+			
+			VAR _previousPeriod = DATE ( YEAR ( _CurrentDate ), MONTH ( _CurrentDate ) - 24, DAY ( _CurrentDate ) )
+			
+			VAR _result = 
+			CALCULATE(
+			    [.Base_Total_Started_wHistAssignGroups] ,
+			    FILTER( 
+			    ALL( dim_date_fiscal_MonthKey ) , 
+			        dim_date_fiscal_MonthKey[DateID] <= _currentPeriod 
+			        &&
+			        dim_date_fiscal_MonthKey[DateID] >= _previousPeriod
+			    )
+			)
+			
+			
+			return 
+			_result
+			```
+		displayFolder: TTM
+		lineageTag: 903ed87d-cfa3-4e57-901d-3fece8bcbb11
+
+		formatStringDefinition = "#,0"
+
+	measure TTM_Started_Rolling_CurrentYear = ```
+			
+			
+			VAR _CurrentDate = MAX(dim_date_fiscal_TTMKey[DateID])
+			
+			VAR _currentPeriod = DATE(YEAR(_CurrentDate), MONTH(_CurrentDate) , DAY(_CurrentDate))
+			
+			VAR _previousPeriod = DATE(YEAR(_CurrentDate), MONTH(_CurrentDate) - 11 , DAY(_CurrentDate))
+			
+			VAR _result =
+			CALCULATE(
+			    [.Base_Total_Started_wHistAssignGroups] , 
+			    FILTER( 
+			        ALL( dim_date_fiscal_MonthKey ) , 
+			        dim_date_fiscal_MonthKey[DateID] <= _currentPeriod 
+			        &&
+			        dim_date_fiscal_MonthKey[DateID] >= _previousPeriod
+			    )
+			)
+			
+			RETURN
+			_result
+			```
+		displayFolder: TTM
+		lineageTag: 4957a0bb-d6fa-4357-8fae-8c8004f41d60
+
+		formatStringDefinition = "#,0"
+
+	measure PoP_Started_#Change = [TTM_Total_StartedInPeriod_CurrentPeriod] - [TTM_Total_StartedInPeriod_PriorPeriod]
+		displayFolder: TaskSLA
+		lineageTag: ed758056-947e-40be-a5cd-7ec709e4cd44
+
+		formatStringDefinition = "+ #,0;- #,0"
+
+	measure PoP_Started_%Change = DIVIDE( ( [.Base_Total_Started_wHistAssignGroups] - [TTM_Total_StartedInPeriod_PriorPeriod] ) , [TTM_Total_StartedInPeriod_PriorPeriod] )
+		displayFolder: TaskSLA
+		lineageTag: 7fe64a7d-8e3d-4d1f-8274-77b659fe4978
+
+		formatStringDefinition = "+ 0.0%;- 0.0%"
+
+	measure YoY_Started_Period_#Change = [.Base_Total_Started_wHistAssignGroups] - [TTM_Total_StartedInPeriod_PYPeriod]
+		displayFolder: TaskSLA
+		lineageTag: d4bb1849-cc50-4787-9d80-5d50687b0557
+
+		formatStringDefinition = "+ #,0;- #,0"
+
+	measure YoY_Started_Period_%Change = DIVIDE( ( [.Base_Total_Started_wHistAssignGroups] - [TTM_Total_StartedInPeriod_PYPeriod] ) , [TTM_Total_StartedInPeriod_PYPeriod] )
+		displayFolder: TaskSLA
+		lineageTag: 23e3b478-c425-41ef-aa5a-9e18f5723dd2
+
+		formatStringDefinition = "+ 0.0%;- 0.0%"
+
+	measure YoY_Started_Year_#Change = [TTM_Started_Rolling_CurrentYear] - [TTM_Started_PriorYear]
+		displayFolder: TaskSLA
+		lineageTag: 2e352047-6721-4579-af97-db6518034c5d
+
+		formatStringDefinition = "+ #,0;- #,0"
+
+	measure YoY_Started_Year_%Change = ROUND( DIVIDE( ( [TTM_Started_Rolling_CurrentYear] - [TTM_Started_PriorYear] ) , [TTM_Started_PriorYear] ) , 4 )
+		displayFolder: TaskSLA
+		lineageTag: 7ee6480f-cbce-4f93-8a82-3f46889cfe3b
+
+		formatStringDefinition = "+ 0.0%;- 0.0%"
+
+	measure 'SLA - Font (PoP_Started_Period)' = ```
+			
+			SWITCH( 
+			    TRUE(), 
+			        [PoP_Started_#Change] >= 0 , "#009900",
+			        [PoP_Started_#Change] < 0 , "#CC0000" ) 
+			```
+		displayFolder: .Formatting
+		lineageTag: 80094db3-4a3e-4bd0-a5a9-d18a0d5c5050
+
+	column Name
+		dataType: string
+		isHidden
+		lineageTag: fa159de8-74ac-4579-b081-e3c0c50378e7
+		summarizeBy: none
+		sourceColumn: Name
+		sortByColumn: Ordinal
+
+		annotation SummarizationSetBy = Automatic
+
+	column Ordinal
+		dataType: int64
+		isHidden
+		lineageTag: 7942fe90-46a3-411e-bf53-8ac5477598f1
+		summarizeBy: sum
+		sourceColumn: Ordinal
+
+		annotation SummarizationSetBy = Automatic
+

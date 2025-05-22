@@ -1,0 +1,25 @@
+DEFINE
+    MEASURE '.Measures'[Current Period (AP)] = VAR _KpiSelect = SELECTEDVALUE ( dim_gbs_mor_KPI[Kpi-Name] )
+
+VAR _CurrentDate = MAX ( dim_date_fiscal_TTMKey[DateID] ) 
+
+VAR _Result =
+    CALCULATE ( 
+        SWITCH( 
+            _KpiSelect , 
+            "Cost Per Invoice", [KPI - (AP) Cost Per Invoice] , 
+            "Incident Resolution - InvoiceMRPO", [KPI - (AP_marketMRPO) Incident Resolution] , 
+            "Cost Per Payment Processed", [KPI - (AP) Cost Per Payment Processed] ,
+            "Incident Resolution - Banking", [KPI - (AP_Banking) Incident Resolution] , 
+            "Cost Per Vendor Setup", [KPI - (AP) Cost Per Vendor Setup] , 
+            "Incident Resolution - Vendor Control", [KPI - (AP_VendorControl) Incident Resolution] , 
+            "Audit Recovery Rate", [KPI - (AP) Audit Recovery Rate] ) ,
+            dim_date_fiscal_MonthKey[DateID] == _CurrentDate ) 
+
+RETURN
+    _Result
+
+EVALUATE
+    SUMMARIZECOLUMNS(
+        "Current Period (AP)", '.Measures'[Current Period (AP)]
+    )

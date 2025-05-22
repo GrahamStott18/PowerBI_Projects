@@ -1,0 +1,43 @@
+model Model
+	culture: en-US
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	discourageImplicitMeasures
+	sourceQueryCulture: en-US
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation PBI_QueryOrder = ["dim_date_fiscal_DateKey","dim_date_fiscal_MonthKey","dim_date_fiscal_TTMKey","dim_gbs_ProfitCenter","dim_gbs_Lockbox","fact_Oracle_Export_US_AccountsReceivable","fact_Daily_Chicago_Lockbox","fact_TreasuryVarianceComments_AccountsReceivable","fact_DailyBankAmounts_AccountsReceivable"]
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBIDesktopVersion = 2.141.1754.0 (25.03)+e4409ed908ce97a5e9747f7dc48da475cf1c71a2
+
+annotation PBI_ProTooling = ["DevMode","CalcGroup"]
+
+annotation __TEdtr = 1
+
+ref table DateTableTemplate_dca4052d-aff4-404f-874c-a1f4d0e63d60
+ref table '.Measures'
+ref table dim_date_fiscal_DateKey
+ref table dim_date_fiscal_MonthKey
+ref table LocalDateTable_336abc93-57dc-46da-acaa-273f0a494a3a
+ref table LocalDateTable_d7c77918-59e0-47ad-bc6e-76d5c4af2469
+ref table dim_date_fiscal_TTMKey
+ref table LocalDateTable_07d4074b-6db8-4afb-a27b-ef3a916e6b94
+ref table dim_gbs_ProfitCenter
+ref table dim_gbs_Lockbox
+ref table fact_Oracle_Export_US_AccountsReceivable
+ref table LocalDateTable_f9a191cc-6262-4880-9bf8-48b7963b4e22
+ref table LocalDateTable_05cf1d3e-4c2a-4853-97b4-d0a9fd79cb2f
+ref table LocalDateTable_a370022a-83b3-4092-9c35-08cf2c56cd11
+ref table fact_Daily_Chicago_Lockbox
+ref table LocalDateTable_87d2e269-fbf4-446e-b8d6-058cda9f193e
+ref table LocalDateTable_ac003090-0eda-40e8-89be-7c7692509277
+ref table fact_TreasuryVarianceComments_AccountsReceivable
+ref table fact_DailyBankAmounts_AccountsReceivable
+ref table LocalDateTable_2e026643-c43c-4ed9-a49f-2e58d6805c6f
+ref table LocalDateTable_abb2f710-5de8-4f03-b645-a806ac59a981
+
+ref cultureInfo en-US
+

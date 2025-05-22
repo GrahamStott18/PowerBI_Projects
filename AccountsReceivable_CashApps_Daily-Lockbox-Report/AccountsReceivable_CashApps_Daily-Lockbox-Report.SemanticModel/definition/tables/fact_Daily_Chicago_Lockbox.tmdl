@@ -1,0 +1,109 @@
+table fact_Daily_Chicago_Lockbox
+	lineageTag: b8833a43-82e7-4dce-a6d8-1fce55bd15f0
+
+	column account_no
+		dataType: string
+		lineageTag: f3df7183-fdbc-485b-8748-d65f5f46570a
+		summarizeBy: none
+		sourceColumn: account_no
+
+		annotation SummarizationSetBy = Automatic
+
+	column date
+		dataType: dateTime
+		formatString: Short Date
+		lineageTag: 2df9a046-3f51-4bbe-bc71-5b71e3aca37e
+		summarizeBy: none
+		sourceColumn: date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column amount
+		dataType: double
+		lineageTag: 89957e32-d655-4633-847f-3b2ddd990f16
+		summarizeBy: sum
+		sourceColumn: amount
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column bai_code
+		dataType: string
+		lineageTag: b4198920-3072-41c2-80fa-7e9246bac843
+		summarizeBy: none
+		sourceColumn: bai_code
+
+		annotation SummarizationSetBy = Automatic
+
+	column additional_transaction_type
+		dataType: string
+		lineageTag: 229214d7-92c5-40f2-97f5-142c7877a3fe
+		summarizeBy: none
+		sourceColumn: additional_transaction_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column transaction_type
+		dataType: string
+		lineageTag: a6f75426-7987-46bc-99d4-6d3994795294
+		summarizeBy: none
+		sourceColumn: transaction_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column bank_reference
+		dataType: string
+		lineageTag: 587783ac-c1c2-4ee5-942b-03e24dfb98b2
+		summarizeBy: none
+		sourceColumn: bank_reference
+
+		annotation SummarizationSetBy = Automatic
+
+	column bank_comments
+		dataType: string
+		lineageTag: b394ddf6-3147-4d00-b112-b3b12c2f0a54
+		summarizeBy: none
+		sourceColumn: bank_comments
+
+		annotation SummarizationSetBy = Automatic
+
+	column loaded_date
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: e497a1bb-d594-4326-a530-26fdf10a0d80
+		summarizeBy: none
+		sourceColumn: loaded_date
+
+		variation Variation
+			isDefault
+			relationship: 7ee111b2-f26f-454a-80e9-ef80e161d2c0
+			defaultHierarchy: LocalDateTable_87d2e269-fbf4-446e-b8d6-058cda9f193e.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column report_name
+		dataType: string
+		lineageTag: 42bf84a2-6bee-4507-8394-dd5a9099a500
+		summarizeBy: none
+		sourceColumn: report_name
+
+		annotation SummarizationSetBy = Automatic
+
+	partition fact_Daily_Chicago_Lockbox = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("USPHL0PRPADBA1", "Graham_Workspace"),
+				    dbo_fact_Daily_Chicago_Lockbox = Source{[Schema="dbo",Item="fact_Daily_Chicago_Lockbox"]}[Data],
+				    #"Changed Type" = Table.TransformColumnTypes(dbo_fact_Daily_Chicago_Lockbox,{{"amount", type number}, {"date", type datetime}}),
+				    #"Changed Type1" = Table.TransformColumnTypes(#"Changed Type",{{"date", type date}})
+				in
+				    #"Changed Type1"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,227 @@
+relationship 38e61474-9256-420a-b8af-b917163de6f4
+	joinOnDateBehavior: datePartOnly
+	fromColumn: dim_date_fiscal_DateKey.DateID
+	toColumn: LocalDateTable_85f61c1d-c101-4656-afa2-8b2ed3b11878.Date
+
+relationship 0a211ae5-32ad-4d51-bee1-6358fb55235f
+	joinOnDateBehavior: datePartOnly
+	fromColumn: dim_date_fiscal_MonthKey.DateID
+	toColumn: LocalDateTable_336abc93-57dc-46da-acaa-273f0a494a3a.Date
+
+relationship ae769ad1-81d4-4e58-bbe0-51b8ee55cd03
+	joinOnDateBehavior: datePartOnly
+	fromColumn: dim_date_fiscal_MonthKey.'DateID - Mmm'
+	toColumn: LocalDateTable_d7c77918-59e0-47ad-bc6e-76d5c4af2469.Date
+
+relationship b1be2d67-588b-4b82-8b30-a2a33d486f49
+	joinOnDateBehavior: datePartOnly
+	fromColumn: dim_date_fiscal_TTMKey.DateID
+	toColumn: LocalDateTable_07d4074b-6db8-4afb-a27b-ef3a916e6b94.Date
+
+relationship 4fd538ef-949f-43d6-83d4-76550ae1739f
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: dim_date_fiscal_MonthKey.PeriodID
+	toColumn: dim_gbs_mor_Goals.Period-ID
+
+relationship 97a209d9-29b4-4ead-9b95-37131971c422
+	fromColumn: dim_date_fiscal_DateKey.PeriodID
+	toColumn: dim_date_fiscal_MonthKey.PeriodID
+
+relationship 90370a7b-ebc9-43f3-a6fb-f9fc49a8c69c
+	joinOnDateBehavior: datePartOnly
+	fromColumn: dim_date_Holiday.Holiday-Date
+	toColumn: LocalDateTable_ea96c6d0-1e78-4218-9ae5-7a7b60ec3fbf.Date
+
+relationship 0578dbee-12fe-4ee2-a177-44694d973a85
+	fromColumn: dim_snow_AssignmentGroup.ProfitCenter-ID
+	toColumn: dim_gbs_ProfitCenter.ProfitCenter-Code
+
+relationship 5d79482f-e6ff-4019-bf75-668462660db0
+	joinOnDateBehavior: datePartOnly
+	fromColumn: ServiceNow_TaskSLA_Started.end_date
+	toColumn: LocalDateTable_43dcabd4-21db-4979-a620-7bb79e0043ef.Date
+
+relationship fd56a3d4-95ad-4fc6-9b63-27136d839b61
+	joinOnDateBehavior: datePartOnly
+	fromColumn: ServiceNow_TaskSLA_Started.loaded_date
+	toColumn: LocalDateTable_62d4ba8b-987d-40f0-ac37-60f4e6c22280.Date
+
+relationship 9592115e-a4f6-42e7-87df-8eeb6e4acc0a
+	joinOnDateBehavior: datePartOnly
+	fromColumn: ServiceNow_TaskSLA_Ended.loaded_date
+	toColumn: LocalDateTable_8c95d7f7-1fc9-4225-b0d1-13fd8a830b68.Date
+
+relationship db435c05-3ee0-4041-8806-9aa64f911057
+	joinOnDateBehavior: datePartOnly
+	fromColumn: ServiceNow_TaskSLA_Active_CatalogTask_IncidentPS.end_date
+	toColumn: LocalDateTable_7758efe2-ce13-4760-b8a5-760a9bd6f178.Date
+
+relationship 9136f953-5c8e-4318-bd4b-5582d6b21f28
+	joinOnDateBehavior: datePartOnly
+	fromColumn: ServiceNow_TaskSLA_Active_CatalogTask_IncidentPS.loaded_date
+	toColumn: LocalDateTable_6f224b31-2a37-479a-98aa-f48f8ae5e413.Date
+
+relationship d802f882-b0e5-0896-c9da-70d2e30679db
+	fromColumn: ServiceNow_TaskSLA_Started.start_date
+	toColumn: dim_date_fiscal_DateKey.DateID
+
+relationship 08e9f4fa-983b-bd12-4b0c-7186894e9010
+	fromColumn: ServiceNow_TaskSLA_Active_CatalogTask_IncidentPS.start_date
+	toColumn: dim_date_fiscal_DateKey.DateID
+
+relationship 6ce5777b-d7f0-5158-259f-ec4b124bea07
+	fromColumn: ServiceNow_TaskSLA_Active_CatalogTask_IncidentPS.task_assignment_group
+	toColumn: dim_snow_AssignmentGroup.Assignment-Group
+
+relationship 9acd2217-a89d-98cf-28b0-40812ce43c78
+	fromColumn: ServiceNow_TaskSLA_Started.task_assignment_group
+	toColumn: dim_snow_AssignmentGroup.Assignment-Group
+
+relationship 15865f72-4237-b57d-d730-cd748fdd59c1
+	fromColumn: ServiceNow_TaskSLA_Ended.task_assignment_group
+	toColumn: dim_snow_AssignmentGroup.Assignment-Group
+
+relationship eac93489-ede8-1247-7b88-1002b5e95d9d
+	toCardinality: many
+	fromColumn: ServiceNow_TaskSLA_Active_CatalogTask_IncidentPS.task_assigned_to
+	toColumn: dim_Employee_AccountsReceivable.Employee-Name
+
+relationship b962f801-6e59-af1c-5f21-814b90f9c4f4
+	toCardinality: many
+	fromColumn: ServiceNow_TaskSLA_Started.task_assigned_to
+	toColumn: dim_Employee_AccountsReceivable.Employee-Name
+
+relationship d5ad1253-ac82-4524-347e-a18e81fee1b0
+	toCardinality: many
+	fromColumn: ServiceNow_TaskSLA_Ended.task_assigned_to
+	toColumn: dim_Employee_AccountsReceivable.Employee-Name
+
+relationship 64ed1d1d-b228-4349-ab89-7eabec2e7e5f
+	joinOnDateBehavior: datePartOnly
+	fromColumn: ServiceNow_TaskSLA_Active_CatalogTask_IncidentPS.sys_created_on
+	toColumn: LocalDateTable_6372f301-84d6-4cb8-a24a-1f0bd99aa07a.Date
+
+relationship ea622c81-e371-4a69-91c6-14d1fa59bc52
+	joinOnDateBehavior: datePartOnly
+	fromColumn: ServiceNow_TaskSLA_Active_CatalogTask_IncidentPS.original_breach_time
+	toColumn: LocalDateTable_4a9b743a-6958-48d3-b818-869d10ba68c9.Date
+
+relationship c52750a3-9322-480f-bb5c-d9a52ffa562b
+	joinOnDateBehavior: datePartOnly
+	fromColumn: ServiceNow_TaskSLA_Active_CatalogTask_IncidentPS.start_time
+	toColumn: LocalDateTable_c505444b-ce03-4fea-919c-c59618cce821.Date
+
+relationship cceb49ae-1af7-43e9-969f-dd9c3471bd83
+	joinOnDateBehavior: datePartOnly
+	fromColumn: ServiceNow_TaskSLA_Active_CatalogTask_IncidentPS.planned_end_time
+	toColumn: LocalDateTable_712c8c95-89d6-4c8d-b104-8ce6c7e7f519.Date
+
+relationship 2c36dcf2-5b9a-4c0e-a532-66787a4f1a27
+	joinOnDateBehavior: datePartOnly
+	fromColumn: ServiceNow_TaskSLA_Ended.start_date
+	toColumn: LocalDateTable_2e09690b-72a7-43d5-b6b3-a56e6b6d39b3.Date
+
+relationship 6efe65ee-ad90-2e08-74db-407d090ec1b4
+	fromColumn: ServiceNow_TaskSLA_Ended.end_date
+	toColumn: dim_date_fiscal_DateKey.DateID
+
+relationship 3cf8b429-687d-985f-5d0b-fce71fea8621
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: dim_ar_ServiceNow_Groupings.Assignment-Group
+	toColumn: dim_snow_AssignmentGroup.Assignment-Group
+
+relationship 3a1c8c01-4149-e4d8-6571-225289754c29
+	toCardinality: many
+	fromColumn: dim_Employee_AccountsReceivable.Fiscal-Year
+	toColumn: dim_date_fiscal_DateKey.FY-YY
+
+relationship 30e59b29-75b8-411c-a5c3-ea19ce99c728
+	joinOnDateBehavior: datePartOnly
+	fromColumn: ServiceNow_TaskSLA_Active_CatalogTask_IncidentPS.start_time_utc
+	toColumn: LocalDateTable_65917a37-afc1-4560-bf51-626455109fc4.Date
+
+relationship 87726ae8-80a4-4173-a4b2-71899f1d4f88
+	joinOnDateBehavior: datePartOnly
+	fromColumn: ServiceNow_TaskSLA_Active_CatalogTask_IncidentPS.original_breach_time_utc
+	toColumn: LocalDateTable_6dcc6dd5-9b1e-4253-940d-00e60419b71e.Date
+
+relationship 669f67aa-4a03-4b32-a98b-abce50f32f99
+	joinOnDateBehavior: datePartOnly
+	fromColumn: ServiceNow_TaskSLA_Active_CatalogTask_IncidentPS.planned_end_time_utc
+	toColumn: LocalDateTable_d7f47d8f-b28a-4902-b674-2462c4f5ea2d.Date
+
+relationship c9c16bdc-b046-fc93-5a99-30f6aaa01680
+	toCardinality: many
+	fromColumn: ServiceNow_TaskSLA_Ended.task_assignment_group
+	toColumn: dim_ServiceNow_Queues_AccountsReceivable.assignment_group
+
+relationship 6033d561-f821-4c71-b786-6dfb63f76180
+	joinOnDateBehavior: datePartOnly
+	fromColumn: dim_date_fiscal_MonthKey.'Start of week'
+	toColumn: LocalDateTable_015169bc-06d7-473d-82d4-d4dedf1d87bb.Date
+
+relationship be45beb0-a7e0-4d8c-baef-d8b7dda0a4a3
+	joinOnDateBehavior: datePartOnly
+	fromColumn: fact_ServiceNow_TaskSLA.loaded_date
+	toColumn: LocalDateTable_e0ebee7a-0523-419e-ac8a-d98a6b436ec7.Date
+
+relationship 13007bf1-c251-b0ae-2ba6-221820b930d5
+	fromColumn: fact_ServiceNow_TaskSLA.assignment_group
+	toColumn: dim_snow_AssignmentGroup.Assignment-Group
+
+relationship 4c7abbcc-4045-27be-aceb-3e18b2f140ba
+	toCardinality: many
+	fromColumn: fact_ServiceNow_TaskSLA.assigned_to
+	toColumn: dim_Employee_AccountsReceivable.Employee-Name
+
+relationship a5259c31-cadb-4fac-bb44-a190581aa958
+	joinOnDateBehavior: datePartOnly
+	fromColumn: fact_ServiceNow_TaskSLA.start_time
+	toColumn: LocalDateTable_b7f45167-ddfe-442c-8ed9-1551c6da2697.Date
+
+relationship be0a5e86-7346-8346-a9cb-93e371fd7a52
+	isActive: false
+	fromColumn: fact_ServiceNow_TaskSLA.start_date
+	toColumn: dim_date_fiscal_DateKey.DateID
+
+relationship 8ff49fe6-e029-444f-8b56-54cc69c7478a
+	joinOnDateBehavior: datePartOnly
+	fromColumn: fact_ServiceNow_TaskSLA.end_time
+	toColumn: LocalDateTable_dcc87dd1-c4cd-42f6-a05d-2b93ad907689.Date
+
+relationship 138dac33-2464-df0e-a0cf-027208ca8be4
+	fromColumn: fact_ServiceNow_TaskSLA.end_date
+	toColumn: dim_date_fiscal_DateKey.DateID
+
+relationship 294c1856-77a4-5b7b-f0ab-741b5f60882f
+	fromColumn: fact_ServiceNow_TaskSLA.assignment_group
+	toColumn: dim_ServiceNow_AssignmentGroup.Assignment-Group
+
+relationship f492379a-c35c-4b91-94fc-bb089cb8b578
+	joinOnDateBehavior: datePartOnly
+	fromColumn: dim_ServiceNow_AssignmentGroup.Start-Date
+	toColumn: LocalDateTable_c40dbc0a-fc24-43da-a330-19ec7c7e577e.Date
+
+relationship dc8cb8ed-9cda-4351-abad-4e329a776aff
+	joinOnDateBehavior: datePartOnly
+	fromColumn: dim_ServiceNow_AssignmentGroup.End-Date
+	toColumn: LocalDateTable_1b8b72c8-38f2-42a6-b0f7-3f2dfa4922cb.Date
+
+relationship 18ba60f3-ee80-4d6a-9077-e2d3434f2802
+	fromColumn: dim_snow_AssignmentGroup.Sub-Function
+	toColumn: CombinedTotals1.Sub-Function
+
+relationship 6962e7e9-7ecb-d463-592c-cf9c7dec513a
+	fromColumn: dim_ServiceNow_AssignmentGroup.Sub-Function
+	toColumn: CombinedTotals.Sub-Function
+
+relationship bf29be86-a366-0e9b-9fdf-ab28a526ddbf
+	fromColumn: ServiceNow_TaskSLA_Active_CatalogTask_IncidentPS.task_assignment_group
+	toColumn: dim_ServiceNow_AssignmentGroup.Assignment-Group
+
+relationship a42be7ba-6717-3f8c-7b10-60a8ee027c0e
+	fromColumn: dim_date_fiscal_MonthKey.'Month Name'
+	toColumn: dim_date_Month.Month-Name
+

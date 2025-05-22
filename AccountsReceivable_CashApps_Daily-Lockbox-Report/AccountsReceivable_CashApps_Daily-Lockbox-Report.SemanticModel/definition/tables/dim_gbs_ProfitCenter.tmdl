@@ -1,0 +1,56 @@
+table dim_gbs_ProfitCenter
+	lineageTag: b61b8fd8-119c-4636-aa91-153e7196a353
+
+	column RowNumber
+		dataType: string
+		lineageTag: 0af9a1d6-89de-483a-b549-9b331644f2e1
+		summarizeBy: none
+		sourceColumn: RowNumber
+
+		annotation SummarizationSetBy = Automatic
+
+	column ProfitCenter-Code
+		dataType: string
+		lineageTag: 61bc9e8c-a8ec-4a02-af6e-0cdb50945784
+		summarizeBy: none
+		sourceColumn: ProfitCenter-Code
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'ProfitCenter -ID'
+		dataType: string
+		lineageTag: e08426f6-ca8c-4614-a81a-8cad773e5ca7
+		summarizeBy: none
+		sourceColumn: ProfitCenter -ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column Department-Name
+		dataType: string
+		lineageTag: 0e9c73bf-045b-42d0-949c-8617e2c2bb15
+		summarizeBy: none
+		sourceColumn: Department-Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column ProfitCenter-Name
+		dataType: string
+		lineageTag: 6f7864b1-94ef-4ef0-8c4d-c4490f4b91cb
+		summarizeBy: none
+		sourceColumn: ProfitCenter-Name
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_gbs_ProfitCenter = m
+		mode: import
+		source =
+				let
+				    Source = Smartsheet.Tables(),
+				    #"2976903809263492" = Source{[Key="2976903809263492"]}[Data],
+				    #"7899457811074948" = #"2976903809263492"{[Key="7899457811074948"]}[Data],
+				    #"Changed Type" = Table.TransformColumnTypes(#"7899457811074948",{{"ProfitCenter-Code", type text}, {"Department-Name", type text}, {"ProfitCenter-Name", type text}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,9 @@
+{
+  "version": "4.0",
+  "datasetReference": {
+    "byPath": {
+      "path": "../AccountsReceivable_ServiceNow-Dashboard.SemanticModel"
+    },
+    "byConnection": null
+  }
+}

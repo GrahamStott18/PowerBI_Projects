@@ -1,0 +1,83 @@
+table dim_gbs_Lockbox
+	lineageTag: 9c080e5e-8f6a-44a7-9483-1ad266018292
+
+	column Sort-ID
+		dataType: double
+		lineageTag: b1a91c7e-68eb-48bf-821f-f47e3e99cbbb
+		summarizeBy: none
+		sourceColumn: Sort-ID
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Lockbox-ID
+		dataType: string
+		lineageTag: 242c3caf-575d-44f5-9221-e84729912d46
+		summarizeBy: none
+		sourceColumn: Lockbox-ID
+		sortByColumn: Sort-ID
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	column Lockbox-Name
+		dataType: string
+		lineageTag: e2177c31-393a-4ecf-aad9-b69d050078d3
+		summarizeBy: none
+		sourceColumn: Lockbox-Name
+		sortByColumn: Sort-ID
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	column Lockbox-Alt-Name
+		dataType: string
+		lineageTag: 7deb6259-582d-4e5c-bedc-bf4d946a304b
+		summarizeBy: none
+		sourceColumn: Lockbox-Alt-Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column Status
+		dataType: string
+		lineageTag: 1a5e6f8a-696a-456c-935e-64baf8a0e49c
+		summarizeBy: none
+		sourceColumn: Status
+
+		annotation SummarizationSetBy = Automatic
+
+	column Type
+		dataType: string
+		lineageTag: ccb06c83-5bf0-4252-a78f-4018568500c6
+		summarizeBy: none
+		sourceColumn: Type
+
+		annotation SummarizationSetBy = Automatic
+
+	column Batch-Name
+		dataType: string
+		lineageTag: 7b2a33fe-fcba-4f74-9951-85140dc449e7
+		summarizeBy: none
+		sourceColumn: Batch-Name
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_gbs_Lockbox = m
+		mode: import
+		source =
+				let
+				    Source = Smartsheet.Tables(),
+				    #"2976903809263492" = Source{[Key="2976903809263492"]}[Data],
+				    #"313114822135684" = #"2976903809263492"{[Key="313114822135684"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(#"313114822135684",{"RowNumber"}),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Removed Columns",{{"Sort-ID", type number}, {"Lockbox-ID", type text}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

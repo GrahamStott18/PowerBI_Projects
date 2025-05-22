@@ -1,0 +1,74 @@
+cultureInfo en-US
+
+	linguisticMetadata =
+			{
+			  "Version": "2.0.0",
+			  "Language": "en-US",
+			  "Entities": {
+			    "dim_date_fiscal_monthkey.month_fyyy": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "dim_date_fiscal_MonthKey",
+			          "ConceptualProperty": "Month FY-YY"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Fiscal Period": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "measures.ttm_goal": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": ".Measures",
+			          "ConceptualProperty": "TTM_Goal"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Goal": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "measures.ttm_quantity": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": ".Measures",
+			          "ConceptualProperty": "TTM_Quantity"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Qty": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    }
+			  }
+			}
+		contentType: json
+

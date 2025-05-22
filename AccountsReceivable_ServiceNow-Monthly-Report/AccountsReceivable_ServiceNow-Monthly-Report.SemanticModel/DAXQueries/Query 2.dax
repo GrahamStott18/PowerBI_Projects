@@ -1,0 +1,74 @@
+DEFINE
+	VAR __DS0FilterTable = 
+		TREATAS({"March FY-25"}, 'dim_date_fiscal_TTMKey'[Month FY-YY])
+
+	VAR __DS0FilterTable2 = 
+		TREATAS({"Accounts Receivable"}, 'dim_snow_AssignmentGroup'[Functional-Area])
+
+	VAR __DS0Core = 
+		SUMMARIZECOLUMNS(
+			ROLLUPADDISSUBTOTAL('dim_snow_AssignmentGroup'[Assignment-Group], "IsGrandTotalRowTotal"),
+			'dim_date_fiscal_MonthKey'[Month FY-YY],
+			'dim_date_fiscal_MonthKey'[DateID],
+			__DS0FilterTable,
+			__DS0FilterTable2,
+			"TTM_TotalTicketCount_AllTickets_Started__MostRecent_", '.Measures'[TTM_TotalTicketCount_AllTickets_Started (MostRecent)],
+			"v_TTM_TotalTicketCount_AllTickets_Started__MostRecent__FormatString", IGNORE('.Measures'[_TTM_TotalTicketCount_AllTickets_Started (MostRecent) FormatString]),
+			"TTM_IncomingDailyAvg_AllTickets_Started", '.Measures'[TTM_IncomingDailyAvg_AllTickets_Started],
+			"v_TTM_IncomingDailyAvg_AllTickets_Started_FormatString", IGNORE('.Measures'[_TTM_IncomingDailyAvg_AllTickets_Started FormatString])
+		)
+
+	VAR __DS0PrimaryWindowed = 
+		TOPN(
+			102,
+			SUMMARIZE(__DS0Core, 'dim_snow_AssignmentGroup'[Assignment-Group], [IsGrandTotalRowTotal]),
+			[IsGrandTotalRowTotal],
+			0,
+			'dim_snow_AssignmentGroup'[Assignment-Group],
+			1
+		)
+
+	VAR __DS0SecondaryBase = 
+		SUMMARIZE(
+			__DS0Core,
+			'dim_date_fiscal_MonthKey'[Month FY-YY],
+			'dim_date_fiscal_MonthKey'[DateID]
+		)
+
+	VAR __DS0Secondary = 
+		TOPN(
+			102,
+			__DS0SecondaryBase,
+			'dim_date_fiscal_MonthKey'[DateID],
+			1,
+			'dim_date_fiscal_MonthKey'[Month FY-YY],
+			1
+		)
+
+	VAR __DS0BodyLimited = 
+		NATURALLEFTOUTERJOIN(
+			__DS0PrimaryWindowed,
+			SUBSTITUTEWITHINDEX(
+				__DS0Core,
+				"ColumnIndex",
+				__DS0Secondary,
+				'dim_date_fiscal_MonthKey'[DateID],
+				ASC,
+				'dim_date_fiscal_MonthKey'[Month FY-YY],
+				ASC
+			)
+		)
+
+EVALUATE
+	__DS0Secondary
+
+ORDER BY
+	'dim_date_fiscal_MonthKey'[DateID], 'dim_date_fiscal_MonthKey'[Month FY-YY]
+
+EVALUATE
+	__DS0BodyLimited
+
+ORDER BY
+	[IsGrandTotalRowTotal] DESC,
+	'dim_snow_AssignmentGroup'[Assignment-Group],
+	[ColumnIndex]

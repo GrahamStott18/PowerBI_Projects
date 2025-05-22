@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Report",
+    "displayName": "FixedAssets_Capital-Expense-Requests"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "59d376af-81b5-4f4c-b661-b96533829232"
+  }
+}

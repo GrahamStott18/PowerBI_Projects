@@ -1,0 +1,87 @@
+table dim_ServiceNow_Queues_AccountsReceivable
+	lineageTag: b9e812b7-f11a-4b42-b564-0bab7fee930d
+
+	column RowNumber
+		dataType: string
+		lineageTag: 105af6fb-df09-4a75-bc8c-b0dfdbdecac4
+		summarizeBy: none
+		sourceColumn: RowNumber
+
+		annotation SummarizationSetBy = Automatic
+
+	column assignment_group
+		dataType: string
+		lineageTag: fd49a3a3-160d-496f-8f87-1ec4eae3679a
+		summarizeBy: none
+		sourceColumn: assignment_group
+
+		annotation SummarizationSetBy = Automatic
+
+	column queue_name
+		dataType: string
+		lineageTag: 361af478-39cc-47e6-a08d-0719d20f2cc1
+		summarizeBy: none
+		sourceColumn: queue_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column sub_function
+		dataType: string
+		lineageTag: ac79b8dd-757b-4ba8-98b3-e768cb520d6e
+		summarizeBy: none
+		sourceColumn: sub_function
+
+		annotation SummarizationSetBy = Automatic
+
+	column sub_function_alt
+		dataType: string
+		lineageTag: 2f840333-f2a2-4ea6-afaf-46ed0e4d63a7
+		summarizeBy: none
+		sourceColumn: sub_function_alt
+
+		annotation SummarizationSetBy = Automatic
+
+	column sla
+		dataType: string
+		lineageTag: 21eb96f6-5bea-4391-b1c7-3c9fd09897e5
+		summarizeBy: none
+		sourceColumn: sla
+
+		annotation SummarizationSetBy = Automatic
+
+	column ticket_type
+		dataType: string
+		lineageTag: d90d1a1f-672b-4afd-9061-1180d452d010
+		summarizeBy: none
+		sourceColumn: ticket_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column functional_area
+		dataType: string
+		lineageTag: 51b834c4-108c-40bb-8e26-8240b2a81da5
+		summarizeBy: none
+		sourceColumn: functional_area
+
+		annotation SummarizationSetBy = Automatic
+
+	column functional_alt
+		dataType: string
+		lineageTag: 82096a4a-3f60-4622-bc73-607c49145ae4
+		summarizeBy: none
+		sourceColumn: functional_alt
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_ServiceNow_Queues_AccountsReceivable = m
+		mode: import
+		source =
+				let
+				    Source = SmartsheetGlobal.Contents("US", []),
+				    #"2976903809263492" = Source{[Key="2976903809263492"]}[Data],
+				    #"2383437710184324" = #"2976903809263492"{[Key="2383437710184324"]}[Data]
+				in
+				    #"2383437710184324"
+
+	annotation PBI_ResultType = Table
+

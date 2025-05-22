@@ -1,0 +1,20 @@
+visualStyles:{
+    visualName:{        --- Replace with "JSON.visualName" name of the visual for the PowerBI visual, they can differ
+        styleName:{
+            cardName:[{         --- Replace with "JSON.cardName" for the PBI visual style option name
+                propertyName: propertyValue }]  --- Replace with "JSON.propertyName" that matches for the items under each of the VISUAL option catagories
+            }
+        }
+    }
+
+
+
+# Matrix Example
+    "visualStyles":{
+        "pivotTable":{   
+            styleName:{
+                "grid":[{
+                    propertyName: propertyValue }]
+                }
+            }
+        }

@@ -1,0 +1,354 @@
+table dim_gbs_mor_Goals
+	lineageTag: 127b1f71-59c3-4712-a012-5b54d8e6c95e
+
+	column RowNumber
+		dataType: string
+		lineageTag: c2512972-653d-45b9-ae21-3ef0ce3f2bf0
+		summarizeBy: none
+		sourceColumn: RowNumber
+
+		annotation SummarizationSetBy = Automatic
+
+	column Period-ID
+		dataType: string
+		lineageTag: 488363a9-267d-42cd-8eed-bff056cd9e26
+		summarizeBy: none
+		sourceColumn: Period-ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column Fiscal-Period
+		dataType: string
+		lineageTag: a195ea7c-093c-4fae-8389-4554ea482e6d
+		summarizeBy: none
+		sourceColumn: Fiscal-Period
+
+		annotation SummarizationSetBy = Automatic
+
+	column AR_Incident-Resolution
+		dataType: double
+		lineageTag: adae1884-5461-4daa-a4b3-1bef4b77309f
+		summarizeBy: sum
+		sourceColumn: AR_Incident-Resolution
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column AR_Unapplied-Cash
+		dataType: string
+		lineageTag: b32dfc64-8c11-4367-bb07-12fa06e1c71c
+		summarizeBy: none
+		sourceColumn: AR_Unapplied-Cash
+
+		annotation SummarizationSetBy = Automatic
+
+	column AR_Cost-Per-Manual-Receipt
+		dataType: string
+		lineageTag: 013c2f49-5fdf-4a0a-8e8d-9908fda73ef8
+		summarizeBy: none
+		sourceColumn: AR_Cost-Per-Manual-Receipt
+
+		annotation SummarizationSetBy = Automatic
+
+	column AR_Cost-Per-SNow-Request
+		dataType: string
+		lineageTag: 9dd7b20c-e3ca-4bff-b77a-659f8e615dd7
+		summarizeBy: none
+		sourceColumn: AR_Cost-Per-SNow-Request
+
+		annotation SummarizationSetBy = Automatic
+
+	column CB_Debit-Pending-Items-US
+		dataType: string
+		lineageTag: 8b78755c-367d-4615-9723-00da2aa35c5c
+		summarizeBy: none
+		sourceColumn: CB_Debit-Pending-Items-US
+
+		annotation SummarizationSetBy = Automatic
+
+	column CB_Bank-Account-Reconciliation-US
+		dataType: string
+		lineageTag: bde99ad3-065d-4630-a7b6-99d78ac1d876
+		summarizeBy: none
+		sourceColumn: CB_Bank-Account-Reconciliation-US
+
+		annotation SummarizationSetBy = Automatic
+
+	column CB_Cost-Per-Manually-Reconcilied-Item
+		dataType: string
+		lineageTag: 0dbd56a5-2320-43c8-895a-68cc5f147651
+		summarizeBy: none
+		sourceColumn: CB_Cost-Per-Manually-Reconcilied-Item
+
+		annotation SummarizationSetBy = Automatic
+
+	column CB_Debit-Pending-Items-CAN
+		dataType: string
+		lineageTag: 67449cab-1dde-4041-87c2-aef031cd27c5
+		summarizeBy: none
+		sourceColumn: CB_Debit-Pending-Items-CAN
+
+		annotation SummarizationSetBy = Automatic
+
+	column CB_Bank-Account-Reconciliation-CAN
+		dataType: string
+		lineageTag: 0e3f686a-92a4-4489-9505-19c13f6fd878
+		summarizeBy: none
+		sourceColumn: CB_Bank-Account-Reconciliation-CAN
+
+		annotation SummarizationSetBy = Automatic
+
+	column FA_CIP-Balance
+		dataType: string
+		lineageTag: 1a1d58d1-71cd-4fab-9b47-c485249a5cd5
+		summarizeBy: none
+		sourceColumn: FA_CIP-Balance
+
+		annotation SummarizationSetBy = Automatic
+
+	column FA_CIP-Balance-Stale
+		dataType: string
+		lineageTag: 43ae03dd-d28a-4ce0-bb85-8973c15a6804
+		summarizeBy: none
+		sourceColumn: FA_CIP-Balance-Stale
+
+		annotation SummarizationSetBy = Automatic
+
+	column FA_CERs-Closed-Timely
+		dataType: string
+		lineageTag: 77730545-548f-48e8-b329-765c9f2c356d
+		summarizeBy: none
+		sourceColumn: FA_CERs-Closed-Timely
+
+		annotation SummarizationSetBy = Automatic
+
+	column FA_Cost-Per-Transaction
+		dataType: string
+		lineageTag: a76fca32-fb51-4823-b390-74aa23ee23f1
+		summarizeBy: none
+		sourceColumn: FA_Cost-Per-Transaction
+
+		annotation SummarizationSetBy = Automatic
+
+	column FA_Reconciliations-Prepared-And-Reviewed
+		dataType: string
+		lineageTag: 8c662297-abfe-4f78-bbf6-3f10c93b935b
+		summarizeBy: none
+		sourceColumn: FA_Reconciliations-Prepared-And-Reviewed
+
+		annotation SummarizationSetBy = Automatic
+
+	column GL_Accurate-Journal-Entries
+		dataType: string
+		lineageTag: 2213159f-062f-4818-b80d-67cb7a28eaa2
+		summarizeBy: none
+		sourceColumn: GL_Accurate-Journal-Entries
+
+		annotation SummarizationSetBy = Automatic
+
+	column GL_Cost-Per-Manual-Journal-Entries
+		dataType: string
+		lineageTag: a6836dd9-805e-467c-b637-b04a8dff2b07
+		summarizeBy: none
+		sourceColumn: GL_Cost-Per-Manual-Journal-Entries
+
+		annotation SummarizationSetBy = Automatic
+
+	column GL_Reconciliations-Prepared-And-Reviewed
+		dataType: string
+		lineageTag: 1f17d278-37c3-4310-a5dd-42119b2ec41a
+		summarizeBy: none
+		sourceColumn: GL_Reconciliations-Prepared-And-Reviewed
+
+		annotation SummarizationSetBy = Automatic
+
+	column AP_Cost-Per-Invoice
+		dataType: string
+		lineageTag: 4d7985a2-f3f1-41f3-b9e5-9cc0b6819a36
+		summarizeBy: none
+		sourceColumn: AP_Cost-Per-Invoice
+
+		annotation SummarizationSetBy = Automatic
+
+	column AP_Incident-Resolution-Invoice-Entry
+		dataType: double
+		lineageTag: 481a5c35-43c1-4dbf-b239-0d152c69f9ab
+		summarizeBy: sum
+		sourceColumn: AP_Incident-Resolution-Invoice-Entry
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column AP_Cost-Per-Payment-Processed
+		dataType: string
+		lineageTag: 35c1154d-12a3-454e-b32c-ed1362826bba
+		summarizeBy: none
+		sourceColumn: AP_Cost-Per-Payment-Processed
+
+		annotation SummarizationSetBy = Automatic
+
+	column AP_Incident-Resolution-Banking
+		dataType: double
+		lineageTag: 9c553f72-21ac-4641-9944-3213f3fe4e10
+		summarizeBy: sum
+		sourceColumn: AP_Incident-Resolution-Banking
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column AP_Cost-Per-Vendor-Setup
+		dataType: string
+		lineageTag: f38cb6b4-7eea-448d-825c-bb15044150c6
+		summarizeBy: none
+		sourceColumn: AP_Cost-Per-Vendor-Setup
+
+		annotation SummarizationSetBy = Automatic
+
+	column AP_Incident-Resolution-Vendor-Control
+		dataType: double
+		lineageTag: 74e84a6b-8c06-44ee-847e-ef5d6635a0f5
+		summarizeBy: sum
+		sourceColumn: AP_Incident-Resolution-Vendor-Control
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column AP_Audit-Recovery-Rate
+		dataType: double
+		lineageTag: e93e4b2d-6347-4974-903a-2bca387a1f94
+		summarizeBy: sum
+		sourceColumn: AP_Audit-Recovery-Rate
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column AP_Audit-Recovery-Volume
+		dataType: double
+		lineageTag: e1e1e6f4-a872-4bd3-b810-3c5a893b9072
+		summarizeBy: sum
+		sourceColumn: AP_Audit-Recovery-Volume
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column PR_Cost-Per-Payment
+		dataType: string
+		lineageTag: b44c6dc9-27d0-44d4-8b48-774541813d2b
+		summarizeBy: none
+		sourceColumn: PR_Cost-Per-Payment
+
+		annotation SummarizationSetBy = Automatic
+
+	column PR_eForm-Resolution
+		dataType: string
+		lineageTag: 50a890e6-2438-4b02-840e-747dad0ffb13
+		summarizeBy: none
+		sourceColumn: PR_eForm-Resolution
+
+		annotation SummarizationSetBy = Automatic
+
+	column PR_Incident-Resolution
+		dataType: double
+		lineageTag: 0d18ccb0-3065-485d-966d-622cf2587f86
+		summarizeBy: sum
+		sourceColumn: PR_Incident-Resolution
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column CC_Customer-Satisfaction
+		dataType: string
+		lineageTag: 393d7336-853c-4d33-9417-6846911464e7
+		summarizeBy: none
+		sourceColumn: CC_Customer-Satisfaction
+
+		annotation SummarizationSetBy = Automatic
+
+	column CC_Survey-Participation-Rate
+		dataType: string
+		lineageTag: 04807c57-77ac-4672-add1-65d70327356f
+		summarizeBy: none
+		sourceColumn: CC_Survey-Participation-Rate
+
+		annotation SummarizationSetBy = Automatic
+
+	column CC_Average-Answer-Time
+		dataType: string
+		lineageTag: c3417c3a-d7fc-4722-b729-7c0e19cc0384
+		summarizeBy: none
+		sourceColumn: CC_Average-Answer-Time
+
+		annotation SummarizationSetBy = Automatic
+
+	column CC_Abandonment-Rate
+		dataType: string
+		lineageTag: fc01f0c7-54b0-438a-8939-8a0cf71a4646
+		summarizeBy: none
+		sourceColumn: CC_Abandonment-Rate
+
+		annotation SummarizationSetBy = Automatic
+
+	column CC_Calls-Answered-Within-SLA
+		dataType: string
+		lineageTag: bd19005b-b78f-4af2-af7f-659343eef82b
+		summarizeBy: none
+		sourceColumn: CC_Calls-Answered-Within-SLA
+
+		annotation SummarizationSetBy = Automatic
+
+	column CC_Callbacks
+		dataType: string
+		lineageTag: 641a73a6-644b-467f-992b-9cb151f97299
+		summarizeBy: none
+		sourceColumn: CC_Callbacks
+
+		annotation SummarizationSetBy = Automatic
+
+	column PS_Average-Answer-Time
+		dataType: string
+		lineageTag: 12ac2266-51cc-445f-9611-6a88dea164b6
+		summarizeBy: none
+		sourceColumn: PS_Average-Answer-Time
+
+		annotation SummarizationSetBy = Automatic
+
+	column PS_Abandonment-Rate
+		dataType: string
+		lineageTag: bf68227d-f196-40c2-99a8-eb80ab3dc405
+		summarizeBy: none
+		sourceColumn: PS_Abandonment-Rate
+
+		annotation SummarizationSetBy = Automatic
+
+	column PS_Inbound-Email-Efficiency
+		dataType: double
+		lineageTag: bb215d4f-3439-4f8b-8c06-8c641aec6dd1
+		summarizeBy: sum
+		sourceColumn: PS_Inbound-Email-Efficiency
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition dim_gbs_mor_Goals = m
+		mode: import
+		source =
+				let
+				    Source = Smartsheet.Tables(),
+				    #"2976903809263492" = Source{[Key="2976903809263492"]}[Data],
+				    #"8860436996771716" = #"2976903809263492"{[Key="8860436996771716"]}[Data],
+				    #"Changed Type" = Table.TransformColumnTypes(#"8860436996771716",{{"Period-ID", type text}, {"AP_Incident-Resolution-Vendor-Control", type number}, {"AP_Audit-Recovery-Rate", type number}, {"AP_Audit-Recovery-Volume", type number}, {"PR_Incident-Resolution", type number}, {"AP_Incident-Resolution-Banking", type number}, {"AP_Incident-Resolution-Invoice-Entry", type number}, {"AR_Incident-Resolution", type number}, {"PS_Inbound-Email-Efficiency", type number}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

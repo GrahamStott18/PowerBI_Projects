@@ -1,0 +1,272 @@
+table '.Measures'
+	lineageTag: 4a13359a-294c-41ce-90aa-75afee8f7e30
+
+	calculationGroup
+
+	measure 'Control Amount' = SUM( fact_Oracle_Export_US_AccountsReceivable[control_amount] )
+		displayFolder: Oracle_Export
+		lineageTag: 8917e2b7-d207-4797-a8b0-3140375cf30d
+
+		formatStringDefinition = "$#,0.00"
+
+	measure 'Applied Amount' = SUM( fact_Oracle_Export_US_AccountsReceivable[applied_amount] )
+		displayFolder: Oracle_Export
+		lineageTag: 9ebbfaf8-335e-4a7a-9763-9864e4c9a823
+
+		formatStringDefinition = "$#,0.00"
+
+	measure 'Unapplied Amount' = SUM( fact_Oracle_Export_US_AccountsReceivable[unapplied_amount] )
+		displayFolder: Oracle_Export
+		lineageTag: a9707cfa-f303-4966-8eb4-359e71b483f9
+
+		formatStringDefinition = "$#,0.00"
+
+	measure 'On Account Amount' = SUM( fact_Oracle_Export_US_AccountsReceivable[on_account_amount] )
+		displayFolder: Oracle_Export
+		lineageTag: db53f0a2-1723-42da-b8bb-4d64488ce23f
+
+		formatStringDefinition = "$#,0.00"
+
+	measure 'Unidentified Amount' = SUM( fact_Oracle_Export_US_AccountsReceivable[unidentified_amount] )
+		displayFolder: Oracle_Export
+		lineageTag: 8aa07c31-ed2c-484b-8be6-a8d234db9491
+
+		formatStringDefinition = "$#,0.00"
+
+	measure 'Apply Rate' = [Applied Amount] / [Control Amount]
+		lineageTag: 8d7c2972-eb5d-4c11-bd9d-4009deb88f15
+
+		formatStringDefinition = "0%"
+
+	measure 'Control Count' = SUM( fact_Oracle_Export_US_AccountsReceivable[control_count] )
+		displayFolder: Oracle_Export
+		lineageTag: f13f01f4-a64d-489a-b9f9-3edd1befe940
+
+		formatStringDefinition = "#,0"
+
+	measure 'Applied Count' = SUM( fact_Oracle_Export_US_AccountsReceivable[applied_count] )
+		displayFolder: Oracle_Export
+		lineageTag: 7068dbbe-b74a-4cf4-a50d-a3cfa6004f68
+
+		formatStringDefinition = "#,0"
+
+	measure 'Unapplied Count' = SUM( fact_Oracle_Export_US_AccountsReceivable[unapplied_count] )
+		displayFolder: Oracle_Export
+		lineageTag: c035edfa-7be8-41a6-a59e-5bd993ae7937
+
+		formatStringDefinition = "#,0"
+
+	measure 'On Account Count' = SUM( fact_Oracle_Export_US_AccountsReceivable[on_account_count] )
+		displayFolder: Oracle_Export
+		lineageTag: f8f20b8b-8f12-43c2-a785-0f59540bc863
+
+		formatStringDefinition = "#,0"
+
+	measure 'Unidentified Count' = SUM( fact_Oracle_Export_US_AccountsReceivable[unidentified_count] )
+		displayFolder: Oracle_Export
+		lineageTag: 77592922-15d6-4873-a2b7-93a8aa1e9166
+
+		formatStringDefinition = "#,0"
+
+	measure 'Miscellaneous Count' = SUM( fact_Oracle_Export_US_AccountsReceivable[miscellaneous_count] )
+		displayFolder: Oracle_Export
+		lineageTag: fcdded14-a9c7-4c87-b2de-3de2e4b0f7f2
+
+		formatStringDefinition = "#,0"
+
+	measure 'Miscellaneous Amount' = SUM( fact_Oracle_Export_US_AccountsReceivable[miscellaneous_amount] )
+		displayFolder: Oracle_Export
+		lineageTag: bb53cf62-56e7-43f0-b00d-6da4b38951c6
+
+		formatStringDefinition = "$#,0.00"
+
+	measure 'Hit Rate' = [Applied Count] / [Control Count]
+		lineageTag: 1eaf99ed-d26e-436f-bc62-c665f48c19b6
+
+		formatStringDefinition = "0%"
+
+	measure 'Bank Amount' = ```
+			
+			CALCULATE(
+			    SWITCH(
+			        TRUE(),
+			        SELECTEDVALUE( dim_gbs_Lockbox[Lockbox-Name] ) = "GFF Chicago JPMC", [Bank Amount (Chicago_JPMC)],
+			        SELECTEDVALUE( dim_gbs_Lockbox[Lockbox-Name] ) = "GFF Dallas JPMC", [Bank Amount (Dallas_JPMC)],
+			        BLANK()
+			    )
+			)
+			
+			
+			
+			/* 
+			    CALCULATE( 
+			        [Control Amount] , 
+			        FILTER( 
+			            dim_gbs_Lockbox , 
+			            dim_gbs_Lockbox[Type] = "JPMC" ) ) 
+			*/ 
+			```
+		lineageTag: 1aee8d2f-c6c7-46c7-bf26-e7ffd650fbc6
+
+		formatStringDefinition = "$#,0.00"
+
+	measure 'Lockbox Type' = SELECTEDVALUE( dim_gbs_Lockbox[Type] )
+		lineageTag: 9df8c3c1-a775-49e0-80ea-e237ff95c777
+
+	measure 'Variance - Treasury Bank vs Oracle Total' = [Oracle Total] - [Treasury Bank File Amount]
+		lineageTag: e44808ef-a629-49a7-8f16-cf93eb638203
+
+		formatStringDefinition = "$#,0.00; ($#,0.00)"
+
+	measure 'Manual Receipts' = CALCULATE( [Unapplied Count] + [On Account Count] + [Unidentified Count] )
+		lineageTag: 78a437d3-40bc-4385-867f-b67e3fba0512
+
+		formatStringDefinition = "#,0"
+
+	measure LockboxAmount_Sum = SUM( fact_Daily_Chicago_Lockbox[amount] )
+		lineageTag: ab03296d-1a22-4349-8809-982e6e49aaf8
+
+		formatStringDefinition = "$#,0.00; ($#,0.00)"
+
+	measure 'Treasury File Variance - Comment' = VALUES( fact_TreasuryVarianceComments_AccountsReceivable[variance_comments] )
+		displayFolder: Treasury_Bank_File
+		lineageTag: 414842fe-a7fe-4d82-bbf2-f7903cdb187b
+
+	measure 'Treasury Bank File Amount' = ```
+			
+			CALCULATE( 
+			    SUM( fact_Daily_Chicago_Lockbox[amount] ) , 
+			    fact_Daily_Chicago_Lockbox[additional_transaction_type] <> "ZBA_DB"
+			)
+			```
+		displayFolder: Treasury_Bank_File
+		lineageTag: fd02b8a2-7689-45bf-8a9f-8cdf97de1194
+
+		formatStringDefinition = "$#,0.00"
+
+	measure 'Oracle Amount' = [Control Amount]
+		lineageTag: 1bcc0028-e53b-4038-a585-58680c541418
+
+		formatStringDefinition = "$#,0.00"
+
+	measure 'Format Variance - Background (BankVsOracle)' = ```
+			
+			SWITCH( 
+			    TRUE(), 
+			        ROUNDDOWN( [Variance - Treasury Bank vs Oracle Total] , 4 ) > 0 , "#CC0000",
+			        ROUNDDOWN( [Variance - Treasury Bank vs Oracle Total] , 4 ) < 0 , "#CC0000",
+			        ROUNDDOWN( [Variance - Treasury Bank vs Oracle Total] , 4 ) = 0 , "#009900"
+			)
+			--  "#009900"   -- Green    
+			--  "#FFFF00"   -- Yellow    
+			--  "CC0000"    -- Red
+			```
+		displayFolder: .Formatting
+		lineageTag: c9a11378-8c29-42f6-93bf-0d7352d1e06d
+
+	measure 'Format Variance - Font (BankVsOracle)' = ```
+			
+			SWITCH( 
+			    TRUE(), 
+			        ROUNDDOWN( [Variance - Treasury Bank vs Oracle Total] , 4 ) > 0 , "#FFFFFF",
+			        ROUNDDOWN( [Variance - Treasury Bank vs Oracle Total] , 4 ) < 0 , "#FFFFFF",
+			        ROUNDDOWN( [Variance - Treasury Bank vs Oracle Total] , 4 ) = 0 , "#FFFFFF"
+			)
+			        
+			--  "#FFFFFF"   -- White
+			--  "#000000"   -- Black
+			```
+		displayFolder: .Formatting
+		lineageTag: 6f2177c4-ab20-49c9-b8fb-2a2d170ed703
+
+	measure 'Oracle Total' = ```
+			
+			CALCULATE(
+			    [Oracle Amount] , 
+			    dim_gbs_Lockbox[Type] <> "GFF" 
+			)
+			```
+		lineageTag: a721ab40-f851-44d2-a3e7-5340c750c735
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Bank Amount (Chicago_JPMC)' = SUM( fact_DailyBankAmounts_AccountsReceivable[chicago_jpmc_amount] )
+		lineageTag: 5846c622-b020-42d9-8da8-6887907ca979
+
+		formatStringDefinition = "0.00"
+
+	measure 'Bank Amount (Dallas_JPMC)' = CALCULATE( SUM(fact_DailyBankAmounts_AccountsReceivable[dallas_jpmc_amount] ) )
+		lineageTag: 3500cadb-959a-47ee-8a58-bac21e641850
+
+		formatStringDefinition = "0.00"
+
+	measure 'Variance - JPMC Amount vs Oracle Total' = [Bank Amount] - [Oracle Total]
+		lineageTag: faaa3c06-5701-433c-975a-f0742aad0156
+
+		formatStringDefinition = "$#,0.00; ($#,0.00)"
+
+	measure 'Format Variance - Font (JPMCVsOracle)' = ```
+			
+			SWITCH( 
+			    TRUE(), 
+			        ISBLANK([Variance - JPMC Amount vs Oracle Total]), "#000000",
+			        ROUNDDOWN( [Variance - JPMC Amount vs Oracle Total] , 4 ) > 0 , "#FFFFFF",
+			        ROUNDDOWN( [Variance - JPMC Amount vs Oracle Total] , 4 ) < 0 , "#FFFFFF",
+			        ROUNDDOWN( [Variance - JPMC Amount vs Oracle Total] , 4 ) = 0 , "#FFFFFF"
+			)
+			        
+			--  "#FFFFFF"   -- White
+			--  "#000000"   -- Black
+			```
+		displayFolder: .Formatting
+		lineageTag: ada12495-8dad-445a-bb6d-4258f5c9d279
+
+	measure 'Format Variance - Background (JPMCVsOracle)' = ```
+			
+			SWITCH( 
+			    TRUE(), 
+			        ISBLANK([Variance - JPMC Amount vs Oracle Total]), BLANK(),
+			        ROUNDDOWN([Variance - JPMC Amount vs Oracle Total], 4) > 0, "#CC0000",
+			        ROUNDDOWN([Variance - JPMC Amount vs Oracle Total], 4) < 0, "#CC0000",
+			        ROUNDDOWN([Variance - JPMC Amount vs Oracle Total], 4) = 0, "#009900"
+			)
+			
+			--  "#009900"   -- Green    
+			--  "#FFFF00"   -- Yellow    
+			--  "CC0000"    -- Red
+			```
+		displayFolder: .Formatting
+		lineageTag: 1614805c-fe43-4177-a003-e356884fbaae
+
+	measure 'Treasury File Variance - Submitted By' = VALUES( fact_TreasuryVarianceComments_AccountsReceivable[submitted_by] )
+		displayFolder: Treasury_Bank_File
+		lineageTag: 58fb3b33-bef0-41a5-918f-faf2d37d9ed3
+
+	measure 'Treasury File Variance - Created Date' = SELECTEDVALUE( fact_TreasuryVarianceComments_AccountsReceivable[created_on] )
+		displayFolder: Treasury_Bank_File
+		lineageTag: 0e247612-2f35-4ac2-943d-c0e20edc3c4d
+
+	measure 'Treasury File Variance - Date' = VALUES( fact_TreasuryVarianceComments_AccountsReceivable[treasury_file_date] )
+		formatString: Short Date
+		displayFolder: Treasury_Bank_File
+		lineageTag: 8a131644-f68d-494a-8ff0-60cf31f8749d
+
+	column Name
+		dataType: string
+		isHidden
+		lineageTag: fa159de8-74ac-4579-b081-e3c0c50378e7
+		summarizeBy: none
+		sourceColumn: Name
+		sortByColumn: Ordinal
+
+		annotation SummarizationSetBy = Automatic
+
+	column Ordinal
+		dataType: int64
+		isHidden
+		lineageTag: 7942fe90-46a3-411e-bf53-8ac5477598f1
+		summarizeBy: sum
+		sourceColumn: Ordinal
+
+		annotation SummarizationSetBy = Automatic
+

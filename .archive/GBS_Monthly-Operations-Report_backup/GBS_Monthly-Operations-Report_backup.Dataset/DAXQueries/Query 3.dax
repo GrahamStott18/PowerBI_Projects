@@ -1,0 +1,56 @@
+DEFINE
+    MEASURE '.Measures'[Current Period (ALL)] = VAR _KPI = [KPI (GBS)]
+
+VAR _KpiSelect =
+    SELECTEDVALUE ( dim_gbs_mor_KPI[Kpi-Name] )
+
+VAR _CurrentDate =
+    MAX ( dim_date_fiscal_TTMKey[DateID] ) 
+
+VAR _Result =
+    CALCULATE (
+        IF ( _KpiSelect = "Cost Per Invoice", [KPI - Cost Per Invoice (AP)] , 
+        IF ( _KpiSelect = "Incident Resolution - InvoiceMRPO", [KPI - Incident Resolution (AP_marketMRPO)] , 
+        IF ( _KpiSelect = "Cost Per Payment Processed", [KPI - Cost Per Payment Processed (AP)] ,
+        IF ( _KpiSelect = "Incident Resolution - Banking", [KPI - Incident Resolution (AP_Banking)] , 
+        IF ( _KpiSelect = "Cost Per Vendor Setup", [KPI - Cost Per Vendor Setup (AP)] , 
+        IF ( _KpiSelect = "Incident Resolution - Vendor Control", [KPI - Incident Resolution (AP_VendorControl)] , 
+        IF ( _KpiSelect = "Audit Recovery Rate", [KPI - Audit Recovery Rate] ,
+        IF ( _KpiSelect = "Incident Resolution - AR" , [KPI - Incident Resolution (AR)] , 
+        IF ( _KpiSelect = "Unapplied Cash", [KPI - Unapplied Cash (AR)] , 
+        IF ( _KpiSelect = "Cost Per Manual Receipt", [KPI - Cost Per Manual Receipt (AR)] ,
+        IF ( _KpiSelect = "Cost Per SNow Request" , [KPI - Cost Per SNow Request (AR)] , 
+        IF ( _KpiSelect = "Debit Pending Items - US", [KPI - Debit Pending Items-US (CB)] , 
+        IF ( _KpiSelect = "Bank Account Reconciliation - US", [KPI - Bank Account Reconciliation-US (CB)] ,
+        IF ( _KpiSelect = "Cost Per Manually Reconciled Item" , [KPI - Cost Per Manually Reconciled Item (CB)] , 
+        IF ( _KpiSelect = "Debit Pending Items - Canada", [KPI - Debit Pending Items-CAN (CB)] ,
+        IF ( _KpiSelect = "Bank Account Reconciliation - Canada" , [KPI - Bank Account Reconciliation-CAN (CB)] , 
+        IF ( _KpiSelect = "Accurate Journal Entries", [KPI - Accurate Journal Entries (GL)] , 
+        IF ( _KpiSelect = "Cost Per Manual Journal Entry", [KPI - Cost Per Manual Journal Entry (GL)] ,
+        IF ( _KpiSelect = "Reconciliations Prepared & Reviewed - GL" , [KPI - Reconciliations Prepared & Reviewed (GL)] , 
+        IF ( _KpiSelect = "CIP Balance", [KPI - CIP Balance (FA)] ,
+        IF ( _KpiSelect = "CIP Balance (Stale)" , [KPI - CIP Balance-Stale (FA)] , 
+        IF ( _KpiSelect = "CERs Closed Timely", [KPI - CERs Closed Timely (FA)] , 
+        IF ( _KpiSelect = "Cost Per Transaction - FA", [KPI - Cost Per FA Transaction (FA)] ,
+        IF ( _KpiSelect = "Reconciliations Prepared & Reviewed - FA" , [KPI - Reconciliations Prepared & Reviewed (FA)] , 
+        IF ( _KpiSelect = "Cost Per Payment - PR", [KPI - Cost Per Payment (PR)] , 
+        IF ( _KpiSelect = "eForm Resolution", [KPI - eForm Resolution (PR)] ,
+        IF ( _KpiSelect = "Incident Resolution - PR" , [KPI - Incident Resolution (PR)] , 
+        IF ( _KpiSelect = "Customer Satisfaction", [KPI - Customer Satisfaction (CC)], 
+        IF ( _KpiSelect = "Survey Participation Rate", [KPI - Survey Participation Rate (CC)],        
+        IF ( _KpiSelect = "Average Answer Time", [KPI - Average Answer Time (CC)],
+        IF ( _KpiSelect = "Abandonment Rate", [KPI - Abandonment Rate (CC)], 
+        IF ( _KpiSelect = "Calls Answered within Service Level", [KPI - Calls Answered Within SLA (CC)], 
+        IF( _KpiSelect = "Inbound Email Efficiency", [KPI - Inbound Email Efficency (CC)] ,     
+        IF ( _KpiSelect = "Callbacks", [KPI - Callbacks (CC)]  
+        ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) , 
+
+            dim_date_fiscal_MonthKey[DateID] == _CurrentDate )
+
+RETURN
+    _Result
+
+EVALUATE
+    SUMMARIZECOLUMNS(
+        "Current Period (ALL)", '.Measures'[Current Period (ALL)]
+    )

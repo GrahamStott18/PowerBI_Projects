@@ -1,0 +1,217 @@
+{
+  "version": "1.1.0",
+  "diagrams": [
+    {
+      "ordinal": 0,
+      "scrollPosition": {
+        "x": 342.14999777192315,
+        "y": 0
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 1215.1746104000217,
+            "y": 477.66214448095837
+          },
+          "nodeIndex": "dim_date_fiscal_DateKey",
+          "nodeLineageTag": "a97fe3ba-0321-420c-9f6f-8dc3e13f1e31",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 1
+        },
+        {
+          "location": {
+            "x": 1599.982467704358,
+            "y": 280.92422941926964
+          },
+          "nodeIndex": "dim_date_fiscal_MonthKey",
+          "nodeLineageTag": "93611b21-f518-4acc-941f-20788b0dae42",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 2
+        },
+        {
+          "location": {
+            "x": 1719.460155544258,
+            "y": 804.24120919094071
+          },
+          "nodeIndex": "fact_LaborAllocation_AccountsPayable",
+          "nodeLineageTag": "1890a308-6d18-4e86-8170-6e5290fb6210",
+          "size": {
+            "height": 272,
+            "width": 234
+          },
+          "zIndex": 5
+        },
+        {
+          "location": {
+            "x": 546.66290128919229,
+            "y": 500.27191927302124
+          },
+          "nodeIndex": "fact_LaborAllocation_AccountsReceivable",
+          "nodeLineageTag": "231a592a-6848-4bf3-b4cc-90afd316f2c1",
+          "size": {
+            "height": 296,
+            "width": 234
+          },
+          "zIndex": 6
+        },
+        {
+          "location": {
+            "x": 2141.7977368601596,
+            "y": 1108.7090601927162
+          },
+          "nodeIndex": "fact_LaborAllocation_AuditRecovery",
+          "nodeLineageTag": "3746db8f-1729-4ad3-9047-2b35863f37f7",
+          "size": {
+            "height": 272,
+            "width": 234
+          },
+          "zIndex": 7
+        },
+        {
+          "location": {
+            "x": 1974.1272842522299,
+            "y": 345.83985511274557
+          },
+          "nodeIndex": "fact_LaborAllocation_Banking",
+          "nodeLineageTag": "73b0f728-5ac8-4263-9c29-30f604290663",
+          "size": {
+            "height": 272,
+            "width": 234
+          },
+          "zIndex": 8
+        },
+        {
+          "location": {
+            "x": 1802.6693077972177,
+            "y": 1133.8342719821608
+          },
+          "nodeIndex": "fact_LaborAllocation_InvoiceMRPO",
+          "nodeLineageTag": "f633e843-2ddc-48ed-8adf-fec728fb96f7",
+          "size": {
+            "height": 309.39646319354415,
+            "width": 234
+          },
+          "zIndex": 10
+        },
+        {
+          "location": {
+            "x": 2429.1767239030014,
+            "y": 960.69770395570276
+          },
+          "nodeIndex": "fact_LaborAllocation_VendorControl",
+          "nodeLineageTag": "2e81f654-2e6f-490e-a7c0-834ceca15cef",
+          "size": {
+            "height": 272,
+            "width": 234
+          },
+          "zIndex": 9
+        },
+        {
+          "location": {
+            "x": 9.6748059206029211,
+            "y": 705.16961243531534
+          },
+          "nodeIndex": ".Measures",
+          "nodeLineageTag": "648e0315-86e4-4461-98c4-14eb7327dba1",
+          "size": {
+            "height": 128,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 907.37010717809267,
+            "y": 1374.6200229478022
+          },
+          "nodeIndex": "UFR GL_L2_SUMMARY_F",
+          "nodeLineageTag": "01425bcc-7482-4dce-bbd2-187ddfe0ad50",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1295.6429436750891,
+            "y": 1664.2714515072421
+          },
+          "nodeIndex": "Dashboard_Account_Hierarchy",
+          "nodeLineageTag": "92827299-acf3-4c75-9ee3-9b95e60649d5",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 793.22959033573557,
+            "y": 1731.8465582113363
+          },
+          "nodeIndex": "Account_Hierarchy_Linking",
+          "nodeLineageTag": "f2836372-478a-4cca-9dd0-5cc5b6c1e502",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 2331.7109220856828,
+            "y": 480.42520962466438
+          },
+          "nodeIndex": "dim_Employee_AccountsPayable",
+          "nodeLineageTag": "696764be-d223-4ac7-af35-095ac7fcc4e5",
+          "size": {
+            "height": 272,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 372.9776551328755,
+            "y": 134.14312760044504
+          },
+          "nodeIndex": "dim_Employee_AccountsReceivable",
+          "nodeLineageTag": "7db4f924-97ba-481a-a52b-fb1ca5d06c27",
+          "size": {
+            "height": 248,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 569.93947771876992,
+            "y": 1345.5387188116013
+          },
+          "nodeIndex": "dim_gbs_ProfitCenter",
+          "nodeLineageTag": "747bf6b8-102f-4105-8966-48b09fd89c5e",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 0
+        }
+      ],
+      "name": "All tables",
+      "zoomValue": 53.309950338819533,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    }
+  ],
+  "selectedDiagram": "All tables",
+  "defaultDiagram": "All tables"
+}

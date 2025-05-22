@@ -1,0 +1,146 @@
+table dim_date_fiscal_DateKey
+	lineageTag: 8c566ff8-7d66-441f-a997-34273850b481
+
+	column DayIndex
+		dataType: int64
+		formatString: 0
+		lineageTag: 09f81d28-78b1-4bd4-bf8d-1d42a2e53fa7
+		summarizeBy: sum
+		sourceColumn: DayIndex
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	column DateID
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: f6146718-4bdf-41f9-874b-862c34261c0e
+		summarizeBy: none
+		sourceColumn: DateID
+
+		variation Variation
+			isDefault
+			relationship: 38e61474-9256-420a-b8af-b917163de6f4
+			defaultHierarchy: LocalDateTable_85f61c1d-c101-4656-afa2-8b2ed3b11878.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Fiscal Period'
+		dataType: int64
+		formatString: 0
+		lineageTag: 27aa782c-bd10-4e4b-8fe8-2142ba56da31
+		summarizeBy: sum
+		sourceColumn: Fiscal Period
+
+		annotation SummarizationSetBy = Automatic
+
+	column WeekInFM
+		dataType: int64
+		formatString: 0
+		lineageTag: 1f4aecb6-f017-4478-9e4b-5e3e4d76d2b0
+		summarizeBy: sum
+		sourceColumn: WeekInFM
+
+		annotation SummarizationSetBy = Automatic
+
+	column FWeek_Index
+		dataType: int64
+		formatString: 0
+		lineageTag: 55e6f43e-36b8-4019-9d55-843e2973bd2b
+		summarizeBy: sum
+		sourceColumn: FWeek_Index
+
+		annotation SummarizationSetBy = Automatic
+
+	column Fiscal-Year
+		dataType: string
+		lineageTag: 5a693aa1-fd60-4346-92a5-cfe64ea664a8
+		summarizeBy: none
+		sourceColumn: Fiscal-Year
+
+		annotation SummarizationSetBy = Automatic
+
+	column FY-YY
+		dataType: string
+		lineageTag: 3218cc33-731e-4fc3-b65a-8936a00f09f6
+		summarizeBy: none
+		sourceColumn: FY-YY
+
+		annotation SummarizationSetBy = Automatic
+
+	column Fiscal-Period
+		dataType: string
+		lineageTag: 61939cc3-eff8-45b8-8a4d-e953388fc011
+		summarizeBy: none
+		sourceColumn: Fiscal-Period
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Fiscal Month'
+		dataType: string
+		lineageTag: 7a2c8c85-4abe-4052-9686-cef2cbcd5422
+		summarizeBy: none
+		sourceColumn: Fiscal Month
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Month FY-YY'
+		dataType: string
+		lineageTag: b098402e-684b-4b7e-aee7-0f880fe7d372
+		summarizeBy: none
+		sourceColumn: Month FY-YY
+
+		annotation SummarizationSetBy = Automatic
+
+	column MMM
+		dataType: string
+		lineageTag: 34a066d5-9fd3-4175-8960-94fde0904fde
+		summarizeBy: none
+		sourceColumn: MMM
+
+		annotation SummarizationSetBy = Automatic
+
+	column MMM_FY-YY
+		dataType: string
+		lineageTag: 053f06bd-d150-45c1-9013-fe6de5336831
+		summarizeBy: none
+		sourceColumn: MMM_FY-YY
+
+		annotation SummarizationSetBy = Automatic
+
+	column PeriodID
+		dataType: string
+		lineageTag: e813c75c-fa76-4aa8-a218-e9a0f26389be
+		summarizeBy: none
+		sourceColumn: PeriodID
+
+		annotation SummarizationSetBy = Automatic
+
+	column WeekDay
+		dataType: int64
+		formatString: 0
+		lineageTag: 775174bc-78e9-48e1-a974-e090fde97e94
+		summarizeBy: sum
+		sourceColumn: WeekDay
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_date_fiscal_DateKey = m
+		mode: import
+		source =
+				let
+				    Source = PowerPlatform.Dataflows(null),
+				    Workspaces = Source{[Id="Workspaces"]}[Data],
+				    #"c52e4ff9-a75a-4ede-b43a-ee2e8b5aaae1" = Workspaces{[workspaceId="c52e4ff9-a75a-4ede-b43a-ee2e8b5aaae1"]}[Data],
+				    #"c4eefec3-54ff-4c2d-95b2-631d551349a7" = #"c52e4ff9-a75a-4ede-b43a-ee2e8b5aaae1"{[dataflowId="c4eefec3-54ff-4c2d-95b2-631d551349a7"]}[Data],
+				    dim_date_fiscal_DateKey_ = #"c4eefec3-54ff-4c2d-95b2-631d551349a7"{[entity="dim_date_fiscal_DateKey",version=""]}[Data]
+				in
+				    dim_date_fiscal_DateKey_
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

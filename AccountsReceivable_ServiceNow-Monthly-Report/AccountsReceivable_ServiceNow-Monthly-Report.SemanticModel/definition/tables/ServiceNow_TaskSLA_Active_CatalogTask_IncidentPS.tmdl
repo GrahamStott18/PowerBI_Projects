@@ -1,0 +1,364 @@
+table ServiceNow_TaskSLA_Active_CatalogTask_IncidentPS
+	lineageTag: 55eedcae-66cf-44a7-ab16-44d81fa74621
+
+	column pause_duration
+		dataType: string
+		lineageTag: ecac0d6d-de6b-4cb2-9303-e7ed9a113ce0
+		summarizeBy: none
+		sourceColumn: pause_duration
+
+		annotation SummarizationSetBy = Automatic
+
+	column task_assigned_to
+		dataType: string
+		lineageTag: 73fef5de-7b48-4c93-a18f-0c00534cc99c
+		summarizeBy: none
+		sourceColumn: task_assigned_to
+
+		annotation SummarizationSetBy = Automatic
+
+	column pause_time
+		dataType: string
+		lineageTag: d55d9ab7-52d4-4fe5-a85d-f4e5966911fe
+		summarizeBy: none
+		sourceColumn: pause_time
+
+		annotation SummarizationSetBy = Automatic
+
+	column timezone
+		dataType: string
+		lineageTag: 394a2952-154d-4fc7-9263-4c162cd73188
+		summarizeBy: none
+		sourceColumn: timezone
+
+		annotation SummarizationSetBy = Automatic
+
+	column sys_updated_on
+		dataType: string
+		lineageTag: 27afdae9-483a-45ca-9294-01e1199ca721
+		summarizeBy: none
+		sourceColumn: sys_updated_on
+
+		annotation SummarizationSetBy = Automatic
+
+	column business_time_left
+		dataType: string
+		lineageTag: 3866a4df-038c-4015-8348-19ce718baa25
+		summarizeBy: none
+		sourceColumn: business_time_left
+
+		annotation SummarizationSetBy = Automatic
+
+	column duration
+		dataType: string
+		lineageTag: a459628e-572a-4968-8b25-39961fa558e8
+		summarizeBy: none
+		sourceColumn: duration
+
+		annotation SummarizationSetBy = Automatic
+
+	column sys_id
+		dataType: string
+		lineageTag: 0b7eddc6-5525-4e74-82cd-5cec9605d881
+		summarizeBy: none
+		sourceColumn: sys_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column time_left
+		dataType: string
+		lineageTag: d36a9b83-4e23-479b-9185-566c40b7c5d7
+		summarizeBy: none
+		sourceColumn: time_left
+
+		annotation SummarizationSetBy = Automatic
+
+	column sys_updated_by
+		dataType: string
+		lineageTag: 8d2eee44-eaa3-4f88-895e-928ec9ce58f3
+		summarizeBy: none
+		sourceColumn: sys_updated_by
+
+		annotation SummarizationSetBy = Automatic
+
+	column sys_created_on
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: d53d1f2f-02aa-46d4-b455-edf74a51c210
+		summarizeBy: none
+		sourceColumn: sys_created_on
+
+		variation Variation
+			isDefault
+			relationship: 64ed1d1d-b228-4349-ab89-7eabec2e7e5f
+			defaultHierarchy: LocalDateTable_6372f301-84d6-4cb8-a24a-1f0bd99aa07a.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column percentage
+		dataType: string
+		lineageTag: f8806ea9-5728-4550-b920-e1c379d775f5
+		summarizeBy: none
+		sourceColumn: percentage
+
+		annotation SummarizationSetBy = Automatic
+
+	column original_breach_time
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: a6db9796-0fb6-406c-8515-989c82fcde80
+		summarizeBy: none
+		sourceColumn: original_breach_time
+
+		variation Variation
+			isDefault
+			relationship: ea622c81-e371-4a69-91c6-14d1fa59bc52
+			defaultHierarchy: LocalDateTable_4a9b743a-6958-48d3-b818-869d10ba68c9.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column sys_created_by
+		dataType: string
+		lineageTag: d4210e4c-5cd6-4335-ad26-d463890d0230
+		summarizeBy: none
+		sourceColumn: sys_created_by
+
+		annotation SummarizationSetBy = Automatic
+
+	column business_percentage
+		dataType: string
+		lineageTag: 7acd9de1-e0c8-4e78-8fee-622464724353
+		summarizeBy: none
+		sourceColumn: business_percentage
+
+		annotation SummarizationSetBy = Automatic
+
+	column task_assignment_group
+		dataType: string
+		lineageTag: ad0a0cb7-8504-401e-95af-217f0b9d757d
+		summarizeBy: none
+		sourceColumn: task_assignment_group
+
+		annotation SummarizationSetBy = Automatic
+
+	column end_time
+		dataType: string
+		lineageTag: 51641a58-6b3c-4ae5-80fc-ee85cab2ae8a
+		summarizeBy: none
+		sourceColumn: end_time
+
+		annotation SummarizationSetBy = Automatic
+
+	column sys_mod_count
+		dataType: string
+		lineageTag: 011aa70b-935f-42d1-b661-13743838673f
+		summarizeBy: none
+		sourceColumn: sys_mod_count
+
+		annotation SummarizationSetBy = Automatic
+
+	column active
+		dataType: string
+		lineageTag: c6a5c907-e3dd-4aee-b326-c3ad2c033851
+		summarizeBy: none
+		sourceColumn: active
+
+		annotation SummarizationSetBy = Automatic
+
+	column business_pause_duration
+		dataType: string
+		lineageTag: a735865a-070b-43f8-856d-08d2c0c9e42c
+		summarizeBy: none
+		sourceColumn: business_pause_duration
+
+		annotation SummarizationSetBy = Automatic
+
+	column sys_tags
+		dataType: string
+		lineageTag: ceae11b6-6d41-435d-84e7-2d51ab83465a
+		summarizeBy: none
+		sourceColumn: sys_tags
+
+		annotation SummarizationSetBy = Automatic
+
+	column schedule
+		dataType: string
+		lineageTag: 462bb580-f77c-4b0e-aa61-f34f67e94434
+		summarizeBy: none
+		sourceColumn: schedule
+
+		annotation SummarizationSetBy = Automatic
+
+	column start_time
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: bc865460-b3a8-4cb3-853f-ad3de9a52c68
+		summarizeBy: none
+		sourceColumn: start_time
+
+		variation Variation
+			isDefault
+			relationship: c52750a3-9322-480f-bb5c-d9a52ffa562b
+			defaultHierarchy: LocalDateTable_c505444b-ce03-4fea-919c-c59618cce821.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column business_duration
+		dataType: string
+		lineageTag: f0de5b6f-0f4e-4452-b402-31d92cf5b078
+		summarizeBy: none
+		sourceColumn: business_duration
+
+		annotation SummarizationSetBy = Automatic
+
+	column task
+		dataType: string
+		lineageTag: 8a07eedc-210d-4721-8315-d8475142daed
+		summarizeBy: none
+		sourceColumn: task
+
+		annotation SummarizationSetBy = Automatic
+
+	column task_type
+		dataType: string
+		lineageTag: 17fba5c6-0b23-442c-a56f-434f7e45809f
+		summarizeBy: none
+		sourceColumn: task_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column stage
+		dataType: string
+		lineageTag: 808496ea-6860-4466-b0ac-8c1adf354834
+		summarizeBy: none
+		sourceColumn: stage
+
+		annotation SummarizationSetBy = Automatic
+
+	column planned_end_time
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 8b7bc3ab-615b-4580-8d5e-b094f7743436
+		summarizeBy: none
+		sourceColumn: planned_end_time
+
+		variation Variation
+			isDefault
+			relationship: cceb49ae-1af7-43e9-969f-dd9c3471bd83
+			defaultHierarchy: LocalDateTable_712c8c95-89d6-4c8d-b104-8ce6c7e7f519.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column has_breached
+		dataType: string
+		lineageTag: 783ec9e2-4cea-47be-996d-4b10c2cde5b0
+		summarizeBy: none
+		sourceColumn: has_breached
+
+		annotation SummarizationSetBy = Automatic
+
+	column start_date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 5e21d6c5-0ea9-48b8-8ac8-a0a72c67609a
+		summarizeBy: none
+		sourceColumn: start_date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column end_date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 58ec6aa8-a493-48bc-b2a2-68a178688570
+		summarizeBy: none
+		sourceColumn: end_date
+
+		variation Variation
+			isDefault
+			relationship: db435c05-3ee0-4041-8806-9aa64f911057
+			defaultHierarchy: LocalDateTable_7758efe2-ce13-4760-b8a5-760a9bd6f178.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column loaded_date
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: d50fa94f-742f-49cb-be07-4598e21df7bb
+		summarizeBy: none
+		sourceColumn: loaded_date
+
+		variation Variation
+			isDefault
+			relationship: 9136f953-5c8e-4318-bd4b-5582d6b21f28
+			defaultHierarchy: LocalDateTable_6f224b31-2a37-479a-98aa-f48f8ae5e413.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column sla
+		dataType: string
+		lineageTag: 4012bc3d-134b-4f18-9b93-9a2034fef01b
+		summarizeBy: none
+		sourceColumn: sla
+
+		annotation SummarizationSetBy = Automatic
+
+	column start_time_utc
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 2b58762b-446e-4641-8bae-b2ad7c1759b3
+		summarizeBy: none
+		sourceColumn: start_time_utc
+
+		variation Variation
+			isDefault
+			relationship: 30e59b29-75b8-411c-a5c3-ea19ce99c728
+			defaultHierarchy: LocalDateTable_65917a37-afc1-4560-bf51-626455109fc4.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column original_breach_time_utc
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: feeb30ea-eace-4a88-8505-e9a5e633df46
+		summarizeBy: none
+		sourceColumn: original_breach_time_utc
+
+		variation Variation
+			isDefault
+			relationship: 87726ae8-80a4-4173-a4b2-71899f1d4f88
+			defaultHierarchy: LocalDateTable_6dcc6dd5-9b1e-4253-940d-00e60419b71e.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column planned_end_time_utc
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 7784af2d-bfca-433b-8891-ed7f6c44d4c0
+		summarizeBy: none
+		sourceColumn: planned_end_time_utc
+
+		variation Variation
+			isDefault
+			relationship: 669f67aa-4a03-4b32-a98b-abce50f32f99
+			defaultHierarchy: LocalDateTable_d7f47d8f-b28a-4902-b674-2462c4f5ea2d.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	partition ServiceNow_TaskSLA_Active_CatalogTask_IncidentPS = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("USPHL0PRPADBA1", "Graham_Workspace"),
+				    dbo_ServiceNow_TaskSLA_Active_CatalogTask_IncidentPS = Source{[Schema="dbo",Item="ServiceNow_TaskSLA_Active_CatalogTask_IncidentPS"]}[Data],
+				    #"Changed Type" = Table.TransformColumnTypes(dbo_ServiceNow_TaskSLA_Active_CatalogTask_IncidentPS,{{"original_breach_time", type datetime}, {"sys_created_on", type datetime}, {"start_time", type datetime}, {"planned_end_time", type datetime}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

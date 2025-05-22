@@ -1,0 +1,62 @@
+{
+  "config": "{\"version\":\"5.47\",\"themeCollection\":{\"baseTheme\":{\"name\":\"CY23SU08\",\"version\":\"5.48\",\"type\":2}},\"activeSectionIndex\":0,\"defaultDrillFilterOtherVisuals\":true,\"slowDataSourceSettings\":{\"isCrossHighlightingDisabled\":false,\"isSlicerSelectionsButtonEnabled\":false,\"isFilterSelectionsButtonEnabled\":false,\"isFieldWellButtonEnabled\":false,\"isApplyAllButtonEnabled\":false},\"linguisticSchemaSyncVersion\":2,\"settings\":{\"useNewFilterPaneExperience\":true,\"allowChangeFilterTypes\":true,\"useStylableVisualContainerHeader\":true,\"queryLimitOption\":6,\"exportDataMode\":1,\"useDefaultAggregateDisplayName\":true},\"objects\":{\"section\":[{\"properties\":{\"verticalAlignment\":{\"expr\":{\"Literal\":{\"Value\":\"'Top'\"}}}}}]}}",
+  "layoutOptimization": 0,
+  "resourcePackages": [
+    {
+      "resourcePackage": {
+        "disabled": false,
+        "items": [
+          {
+            "name": "CY23SU08",
+            "path": "BaseThemes/CY23SU08.json",
+            "type": 202
+          }
+        ],
+        "name": "SharedResources",
+        "type": 2
+      }
+    }
+  ],
+  "sections": [
+    {
+      "config": "{}",
+      "displayName": "Page 1",
+      "displayOption": 1,
+      "filters": "[{\"name\":\"Filterae72643ad2658d82fcc7\",\"expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"dim_date_fiscal_DateKey\"}},\"Property\":\"Month FY-YY\"}},\"type\":\"Categorical\",\"howCreated\":1,\"objects\":{}}]",
+      "height": 720.00,
+      "name": "ReportSection",
+      "visualContainers": [
+        {
+          "config": "{\"name\":\"6e6b8a3f3233eef598c8\",\"layouts\":[{\"id\":0,\"position\":{\"x\":0,\"y\":0,\"z\":0,\"width\":996.6666666666666,\"height\":720,\"tabOrder\":0}}],\"singleVisual\":{\"visualType\":\"tableEx\",\"projections\":{\"Values\":[{\"queryRef\":\".Measures.Passed SLA\"},{\"queryRef\":\".Measures.Failed SLA\"},{\"queryRef\":\".Measures.Ticket Count\"},{\"queryRef\":\".Measures.SLA %\"},{\"queryRef\":\"dim_snow_AssignmentGroup.Sub-Function\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"m\",\"Entity\":\".Measures\",\"Type\":0},{\"Name\":\"d\",\"Entity\":\"dim_snow_AssignmentGroup\",\"Type\":0}],\"Select\":[{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"m\"}},\"Property\":\"Ticket Count\"},\"Name\":\".Measures.Ticket Count\",\"NativeReferenceName\":\"Ticket Count\"},{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"m\"}},\"Property\":\"Failed SLA\"},\"Name\":\".Measures.Failed SLA\",\"NativeReferenceName\":\"Failed SLA\"},{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"m\"}},\"Property\":\"Passed SLA\"},\"Name\":\".Measures.Passed SLA\",\"NativeReferenceName\":\"Passed SLA\"},{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"m\"}},\"Property\":\"SLA %\"},\"Name\":\".Measures.SLA %\",\"NativeReferenceName\":\"SLA %\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"d\"}},\"Property\":\"Sub-Function\"},\"Name\":\"dim_snow_AssignmentGroup.Sub-Function\",\"NativeReferenceName\":\"Sub-Function\"}]},\"drillFilterOtherVisuals\":true}}",
+          "filters": "[]",
+          "height": 720.00,
+          "width": 996.67,
+          "x": 0.00,
+          "y": 0.00,
+          "z": 0.00
+        },
+        {
+          "config": "{\"name\":\"dcfb90f41ed2d101cca2\",\"layouts\":[{\"id\":0,\"position\":{\"x\":996.6666666666666,\"y\":0,\"z\":1000,\"width\":283.3333333333333,\"height\":87.77777777777777,\"tabOrder\":1000}}],\"singleVisual\":{\"visualType\":\"slicer\",\"projections\":{\"Values\":[{\"queryRef\":\"dim_date_fiscal_MonthKey.Month FY-YY\",\"active\":true}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"d\",\"Entity\":\"dim_date_fiscal_MonthKey\",\"Type\":0}],\"Select\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"d\"}},\"Property\":\"Month FY-YY\"},\"Name\":\"dim_date_fiscal_MonthKey.Month FY-YY\",\"NativeReferenceName\":\"Month FY-YY\"}]},\"drillFilterOtherVisuals\":true,\"objects\":{\"data\":[{\"properties\":{\"mode\":{\"expr\":{\"Literal\":{\"Value\":\"'Dropdown'\"}}}}}],\"general\":[{\"properties\":{\"filter\":{\"filter\":{\"Version\":2,\"From\":[{\"Name\":\"d\",\"Entity\":\"dim_date_fiscal_MonthKey\",\"Type\":0}],\"Where\":[{\"Condition\":{\"In\":{\"Expressions\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"d\"}},\"Property\":\"Month FY-YY\"}}],\"Values\":[[{\"Literal\":{\"Value\":\"'January FY-24'\"}}]]}}}]}}}}]}}}",
+          "filters": "[{\"name\":\"Filtera76c0b8cc86b1c20ce83\",\"expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"dim_date_fiscal_MonthKey\"}},\"Property\":\"Month FY-YY\"}},\"filter\":{\"Version\":2,\"From\":[{\"Name\":\"d\",\"Entity\":\"dim_date_fiscal_MonthKey\",\"Type\":0}],\"Where\":[{\"Condition\":{\"Not\":{\"Expression\":{\"In\":{\"Expressions\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"d\"}},\"Property\":\"Month FY-YY\"}}],\"Values\":[[{\"Literal\":{\"Value\":\"'October FY-22'\"}}],[{\"Literal\":{\"Value\":\"'November FY-22'\"}}],[{\"Literal\":{\"Value\":\"'December FY-22'\"}}],[{\"Literal\":{\"Value\":\"'January FY-22'\"}}],[{\"Literal\":{\"Value\":\"'February FY-22'\"}}],[{\"Literal\":{\"Value\":\"'March FY-22'\"}}],[{\"Literal\":{\"Value\":\"'April FY-22'\"}}],[{\"Literal\":{\"Value\":\"'May FY-22'\"}}],[{\"Literal\":{\"Value\":\"'June FY-22'\"}}],[{\"Literal\":{\"Value\":\"'July FY-22'\"}}],[{\"Literal\":{\"Value\":\"'August FY-22'\"}}],[{\"Literal\":{\"Value\":\"'September FY-22'\"}}],[{\"Literal\":{\"Value\":\"'October FY-23'\"}}],[{\"Literal\":{\"Value\":\"'November FY-23'\"}}],[{\"Literal\":{\"Value\":\"'December FY-23'\"}}],[{\"Literal\":{\"Value\":\"'January FY-23'\"}}],[{\"Literal\":{\"Value\":\"'February FY-23'\"}}],[{\"Literal\":{\"Value\":\"'March FY-23'\"}}],[{\"Literal\":{\"Value\":\"'April FY-23'\"}}],[{\"Literal\":{\"Value\":\"'May FY-23'\"}}],[{\"Literal\":{\"Value\":\"'June FY-23'\"}}],[{\"Literal\":{\"Value\":\"'July FY-23'\"}}],[{\"Literal\":{\"Value\":\"'August FY-23'\"}}]]}}}}}]},\"type\":\"Categorical\",\"howCreated\":0,\"objects\":{\"general\":[{\"properties\":{\"isInvertedSelectionMode\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}}}}]},\"isHiddenInViewMode\":false}]",
+          "height": 87.78,
+          "width": 283.33,
+          "x": 996.67,
+          "y": 0.00,
+          "z": 1000.00
+        }
+      ],
+      "width": 1280.00
+    },
+    {
+      "config": "{}",
+      "displayName": "Page 2",
+      "displayOption": 1,
+      "filters": "[]",
+      "height": 720.00,
+      "name": "ReportSectiondec86628c30dde2b6c80",
+      "ordinal": 1,
+      "visualContainers": [],
+      "width": 1280.00
+    }
+  ]
+}

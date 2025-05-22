@@ -1,0 +1,67 @@
+model Model
+	culture: en-US
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	discourageImplicitMeasures
+	sourceQueryCulture: en-US
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation PBI_QueryOrder = ["dim_date_fiscal_DateKey","dim_date_fiscal_MonthKey","dim_date_fiscal_TTMKey","dim_date_Holiday","dim_snow_AssignmentGroup","dim_gbs_mor_Goals","dim_gbs_ProfitCenter","dim_Employee_AccountsReceivable","ServiceNow_TaskSLA_Started","ServiceNow_TaskSLA_Ended","ServiceNow_TaskSLA_Active_CatalogTask_IncidentPS","dim_ar_ServiceNow_Groupings","dim_ServiceNow_Queues_AccountsReceivable","fact_ServiceNow_TaskSLA","dim_ServiceNow_AssignmentGroup","dim_date_Month"]
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBIDesktopVersion = 2.142.1277.0 (25.04)+014fde450f93691fc9537f0758d73d1c5df153ef
+
+annotation PBI_ProTooling = ["DevMode","CalcGroup","DaxQueryView_Desktop"]
+
+annotation __TEdtr = 1
+
+ref table DateTableTemplate_dca4052d-aff4-404f-874c-a1f4d0e63d60
+ref table '.Measures'
+ref table dim_date_fiscal_DateKey
+ref table LocalDateTable_85f61c1d-c101-4656-afa2-8b2ed3b11878
+ref table dim_date_fiscal_MonthKey
+ref table LocalDateTable_336abc93-57dc-46da-acaa-273f0a494a3a
+ref table LocalDateTable_d7c77918-59e0-47ad-bc6e-76d5c4af2469
+ref table dim_date_fiscal_TTMKey
+ref table LocalDateTable_07d4074b-6db8-4afb-a27b-ef3a916e6b94
+ref table dim_snow_AssignmentGroup
+ref table dim_gbs_mor_Goals
+ref table dim_date_Holiday
+ref table LocalDateTable_ea96c6d0-1e78-4218-9ae5-7a7b60ec3fbf
+ref table dim_gbs_ProfitCenter
+ref table dim_Employee_AccountsReceivable
+ref table ServiceNow_TaskSLA_Started
+ref table LocalDateTable_43dcabd4-21db-4979-a620-7bb79e0043ef
+ref table LocalDateTable_62d4ba8b-987d-40f0-ac37-60f4e6c22280
+ref table ServiceNow_TaskSLA_Ended
+ref table LocalDateTable_8c95d7f7-1fc9-4225-b0d1-13fd8a830b68
+ref table ServiceNow_TaskSLA_Active_CatalogTask_IncidentPS
+ref table LocalDateTable_7758efe2-ce13-4760-b8a5-760a9bd6f178
+ref table LocalDateTable_6f224b31-2a37-479a-98aa-f48f8ae5e413
+ref table LocalDateTable_6372f301-84d6-4cb8-a24a-1f0bd99aa07a
+ref table LocalDateTable_4a9b743a-6958-48d3-b818-869d10ba68c9
+ref table LocalDateTable_c505444b-ce03-4fea-919c-c59618cce821
+ref table LocalDateTable_712c8c95-89d6-4c8d-b104-8ce6c7e7f519
+ref table LocalDateTable_2e09690b-72a7-43d5-b6b3-a56e6b6d39b3
+ref table dim_ar_ServiceNow_Groupings
+ref table CombinedTotals1
+ref table dim_ServiceNow_Queues_AccountsReceivable
+ref table LocalDateTable_65917a37-afc1-4560-bf51-626455109fc4
+ref table LocalDateTable_6dcc6dd5-9b1e-4253-940d-00e60419b71e
+ref table LocalDateTable_d7f47d8f-b28a-4902-b674-2462c4f5ea2d
+ref table MTD_Summary_Calculation
+ref table LocalDateTable_015169bc-06d7-473d-82d4-d4dedf1d87bb
+ref table fact_ServiceNow_TaskSLA
+ref table LocalDateTable_e0ebee7a-0523-419e-ac8a-d98a6b436ec7
+ref table LocalDateTable_b7f45167-ddfe-442c-8ed9-1551c6da2697
+ref table LocalDateTable_dcc87dd1-c4cd-42f6-a05d-2b93ad907689
+ref table dim_ServiceNow_AssignmentGroup
+ref table LocalDateTable_c40dbc0a-fc24-43da-a330-19ec7c7e577e
+ref table LocalDateTable_1b8b72c8-38f2-42a6-b0f7-3f2dfa4922cb
+ref table CombinedTotals
+ref table dim_date_Month
+
+ref cultureInfo en-US
+

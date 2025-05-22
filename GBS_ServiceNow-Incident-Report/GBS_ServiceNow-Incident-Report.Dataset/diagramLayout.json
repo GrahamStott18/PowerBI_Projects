@@ -1,0 +1,178 @@
+{
+  "version": "1.1.0",
+  "diagrams": [
+    {
+      "ordinal": 0,
+      "scrollPosition": {
+        "x": 0,
+        "y": 0
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 1883.5656200322239,
+            "y": 81.024354753391663
+          },
+          "nodeIndex": ".Measures",
+          "nodeLineageTag": "4a13359a-294c-41ce-90aa-75afee8f7e30",
+          "size": {
+            "height": 249.07971072993553,
+            "width": 234
+          },
+          "zIndex": 6
+        },
+        {
+          "location": {
+            "x": 309.75255118026234,
+            "y": 593.11603542040393
+          },
+          "nodeIndex": "dim_date_fiscal_DateKey",
+          "nodeLineageTag": "8c566ff8-7d66-441f-a997-34273850b481",
+          "size": {
+            "height": 276.9697070000002,
+            "width": 234
+          },
+          "zIndex": 7
+        },
+        {
+          "location": {
+            "x": 289.08029231454407,
+            "y": 107.82356422490308
+          },
+          "nodeIndex": "dim_date_fiscal_MonthKey",
+          "nodeLineageTag": "7ec0e8e7-a81a-455d-b52f-ac5347932ea2",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 10
+        },
+        {
+          "location": {
+            "x": 1301.6465721427915,
+            "y": 62.735264812701047
+          },
+          "nodeIndex": "dim_date_fiscal_TTMKey",
+          "nodeLineageTag": "f09306d5-6901-415b-b6c4-ac7f6f4bbfc4",
+          "size": {
+            "height": 272,
+            "width": 234
+          },
+          "zIndex": 2
+        },
+        {
+          "location": {
+            "x": 877.393137834903,
+            "y": 99.005219569676115
+          },
+          "nodeIndex": "dim_gbs_mor_Goals",
+          "nodeLineageTag": "127b1f71-59c3-4712-a012-5b54d8e6c95e",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 8
+        },
+        {
+          "location": {
+            "x": 1547.72113536041,
+            "y": 575.21232169690416
+          },
+          "nodeIndex": "dim_snow_AssignmentGroup",
+          "nodeLineageTag": "66beda21-384a-4fb3-a6f7-3b2b979d8fc3",
+          "size": {
+            "height": 248,
+            "width": 234
+          },
+          "zIndex": 12
+        },
+        {
+          "location": {
+            "x": 1585.0219132156992,
+            "y": 112.97260353960402
+          },
+          "nodeIndex": "dim_date_Holiday",
+          "nodeLineageTag": "d6573e35-20f9-4a70-861f-8a0bd8a063e7",
+          "size": {
+            "height": 152,
+            "width": 234
+          },
+          "zIndex": 3
+        },
+        {
+          "location": {
+            "x": 2098.943756059246,
+            "y": 593.95556196186953
+          },
+          "nodeIndex": "dim_gbs_ProfitCenter",
+          "nodeLineageTag": "55cc8b75-3311-4090-92a2-d8b2223f8233",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 4
+        },
+        {
+          "location": {
+            "x": 793.82406571541378,
+            "y": 1273.3684449447696
+          },
+          "nodeIndex": "SNow_MORMetrics (GBS_Metrics)",
+          "nodeLineageTag": "3a049e81-db14-4c41-803a-7fc9875af035",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 5
+        },
+        {
+          "location": {
+            "x": 796.89510421261036,
+            "y": 488.67877526879619
+          },
+          "nodeIndex": "ServiceNow_CatalogTask_Closed",
+          "nodeLineageTag": "3cdadc5d-8a41-455c-bac5-9446797d9c1f",
+          "size": {
+            "height": 390,
+            "width": 234
+          },
+          "zIndex": 11
+        },
+        {
+          "location": {
+            "x": 796.48042035790229,
+            "y": 926.288999552665
+          },
+          "nodeIndex": "ServiceNow_IncidentPS_Resolved",
+          "nodeLineageTag": "c1a44f78-513b-4bd2-af88-a0986886b7b4",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 1
+        },
+        {
+          "location": {
+            "x": 783.97601331262831,
+            "y": 1621.2821388267614
+          },
+          "nodeIndex": "ServiceNow_TaskSLA_Ended",
+          "nodeLineageTag": "69c09bc6-d8b0-43cd-ba05-46b256b10e80",
+          "size": {
+            "height": 364.18426461183094,
+            "width": 234
+          },
+          "zIndex": 9
+        }
+      ],
+      "name": "All tables",
+      "zoomValue": 31.384283767210015,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    }
+  ],
+  "selectedDiagram": "All tables",
+  "defaultDiagram": "All tables"
+}

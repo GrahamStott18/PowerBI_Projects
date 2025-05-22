@@ -1,0 +1,152 @@
+{
+  "version": "1.1.0",
+  "diagrams": [
+    {
+      "ordinal": 0,
+      "scrollPosition": {
+        "x": 0,
+        "y": 0
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 0,
+            "y": 0
+          },
+          "nodeIndex": ".Measures",
+          "nodeLineageTag": "4a13359a-294c-41ce-90aa-75afee8f7e30",
+          "size": {
+            "height": 128,
+            "width": 234
+          },
+          "zIndex": 8
+        },
+        {
+          "location": {
+            "x": 863.41674121563426,
+            "y": 245.49606858662563
+          },
+          "nodeIndex": "dim_date_fiscal_DateKey",
+          "nodeLineageTag": "8c566ff8-7d66-441f-a997-34273850b481",
+          "size": {
+            "height": 276.9697070000002,
+            "width": 234
+          },
+          "zIndex": 1
+        },
+        {
+          "location": {
+            "x": 485.17799464958426,
+            "y": 242.45218480803075
+          },
+          "nodeIndex": "dim_date_fiscal_MonthKey",
+          "nodeLineageTag": "7ec0e8e7-a81a-455d-b52f-ac5347932ea2",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 2
+        },
+        {
+          "location": {
+            "x": 0,
+            "y": 160.8431046086769
+          },
+          "nodeIndex": "dim_date_fiscal_TTMKey",
+          "nodeLineageTag": "f09306d5-6901-415b-b6c4-ac7f6f4bbfc4",
+          "size": {
+            "height": 272,
+            "width": 234
+          },
+          "zIndex": 3
+        },
+        {
+          "location": {
+            "x": 1931.9840947931675,
+            "y": 1053.595606239578
+          },
+          "nodeIndex": "dim_gbs_ProfitCenter",
+          "nodeLineageTag": "b61b8fd8-119c-4636-aa91-153e7196a353",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 4
+        },
+        {
+          "location": {
+            "x": 1672.0456755415191,
+            "y": 97.5277882658601
+          },
+          "nodeIndex": "ServiceNow_TaskSLA_Active",
+          "nodeLineageTag": "871a8d8a-f97f-423f-8466-3323ef4f758e",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 5
+        },
+        {
+          "location": {
+            "x": 1229.2627196995618,
+            "y": 472.42765978686384
+          },
+          "nodeIndex": "ServiceNow_TaskSLA_Active_CatalogTask_IncidentPS",
+          "nodeLineageTag": "0ca4f93a-f799-473e-acc0-b8adc3e4a89b",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 6
+        },
+        {
+          "location": {
+            "x": 1284.8313263233208,
+            "y": 911.749222801656
+          },
+          "nodeIndex": "dim_snow_AssignmentGroup",
+          "nodeLineageTag": "55764fcf-ff1b-4543-9787-fcbba7a2af0f",
+          "size": {
+            "height": 248,
+            "width": 234
+          },
+          "zIndex": 7
+        },
+        {
+          "location": {
+            "x": 735.36637610180458,
+            "y": 1026.5161741520162
+          },
+          "nodeIndex": "Query1",
+          "nodeLineageTag": "ba91f6f2-c5a8-4f6c-8d6a-60e7b1db69c3",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 10
+        },
+        {
+          "location": {
+            "x": 292.34922901129926,
+            "y": 726.6917328617501
+          },
+          "nodeIndex": "dim_ServiceNow_Queues_AccountsReceivable",
+          "nodeLineageTag": "b9e812b7-f11a-4b42-b564-0bab7fee930d",
+          "size": {
+            "height": 296,
+            "width": 234
+          },
+          "zIndex": 9
+        }
+      ],
+      "name": "All tables",
+      "zoomValue": 54.856245933097959,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    }
+  ],
+  "selectedDiagram": "All tables",
+  "defaultDiagram": "All tables"
+}

@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Report",
+    "displayName": "AccountsPayable_Month-End-Reporting"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "05558737-9e2a-4375-a1bf-ab8d9d5f57b3"
+  }
+}

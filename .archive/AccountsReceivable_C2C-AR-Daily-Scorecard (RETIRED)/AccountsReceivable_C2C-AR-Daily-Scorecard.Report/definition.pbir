@@ -1,0 +1,9 @@
+{
+  "version": "4.0",
+  "datasetReference": {
+    "byPath": {
+      "path": "../AccountsReceivable_C2C-AR-Daily-Scorecard.SemanticModel"
+    },
+    "byConnection": null
+  }
+}

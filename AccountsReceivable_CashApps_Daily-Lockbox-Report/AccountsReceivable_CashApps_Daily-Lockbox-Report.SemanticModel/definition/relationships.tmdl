@@ -1,0 +1,77 @@
+relationship 0a211ae5-32ad-4d51-bee1-6358fb55235f
+	joinOnDateBehavior: datePartOnly
+	fromColumn: dim_date_fiscal_MonthKey.DateID
+	toColumn: LocalDateTable_336abc93-57dc-46da-acaa-273f0a494a3a.Date
+
+relationship ae769ad1-81d4-4e58-bbe0-51b8ee55cd03
+	joinOnDateBehavior: datePartOnly
+	fromColumn: dim_date_fiscal_MonthKey.'DateID - Mmm'
+	toColumn: LocalDateTable_d7c77918-59e0-47ad-bc6e-76d5c4af2469.Date
+
+relationship b1be2d67-588b-4b82-8b30-a2a33d486f49
+	joinOnDateBehavior: datePartOnly
+	fromColumn: dim_date_fiscal_TTMKey.DateID
+	toColumn: LocalDateTable_07d4074b-6db8-4afb-a27b-ef3a916e6b94.Date
+
+relationship 97a209d9-29b4-4ead-9b95-37131971c422
+	fromColumn: dim_date_fiscal_DateKey.PeriodID
+	toColumn: dim_date_fiscal_MonthKey.PeriodID
+
+relationship 7ccac70d-637b-4adb-a5d8-8d2e84cd6287
+	joinOnDateBehavior: datePartOnly
+	fromColumn: fact_Oracle_Export_US_AccountsReceivable.batch_date
+	toColumn: LocalDateTable_f9a191cc-6262-4880-9bf8-48b7963b4e22.Date
+
+relationship bfbeb7a0-64d4-45fa-b0ba-d83bd9c1ee2f
+	joinOnDateBehavior: datePartOnly
+	fromColumn: fact_Oracle_Export_US_AccountsReceivable.deposit_date
+	toColumn: LocalDateTable_05cf1d3e-4c2a-4853-97b4-d0a9fd79cb2f.Date
+
+relationship 6c5d7200-adac-4815-baa6-41238c3a87de
+	joinOnDateBehavior: datePartOnly
+	fromColumn: fact_Oracle_Export_US_AccountsReceivable.loaded_date
+	toColumn: LocalDateTable_a370022a-83b3-4092-9c35-08cf2c56cd11.Date
+
+relationship c24e51ed-d543-0a9f-e9a0-4526bb71a1a0
+	crossFilteringBehavior: bothDirections
+	fromColumn: fact_Oracle_Export_US_AccountsReceivable.gl_date
+	toColumn: dim_date_fiscal_DateKey.DateID
+
+relationship 1038b4d8-51d9-f799-5233-c91deaa5b362
+	fromColumn: fact_Oracle_Export_US_AccountsReceivable.batch_source
+	toColumn: dim_gbs_Lockbox.Batch-Name
+
+relationship 7ee111b2-f26f-454a-80e9-ef80e161d2c0
+	joinOnDateBehavior: datePartOnly
+	fromColumn: fact_Daily_Chicago_Lockbox.loaded_date
+	toColumn: LocalDateTable_87d2e269-fbf4-446e-b8d6-058cda9f193e.Date
+
+relationship 96c256ed-1220-177a-13a4-4358e2dfb647
+	fromColumn: fact_Daily_Chicago_Lockbox.date
+	toColumn: dim_date_fiscal_DateKey.DateID
+
+relationship 6b9cbc5e-0bc9-4dc6-8ff4-8c9fdff3156b
+	joinOnDateBehavior: datePartOnly
+	fromColumn: dim_date_fiscal_MonthKey.'Start of week'
+	toColumn: LocalDateTable_ac003090-0eda-40e8-89be-7c7692509277.Date
+
+relationship 33b21e16-4839-d52c-ff01-370448770983
+	fromColumn: fact_TreasuryVarianceComments_AccountsReceivable.treasury_file_date
+	toColumn: dim_date_fiscal_DateKey.DateID
+
+relationship 9ff7823f-31cf-4f89-b5c7-8a0564c6e78d
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: dim_date_fiscal_DateKey.DateID
+	toColumn: fact_DailyBankAmounts_AccountsReceivable.date
+
+relationship cfe0d3e7-6661-4b50-bc6b-55573759fcb9
+	joinOnDateBehavior: datePartOnly
+	fromColumn: fact_DailyBankAmounts_AccountsReceivable.date
+	toColumn: LocalDateTable_2e026643-c43c-4ed9-a49f-2e58d6805c6f.Date
+
+relationship a5b8e774-50fc-4446-ac35-b0b1617b70e4
+	joinOnDateBehavior: datePartOnly
+	fromColumn: fact_TreasuryVarianceComments_AccountsReceivable.created_on
+	toColumn: LocalDateTable_abb2f710-5de8-4f03-b645-a806ac59a981.Date
+

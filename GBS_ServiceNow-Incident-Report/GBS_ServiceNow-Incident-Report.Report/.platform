@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Report",
+    "displayName": "GBS_ServiceNow-Incident-Report"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "29cabe95-52a6-4264-9c9e-072ca72580ed"
+  }
+}

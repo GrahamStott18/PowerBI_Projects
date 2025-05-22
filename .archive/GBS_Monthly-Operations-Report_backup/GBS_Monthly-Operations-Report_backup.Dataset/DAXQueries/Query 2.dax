@@ -1,0 +1,4 @@
+EVALUATE
+    SUMMARIZECOLUMNS(
+        "Current Period (ALL)", '.Measures'[Current Period (ALL)]
+    )

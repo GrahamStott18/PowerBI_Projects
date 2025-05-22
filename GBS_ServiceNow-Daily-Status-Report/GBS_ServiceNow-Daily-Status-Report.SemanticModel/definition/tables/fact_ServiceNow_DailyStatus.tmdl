@@ -1,0 +1,172 @@
+table fact_ServiceNow_DailyStatus
+	lineageTag: 2e4cf925-a3ac-4b7c-86d4-651a5f0c926f
+
+	column age
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 9c374bc3-956b-4410-b6cd-3a59ffd047d8
+		summarizeBy: sum
+		sourceColumn: age
+
+		annotation SummarizationSetBy = Automatic
+
+	column age_category
+		dataType: string
+		sourceProviderType: nvarchar(50)
+		lineageTag: 7cf3640b-9b76-4544-a47b-2f8bf1fab3c1
+		summarizeBy: none
+		sourceColumn: age_category
+
+		annotation SummarizationSetBy = Automatic
+
+	column closed_age
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: afdd7d89-63b7-4214-8b13-f58594bcd6a4
+		summarizeBy: sum
+		sourceColumn: closed_age
+
+		annotation SummarizationSetBy = Automatic
+
+	column assignment_group
+		dataType: string
+		sourceProviderType: nvarchar(max)
+		lineageTag: f228ab36-d214-4788-9d28-2158906ecfb6
+		summarizeBy: none
+		sourceColumn: assignment_group
+
+		annotation SummarizationSetBy = Automatic
+
+	column category
+		dataType: string
+		sourceProviderType: nvarchar(max)
+		lineageTag: 99c3eacb-b5eb-47c7-a9eb-457d99ec788c
+		summarizeBy: none
+		sourceColumn: category
+
+		annotation SummarizationSetBy = Automatic
+
+	column subcategory
+		dataType: string
+		sourceProviderType: nvarchar(max)
+		lineageTag: bfb39696-f254-4165-aea2-dca09ea5c00c
+		summarizeBy: none
+		sourceColumn: subcategory
+
+		annotation SummarizationSetBy = Automatic
+
+	column closed_date
+		dataType: dateTime
+		formatString: General Date
+		sourceProviderType: datetime
+		lineageTag: 97d41b83-6ab4-41a8-8c89-4c0b7eca7f25
+		summarizeBy: none
+		sourceColumn: closed_date
+
+		annotation SummarizationSetBy = Automatic
+
+	column created_date
+		dataType: dateTime
+		formatString: General Date
+		sourceProviderType: datetime
+		lineageTag: fe39145a-8c35-46e2-adb0-eeef9160c482
+		summarizeBy: none
+		sourceColumn: created_date
+
+		annotation SummarizationSetBy = Automatic
+
+	column last_update
+		dataType: dateTime
+		formatString: General Date
+		sourceProviderType: datetime
+		lineageTag: 342d559b-9d64-4ed7-82eb-6846a07703a2
+		summarizeBy: none
+		sourceColumn: last_update
+
+		annotation SummarizationSetBy = Automatic
+
+	column number
+		dataType: string
+		sourceProviderType: nvarchar(50)
+		lineageTag: 74e20c94-49b5-4bd2-a3a0-68b7f554954e
+		summarizeBy: none
+		sourceColumn: number
+
+		annotation SummarizationSetBy = Automatic
+
+	column resolved_date
+		dataType: dateTime
+		formatString: General Date
+		sourceProviderType: datetime
+		lineageTag: a0b42de9-8eac-4dcf-baca-79cac169a026
+		summarizeBy: none
+		sourceColumn: resolved_date
+
+		annotation SummarizationSetBy = Automatic
+
+	column state
+		dataType: string
+		sourceProviderType: nvarchar(50)
+		lineageTag: 9a1f4190-7242-4a59-86dd-3b6cebb81ed6
+		summarizeBy: none
+		sourceColumn: state
+
+		annotation SummarizationSetBy = Automatic
+
+	column ticket_type
+		dataType: string
+		sourceProviderType: nvarchar(50)
+		lineageTag: f2c14f63-7b15-4321-876c-d3de8bc39a0a
+		summarizeBy: none
+		sourceColumn: ticket_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column parent
+		dataType: string
+		sourceProviderType: nvarchar(50)
+		lineageTag: 9cf68252-0439-4d1e-9a29-44f5ad60c88d
+		summarizeBy: none
+		sourceColumn: parent
+
+		annotation SummarizationSetBy = Automatic
+
+	column stage
+		dataType: string
+		sourceProviderType: nvarchar(50)
+		lineageTag: 82df12fa-c8f5-4fb7-b810-c11339cb2803
+		summarizeBy: none
+		sourceColumn: stage
+
+		annotation SummarizationSetBy = Automatic
+
+	column source_table
+		dataType: string
+		sourceProviderType: nvarchar(50)
+		lineageTag: 7db74a87-fa88-42a3-8d8e-05abad42b13d
+		summarizeBy: none
+		sourceColumn: source_table
+
+		annotation SummarizationSetBy = Automatic
+
+	column loaded_date
+		dataType: dateTime
+		formatString: General Date
+		sourceProviderType: datetime
+		lineageTag: d83d97d7-31bd-45a5-a829-ee94cbe82117
+		summarizeBy: none
+		sourceColumn: loaded_date
+
+		annotation SummarizationSetBy = Automatic
+
+	partition fact_ServiceNow_DailyStatus = m
+		mode: directQuery
+		source =
+				let
+				    Source = Sql.Database("USPHL0PRPADBA1", "Graham_Workspace"),
+				    dbo_fact_ServiceNow_DailyStatus = Source{[Schema="dbo",Item="fact_ServiceNow_DailyStatus"]}[Data]
+				in
+				    dbo_fact_ServiceNow_DailyStatus
+

@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "SemanticModel",
+    "displayName": "AccountsReceivable_ServiceNow-Active-Tickets-Report"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "a29e95f1-59b3-4b77-a09a-61f97ef09270"
+  }
+}

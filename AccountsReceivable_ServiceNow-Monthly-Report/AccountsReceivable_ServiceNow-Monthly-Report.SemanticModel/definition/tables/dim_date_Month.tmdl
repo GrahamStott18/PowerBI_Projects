@@ -1,0 +1,68 @@
+table dim_date_Month
+	lineageTag: f2116cc9-fbb2-465a-86ad-80d68413dfad
+
+	column Month-Name
+		dataType: string
+		lineageTag: 454841d2-a2a8-43f2-9827-0bb762ffa952
+		summarizeBy: none
+		sourceColumn: Month-Name
+		sortByColumn: Period
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	column Month-ABRV
+		dataType: string
+		lineageTag: 73923317-b886-4a99-8fbb-0f7d0b2df8f9
+		summarizeBy: none
+		sourceColumn: Month-ABRV
+		sortByColumn: Period
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	column Mmm
+		dataType: string
+		lineageTag: 5b5065d6-af64-4ddb-b3c8-301c0f428f9d
+		summarizeBy: none
+		sourceColumn: Mmm
+		sortByColumn: Period
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	column Period
+		dataType: int64
+		formatString: 0
+		lineageTag: c445d151-be82-4491-bfd9-62342196a6be
+		summarizeBy: none
+		sourceColumn: Period
+
+		annotation SummarizationSetBy = Automatic
+
+	column Fiscal-Period
+		dataType: string
+		lineageTag: 1db8cd5c-de5a-4e7b-a773-083cffd0bdbc
+		summarizeBy: none
+		sourceColumn: Fiscal-Period
+		sortByColumn: Period
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_date_Month = m
+		mode: import
+		source =
+				let
+				    Source = PowerPlatform.Dataflows(null),
+				    Workspaces = Source{[Id="Workspaces"]}[Data],
+				    #"c52e4ff9-a75a-4ede-b43a-ee2e8b5aaae1" = Workspaces{[workspaceId="c52e4ff9-a75a-4ede-b43a-ee2e8b5aaae1"]}[Data],
+				    #"c4eefec3-54ff-4c2d-95b2-631d551349a7" = #"c52e4ff9-a75a-4ede-b43a-ee2e8b5aaae1"{[dataflowId="c4eefec3-54ff-4c2d-95b2-631d551349a7"]}[Data],
+				    dim_date_Month_ = #"c4eefec3-54ff-4c2d-95b2-631d551349a7"{[entity="dim_date_Month",version=""]}[Data]
+				in
+				    dim_date_Month_
+

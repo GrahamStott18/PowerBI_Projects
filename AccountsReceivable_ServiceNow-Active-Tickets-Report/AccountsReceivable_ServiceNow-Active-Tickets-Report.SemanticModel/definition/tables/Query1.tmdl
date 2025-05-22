@@ -1,0 +1,412 @@
+table Query1
+	lineageTag: ba91f6f2-c5a8-4f6c-8d6a-60e7b1db69c3
+
+	column pause_duration
+		dataType: string
+		sourceProviderType: nvarchar(max)
+		lineageTag: d51773b7-3b32-4198-abb7-d834b0f20449
+		summarizeBy: none
+		sourceColumn: pause_duration
+
+		annotation SummarizationSetBy = Automatic
+
+	column task_assigned_to
+		dataType: string
+		sourceProviderType: nvarchar(max)
+		lineageTag: ca0e852e-4c82-420d-9ed3-c5508878c49b
+		summarizeBy: none
+		sourceColumn: task_assigned_to
+
+		annotation SummarizationSetBy = Automatic
+
+	column pause_time
+		dataType: string
+		sourceProviderType: nvarchar(max)
+		lineageTag: 76c74ec7-8d92-4f1c-80de-09279cbdb2bb
+		summarizeBy: none
+		sourceColumn: pause_time
+
+		annotation SummarizationSetBy = Automatic
+
+	column timezone
+		dataType: string
+		sourceProviderType: nvarchar(max)
+		lineageTag: 3e90004b-df92-4832-b6e6-731b79a03dbf
+		summarizeBy: none
+		sourceColumn: timezone
+
+		annotation SummarizationSetBy = Automatic
+
+	column sys_updated_on
+		dataType: string
+		sourceProviderType: nvarchar(max)
+		lineageTag: 0a07f729-6682-4260-a03a-a23e85255010
+		summarizeBy: none
+		sourceColumn: sys_updated_on
+
+		annotation SummarizationSetBy = Automatic
+
+	column business_time_left
+		dataType: string
+		sourceProviderType: nvarchar(max)
+		lineageTag: 494dfaec-9fcd-4a77-aed8-51d49bea7020
+		summarizeBy: none
+		sourceColumn: business_time_left
+
+		annotation SummarizationSetBy = Automatic
+
+	column duration
+		dataType: string
+		sourceProviderType: nvarchar(max)
+		lineageTag: d720e943-eb7e-4354-a349-d91f3637d729
+		summarizeBy: none
+		sourceColumn: duration
+
+		annotation SummarizationSetBy = Automatic
+
+	column sys_id
+		dataType: string
+		sourceProviderType: nvarchar(max)
+		lineageTag: 872d8db5-e2f7-41c4-9ba9-4ed5687ed894
+		summarizeBy: none
+		sourceColumn: sys_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column time_left
+		dataType: string
+		sourceProviderType: nvarchar(max)
+		lineageTag: d342f542-8a7b-47d0-afac-935aff6d1c7b
+		summarizeBy: none
+		sourceColumn: time_left
+
+		annotation SummarizationSetBy = Automatic
+
+	column sys_updated_by
+		dataType: string
+		sourceProviderType: nvarchar(max)
+		lineageTag: 1886f410-a32d-46bf-adab-b47215131773
+		summarizeBy: none
+		sourceColumn: sys_updated_by
+
+		annotation SummarizationSetBy = Automatic
+
+	column sys_created_on
+		dataType: dateTime
+		formatString: General Date
+		sourceProviderType: datetime
+		lineageTag: 46830216-ca07-4bdb-99ac-87e97db154aa
+		summarizeBy: none
+		sourceColumn: sys_created_on
+
+		annotation SummarizationSetBy = Automatic
+
+	column percentage
+		dataType: string
+		sourceProviderType: nvarchar(max)
+		lineageTag: d9eb5835-da22-4059-a43f-df0db1a4266e
+		summarizeBy: none
+		sourceColumn: percentage
+
+		annotation SummarizationSetBy = Automatic
+
+	column original_breach_time
+		dataType: dateTime
+		formatString: General Date
+		sourceProviderType: datetime
+		lineageTag: b29ea0e6-8b05-4459-aaf3-73fbb19f7148
+		summarizeBy: none
+		sourceColumn: original_breach_time
+
+		annotation SummarizationSetBy = Automatic
+
+	column sys_created_by
+		dataType: string
+		sourceProviderType: nvarchar(max)
+		lineageTag: a8c91a39-108a-4c20-9f0a-321c3be09290
+		summarizeBy: none
+		sourceColumn: sys_created_by
+
+		annotation SummarizationSetBy = Automatic
+
+	column business_percentage
+		dataType: string
+		sourceProviderType: nvarchar(max)
+		lineageTag: c509d455-c5de-4228-b7b7-3697de54099d
+		summarizeBy: none
+		sourceColumn: business_percentage
+
+		annotation SummarizationSetBy = Automatic
+
+	column task_assignment_group
+		dataType: string
+		sourceProviderType: nvarchar(max)
+		lineageTag: a00a4175-4315-4671-b909-64bea55d3aec
+		summarizeBy: none
+		sourceColumn: task_assignment_group
+
+		annotation SummarizationSetBy = Automatic
+
+	column end_time
+		dataType: string
+		sourceProviderType: nvarchar(max)
+		lineageTag: 16b2cf70-28c6-4dce-abc2-b49dbe058caf
+		summarizeBy: none
+		sourceColumn: end_time
+
+		annotation SummarizationSetBy = Automatic
+
+	column sys_mod_count
+		dataType: string
+		sourceProviderType: nvarchar(max)
+		lineageTag: b037c337-9a90-458e-be91-7be935aafdcf
+		summarizeBy: none
+		sourceColumn: sys_mod_count
+
+		annotation SummarizationSetBy = Automatic
+
+	column active
+		dataType: string
+		sourceProviderType: nvarchar(max)
+		lineageTag: c8dace03-b1b0-428e-9d96-21348d912f92
+		summarizeBy: none
+		sourceColumn: active
+
+		annotation SummarizationSetBy = Automatic
+
+	column business_pause_duration
+		dataType: string
+		sourceProviderType: nvarchar(max)
+		lineageTag: 3f2a3b3a-8990-4134-aaca-ce192f8890b0
+		summarizeBy: none
+		sourceColumn: business_pause_duration
+
+		annotation SummarizationSetBy = Automatic
+
+	column sys_tags
+		dataType: string
+		sourceProviderType: nvarchar(max)
+		lineageTag: 5209e8bb-a567-4b91-aff7-8a9fbf599263
+		summarizeBy: none
+		sourceColumn: sys_tags
+
+		annotation SummarizationSetBy = Automatic
+
+	column schedule
+		dataType: string
+		sourceProviderType: nvarchar(max)
+		lineageTag: 495ba3a5-c9ad-435b-a5fc-6f8626d10dc7
+		summarizeBy: none
+		sourceColumn: schedule
+
+		annotation SummarizationSetBy = Automatic
+
+	column start_time
+		dataType: dateTime
+		formatString: General Date
+		sourceProviderType: datetime
+		lineageTag: ae0931f5-ab63-4374-974b-7f7152a3da4f
+		summarizeBy: none
+		sourceColumn: start_time
+
+		annotation SummarizationSetBy = Automatic
+
+	column business_duration
+		dataType: string
+		sourceProviderType: nvarchar(max)
+		lineageTag: 3dcaf899-42a5-4ea1-a6f2-19badaa6b317
+		summarizeBy: none
+		sourceColumn: business_duration
+
+		annotation SummarizationSetBy = Automatic
+
+	column task
+		dataType: string
+		sourceProviderType: nvarchar(max)
+		lineageTag: 0927aa71-21bb-4f82-b681-5145f5192fc4
+		summarizeBy: none
+		sourceColumn: task
+
+		annotation SummarizationSetBy = Automatic
+
+	column task_type
+		dataType: string
+		sourceProviderType: nvarchar(max)
+		lineageTag: 565f7fb4-2000-4e98-be89-722f8bef2601
+		summarizeBy: none
+		sourceColumn: task_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column stage
+		dataType: string
+		sourceProviderType: nvarchar(max)
+		lineageTag: f2e0e2a5-5922-4952-afbe-018f50e54a71
+		summarizeBy: none
+		sourceColumn: stage
+
+		annotation SummarizationSetBy = Automatic
+
+	column planned_end_time
+		dataType: dateTime
+		formatString: General Date
+		sourceProviderType: datetime
+		lineageTag: 208745ad-9384-4226-9566-0b215636c927
+		summarizeBy: none
+		sourceColumn: planned_end_time
+
+		annotation SummarizationSetBy = Automatic
+
+	column has_breached
+		dataType: string
+		sourceProviderType: nvarchar(max)
+		lineageTag: 5c6be720-b779-4251-97a0-aa2e8dfc0ad7
+		summarizeBy: none
+		sourceColumn: has_breached
+
+		annotation SummarizationSetBy = Automatic
+
+	column start_date
+		dataType: dateTime
+		formatString: General Date
+		sourceProviderType: date
+		lineageTag: d8897f65-80e6-43a0-9721-13609fecb44f
+		summarizeBy: none
+		sourceColumn: start_date
+
+		annotation SummarizationSetBy = Automatic
+
+	column end_date
+		dataType: dateTime
+		formatString: General Date
+		sourceProviderType: date
+		lineageTag: 49797e81-1df5-44a6-a3a7-e3df47433a78
+		summarizeBy: none
+		sourceColumn: end_date
+
+		annotation SummarizationSetBy = Automatic
+
+	column loaded_date
+		dataType: dateTime
+		formatString: General Date
+		sourceProviderType: datetime
+		lineageTag: a409b98a-dbd9-491b-a6a3-6640149f3b7e
+		summarizeBy: none
+		sourceColumn: loaded_date
+
+		annotation SummarizationSetBy = Automatic
+
+	column functional_area
+		dataType: string
+		sourceProviderType: nvarchar(max)
+		lineageTag: 3e6f6cb0-c572-4cc3-89b4-b5c82f7f8466
+		summarizeBy: none
+		sourceColumn: functional_area
+
+		annotation SummarizationSetBy = Automatic
+
+	column assignment_group
+		dataType: string
+		sourceProviderType: nvarchar(max)
+		lineageTag: d8659b39-1766-426c-85d1-faf87110f67f
+		summarizeBy: none
+		sourceColumn: assignment_group
+
+		annotation SummarizationSetBy = Automatic
+
+	column queue_name
+		dataType: string
+		sourceProviderType: nvarchar(max)
+		lineageTag: 65d47cf6-ffaa-4351-a090-34caa67ad141
+		summarizeBy: none
+		sourceColumn: queue_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column sub_function
+		dataType: string
+		sourceProviderType: nvarchar(max)
+		lineageTag: 65a4e27f-6376-4a9b-a3da-2f78b990b523
+		summarizeBy: none
+		sourceColumn: sub_function
+
+		annotation SummarizationSetBy = Automatic
+
+	column sub_function_alt
+		dataType: string
+		sourceProviderType: nvarchar(max)
+		lineageTag: 2c781065-80fd-4a25-812c-6f8596edae39
+		summarizeBy: none
+		sourceColumn: sub_function_alt
+
+		annotation SummarizationSetBy = Automatic
+
+	column sla
+		dataType: string
+		sourceProviderType: nvarchar(max)
+		lineageTag: e04b5914-ed4f-49f4-81fa-8ade9e65b97f
+		summarizeBy: none
+		sourceColumn: sla
+
+		annotation SummarizationSetBy = Automatic
+
+	column ticket_type
+		dataType: string
+		sourceProviderType: nvarchar(max)
+		lineageTag: 8b8108e6-700e-45d0-b8ae-a00d850422ca
+		summarizeBy: none
+		sourceColumn: ticket_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column functional_alt
+		dataType: string
+		sourceProviderType: nvarchar(max)
+		lineageTag: 33d94a4c-8727-4441-9506-f3383f7a88dc
+		summarizeBy: none
+		sourceColumn: functional_alt
+
+		annotation SummarizationSetBy = Automatic
+
+	column planned_end_time_utc
+		dataType: dateTime
+		formatString: General Date
+		sourceProviderType: datetime
+		lineageTag: f7dbad94-0296-48d9-9cdb-a19620fcb915
+		summarizeBy: none
+		sourceColumn: planned_end_time_utc
+
+		annotation SummarizationSetBy = Automatic
+
+	column start_time_utc
+		dataType: dateTime
+		formatString: General Date
+		sourceProviderType: datetime
+		lineageTag: 5eb61cda-2801-4185-b49e-1525e2153472
+		summarizeBy: none
+		sourceColumn: start_time_utc
+
+		annotation SummarizationSetBy = Automatic
+
+	column original_breach_time_utc
+		dataType: dateTime
+		formatString: General Date
+		sourceProviderType: datetime
+		lineageTag: 96a44e61-abfc-4e22-9e78-38e0ef5afafa
+		summarizeBy: none
+		sourceColumn: original_breach_time_utc
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Query1 = m
+		mode: directQuery
+		source =
+				let
+				    Source = Sql.Database("USPHL0PRPADBA1", "Graham_Workspace", [Query="SELECT #(lf)    a.[functional_area],#(lf)    a.[assignment_group],#(lf)    a.[queue_name],#(lf)    a.[sub_function],#(lf)    a.[sub_function_alt],#(lf)    a.[sla],#(lf)    a.[ticket_type],#(lf)    a.[functional_alt],#(lf)    b.[pause_duration],#(lf)    b.[task_assigned_to],#(lf)    b.[pause_time],#(lf)    b.[timezone],#(lf)    b.[sys_updated_on],#(lf)    b.[business_time_left],#(lf)    b.[duration],#(lf)    b.[sys_id],#(lf)    b.[time_left],#(lf)    b.[sys_updated_by],#(lf)    b.[sys_created_on],#(lf)    b.[percentage],#(lf)    b.[original_breach_time],#(lf)    b.[sys_created_by],#(lf)    b.[business_percentage],#(lf)    b.[task_assignment_group],#(lf)    b.[end_time],#(lf)    b.[sys_mod_count],#(lf)    b.[active],#(lf)    b.[business_pause_duration],#(lf)    b.[sys_tags],#(lf)    b.[schedule],#(lf)    b.[start_time],#(lf)    b.[business_duration],#(lf)    b.[task],#(lf)    b.[task_type],#(lf)    b.[stage],#(lf)    b.[planned_end_time],#(lf)    b.[has_breached],#(lf)#(tab)b.[start_time_utc],#(lf)#(tab)b.[original_breach_time_utc],#(lf)#(tab)b.[planned_end_time_utc],#(lf)    b.[start_date],#(lf)    b.[end_date],#(lf)    b.[loaded_date]#(lf)FROM #(lf)    [Graham_Workspace].[dbo].[dim_ServiceNow_Queues_AccountsReceivable] a#(lf)JOIN #(lf)    [Graham_Workspace].[dbo].[ServiceNow_TaskSLA_Active_CatalogTask_IncidentPS] b#(lf)ON #(lf)    a.[assignment_group] = b.[task_assignment_group]#(lf)    AND a.[sla] = b.[sla]#(lf)    AND a.[ticket_type] = b.[task_type];"])
+				in
+				    Source
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

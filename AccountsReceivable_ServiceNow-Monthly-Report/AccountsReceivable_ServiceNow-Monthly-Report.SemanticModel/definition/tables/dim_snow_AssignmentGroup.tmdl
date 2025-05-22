@@ -1,0 +1,102 @@
+table dim_snow_AssignmentGroup
+	lineageTag: 66beda21-384a-4fb3-a6f7-3b2b979d8fc3
+
+	column RowNumber
+		dataType: string
+		lineageTag: 6a81165e-6509-4b14-9c01-e446ee94ede4
+		summarizeBy: none
+		sourceColumn: RowNumber
+
+		annotation SummarizationSetBy = Automatic
+
+	column Assignment-Group
+		dataType: string
+		lineageTag: 53c1b05c-f97d-4fca-8c4c-1839a18cd8b9
+		summarizeBy: none
+		sourceColumn: Assignment-Group
+
+		annotation SummarizationSetBy = Automatic
+
+	column Functional-Area
+		dataType: string
+		lineageTag: b0a4cc9c-8d2b-4b1d-b161-ce91069797c1
+		summarizeBy: none
+		sourceColumn: Functional-Area
+
+		annotation SummarizationSetBy = Automatic
+
+	column Sub-Function
+		dataType: string
+		lineageTag: 6909e012-3cc8-4aca-b325-3de5a2502cb4
+		summarizeBy: none
+		sourceColumn: Sub-Function
+
+		annotation SummarizationSetBy = Automatic
+
+	column ProfitCenter-ID
+		dataType: string
+		lineageTag: 09270978-c63e-4044-8021-ef33e168d690
+		summarizeBy: none
+		sourceColumn: ProfitCenter-ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column SLA-BusinessDays
+		dataType: double
+		lineageTag: 4f295926-d2c7-4985-a474-8ef457d323e3
+		summarizeBy: sum
+		sourceColumn: SLA-BusinessDays
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column SLA-NetworkDays
+		dataType: double
+		lineageTag: cde76201-7879-4642-ac79-e475b5f62a32
+		summarizeBy: sum
+		sourceColumn: SLA-NetworkDays
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Group
+		dataType: string
+		lineageTag: c7cc0e52-750e-4957-aaa4-c1ecf6421245
+		summarizeBy: none
+		sourceColumn: Group
+
+		annotation SummarizationSetBy = Automatic
+
+	column Queue
+		dataType: string
+		lineageTag: f0ab1a7c-a0c9-42db-aa38-b4c942930591
+		summarizeBy: none
+		sourceColumn: Queue
+
+		annotation SummarizationSetBy = Automatic
+
+	column Sub-Function-Alt
+		dataType: string
+		lineageTag: 141fc9ea-92e4-4aa4-83dc-e631ebee6b29
+		summarizeBy: none
+		sourceColumn: Sub-Function-Alt
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_snow_AssignmentGroup = m
+		mode: import
+		source =
+				let
+				    Source = Smartsheet.Tables(),
+				    #"2976903809263492" = Source{[Key="2976903809263492"]}[Data],
+				    #"3485167733657476" = #"2976903809263492"{[Key="3485167733657476"]}[Data],
+				    #"Changed Type" = Table.TransformColumnTypes(#"3485167733657476",{{"ProfitCenter-ID", type text}, {"SLA-BusinessDays", type number}, {"SLA-NetworkDays", type number}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+
